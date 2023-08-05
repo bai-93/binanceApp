@@ -1,4 +1,4 @@
-import 'package:simple_app/baseUI/allerts/base_alerts.dart';
+import 'base_alerts.dart';
 
 enum AlertTypes {
   successAlert,

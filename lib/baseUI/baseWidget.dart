@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
 abstract class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
