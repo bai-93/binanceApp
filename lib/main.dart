@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         light: lightTheme,
         dark: darkTheme,
         debugShowFloatingThemeButton: true,
-        initial: AdaptiveThemeMode.dark,
+        initial: AdaptiveThemeMode.light,
         builder: (theme, darkThemes) {
           return MaterialApp(
               theme: theme,

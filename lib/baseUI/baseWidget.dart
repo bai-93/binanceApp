@@ -13,11 +13,11 @@ abstract class BaseScreenState<T extends BaseScreen> extends State<T>
   set appBarIsHiddenSet(bool flag) => {_isHiddenAppBar = flag};
   bool get appBarIsHiddenGet => _isHiddenAppBar;
 
-  String appBarTitle();
+  String appBarTitle() => '';
 
-  void onClickBackButton();
+  void onClickBackButton() {}
 
-  void onClickCart();
+  void onClickCart() {}
 
   set isBackButton(bool isBack) {
     debugPrint('BACK button is tapped');
@@ -78,29 +78,12 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
       appBar: appBar(),
       body: Stack(children: [
         body(),
-        appBarIsHiddenGet
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                    Flexible(
-                      flex: 1,
-                      child: Container(
-                        color: Colors.transparent.withAlpha(100),
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ])
-            : Container(),
       ]),
     );
   }
 }
 
+//example stateFull widgets
 class MyWidget extends BaseScreen {
   const MyWidget({super.key});
 
@@ -118,20 +101,5 @@ class _MyWidgetState extends BaseScreenState<MyWidget> with BaseScreenMixin {
         child: Text('Hello world'),
       ),
     );
-  }
-
-  @override
-  String appBarTitle() {
-    return 'title for app bar';
-  }
-
-  @override
-  void onClickBackButton() {
-    debugPrint('go to Back screen');
-  }
-
-  @override
-  void onClickCart() {
-    debugPrint('go to Cart screen');
   }
 }
