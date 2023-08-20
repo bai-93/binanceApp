@@ -75,20 +75,24 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
                 ),
               ),
             ),
+            gradientContainer([
+              const Color.fromARGB(255, 103, 210, 140),
+              const Color.fromARGB(255, 50, 193, 178)
+            ], getSizeScreen().height * 0.1),
             Positioned(
                 top: 0.0,
                 left: 0.0,
                 child: ClipPath(
                   clipper: TopContentClip(),
                   child: Container(
-                      color: Color.fromARGB(255, 35, 38, 65),
+                      color: const Color.fromARGB(255, 35, 38, 65),
                       width: getSizeScreen().width,
                       height: getSizeScreen().height * 0.5,
-                      child: const Stack(
+                      child: Stack(
                         children: [
-                          Positioned(
-                            top: 60.0,
-                            left: 30.0,
+                          const Positioned(
+                            top: 80.0,
+                            left: 20.0,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -96,35 +100,41 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
                                   'Welcome',
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 30.0,
-                                      fontWeight: FontWeight.bold),
+                                      fontSize: 28.0,
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 SizedBox(
-                                  height: 5.0,
+                                  height: 10.0,
                                 ),
                                 Text('Back',
                                     style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: 30.0,
-                                        fontWeight: FontWeight.bold))
+                                        fontSize: 28.0,
+                                        fontWeight: FontWeight.w600))
                               ],
                             ),
                           ),
                           Align(
                             alignment: Alignment.topRight,
                             child: Column(children: [
-                              SizedBox(
+                              const SizedBox(
                                 height: 20.0,
                               ),
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    Icon(
-                                      Icons.keyboard_arrow_right_outlined,
-                                      color: Colors.white,
-                                      size: 35.0,
+                                    GestureDetector(
+                                      onTap: () {
+                                        debugPrint(
+                                            'welcome back RIGHT_TOP_button');
+                                      },
+                                      child: const Icon(
+                                        Icons.keyboard_arrow_right_outlined,
+                                        color: Colors.white,
+                                        size: 35.0,
+                                      ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10.0,
                                     )
                                   ]),
@@ -205,12 +215,17 @@ class TopContentClip extends CustomClipper<Path> {
     double width = size.width;
 
     Path path = Path();
-    path.moveTo(0.0, height * 0.67);
-    path.quadraticBezierTo(
-        width * 0.2, height * 0.9, width * 0.45, height * 0.5);
-    path.quadraticBezierTo(width * 0.7, height * 0.1, width, height * 0.45);
+    path.moveTo(0.0, height * 0.7);
+    path.quadraticBezierTo(width * 0.2, height, width * 0.45, height * 0.6);
+    path.quadraticBezierTo(width * 0.65, height * 0.2, width, height * 0.45);
     path.lineTo(width, 0.0);
-    path.lineTo(0.0, 0.0);
+    path.lineTo(width * 0.78, 0.0);
+    path.quadraticBezierTo(width * 0.69, height * 0.15, width * 0.55, 20.0);
+    path.quadraticBezierTo(width * 0.42, -20.0, width * 0.31, height * 0.1);
+    path.quadraticBezierTo(
+        width * 0.23, height * 0.2, width * 0.16, height * 0.15);
+    path.quadraticBezierTo(width * 0.1, height * 0.09, 10.0, height * 0.15);
+    path.lineTo(0.0, height * 0.17);
     path.close();
     return path;
   }
