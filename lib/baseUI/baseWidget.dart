@@ -28,6 +28,11 @@ abstract class BaseScreenState<T extends BaseScreen> extends State<T>
     debugPrint('CART button is tapped');
     _isCart = isCart;
   }
+
+  Size getSizeScreen() {
+    return Size(
+        MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
+  }
 }
 
 mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
