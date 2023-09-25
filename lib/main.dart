@@ -1,6 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:sheker/loginFlow/loginScreen.dart';
+import 'package:sheker/loginFlow/loginScreen/loginScreen.dart';
 import 'package:sheker/themes/themes.dart';
 
 void main() {

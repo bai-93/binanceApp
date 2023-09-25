@@ -2,6 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/baseUI/baseWidget.dart';
+import 'login_shape/login_top_bottom.dart';
 
 class LoginScreen extends BaseScreen {
   const LoginScreen({super.key});
@@ -12,21 +13,21 @@ class LoginScreen extends BaseScreen {
 class _LoginScreenState extends BaseScreenState<LoginScreen>
     with BaseScreenMixin, SingleTickerProviderStateMixin {
   VoidCallback? signUp;
-  bool flagOpacity = false;
   late AnimationController controller;
-  late Animation<Color?> colorTween;
+  late Tween<double> opacityTween;
+  late Animation opacity;
 
   @override
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 2));
-    colorTween = ColorTween(begin: Colors.yellow, end: Colors.red).animate(
-        CurvedAnimation(parent: controller, curve: const Interval(0.0, 1.0)));
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    opacityTween = Tween<double>(begin: 0.0, end: 1.0);
+    opacity = opacityTween.animate(controller);
     controller.addListener(() {
-      debugPrint('listener');
       setState(() {});
     });
+    controller.forward();
   }
 
   @override
@@ -148,10 +149,7 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        debugPrint('opacity');
-                                        setState(() {
-                                          flagOpacity = !flagOpacity;
-                                        });
+                                        debugPrint("top left action");
                                       },
                                       child: const Icon(
                                         Icons.keyboard_arrow_right_outlined,
@@ -182,33 +180,31 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
               bottom: getSizeScreen().height * 0.05,
               child: SizedBox(
                 width: getSizeScreen().width,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    createButton(
-                        func: flagOpacity
-                            ? () {
-                                debugPrint('Sign up button');
-                                controller.forward();
-                              }
-                            : null,
-                        child: AnimatedOpacity(
-                          duration: Duration(seconds: 1),
-                          opacity: flagOpacity ? 1.0 : 0.0,
+                child: Opacity(
+                  opacity: opacity.value,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      createButton(
+                          func: opacity.value >= 0.0
+                              ? () {
+                                  debugPrint('Sign up button');
+                                }
+                              : () {},
                           child: Text(
                             'Sign up',
                             style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                        )),
-                    createButton(
-                        func: () {
-                          debugPrint('forgot password button');
-                        },
-                        child: Text(
-                          'Forgot Password',
-                          style: TextStyle(color: colorTween.value),
-                        )),
-                  ],
+                          )),
+                      createButton(
+                          func: () {
+                            debugPrint('forgot password button');
+                          },
+                          child: Text(
+                            'Forgot Password',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          )),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -235,60 +231,6 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
     return TextButton(
       onPressed: func,
       child: child,
-      // style: TextButton.styleFrom(),
     );
   }
 }
-
-class TopContentClip extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    double height = size.height;
-    double width = size.width;
-
-    Path path = Path();
-    path.moveTo(0.0, height * 0.7);
-    path.quadraticBezierTo(width * 0.2, height, width * 0.45, height * 0.6);
-    path.quadraticBezierTo(width * 0.65, height * 0.2, width, height * 0.45);
-    path.lineTo(width, 0.0);
-    path.lineTo(width * 0.78, 0.0);
-    path.quadraticBezierTo(width * 0.69, height * 0.15, width * 0.55, 20.0);
-    path.quadraticBezierTo(width * 0.42, -20.0, width * 0.31, height * 0.1);
-    path.quadraticBezierTo(
-        width * 0.23, height * 0.2, width * 0.16, height * 0.15);
-    path.quadraticBezierTo(width * 0.1, height * 0.09, 10.0, height * 0.15);
-    path.lineTo(0.0, height * 0.17);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
-  }
-}
-
-class BottomContentClip extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    double height = size.height;
-    double width = size.width;
-
-    var pathClip = Path();
-    pathClip.moveTo(0.0, height * 0.23);
-    pathClip.quadraticBezierTo(
-        width * 0.16, height * 0.4, width * 0.4, height * 0.2);
-    pathClip.quadraticBezierTo(width * 0.75, -10.0, width, height * 0.2);
-    pathClip.lineTo(width, height);
-    pathClip.lineTo(0.0, height);
-    pathClip.close();
-    return pathClip;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
-  }
-}
-
-//35 38 65  top content color
