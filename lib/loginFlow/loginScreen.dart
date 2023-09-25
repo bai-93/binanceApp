@@ -10,8 +10,31 @@ class LoginScreen extends BaseScreen {
 }
 
 class _LoginScreenState extends BaseScreenState<LoginScreen>
-    with BaseScreenMixin {
+    with BaseScreenMixin, SingleTickerProviderStateMixin {
   VoidCallback? signUp;
+  bool flagOpacity = false;
+  late AnimationController controller;
+  late Animation<Color?> colorTween;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    colorTween = ColorTween(begin: Colors.yellow, end: Colors.red).animate(
+        CurvedAnimation(parent: controller, curve: const Interval(0.0, 1.0)));
+    controller.addListener(() {
+      debugPrint('listener');
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   Widget body() {
     return Container(
@@ -125,8 +148,10 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
                                   children: [
                                     GestureDetector(
                                       onTap: () {
-                                        debugPrint(
-                                            'welcome back RIGHT_TOP_button');
+                                        debugPrint('opacity');
+                                        setState(() {
+                                          flagOpacity = !flagOpacity;
+                                        });
                                       },
                                       child: const Icon(
                                         Icons.keyboard_arrow_right_outlined,
@@ -161,12 +186,19 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     createButton(
-                        func: () {
-                          debugPrint('Sign up button');
-                        },
-                        child: Text(
-                          'Sign up',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                        func: flagOpacity
+                            ? () {
+                                debugPrint('Sign up button');
+                                controller.forward();
+                              }
+                            : null,
+                        child: AnimatedOpacity(
+                          duration: Duration(seconds: 1),
+                          opacity: flagOpacity ? 1.0 : 0.0,
+                          child: Text(
+                            'Sign up',
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
                         )),
                     createButton(
                         func: () {
@@ -174,7 +206,7 @@ class _LoginScreenState extends BaseScreenState<LoginScreen>
                         },
                         child: Text(
                           'Forgot Password',
-                          style: Theme.of(context).textTheme.bodyLarge,
+                          style: TextStyle(color: colorTween.value),
                         )),
                   ],
                 ),
