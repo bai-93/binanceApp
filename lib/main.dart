@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sheker/base_widgets/tabBar_widget/bottom_menu_indicator/tab_bar_indicator.dart';
 import 'package:sheker/loginFlow/loginScreen/loginScreen.dart';
 import 'package:sheker/themes/themes.dart';
 
@@ -24,8 +25,7 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
               debugShowMaterialGrid: false,
-              home: const LoginScreen());
+              home: const BottomMenuTabBar());
         });
   }
 }
-
