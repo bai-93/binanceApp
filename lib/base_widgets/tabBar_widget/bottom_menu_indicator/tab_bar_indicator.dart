@@ -9,9 +9,11 @@ class BottomMenuTabBar extends StatefulWidget {
   State<BottomMenuTabBar> createState() => _BottomMenuTabBarState();
 }
 
-class _BottomMenuTabBarState extends State<BottomMenuTabBar> {
+class _BottomMenuTabBarState extends State<BottomMenuTabBar>
+    with SingleTickerProviderStateMixin {
   int selectedIndexStack = 0;
   late List<Widget> stackItems = [];
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -58,6 +60,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar> {
         ),
       )
     ];
+    _tabController = TabController(length: stackItems.length, vsync: this);
     super.initState();
   }
 
@@ -69,37 +72,33 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar> {
           data: ThemeData(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent),
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            showUnselectedLabels: true,
-            showSelectedLabels: true,
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.grey,
-            selectedFontSize: 11.0,
-            unselectedFontSize: 11.0,
-            currentIndex: selectedIndexStack,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home,
-                  ),
-                  label: 'Главная'),
-              BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Сеть'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.plus_one_sharp), label: 'Разместить'),
-              BottomNavigationBarItem(
+          child: TabBar(
+            indicatorPadding: const EdgeInsets.only(bottom: 72.0),
+            labelColor: Colors.black,
+            unselectedLabelColor: Colors.grey,
+            labelPadding: const EdgeInsets.all(0.0),
+            labelStyle: const TextStyle(fontSize: 11),
+            unselectedLabelStyle: const TextStyle(fontSize: 11),
+            controller: _tabController,
+            tabs: const [
+              Tab(
+                text: 'Главная',
                 icon: Icon(
-                  Icons.notifications,
+                  Icons.home,
                 ),
-                label: 'Уведомления',
               ),
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.luggage_sharp,
-                ),
-                label: 'Вакансии',
-              )
+              Tab(icon: Icon(Icons.people), text: 'Сеть'),
+              Tab(icon: Icon(Icons.plus_one_sharp), text: 'Разместить'),
+              Tab(
+                  icon: Icon(
+                    Icons.notifications,
+                  ),
+                  text: 'Уведомления'),
+              Tab(
+                  icon: Icon(
+                    Icons.luggage_sharp,
+                  ),
+                  text: 'Вакансии')
             ],
             onTap: (value) {
               {
