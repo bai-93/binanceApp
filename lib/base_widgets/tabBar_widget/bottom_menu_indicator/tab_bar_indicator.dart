@@ -10,68 +10,105 @@ class BottomMenuTabBar extends StatefulWidget {
 }
 
 class _BottomMenuTabBarState extends State<BottomMenuTabBar> {
-  final ScrollController _homeController = ScrollController();
-  int previousIndex = 0;
+  int selectedIndexStack = 0;
   late List<Widget> stackItems = [];
+
   @override
   void initState() {
     stackItems = [
-      ScrollScreen(
-        key: ValueKey(1),
+      Container(
+        color: Colors.white,
+        child: const Center(
+          child: Text(
+            'Главная',
+            style: TextStyle(color: Colors.black),
+          ),
+        ),
+      ),
+      Container(
+        color: Colors.blue,
+        child: const Center(
+          child: Text(
+            'Сеть',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ),
+      Container(
+        color: Colors.yellow,
+        child: const Center(
+          child: Text('Разместить что то'),
+        ),
       ),
       Container(
         color: Colors.deepPurpleAccent,
+        child: const Center(
+            child: Text(
+          'Уведомления',
+          style: TextStyle(color: Colors.white),
+        )),
+      ),
+      Container(
+        color: Colors.black,
+        child: const Center(
+          child: Text(
+            'Вакансии',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
       )
     ];
     super.initState();
   }
 
-  Widget _listViewBody() {
-    return ListView.separated(
-        controller: _homeController,
-        itemBuilder: (BuildContext context, int index) {
-          return Center(
-            child: Text(
-              'Item $index',
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(
-              thickness: 2,
-            ),
-        itemCount: 50);
-  }
-
-  List<BottomNavigationBarItem> items() {
-    BottomNavigationBarItem item1 =
-        BottomNavigationBarItem(icon: Icon(Icons.abc_sharp), label: 'page1');
-    BottomNavigationBarItem item2 =
-        BottomNavigationBarItem(icon: Icon(Icons.ac_unit), label: 'page2');
-    return [item1, item2];
-  }
-
-  void changeOrderOfStack(int indexItem) {
-    if (previousIndex != indexItem) {
-      setState(() {
-        Widget firstItem = stackItems[previousIndex];
-        Widget nextItem = stackItems[indexItem];
-        stackItems[previousIndex] = nextItem;
-        stackItems[indexItem] = firstItem;
-        previousIndex = indexItem;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(children: stackItems),
-        bottomNavigationBar: BottomNavigationBar(
-          items: items(),
-          onTap: (value) {
-            // debugPrint('index item === ${value.toString()}');
-            changeOrderOfStack(value);
-          },
+        body: IndexedStack(index: selectedIndexStack, children: stackItems),
+        bottomNavigationBar: Theme(
+          data: ThemeData(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            showUnselectedLabels: true,
+            showSelectedLabels: true,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey,
+            selectedFontSize: 11.0,
+            unselectedFontSize: 11.0,
+            currentIndex: selectedIndexStack,
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.home,
+                  ),
+                  label: 'Главная'),
+              BottomNavigationBarItem(icon: Icon(Icons.people), label: 'Сеть'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.plus_one_sharp), label: 'Разместить'),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.notifications,
+                ),
+                label: 'Уведомления',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.luggage_sharp,
+                ),
+                label: 'Вакансии',
+              )
+            ],
+            onTap: (value) {
+              {
+                setState(() {
+                  selectedIndexStack = value;
+                });
+              }
+            },
+          ),
         ));
   }
 }
@@ -94,7 +131,7 @@ class _ScrollScreenState extends State<ScrollScreen> {
           itemBuilder: (BuildContext context, int index) {
             return Center(
               child: Text(
-                'Index $index',
+                'Index ${index + 1}',
               ),
             );
           },
