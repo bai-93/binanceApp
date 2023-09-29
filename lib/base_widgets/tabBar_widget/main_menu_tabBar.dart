@@ -72,7 +72,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent),
           child: TabBar(
-            indicator: DotIndicatorTabBar(color: Colors.black, radius: 5.0),
+            indicator: DotIndicatorTabBar(color: Colors.black, radius: 2.0),
             indicatorColor: Colors.transparent,
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,

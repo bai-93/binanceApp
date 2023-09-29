@@ -4,13 +4,12 @@ class DotIndicatorTabBar extends Decoration {
   final Color color;
   final double radius;
 
-  DotIndicatorTabBar({this.color = Colors.white, this.radius = 3.0});
+  const DotIndicatorTabBar({this.color = Colors.white, this.radius = 3.0});
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    // TODO: implement createBoxPainter
     return _DotIndicatorPainter(
-        color: this.color, radius: this.radius, onChanged: onChanged);
+        color: color, radius: radius, onChanged: onChanged);
   }
 }
 
@@ -25,15 +24,14 @@ class _DotIndicatorPainter extends BoxPainter {
     _paint = Paint();
     _paint.color = color;
     _paint.style = PaintingStyle.fill;
+    _paint.strokeWidth = radius;
   }
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     assert(configuration.size != null);
     final Rect rect = offset & configuration.size!;
-    canvas.drawCircle(
-        Offset(rect.topCenter.dx, rect.topCenter.dy + radius),
-        radius,
-        _paint);
+    canvas.drawLine(Offset(rect.topLeft.dx + 5.0, rect.topLeft.dy + 1.0),
+        Offset(rect.topRight.dx - 5.0, rect.topRight.dy + 1.0), _paint);
   }
 }
