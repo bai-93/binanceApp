@@ -1,8 +1,8 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:sheker/base_widgets/tabBar_widget/bottom_menu_indicator/tab_bar_indicator.dart';
 import 'package:sheker/loginFlow/loginScreen/loginScreen.dart';
 import 'package:sheker/themes/themes.dart';
+import 'base_widgets/tabBar_widget/main_menu_tabBar.dart';
 
 void main() {
   runApp(const MyApp());

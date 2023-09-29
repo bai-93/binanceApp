@@ -1,143 +1,39 @@
-import 'package:flutter/cupertino.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
-class BottomMenuTabBar extends StatefulWidget {
-  const BottomMenuTabBar({super.key});
+class DotIndicatorTabBar extends Decoration {
+  final Color color;
+  final double radius;
+
+  DotIndicatorTabBar({this.color = Colors.white, this.radius = 3.0});
 
   @override
-  State<BottomMenuTabBar> createState() => _BottomMenuTabBarState();
-}
-
-class _BottomMenuTabBarState extends State<BottomMenuTabBar>
-    with SingleTickerProviderStateMixin {
-  int selectedIndexStack = 0;
-  late List<Widget> stackItems = [];
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    stackItems = [
-      Container(
-        color: Colors.white,
-        child: const Center(
-          child: Text(
-            'Главная',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-      ),
-      Container(
-        color: Colors.blue,
-        child: const Center(
-          child: Text(
-            'Сеть',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
-      Container(
-        color: Colors.yellow,
-        child: const Center(
-          child: Text('Разместить что то'),
-        ),
-      ),
-      Container(
-        color: Colors.deepPurpleAccent,
-        child: const Center(
-            child: Text(
-          'Уведомления',
-          style: TextStyle(color: Colors.white),
-        )),
-      ),
-      Container(
-        color: Colors.black,
-        child: const Center(
-          child: Text(
-            'Вакансии',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      )
-    ];
-    _tabController = TabController(length: stackItems.length, vsync: this);
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: IndexedStack(index: selectedIndexStack, children: stackItems),
-        bottomNavigationBar: Theme(
-          data: ThemeData(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent),
-          child: TabBar(
-            indicatorPadding: const EdgeInsets.only(bottom: 72.0),
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey,
-            labelPadding: const EdgeInsets.all(0.0),
-            labelStyle: const TextStyle(fontSize: 11),
-            unselectedLabelStyle: const TextStyle(fontSize: 11),
-            controller: _tabController,
-            tabs: const [
-              Tab(
-                text: 'Главная',
-                icon: Icon(
-                  Icons.home,
-                ),
-              ),
-              Tab(icon: Icon(Icons.people), text: 'Сеть'),
-              Tab(icon: Icon(Icons.plus_one_sharp), text: 'Разместить'),
-              Tab(
-                  icon: Icon(
-                    Icons.notifications,
-                  ),
-                  text: 'Уведомления'),
-              Tab(
-                  icon: Icon(
-                    Icons.luggage_sharp,
-                  ),
-                  text: 'Вакансии')
-            ],
-            onTap: (value) {
-              {
-                setState(() {
-                  selectedIndexStack = value;
-                });
-              }
-            },
-          ),
-        ));
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    // TODO: implement createBoxPainter
+    return _DotIndicatorPainter(
+        color: this.color, radius: this.radius, onChanged: onChanged);
   }
 }
 
-class ScrollScreen extends StatefulWidget {
-  const ScrollScreen({super.key});
+class _DotIndicatorPainter extends BoxPainter {
+  late final Paint _paint;
+  final Color color;
+  final double radius;
+
+  _DotIndicatorPainter(
+      {required this.color, required this.radius, VoidCallback? onChanged})
+      : super(onChanged) {
+    _paint = Paint();
+    _paint.color = color;
+    _paint.style = PaintingStyle.fill;
+  }
 
   @override
-  State<ScrollScreen> createState() => _ScrollScreenState();
-}
-
-class _ScrollScreenState extends State<ScrollScreen> {
-  final ScrollController _homeController = ScrollController();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ListView.separated(
-          controller: _homeController,
-          itemBuilder: (BuildContext context, int index) {
-            return Center(
-              child: Text(
-                'Index ${index + 1}',
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => const Divider(
-                thickness: 2,
-              ),
-          itemCount: 50),
-    );
+  void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
+    assert(configuration.size != null);
+    final Rect rect = offset & configuration.size!;
+    canvas.drawCircle(
+        Offset(rect.topCenter.dx, rect.topCenter.dy + radius),
+        radius,
+        _paint);
   }
 }
