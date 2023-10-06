@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/base_widgets/tabBar_widget/bottom_menu_indicator/tab_bar_indicator.dart';
 
@@ -60,7 +61,16 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
       )
     ];
     _tabController = TabController(length: stackItems.length, vsync: this);
+    _tabController.addListener(() {
+      debugPrint('tab bar controller LISTENER === ${_tabController.index}');
+    });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
   }
 
   @override
@@ -72,7 +82,8 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent),
           child: TabBar(
-            indicator: DotIndicatorTabBar(color: Colors.black, radius: 2.0),
+            indicator:
+                const DotIndicatorTabBar(color: Colors.black, radius: 2.0),
             indicatorColor: Colors.transparent,
             labelColor: Colors.black,
             unselectedLabelColor: Colors.grey,
@@ -126,6 +137,7 @@ class _ScrollScreenState extends State<ScrollScreen> {
     return Container(
       color: Colors.white,
       child: ListView.separated(
+          key: const ValueKey('value'),
           controller: _homeController,
           itemBuilder: (BuildContext context, int index) {
             return Center(

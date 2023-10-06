@@ -1,10 +1,15 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sheker/base_widgets/tabBar_widget/main_part/profile_menu.dart';
+import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/loginFlow/loginScreen/loginScreen.dart';
+import 'package:sheker/repository/base_repository_abstract.dart';
 import 'package:sheker/themes/themes.dart';
-import 'base_widgets/tabBar_widget/main_menu_tabBar.dart';
+import 'base_widgets/tabBar_widget/main_part/main_menu_tabBar.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   runApp(const MyApp());
 }
 
