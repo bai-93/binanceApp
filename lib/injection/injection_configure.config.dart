@@ -28,21 +28,13 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final registerModules = _$RegisterModules();
-    final registerModule = _$RegisterModule();
     gh.factory<_i3.DioClient>(() => _i3.DioClient());
     await gh.factoryAsync<_i4.SharedPreferences>(
       () => registerModules.prefs,
       preResolve: true,
     );
-    gh.factoryParam<_i5.TestRepository, String, dynamic>((
-      url,
-      _,
-    ) =>
-        registerModule.getService(url));
     return this;
   }
 }
 
 class _$RegisterModules extends _i5.RegisterModules {}
-
-class _$RegisterModule extends _i5.RegisterModule {}

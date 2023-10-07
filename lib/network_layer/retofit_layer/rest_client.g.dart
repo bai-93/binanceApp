@@ -13,7 +13,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://fakestoreapi.com';
+    baseUrl ??= 'http://api.coincap.io/v2/';
   }
 
   final Dio _dio;
@@ -21,20 +21,20 @@ class _ApiClient implements ApiClient {
   String? baseUrl;
 
   @override
-  Future<List<Product>> getProducts() async {
+  Future<CryptoModel> getCryptoCurrencies() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Product>>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CryptoModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/products',
+              'assets',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -43,9 +43,64 @@ class _ApiClient implements ApiClient {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Product.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = CryptoModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CryptoModelList> getCryptoInfoById(String cryptoID) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<CryptoModelList>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'assets/${cryptoID}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = CryptoModelList.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<CryptoHistoryPriceListModel> getCryptoHistoryWithInterval(
+    String cryptoID,
+    String interval,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'interval': interval};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CryptoHistoryPriceListModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'assets/${cryptoID}/history',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = CryptoHistoryPriceListModel.fromJson(_result.data!);
     return value;
   }
 

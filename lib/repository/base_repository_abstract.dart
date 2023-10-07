@@ -9,12 +9,16 @@ abstract class BaseRepository {
   final SharedPreferences prefs = getIt<SharedPreferences>();
 }
 
-// @module
-// abstract class RegisterModules {
-//   @preResolve
-//   Future<SharedPreferences> get prefs async =>
-//       await SharedPreferences.getInstance();
-// }
+@module
+abstract class RegisterModules {
+  @preResolve
+  Future<SharedPreferences> get prefs async =>
+      await SharedPreferences.getInstance();
+}
+
+class Repository extends BaseRepository { // CASE extends not required to override, only in IMPLEMENTS we have to override
+
+}
 
 // @module
 // abstract class RegisterModule {

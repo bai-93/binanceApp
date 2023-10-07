@@ -31,7 +31,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
         color: Colors.blue,
         child: const Center(
           child: Text(
-            'Сеть',
+            'Feed',
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -39,14 +39,14 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
       Container(
         color: Colors.yellow,
         child: const Center(
-          child: Text('Разместить что то'),
+          child: Text('Trade'),
         ),
       ),
       Container(
         color: Colors.deepPurpleAccent,
         child: const Center(
             child: Text(
-          'Уведомления',
+          'Services',
           style: TextStyle(color: Colors.white),
         )),
       ),
@@ -54,7 +54,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
         color: Colors.black,
         child: const Center(
           child: Text(
-            'Вакансии',
+            'Wallets',
             style: TextStyle(color: Colors.white),
           ),
         ),
@@ -93,23 +93,23 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
             controller: _tabController,
             tabs: const [
               Tab(
-                text: 'Главная',
+                text: 'Home',
                 icon: Icon(
                   Icons.home,
                 ),
               ),
-              Tab(icon: Icon(Icons.people), text: 'Сеть'),
-              Tab(icon: Icon(Icons.plus_one_sharp), text: 'Разместить'),
+              Tab(icon: Icon(Icons.feed), text: 'Feed'),
+              Tab(icon: Icon(Icons.money), text: 'Trade'),
               Tab(
                   icon: Icon(
-                    Icons.notifications,
+                    Icons.room_service_sharp,
                   ),
-                  text: 'Уведомления'),
+                  text: 'Services'),
               Tab(
                   icon: Icon(
-                    Icons.luggage_sharp,
+                    Icons.wallet,
                   ),
-                  text: 'Вакансии')
+                  text: 'Wallets')
             ],
             onTap: (value) {
               {

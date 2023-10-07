@@ -12,7 +12,7 @@ class DioClient {
         receiveTimeout: const Duration(milliseconds: 15000),
         sendTimeout: const Duration(milliseconds: 15000),
         connectTimeout: const Duration(milliseconds: 15000),
-        baseUrl: 'https://fakestoreapi.com');
+        baseUrl: 'http://api.coincap.io/v2/');
     final Dio dio = Dio(options);
     dio.interceptors.add(DioClientInterceptor(dio));
     return dio;
