@@ -13,8 +13,6 @@ abstract class ExceptionDescriber extends DioException {
   }
 
   String getStatusMessage() {
-    debugPrint('options baseURL == ${requestOptions.baseUrl}');
-    debugPrint('options object == ${requestOptions}');
     return _statusMessage ?? 'empty STATUS MESSAGE';
   }
 
