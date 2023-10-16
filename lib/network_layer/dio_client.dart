@@ -7,12 +7,12 @@ class DioClient {
 
   static Dio configure() {
     BaseOptions options = BaseOptions(
-        contentType: Headers.jsonContentType,
-        responseType: ResponseType.json,
-        receiveTimeout: const Duration(milliseconds: 15000),
-        sendTimeout: const Duration(milliseconds: 15000),
-        connectTimeout: const Duration(milliseconds: 15000),
-        baseUrl: 'http://api.coincap.io/v2/');
+      contentType: Headers.jsonContentType,
+      responseType: ResponseType.json,
+      receiveTimeout: const Duration(milliseconds: 15000),
+      sendTimeout: const Duration(milliseconds: 15000),
+      connectTimeout: const Duration(milliseconds: 15000),
+    );
     final Dio dio = Dio(options);
     dio.interceptors.add(DioClientInterceptor(dio));
     return dio;
