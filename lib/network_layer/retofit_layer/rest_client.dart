@@ -7,7 +7,7 @@ part 'rest_client.g.dart';
 
 @RestApi(baseUrl: 'http://api.coincap.io/v2/')
 abstract class ApiClient {
-  factory ApiClient(Dio dio) = _ApiClient;
+  factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 
   @GET('assets')
   Future<CryptoModel> getCryptoCurrencies();
