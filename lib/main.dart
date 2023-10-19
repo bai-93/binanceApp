@@ -2,6 +2,8 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/config/theme/themes.dart';
+import 'package:sheker/network_layer/dio_client.dart';
+import 'package:sheker/network_layer/retofit_layer/rest_client.dart';
 import 'presentation/pages/home_tabBar_page/main_part/main_menu_tabBar.dart';
 
 void main() async {

@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
+import 'package:sheker/injection/injection_configure.dart';
+import 'package:sheker/network_layer/dio_client.dart';
+import 'package:sheker/network_layer/retofit_layer/rest_client.dart';
 import 'package:sheker/presentation/pages/home_tabBar_page/bottom_menu_indicator/tab_bar_indicator.dart';
 
 class BottomMenuTabBar extends StatefulWidget {
@@ -18,15 +22,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
   @override
   void initState() {
     stackItems = [
-      Container(
-        color: Colors.white,
-        child: const Center(
-          child: Text(
-            'Главная',
-            style: TextStyle(color: Colors.black),
-          ),
-        ),
-      ),
+      FirstPage(),
       Container(
         color: Colors.blue,
         child: const Center(
@@ -150,6 +146,41 @@ class _ScrollScreenState extends State<ScrollScreen> {
                 thickness: 2,
               ),
           itemCount: 50),
+    );
+  }
+}
+
+class FirstPage extends StatefulWidget {
+  const FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  @override
+  void initState() {
+    apiTest();
+    super.initState();
+  }
+
+  void apiTest() async {
+    final client =
+        getIt<ApiClientRetrofit>();
+    final data = await client.getCryptoCurrencies();
+    print(data.toJson());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: const Center(
+        child: Text(
+          'Главная',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
     );
   }
 }

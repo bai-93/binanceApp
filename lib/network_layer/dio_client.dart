@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 class DioClient {
   final Dio dio = configure();
 
@@ -24,17 +22,19 @@ class DioClientInterceptor extends Interceptor {
   DioClientInterceptor(this.dioClient);
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    print('request is OnRequest');
     handler.next(options);
-    super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    super.onResponse(response, handler);
+    print('request is Response');
+    handler.next(response);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    super.onError(err, handler);
+    print('request is OnError');
+    handler.next(err);
   }
 }
