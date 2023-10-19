@@ -17,7 +17,6 @@ abstract class RegisterModules {
 }
 
 class Repository extends BaseRepository { // CASE extends not required to override, only in IMPLEMENTS we have to override
-
 }
 
 // @module

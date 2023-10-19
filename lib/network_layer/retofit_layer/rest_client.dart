@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:sheker/repository/cryptoModel/crypto_history_price_model.dart';
-import 'package:sheker/repository/cryptoModel/list_crypto_currencies_model.dart';
+import 'package:sheker/domain/repository/cryptoModel/list_crypto_currencies_model.dart';
+import '../../domain/repository/cryptoModel/crypto_history_price_model.dart';
 
 part 'rest_client.g.dart';
 
