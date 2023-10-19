@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sheker/base_widgets/tabBar_widget/bottom_menu_indicator/tab_bar_indicator.dart';
+import 'package:sheker/presentation/pages/home_tabBar_page/bottom_menu_indicator/tab_bar_indicator.dart';
 
 class BottomMenuTabBar extends StatefulWidget {
   const BottomMenuTabBar({super.key});

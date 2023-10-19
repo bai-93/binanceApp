@@ -1,5 +1,4 @@
 import "package:dio/dio.dart";
-import "package:flutter/foundation.dart";
 
 abstract class ExceptionDescriber extends DioException {
   String? _statusMessage;

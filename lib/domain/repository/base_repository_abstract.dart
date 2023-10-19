@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/network_layer/dio_client.dart';

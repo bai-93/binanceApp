@@ -1,7 +1,5 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sheker/base_widgets/baseWidget.dart';
+import 'package:sheker/config/base_widgets/baseWidget.dart';
 import '../../widgets/login_widgets/login_top_bottom.dart';
 
 class LoginScreen extends BaseScreen {
