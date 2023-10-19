@@ -29,7 +29,7 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final registerModules = _$RegisterModules();
-    gh.singleton<_i3.DioClient>(registerModules.dioClient);
+    gh.factory<_i3.DioClient>(() => registerModules.dioClient);
     await gh.factoryAsync<_i4.SharedPreferences>(
       () => registerModules.prefs,
       preResolve: true,

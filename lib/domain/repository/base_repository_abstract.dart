@@ -18,7 +18,7 @@ abstract class RegisterModules {
   @singleton
   ApiClientRetrofit apiRetrofit(DioClient dio) => ApiClientRetrofit(dio.dio);
 
-  @singleton
+  @injectable
   DioClient get dioClient => DioClient();
 }
 
