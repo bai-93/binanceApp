@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sheker/core/constants/constants.dart';
-import 'package:sheker/network_layer/dio_client.dart';
+import 'package:sheker/network_layer/dio_client/dio_client.dart';
 import 'package:sheker/network_layer/retofit_layer/rest_client.dart';
 
 @module

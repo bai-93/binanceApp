@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
 import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
-import 'package:sheker/network_layer/dio_client.dart';
+import 'package:sheker/network_layer/dio_client/dio_client.dart';
 
 part 'rest_client.g.dart';
 

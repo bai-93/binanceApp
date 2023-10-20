@@ -13,7 +13,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i4;
 
-import '../network_layer/dio_client.dart' as _i3;
+import '../network_layer/dio_client/dio_client.dart' as _i3;
 import '../network_layer/retofit_layer/rest_client.dart' as _i5;
 import 'dependency.dart' as _i6;
 

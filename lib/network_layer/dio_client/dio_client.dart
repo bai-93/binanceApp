@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:sheker/network_layer/dio_client/custom_interceptor.dart';
 
 class DioClient {
   final Dio dio = configure();
@@ -15,25 +16,5 @@ class DioClient {
     dio.interceptors.add(DioClientInterceptor(dio));
     dio.interceptors.add(LogInterceptor(requestBody: true));
     return dio;
-  }
-}
-
-class DioClientInterceptor extends QueuedInterceptor {
-  Dio dioClient;
-  DioClientInterceptor(this.dioClient);
-  @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    handler.next(options);
-  }
-
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    handler.next(response);
-  }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    print(err.requestOptions.baseUrl);
-    handler.next(err);
   }
 }
