@@ -13,28 +13,27 @@ class DioClient {
     );
     final Dio dio = Dio(options);
     dio.interceptors.add(DioClientInterceptor(dio));
+    dio.interceptors.add(LogInterceptor(requestBody: true));
     return dio;
   }
 }
 
-class DioClientInterceptor extends Interceptor {
+class DioClientInterceptor extends QueuedInterceptor {
   Dio dioClient;
   DioClientInterceptor(this.dioClient);
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    print('request is OnRequest');
     handler.next(options);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print('request is Response');
     handler.next(response);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    print('request is OnError');
+    print(err.requestOptions.baseUrl);
     handler.next(err);
   }
 }

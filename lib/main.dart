@@ -8,7 +8,9 @@ import 'presentation/pages/home_tabBar_page/main_part/main_menu_tabBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await configureDependencies();
+  await configureDependencies(
+      environment:
+          prod); // we can switch just setting keywords like 'prod' and 'dev'
   runApp(const MyApp());
 }
 

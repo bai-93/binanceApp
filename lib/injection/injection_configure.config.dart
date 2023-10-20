@@ -13,9 +13,9 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i4;
 
-import '../domain/repository/base_repository_abstract.dart' as _i6;
 import '../network_layer/dio_client.dart' as _i3;
 import '../network_layer/retofit_layer/rest_client.dart' as _i5;
+import 'dependency.dart' as _i6;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -34,8 +34,8 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModules.prefs,
       preResolve: true,
     );
-    gh.singleton<_i5.ApiClientRetrofit>(
-        registerModules.apiRetrofit(gh<_i3.DioClient>()));
+    gh.factory<_i5.ApiClientRetrofit>(
+        () => registerModules.apiRetrofit(gh<_i3.DioClient>()));
     return this;
   }
 }
