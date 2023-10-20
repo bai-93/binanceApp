@@ -6,4 +6,4 @@ final String _baseUrlProd = 'http://api.coincap.io/v2/';
 final String baseUrl = getIt<SharedPreferences>().getBool('prod') == true
     ? _baseUrlProd
     : _baseUrlDev;
-final String token = '';
+final String token = '03c32504-aaa4-437c-8c0c-586fb2f7485c';
