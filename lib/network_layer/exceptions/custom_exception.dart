@@ -33,3 +33,8 @@ class ConnectionTimeOutException extends ExceptionDescriber {
   ConnectionTimeOutException(super.statusMessage, super.statusCode,
       {required super.r});
 }
+
+class FailTokenRefreshException extends ExceptionDescriber {
+  FailTokenRefreshException(super.statusMessage, super.statusCode,
+      {required super.r});
+}
