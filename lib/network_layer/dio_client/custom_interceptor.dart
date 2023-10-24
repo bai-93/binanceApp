@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:sheker/core/constants/constants.dart';
 import 'package:sheker/network_layer/exceptions/custom_exception.dart';
@@ -11,13 +10,11 @@ class DioClientInterceptor extends QueuedInterceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    print("COUNTER ======== ${count} ===== ON_REQUEST");
     handler.next(options);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    print("COUNTER ======== ${count} ===== ON_RESPONSE");
     handler.next(response);
   }
 
@@ -40,7 +37,7 @@ class DioClientInterceptor extends QueuedInterceptor {
         }
       }
     } else {
-      print("NOW IS GOING TO NEXT HANDLER error");
+      print("Something new UNEXPECTED ERROR");
       handler.next(err);
     }
   }
@@ -62,10 +59,8 @@ class DioClientInterceptor extends QueuedInterceptor {
 
   Future<Response> retryRequest(RequestOptions reqOpt) {
     count++;
-    print("RETRY REQUEST &&&&&&&& count +++++++======= ${count}");
     final option = Options(
         method: reqOpt.method, headers: {'Authorization': 'Bearer ${token}'});
-    print('${reqOpt.baseUrl + reqOpt.path}');
     return dioClient.request('http://api.coincap.io/v2/${reqOpt.path}',
         options: option,
         cancelToken: reqOpt.cancelToken,

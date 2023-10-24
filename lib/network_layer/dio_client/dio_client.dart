@@ -8,13 +8,10 @@ class DioClient {
     BaseOptions options = BaseOptions(
       contentType: Headers.jsonContentType,
       responseType: ResponseType.json,
-      // receiveTimeout: const Duration(milliseconds: 15000),
-      // sendTimeout: const Duration(milliseconds: 15000),
-      // connectTimeout: const Duration(milliseconds: 15000),
     );
     final Dio dio = Dio(options);
     dio.interceptors.add(DioClientInterceptor(dio));
-    // dio.interceptors.add(LogInterceptor());
+    dio.interceptors.add(LogInterceptor());
     return dio;
   }
 }
