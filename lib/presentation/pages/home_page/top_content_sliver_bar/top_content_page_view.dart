@@ -42,15 +42,12 @@ class _TopContentSliverBarPageViewState
             border: Border.all(color: Colors.grey.withAlpha(80)),
             borderRadius: const BorderRadius.all(Radius.circular(10.0))),
         child: Stack(children: [
-          PageView.builder(
-            controller: _pageController,
-            padEnds: false,
-            itemBuilder: (context, index) {
-              return content('Выиграйте 100 USDT и Tesla',
-                  'Для начала\nпригласите друзей', Colors.black);
-            },
-            itemCount: 2,
-          ),
+          PageView(controller: _pageController, padEnds: false, children: [
+            content('Выиграйте 100 USDT и Tesla',
+                'Для начала пригласите друзей', Colors.black),
+            content('Хаб для новых пользователей',
+                'Получите приветственную награду', Colors.yellow)
+          ]),
           indicatorSlide()
         ]),
       ),
@@ -58,55 +55,53 @@ class _TopContentSliverBarPageViewState
   }
 
   Widget content(String topTitle, String description, Color color) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 10.0, top: 25.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.54,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    topTitle,
-                    softWrap: true,
-                    style: TextStyle(
-                        color: Colors.black.withAlpha(150),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Text(
-                    description,
-                    maxLines: 2,
-                    softWrap: true,
-                    style: const TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        color: Colors.black,
-                        fontSize: 19,
-                        fontWeight: FontWeight.w700),
-                  ),
-                ],
-              ),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10.0, top: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.54,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  topTitle,
+                  softWrap: true,
+                  style: TextStyle(
+                      color: Colors.black.withAlpha(150),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  description,
+                  maxLines: 2,
+                  softWrap: true,
+                  style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      color: Colors.black,
+                      fontSize: 19,
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 40.0,
+          ),
+          const SizedBox(
+            width: 40.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20.0, right: 10.0),
+            child: Container(
+              color: color,
+              width: 90.0,
+              height: 100.0,
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20.0, right: 10.0),
-              child: Container(
-                color: color,
-                width: 90.0,
-                height: 100.0,
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -137,7 +132,7 @@ class _TopContentSliverBarPageViewState
       data.add(item);
       data.insert(
           1,
-          SizedBox(
+          const SizedBox(
             width: 3.0,
           ));
     }
