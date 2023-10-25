@@ -22,7 +22,7 @@ class _ContentSliverBarState extends State<ContentSliverBar> {
         children: [
           topTitleText(),
           moneyTextTitle(),
-          TopContentSliverBarPageView()
+          TopContentSliverBarPageView(),
         ],
       ),
     );
