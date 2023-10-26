@@ -7,9 +7,6 @@ import 'package:sheker/network_layer/retofit_layer/rest_client.dart';
 
 abstract class BaseRepository {
   final DioClient dio = getIt<DioClient>();
+  final ApiClientRetrofit apiClientRetrofit = getIt<ApiClientRetrofit>();
   final SharedPreferences prefs = getIt<SharedPreferences>();
-}
-
-class Repository extends BaseRepository {
-  // CASE extends not required to override, only in IMPLEMENTS we have to override
 }

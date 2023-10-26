@@ -23,7 +23,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
   @override
   void initState() {
     stackItems = [
-      CryptoHomePage(),
+      const CryptoHomePage(),
       Container(
         color: Colors.blue,
         child: const Center(

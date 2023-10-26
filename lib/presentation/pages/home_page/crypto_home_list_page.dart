@@ -34,8 +34,8 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
                     angle: pi / 4,
                     child: Container(
                         color: const Color.fromRGBO(237, 199, 75, 1.0),
-                        height: 10.0,
-                        width: 10.0),
+                        height: 9.5,
+                        width: 9.5),
                   ),
                 ],
               ),

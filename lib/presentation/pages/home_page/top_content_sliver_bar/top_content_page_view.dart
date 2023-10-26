@@ -43,9 +43,9 @@ class _TopContentSliverBarPageViewState
             borderRadius: const BorderRadius.all(Radius.circular(10.0))),
         child: Stack(children: [
           PageView(controller: _pageController, padEnds: false, children: [
-            content('Выиграйте 100 USDT и Tesla',
+            content('Выиграйте 100 USDT и Tesla ---> картина',
                 'Для начала пригласите друзей', Colors.black),
-            content('Хаб для новых пользователей',
+            content('Хаб для новых пользователей ---> картина',
                 'Получите приветственную награду', Colors.yellow)
           ]),
           indicatorSlide()
