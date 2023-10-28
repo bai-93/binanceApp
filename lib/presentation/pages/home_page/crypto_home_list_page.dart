@@ -1,7 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:sheker/presentation/pages/home_page/crypto_content_persistent_bar.dart';
+import 'package:sheker/presentation/pages/home_page/list_crypto_content/list_crypto_content.dart';
+import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_content_persistent_bar.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_sliver_bar_content.dart';
 
 class CryptoHomePage extends StatefulWidget {
@@ -126,15 +126,7 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
           ]),
           SliverPersistentHeader(
               pinned: true, delegate: CustomSliverPersistentHeaderDelegate()),
-          SliverList.builder(
-            itemBuilder: (context, index) {
-              return Container(
-                color: index.isEven ? Colors.white : Colors.white,
-                height: 50.0,
-              );
-            },
-            itemCount: 20,
-          )
+          CryptoListContent()
         ],
       ),
     );

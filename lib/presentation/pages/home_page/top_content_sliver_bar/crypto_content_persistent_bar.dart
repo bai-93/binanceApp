@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/filter_content_persistent_bar.dart';
 
 class CustomSliverPersistentHeaderDelegate
     extends SliverPersistentHeaderDelegate {
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: Colors.white,
-      height: 150.0,
-      child: const Center(
-        child: Text(
-          'data',
-          style: TextStyle(color: Colors.black),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
+    return Container(color: Colors.white, child: FilterContentPersistentBar());
   }
 
   @override
-  double get maxExtent => 80.0;
+  double get maxExtent => 100.0;
 
   @override
-  double get minExtent => 80.0;
+  double get minExtent => 100.0;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {

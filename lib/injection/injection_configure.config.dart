@@ -15,7 +15,8 @@ import 'package:shared_preferences/shared_preferences.dart' as _i6;
 
 import '../domain/repository/repository_home_page/home_page_repository_impl.dart'
     as _i5;
-import '../domain/usecases/home_page_usecase/home_page_usecase.dart' as _i4;
+import '../domain/usecases/home_page_usecase/get_crypto_list_usecase.dart'
+    as _i4;
 import '../network_layer/dio_client/dio_client.dart' as _i3;
 import '../network_layer/retofit_layer/rest_client.dart' as _i7;
 import 'dependency.dart' as _i8;
@@ -33,8 +34,7 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final registerModules = _$RegisterModules();
     gh.factory<_i3.DioClient>(() => registerModules.dioClient);
-    gh.factory<_i4.GetCryptoListHomePageUseCaseImpl>(
-        () => _i4.GetCryptoListHomePageUseCaseImpl());
+    gh.factory<_i4.GetCryptoListCaseImpl>(() => _i4.GetCryptoListCaseImpl());
     gh.factory<_i5.HomePageRepostoryImpl>(() => _i5.HomePageRepostoryImpl());
     await gh.factoryAsync<_i6.SharedPreferences>(
       () => registerModules.prefs,
