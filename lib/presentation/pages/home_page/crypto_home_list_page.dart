@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/home_page/list_crypto_content/list_crypto_content.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_content_persistent_bar.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_sliver_bar_content.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CryptoHomePage extends StatefulWidget {
   const CryptoHomePage({super.key});

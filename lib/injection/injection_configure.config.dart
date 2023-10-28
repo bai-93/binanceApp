@@ -34,7 +34,8 @@ extension GetItInjectableX on _i1.GetIt {
     );
     final registerModules = _$RegisterModules();
     gh.factory<_i3.DioClient>(() => registerModules.dioClient);
-    gh.factory<_i4.GetCryptoListCaseImpl>(() => _i4.GetCryptoListCaseImpl());
+    gh.factory<_i4.GetCryptoListUseCaseImpl>(
+        () => _i4.GetCryptoListUseCaseImpl());
     gh.factory<_i5.HomePageRepostoryImpl>(() => _i5.HomePageRepostoryImpl());
     await gh.factoryAsync<_i6.SharedPreferences>(
       () => registerModules.prefs,

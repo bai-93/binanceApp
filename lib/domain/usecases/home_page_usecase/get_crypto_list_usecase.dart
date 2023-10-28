@@ -6,7 +6,7 @@ import 'package:sheker/domain/repository/repository_home_page/home_page_resposit
 import 'package:sheker/injection/injection_configure.dart';
 
 @injectable
-class GetCryptoListCaseImpl implements UseCase<CryptoModelList, void> {
+class GetCryptoListUseCaseImpl implements UseCase<CryptoModelList, void> {
   final HomePageRepository _repository = getIt<HomePageRepostoryImpl>();
 
   @override
