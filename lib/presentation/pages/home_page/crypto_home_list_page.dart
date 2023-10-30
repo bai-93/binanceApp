@@ -1,8 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/home_page/list_crypto_content/list_crypto_content.dart';
+import 'package:sheker/presentation/pages/home_page/shimmer/home_page_shimmer.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_content_persistent_bar.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_sliver_bar_content.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CryptoHomePage extends StatefulWidget {
   const CryptoHomePage({super.key});
@@ -14,31 +16,32 @@ class CryptoHomePage extends StatefulWidget {
 class _CryptoHomePageState extends State<CryptoHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        shadowColor: Colors.transparent,
-        leading: GestureDetector(
-          child: leading(),
-          onTap: () {
-            debugPrint("menu was tapped");
-          },
-        ),
-        actions: [actions()],
-      ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList.list(children: [
-            BalanceContentSliverBar('13,59', () {
-              print(" Go to portfolio");
-            })
-          ]),
-          SliverPersistentHeader(
-              pinned: true, delegate: CustomSliverPersistentHeaderDelegate()),
-          CryptoListContent()
-        ],
-      ),
-    );
+    return HomePageCryptoShimmer();
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.white,
+    //     shadowColor: Colors.transparent,
+    //     leading: GestureDetector(
+    //       child: leading(),
+    //       onTap: () {
+    //         debugPrint("menu was tapped");
+    //       },
+    //     ),
+    //     actions: [actions()],
+    //   ),
+    //   body: CustomScrollView(
+    //     slivers: [
+    //       SliverList.list(children: [
+    //         BalanceContentSliverBar('13,59', () {
+    //           print(" Go to portfolio");
+    //         })
+    //       ]),
+    //       SliverPersistentHeader(
+    //           pinned: true, delegate: CustomSliverPersistentHeaderDelegate()),
+    //       CryptoListContent()
+    //     ],
+    //   ),
+    // );
   }
 
   Widget leading() {
