@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/home_page/list_crypto_content/list_crypto_content.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_content_persistent_bar.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_sliver_bar_content.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CryptoHomePage extends StatefulWidget {
   const CryptoHomePage({super.key});
@@ -13,6 +12,35 @@ class CryptoHomePage extends StatefulWidget {
 }
 
 class _CryptoHomePageState extends State<CryptoHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        shadowColor: Colors.transparent,
+        leading: GestureDetector(
+          child: leading(),
+          onTap: () {
+            debugPrint("menu was tapped");
+          },
+        ),
+        actions: [actions()],
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverList.list(children: [
+            BalanceContentSliverBar('13,59', () {
+              print(" Go to portfolio");
+            })
+          ]),
+          SliverPersistentHeader(
+              pinned: true, delegate: CustomSliverPersistentHeaderDelegate()),
+          CryptoListContent()
+        ],
+      ),
+    );
+  }
+
   Widget leading() {
     return Container(
         color: Colors.transparent,
@@ -73,62 +101,35 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
         ));
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        shadowColor: Colors.transparent,
-        leading: GestureDetector(
-          child: leading(),
-          onTap: () {
-            debugPrint("menu was tapped");
-          },
+  Widget actions() {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Container(
+        color: Colors.transparent,
+        width: 100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+                splashRadius: 0.1,
+                onPressed: () {
+                  debugPrint("search");
+                },
+                icon: const Icon(
+                  Icons.search_rounded,
+                  color: Colors.grey,
+                )),
+            IconButton(
+                splashRadius: 0.1,
+                onPressed: () {
+                  debugPrint("camera scan");
+                },
+                icon: const Icon(
+                  Icons.qr_code_scanner_sharp,
+                  color: Colors.grey,
+                ))
+          ],
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: Container(
-              color: Colors.transparent,
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      splashRadius: 0.1,
-                      onPressed: () {
-                        debugPrint("search");
-                      },
-                      icon: const Icon(
-                        Icons.search_rounded,
-                        color: Colors.grey,
-                      )),
-                  IconButton(
-                      splashRadius: 0.1,
-                      onPressed: () {
-                        debugPrint("camera scan");
-                      },
-                      icon: const Icon(
-                        Icons.qr_code_scanner_sharp,
-                        color: Colors.grey,
-                      ))
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList.list(children: [
-            ContentSliverBar('13,59', () {
-              print(" Go to portfolio");
-            })
-          ]),
-          SliverPersistentHeader(
-              pinned: true, delegate: CustomSliverPersistentHeaderDelegate()),
-          CryptoListContent()
-        ],
       ),
     );
   }

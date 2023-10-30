@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class TopContentSliverBarPageView extends StatefulWidget {
-  const TopContentSliverBarPageView({super.key});
+class TopBalanceContentSliverBarPageView extends StatefulWidget {
+  const TopBalanceContentSliverBarPageView({super.key});
 
   @override
-  State<TopContentSliverBarPageView> createState() =>
-      _TopContentSliverBarPageViewState();
+  State<TopBalanceContentSliverBarPageView> createState() =>
+      _TopBalanceContentSliverBarPageViewState();
 }
 
-class _TopContentSliverBarPageViewState
-    extends State<TopContentSliverBarPageView> {
+class _TopBalanceContentSliverBarPageViewState
+    extends State<TopBalanceContentSliverBarPageView> {
   bool indicatorFlag = true;
   PageController _pageController = PageController();
   int? indicator = 0;

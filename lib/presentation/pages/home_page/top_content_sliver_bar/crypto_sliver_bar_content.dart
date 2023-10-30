@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/top_content_page_view.dart';
 
-class ContentSliverBar extends StatefulWidget {
+class BalanceContentSliverBar extends StatefulWidget {
   final String money;
   final void Function() goToPortfolioPage;
-  const ContentSliverBar(this.money, this.goToPortfolioPage, {super.key});
+  const BalanceContentSliverBar(this.money, this.goToPortfolioPage,
+      {super.key});
 
   @override
-  State<ContentSliverBar> createState() => _ContentSliverBarState();
+  State<BalanceContentSliverBar> createState() =>
+      _BalanceContentSliverBarState();
 }
 
-class _ContentSliverBarState extends State<ContentSliverBar> {
+class _BalanceContentSliverBarState extends State<BalanceContentSliverBar> {
   bool moneyFlag = true;
 
   @override
@@ -22,7 +24,7 @@ class _ContentSliverBarState extends State<ContentSliverBar> {
         children: [
           topTitleText(),
           moneyTextTitle(),
-          TopContentSliverBarPageView(),
+          TopBalanceContentSliverBarPageView(),
         ],
       ),
     );
