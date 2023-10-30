@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
+import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/top_content_page_view.dart';
 
 class BalanceContentSliverBar extends StatefulWidget {
@@ -13,7 +16,7 @@ class BalanceContentSliverBar extends StatefulWidget {
 }
 
 class _BalanceContentSliverBarState extends State<BalanceContentSliverBar> {
-  bool moneyFlag = true;
+  bool moneyFlag = false;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +39,25 @@ class _BalanceContentSliverBarState extends State<BalanceContentSliverBar> {
         Transform.translate(
           offset: const Offset(0.0, -10.0),
           child: Padding(
-            padding: const EdgeInsets.only(left: 15.0),
-            child: Text(
-              "${widget.money} \$",
-              softWrap: true,
-              style:
-                  const TextStyle(fontSize: 30.0, fontWeight: FontWeight.w500),
+            padding: const EdgeInsets.only(left: 10.0),
+            child: BlocBuilder<CryptoListBloc, CryptoListState>(
+              builder: (context, state) {
+                if (state is CryptoListLoaded) {
+                  NumberFormat format = NumberFormat.decimalPatternDigits(
+                      locale: 'en_us', decimalDigits: 2);
+                  double money =
+                      double.parse(state.modelList.data.first.priceUsd!);
+                  return Text(
+                    "${moneyFlag ? format.format(money).replaceAll(RegExp('[0-9]'), '*') : format.format(money)} \$",
+                    overflow: TextOverflow.clip,
+                    softWrap: true,
+                    maxLines: 1,
+                    style: const TextStyle(
+                        fontSize: 30.0, fontWeight: FontWeight.w500),
+                  );
+                }
+                return const SizedBox();
+              },
             ),
           ),
         ),
@@ -70,7 +86,7 @@ class _BalanceContentSliverBarState extends State<BalanceContentSliverBar> {
                 moneyFlag = !moneyFlag;
               });
             },
-            icon: Icon(moneyFlag ? Icons.lock_open : Icons.lock))
+            icon: Icon(moneyFlag ? Icons.lock : Icons.lock_open))
       ],
     );
   }

@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.dart';
 import 'package:sheker/presentation/pages/home_page/list_crypto_content/list_crypto_content.dart';
 import 'package:sheker/presentation/pages/home_page/shimmer/home_page_shimmer.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/crypto_content_persistent_bar.dart';
@@ -15,7 +17,28 @@ class CryptoHomePage extends StatefulWidget {
 class _CryptoHomePageState extends State<CryptoHomePage> {
   @override
   Widget build(BuildContext context) {
-    return HomePageCryptoShimmer();
+    return MultiBlocListener(
+        listeners: [
+          BlocListener<CryptoListBloc, CryptoListState>(
+              listener: (context, state) {
+            debugPrint("hellll");
+            switch (state) {
+              case CryptoListShimmerEnableState():
+                debugPrint("shimmer turn ON");
+              case CryptoListShimmerDisableState():
+                debugPrint("shimmer turn OFF");
+              case CryptoListLoaded():
+                debugPrint("data was LOADED");
+            }
+          })
+        ],
+        child: BlocBuilder<CryptoListBloc, CryptoListState>(
+            builder: (context, state) {
+          if (state is CryptoListShimmerEnableState) {
+            return const HomePageCryptoShimmer();
+          }
+          return mainPage();
+        }));
   }
 
   Widget mainPage() {

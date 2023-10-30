@@ -7,7 +7,7 @@ class HomePageCryptoShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       child: Container(
         color: Colors.transparent,
         child: Shimmer.fromColors(

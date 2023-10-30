@@ -4,8 +4,8 @@ import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.
 class Providers {
   static get getProviders {
     return [
-      BlocProvider<CryptoListBloc>(create: (context) => CryptoListBloc())
+      BlocProvider<CryptoListBloc>(
+          create: (context) => CryptoListBloc()..add(CryptoListLoadEvent()))
     ];
   }
 }
- 
