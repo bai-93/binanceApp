@@ -7,9 +7,8 @@ class HomePageCryptoShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: NeverScrollableScrollPhysics(),
       child: Container(
-        // height: MediaQuery.of(context).size.height,
-        // width: MediaQuery.of(context).size.width,
         color: Colors.transparent,
         child: Shimmer.fromColors(
           baseColor: Colors.grey.shade300,
