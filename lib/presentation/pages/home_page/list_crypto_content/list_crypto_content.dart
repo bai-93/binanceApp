@@ -43,6 +43,7 @@ class CryptoListContent extends StatelessWidget {
             color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w300),
       ),
       onTap: () {
+        debugPrint(model.id);
         debugPrint('tapped list tile and index === ${index}');
       },
     );

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:sheker/domain/models/responses/crypto_models/crypto_detail_model.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
 import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
 
@@ -14,7 +15,7 @@ abstract class ApiClientRetrofit {
   Future<CryptoModelList> getCryptoCurrencies();
 
   @GET('assets/{crypToID}')
-  Future<CryptoModelList> getCryptoInfoById(@Path('crypToID') String cryptoID);
+  Future<CryptoDetailModel> getCryptoInfoById(@Path('crypToID') String cryptoID);
 
   @GET('assets/{cryptoID}/history')
   Future<CryptoHistoryPriceListModel> getCryptoHistoryWithInterval(

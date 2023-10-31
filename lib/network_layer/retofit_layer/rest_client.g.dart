@@ -48,13 +48,13 @@ class _ApiClientRetrofit implements ApiClientRetrofit {
   }
 
   @override
-  Future<CryptoModelList> getCryptoInfoById(String cryptoID) async {
+  Future<CryptoDetailModel> getCryptoInfoById(String cryptoID) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<CryptoModelList>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<CryptoDetailModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -70,7 +70,7 @@ class _ApiClientRetrofit implements ApiClientRetrofit {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = CryptoModelList.fromJson(_result.data!);
+    final value = CryptoDetailModel.fromJson(_result.data!);
     return value;
   }
 
