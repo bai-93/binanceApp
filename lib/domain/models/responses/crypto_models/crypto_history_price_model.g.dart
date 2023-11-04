@@ -27,7 +27,7 @@ CryptoHistoryPriceListModel _$CryptoHistoryPriceListModelFromJson(
     CryptoHistoryPriceListModel(
       (json['data'] as List<dynamic>)
           .map((e) =>
-              CryptoHistoryPriceListModel.fromJson(e as Map<String, dynamic>))
+              CryptoHistoryPriceModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

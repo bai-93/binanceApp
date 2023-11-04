@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/config/theme/themes.dart';
 import 'package:sheker/presentation/bloc/providers.dart';
-import 'presentation/pages/home_tabBar_page/main_part/main_menu_tabBar.dart';
+import 'presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

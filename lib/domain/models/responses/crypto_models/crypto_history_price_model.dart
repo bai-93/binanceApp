@@ -15,7 +15,7 @@ class CryptoHistoryPriceModel {
 
 @JsonSerializable()
 class CryptoHistoryPriceListModel {
-  final List<CryptoHistoryPriceListModel> data;
+  final List<CryptoHistoryPriceModel> data;
 
   const CryptoHistoryPriceListModel(this.data);
   factory CryptoHistoryPriceListModel.fromJson(Map<String, dynamic> json) =>

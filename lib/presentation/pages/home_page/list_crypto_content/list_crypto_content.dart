@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
 import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.dart';
+import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 
 class CryptoListContent extends StatelessWidget {
   const CryptoListContent({super.key});
@@ -15,7 +16,7 @@ class CryptoListContent extends StatelessWidget {
           return SliverList.builder(
               itemCount: state.modelList.data.length,
               itemBuilder: (context, index) {
-                return contentList(index, state.modelList.data[index]);
+                return contentList(index, state.modelList.data[index], context);
               });
         }
         return const SizedBox();
@@ -23,7 +24,7 @@ class CryptoListContent extends StatelessWidget {
     );
   }
 
-  Widget contentList(int index, CryptoModel model) {
+  Widget contentList(int index, CryptoModel model, BuildContext context) {
     NumberFormat format =
         NumberFormat.decimalPatternDigits(locale: 'en_us', decimalDigits: 2);
     double money = double.parse(model.priceUsd!);
@@ -45,6 +46,9 @@ class CryptoListContent extends StatelessWidget {
       onTap: () {
         debugPrint(model.id);
         debugPrint('tapped list tile and index === ${index}');
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return GraphDetailPage(model.id!);
+        }));
       },
     );
   }

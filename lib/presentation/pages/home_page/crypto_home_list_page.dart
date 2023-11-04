@@ -58,12 +58,12 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
         slivers: [
           SliverList.list(children: [
             BalanceContentSliverBar('13,59', () {
-              print(" Go to portfolio");
+              debugPrint(" Go to portfolio");
             })
           ]),
           SliverPersistentHeader(
               pinned: true, delegate: CustomSliverPersistentHeaderDelegate()),
-          CryptoListContent()
+          const CryptoListContent()
         ],
       ),
     );

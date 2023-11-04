@@ -1,11 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
-import 'package:sheker/injection/injection_configure.dart';
-import 'package:sheker/network_layer/dio_client/dio_client.dart';
-import 'package:sheker/network_layer/retofit_layer/rest_client.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
-import 'package:sheker/presentation/pages/home_tabBar_page/bottom_menu_indicator/tab_bar_indicator.dart';
+import 'package:sheker/presentation/pages/tab_bar/bottom_menu_indicator/tab_bar_indicator.dart';
+import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
 
 class BottomMenuTabBar extends StatefulWidget {
   const BottomMenuTabBar({super.key});
@@ -47,15 +43,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
           style: TextStyle(color: Colors.white),
         )),
       ),
-      Container(
-        color: Colors.black,
-        child: const Center(
-          child: Text(
-            'Wallets',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      )
+      WalletShimmerPage()
     ];
     _tabController = TabController(length: stackItems.length, vsync: this);
     _tabController.addListener(() {
@@ -73,6 +61,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         body: IndexedStack(index: selectedIndexStack, children: stackItems),
         bottomNavigationBar: Theme(
           data: ThemeData(
@@ -118,53 +107,4 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
           ),
         ));
   }
-}
-
-class ScrollScreen extends StatefulWidget {
-  const ScrollScreen({super.key});
-
-  @override
-  State<ScrollScreen> createState() => _ScrollScreenState();
-}
-
-class _ScrollScreenState extends State<ScrollScreen> {
-  final ScrollController _homeController = ScrollController();
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ListView.separated(
-          key: const ValueKey('value'),
-          controller: _homeController,
-          itemBuilder: (BuildContext context, int index) {
-            return Center(
-              child: Text(
-                'Index ${index + 1}',
-              ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => const Divider(
-                thickness: 2,
-              ),
-          itemCount: 50),
-    );
-  }
-}
-
-void apiTest() async {
-  final client = getIt<ApiClientRetrofit>();
-  final data = await client.getCryptoCurrencies();
-}
-
-@override
-Widget build(BuildContext context) {
-  return Container(
-    color: Colors.white,
-    child: const Center(
-      child: Text(
-        'Главная',
-        style: TextStyle(color: Colors.black),
-      ),
-    ),
-  );
 }
