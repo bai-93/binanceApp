@@ -6,19 +6,30 @@ class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
   List<double> percentageData = [];
   List<double> anotherData = [
-    10,
-    11,
-    15,
-    13,
-    5,
-    20,
-    16,
-    2,
-    7,
-    18,
-    9,
-    5,
-    3,
+    83396.89,
+    82364.65,
+    81545.52,
+    82169.63,
+    81390.36,
+    81591.06,
+    81923.55,
+    81500.0,
+    81050.0,
+    81257.9,
+    81385.01,
+    82028.57,
+    81845.01,
+    82040.0,
+    82267.56,
+    82249.01,
+    81891.57,
+    81969.37,
+    81780.0,
+    81990.01,
+    81529.27,
+    80799.75,
+    82615.06,
+    82540.25
   ];
   double maxPrice = 0;
   GraphCustomPaint(this.model) {
@@ -41,11 +52,13 @@ class GraphCustomPaint extends CustomPainter {
     int nextIndex = 0;
     for (var i = 0; i < percentageData.length; i++) {
       double uniCoefficient = 0.0;
-      double paddingTop = limitSize.height * 1 / 9;
+      double paddingTop = limitSize.height * 1 / 15;
       double coef = (log(percentageData[i]).abs()) * 15 > 1.0
           ? (log(percentageData[i]).abs()) / 10
-          : (log(percentageData[i]).abs()) * 15;
-      uniCoefficient = limitSize.height - (coef * limitSize.height * 1.7);
+          : (log(percentageData[i]).abs()) * 12;
+      uniCoefficient =
+          (limitSize.height - (coef * limitSize.height * 1.7)).abs();
+      print('coeff === ${coef} and uni === ${uniCoefficient}');
       if (isFirst) {
         isFirst = false;
         path.moveTo(
