@@ -84,18 +84,21 @@ class _GraphDetailPageState extends State<GraphDetailPage> {
 
   Widget mainPage() {
     return SingleChildScrollView(
-        child: Padding(
-      padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 5.0,
-          ),
-          CryptoTopDescription(model),
-          CryptoGraphPage(widget.cryptoId),
-          CryptoDescription(model)
-        ],
-      ),
+        child: Column(
+      children: [
+        const SizedBox(
+          height: 5.0,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+          child: CryptoTopDescription(model),
+        ),
+        CryptoGraphPage(widget.cryptoId),
+        Padding(
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+          child: CryptoDescription(model),
+        )
+      ],
     ));
   }
 }

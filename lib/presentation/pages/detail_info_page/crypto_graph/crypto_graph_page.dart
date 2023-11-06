@@ -34,7 +34,9 @@ class _CryptoGraphPageState extends State<CryptoGraphPage> {
                   painter: GraphCustomPaint(state.model),
                 );
               }
-              return Container(color: Colors.grey,);
+              return Container(
+                color: Colors.grey,
+              );
             },
           ),
         ),
