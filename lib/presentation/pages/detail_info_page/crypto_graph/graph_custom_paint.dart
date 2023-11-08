@@ -19,7 +19,7 @@ class GraphCustomPaint extends CustomPainter {
     paint.shader = LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
-            stops: [0.0, 1.0, 1.0],
+            stops: const [0.0, 1.0, 1.0],
             colors: [Colors.red, Colors.blue, Colors.blue.withAlpha(127)])
         .createShader(path.getBounds());
     canvas.drawPath(path, paint);
