@@ -1,37 +1,11 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
-import 'dart:ui';
 
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
   List<double> percentageData = [];
-  List<double> anotherData = [
-    83396.89,
-    82364.65,
-    81545.52,
-    82169.63,
-    81390.36,
-    81591.06,
-    81923.55,
-    81500.0,
-    81050.0,
-    81257.9,
-    81385.01,
-    82028.57,
-    81845.01,
-    82040.0,
-    82267.56,
-    82249.01,
-    81891.57,
-    81969.37,
-    81780.0,
-    81990.01,
-    81529.27,
-    80799.75,
-    82615.06,
-    82540.25
-  ];
+  List<double> anotherData = [1550.0, 1000, 1200, 1300, 1400];
   double maxPrice = 0;
   GraphCustomPaint(this.model) {
     settingsModel();
@@ -40,9 +14,14 @@ class GraphCustomPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = paintConfigure();
-    // paint.shader =
-    //     LinearGradient(colors: [Colors.blue, Colors.blue.withAlpha(127)]);
+
     var path = drawFunction(canvas, size);
+    paint.shader = LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomRight,
+            stops: [0.0, 1.0, 1.0],
+            colors: [Colors.red, Colors.blue, Colors.blue.withAlpha(127)])
+        .createShader(path.getBounds());
     canvas.drawPath(path, paint);
   }
 
@@ -104,6 +83,9 @@ class GraphCustomPaint extends CustomPainter {
       nextStepX += stepWidth;
       nextIndex++;
     }
+    path.lineTo(limitSize.width, limitSize.height);
+    path.lineTo(0.0, limitSize.height);
+    path.close();
     return path;
   }
 
@@ -116,11 +98,11 @@ class GraphCustomPaint extends CustomPainter {
 
   Paint paintConfigure() {
     var paint = Paint();
-    paint.color = Colors.black;
+    paint.color = Colors.red;
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
-    paint.strokeWidth = 2.5;
-    paint.style = PaintingStyle.stroke;
+    paint.strokeWidth = 4;
+    paint.style = PaintingStyle.fill;
     // paint.maskFilter = const MaskFilter.blur(BlurStyle.inner, 1.0);
     return paint;
   }
