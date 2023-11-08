@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
+import 'dart:ui';
 
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
@@ -39,6 +40,8 @@ class GraphCustomPaint extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var paint = paintConfigure();
+    // paint.shader =
+    //     LinearGradient(colors: [Colors.blue, Colors.blue.withAlpha(127)]);
     var path = drawFunction(canvas, size);
     canvas.drawPath(path, paint);
   }
@@ -53,33 +56,62 @@ class GraphCustomPaint extends CustomPainter {
     for (var i = 0; i < percentageData.length; i++) {
       double uniCoefficient = 0.0;
       double paddingTop = limitSize.height * 1 / 15;
-      double coef = (log(percentageData[i]).abs()) * 15 > 1.0
-          ? (log(percentageData[i]).abs()) / 10
-          : (log(percentageData[i]).abs()) * 12;
-      uniCoefficient =
-          (limitSize.height - (coef * limitSize.height * 1.7)).abs();
-      print('coeff === ${coef} and uni === ${uniCoefficient}');
+      uniCoefficient = getCoefficient(i, limitSize.height);
       if (isFirst) {
         isFirst = false;
         path.moveTo(
             nextStepX,
-            (((percentageData[i]) * limitSize.height - uniCoefficient)).abs() +
+            (((percentageData[i]) * (limitSize.height) - uniCoefficient))
+                    .abs() +
                 paddingTop);
-        path.lineTo(
-            nextStepX,
-            (((percentageData[i]) * limitSize.height - uniCoefficient)).abs() +
+        path.cubicTo(
+            nextStepX + stepWidth / 2,
+            ((((percentageData[i]) * limitSize.height - uniCoefficient)).abs() +
+                    paddingTop) *
+                1,
+            nextStepX + stepWidth / 2,
+            (((((percentageData[i + 1]) * limitSize.height -
+                            getCoefficient(i + 1, limitSize.height)))
+                        .abs() +
+                    paddingTop) *
+                1),
+            nextStepX + stepWidth,
+            (((percentageData[i + 1]) * limitSize.height -
+                        getCoefficient(i + 1, limitSize.height)))
+                    .abs() +
                 paddingTop);
       } else {
-        if (nextIndex < percentageData.length) {}
-        path.lineTo(
-            nextStepX,
-            (((percentageData[i]) * limitSize.height - uniCoefficient)).abs() +
-                paddingTop);
+        if (nextIndex + 1 < percentageData.length) {
+          path.cubicTo(
+              nextStepX + stepWidth / 2,
+              ((((percentageData[i]) * limitSize.height - uniCoefficient))
+                          .abs() +
+                      paddingTop) *
+                  1,
+              nextStepX + stepWidth / 2,
+              (((((percentageData[i + 1]) * limitSize.height -
+                              getCoefficient(i + 1, limitSize.height)))
+                          .abs() +
+                      paddingTop) *
+                  1),
+              nextStepX + stepWidth,
+              (((percentageData[i + 1]) * limitSize.height -
+                          getCoefficient(i + 1, limitSize.height)))
+                      .abs() +
+                  paddingTop);
+        }
       }
       nextStepX += stepWidth;
       nextIndex++;
     }
     return path;
+  }
+
+  double getCoefficient(int index, double limitHeight) {
+    double coeff = (log(percentageData[index]).abs()) * 10 > 1.0
+        ? ((log(percentageData[index]).abs()) / 20)
+        : ((log(percentageData[index]).abs()) * 10);
+    return (limitHeight - (coeff * limitHeight * 1.7)).abs();
   }
 
   Paint paintConfigure() {
