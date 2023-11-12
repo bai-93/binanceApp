@@ -5,7 +5,32 @@ import 'package:sheker/domain/models/responses/crypto_models/crypto_history_pric
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
   List<double> percentageData = [];
-  List<double> anotherData = [1550.0, 1000, 1200, 1300, 1400];
+  List<double> anotherData = [
+    62634.79,
+    63027.62,
+    63231.06,
+    63174.99,
+    63000.0,
+    63084.5,
+    62575.85,
+    62799.99,
+    63239.31,
+    62834.99,
+    63006.5,
+    63094.97,
+    62740.13,
+    62734.97,
+    63460.04,
+    62773.37,
+    63195.48,
+    62653.63,
+    62384.96,
+    62743.44,
+    63014.9,
+    63188.83,
+    62979.91,
+    62806.18
+  ];
   double maxPrice = 0;
   GraphCustomPaint(this.model) {
     settingsModel();
@@ -33,51 +58,25 @@ class GraphCustomPaint extends CustomPainter {
     bool isFirst = true;
     int nextIndex = 0;
     for (var i = 0; i < percentageData.length; i++) {
-      double uniCoefficient = 0.0;
-      double paddingTop = limitSize.height * 1 / 15;
-      uniCoefficient = getCoefficient(i, limitSize.height);
       if (isFirst) {
         isFirst = false;
-        path.moveTo(
-            nextStepX,
-            (((percentageData[i]) * (limitSize.height) - uniCoefficient))
-                    .abs() +
-                paddingTop);
+        path.moveTo(nextStepX, (percentageData[i]) * (limitSize.height));
         path.cubicTo(
             nextStepX + stepWidth / 2,
-            ((((percentageData[i]) * limitSize.height - uniCoefficient)).abs() +
-                    paddingTop) *
-                1,
+            (((percentageData[i]) * limitSize.height)),
             nextStepX + stepWidth / 2,
-            (((((percentageData[i + 1]) * limitSize.height -
-                            getCoefficient(i + 1, limitSize.height)))
-                        .abs() +
-                    paddingTop) *
-                1),
+            ((percentageData[i + 1]) * limitSize.height),
             nextStepX + stepWidth,
-            (((percentageData[i + 1]) * limitSize.height -
-                        getCoefficient(i + 1, limitSize.height)))
-                    .abs() +
-                paddingTop);
+            ((percentageData[i + 1]) * limitSize.height));
       } else {
         if (nextIndex + 1 < percentageData.length) {
           path.cubicTo(
               nextStepX + stepWidth / 2,
-              ((((percentageData[i]) * limitSize.height - uniCoefficient))
-                          .abs() +
-                      paddingTop) *
-                  1,
+              (((percentageData[i]) * limitSize.height)),
               nextStepX + stepWidth / 2,
-              (((((percentageData[i + 1]) * limitSize.height -
-                              getCoefficient(i + 1, limitSize.height)))
-                          .abs() +
-                      paddingTop) *
-                  1),
+              (percentageData[i + 1]) * limitSize.height,
               nextStepX + stepWidth,
-              (((percentageData[i + 1]) * limitSize.height -
-                          getCoefficient(i + 1, limitSize.height)))
-                      .abs() +
-                  paddingTop);
+              ((percentageData[i + 1]) * limitSize.height));
         }
       }
       nextStepX += stepWidth;
@@ -89,6 +88,7 @@ class GraphCustomPaint extends CustomPainter {
     return path;
   }
 
+// it will work but we have to consider more cases for example if value is zero then we get NAN
   double getCoefficient(int index, double limitHeight) {
     double coeff = (log(percentageData[index]).abs()) * 10 > 1.0
         ? ((log(percentageData[index]).abs()) / 20)
@@ -110,9 +110,24 @@ class GraphCustomPaint extends CustomPainter {
   void settingsModel() {
     maxPrice = anotherData
         .reduce((value, element) => value > element ? value : element);
-    percentageData = anotherData.map((e) {
-      return (e / maxPrice);
+    // percentageData = anotherData.map((e) {
+    //   return (e / maxPrice);
+    // }).toList();
+    List<double> subtractedData = anotherData.map((e) => maxPrice - e).toList();
+    double maxValueFromSubtracted = subtractedData
+        .reduce((value, element) => value > element ? value : element);
+    percentageData = subtractedData.map((e) {
+      if (e == 0.0) {
+        return 0.0;
+      }
+      if (e == maxValueFromSubtracted) {
+        return 1.0;
+      } else {
+        return e / maxValueFromSubtracted;
+      }
     }).toList();
+
+    print(percentageData.toList());
   }
 
   @override
