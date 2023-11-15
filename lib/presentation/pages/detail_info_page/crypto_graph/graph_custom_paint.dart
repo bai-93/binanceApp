@@ -1,12 +1,13 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
 
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
   List<double> percentageData = [];
   List<Offset> coordinates = [];
-  List<double> anotherData = [
+  List<double> percentCoefficient = [
     63006.5,
     63094.97,
     62740.13,
@@ -29,9 +30,9 @@ class GraphCustomPaint extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = paintConfigure();
+    var paint = paintConfigure(true);
+    var path = drawFunction(canvas, size, true);
 
-    var path = drawFunction(canvas, size);
     paint.shader = LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomRight,
@@ -39,9 +40,10 @@ class GraphCustomPaint extends CustomPainter {
             colors: [Colors.red, Colors.blue, Colors.blue.withAlpha(127)])
         .createShader(path.getBounds());
     canvas.drawPath(path, paint);
+    canvas.drawPath(drawFunction(canvas, size, false), paintConfigure(false));
   }
 
-  Path drawFunction(Canvas canvas, Size size) {
+  Path drawFunction(Canvas canvas, Size size, bool isFull) {
     var path = Path();
     final limitSize = Size(size.width, size.height);
     final stepWidth = limitSize.width / percentageData.length;
@@ -70,24 +72,23 @@ class GraphCustomPaint extends CustomPainter {
               nextStepX + stepWidth,
               ((percentageData[i + 1]) * limitSize.height));
         } else {
-          double temp = percentageData[i] < percentageData[i - 1] ? 0.0 : 0.0;
-          double controlPoint =
-              percentageData[i] < percentageData[i - 1] ? 0.0 : 0.0;
           path.cubicTo(
-              nextStepX - stepWidth,
-              (((percentageData[i]) * limitSize.height + (controlPoint))),
               nextStepX + stepWidth,
-              (percentageData[i]) * limitSize.height + (controlPoint),
+              (((percentageData[i]) * limitSize.height)),
               nextStepX + stepWidth,
-              ((percentageData[i]) * limitSize.height + (temp)));
+              (percentageData[i]) * limitSize.height,
+              nextStepX + stepWidth,
+              ((percentageData[i]) * limitSize.height));
         }
       }
       nextStepX += stepWidth;
       nextIndex++;
     }
-    path.lineTo(limitSize.width, limitSize.height);
-    path.lineTo(0.0, limitSize.height);
-    path.close();
+    if (isFull) {
+      path.lineTo(limitSize.width, limitSize.height);
+      path.lineTo(0.0, limitSize.height);
+      path.close();
+    }
     return path;
   }
 
@@ -99,13 +100,14 @@ class GraphCustomPaint extends CustomPainter {
     return (limitHeight - (coeff * limitHeight * 1.7)).abs();
   }
 
-  Paint paintConfigure() {
+  Paint paintConfigure(bool isFill, {Color color = Colors.transparent}) {
     var paint = Paint();
-    paint.color = Colors.red;
+    paint.color = isFill ? Colors.black : Colors.amberAccent;
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
-    paint.strokeWidth = 4;
-    paint.style = PaintingStyle.fill;
+    paint.strokeMiterLimit = 100.0;
+    paint.strokeWidth = isFill ? 0.0 : 3.0;
+    paint.style = isFill ? PaintingStyle.fill : PaintingStyle.stroke;
     // paint.maskFilter = const MaskFilter.blur(BlurStyle.inner, 1.0);
     return paint;
   }
@@ -116,23 +118,27 @@ class GraphCustomPaint extends CustomPainter {
     // here I had to be shortened here, because we got a huge size of data
     List<CryptoHistoryPriceModel> cryptoHistoryModel =
         model.data.getRange(startIndex, endIndex).toList();
-    anotherData =
+    percentCoefficient =
         cryptoHistoryModel.map((e) => double.parse(e.priceUsd)).toList();
-    double majorMaxPrice = anotherData
+    double majorMaxPrice = percentCoefficient
         .reduce((value, element) => value > element ? value : element);
     List<double> subtractedData =
-        anotherData.map((e) => majorMaxPrice - e).toList();
+        percentCoefficient.map((e) => (majorMaxPrice - e).abs()).toList();
     double maxValueFromSubtracted = subtractedData
         .reduce((value, element) => value > element ? value : element);
     percentageData = subtractedData.map((e) {
       if (e == 0.0) {
         return 0.0;
       } else if (e == maxValueFromSubtracted) {
-        return 0.9;
+        return 0.8;
       } else {
-        return (e / maxValueFromSubtracted - 0.1).abs();
+        return (e / maxValueFromSubtracted - 0.2).abs();
       }
     }).toList();
+    for (var element in cryptoHistoryModel) {
+      print(DateFormat('d,M,y,')
+          .format(DateTime.fromMillisecondsSinceEpoch(element.time)));
+    }
   }
 
   @override

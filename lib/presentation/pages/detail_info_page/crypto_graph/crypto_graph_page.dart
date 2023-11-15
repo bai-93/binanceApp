@@ -32,6 +32,7 @@ class _CryptoGraphPageState extends State<CryptoGraphPage> {
               if (state is SuccessGraphDataLoaded) {
                 return CustomPaint(
                   painter: GraphCustomPaint(state.model),
+                  isComplex: true,
                 );
               }
               return Container(
