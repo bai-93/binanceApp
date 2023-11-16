@@ -102,7 +102,7 @@ class GraphCustomPaint extends CustomPainter {
 
   Paint paintConfigure(bool isFill, {Color color = Colors.transparent}) {
     var paint = Paint();
-    paint.color = isFill ? Colors.black : Colors.amberAccent;
+    paint.color = isFill ? Colors.black : Colors.grey.shade600;
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeMiterLimit = 100.0;
