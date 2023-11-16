@@ -41,6 +41,7 @@ class GraphCustomPaint extends CustomPainter {
         .createShader(path.getBounds());
     canvas.drawPath(path, paint);
     canvas.drawPath(drawFunction(canvas, size, false), paintConfigure(false));
+    minMaxCircleDraw(canvas, size);
   }
 
   Path drawFunction(Canvas canvas, Size size, bool isFull) {
@@ -50,10 +51,12 @@ class GraphCustomPaint extends CustomPainter {
     double nextStepX = stepWidth / 2;
     bool isFirst = true;
     int nextIndex = 0;
+    coordinates.clear();
     for (var i = 0; i < percentageData.length; i++) {
       if (isFirst) {
         isFirst = false;
         path.moveTo(0.0, (percentageData[i]) * (limitSize.height));
+        coordinates.add(Offset(2.0, percentageData[i] * limitSize.height));
 
         path.cubicTo(
             nextStepX + stepWidth / 2,
@@ -62,6 +65,8 @@ class GraphCustomPaint extends CustomPainter {
             ((percentageData[i + 1]) * limitSize.height),
             nextStepX + stepWidth,
             ((percentageData[i + 1]) * limitSize.height));
+        coordinates.add(Offset(
+            nextStepX + stepWidth, percentageData[i + 1] * limitSize.height));
       } else {
         if (nextIndex + 1 < percentageData.length) {
           path.cubicTo(
@@ -71,6 +76,8 @@ class GraphCustomPaint extends CustomPainter {
               (percentageData[i + 1]) * limitSize.height,
               nextStepX + stepWidth,
               ((percentageData[i + 1]) * limitSize.height));
+          coordinates.add(Offset(
+              nextStepX + stepWidth, percentageData[i + 1] * limitSize.height));
         } else {
           path.cubicTo(
               nextStepX + stepWidth,
@@ -144,5 +151,29 @@ class GraphCustomPaint extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+
+// here we'll add circle shape for minimal and maximum values
+  void minMaxCircleDraw(Canvas canvas, Size size) {
+    double maxValues = percentCoefficient
+        .reduce((value, element) => value > element ? value : element);
+    double minValues = percentCoefficient
+        .reduce((value, element) => value > element ? element : value);
+    int indexMaxValues = percentCoefficient.indexOf(maxValues);
+    int indexMinValues = percentCoefficient.indexOf(minValues);
+    canvas.drawCircle(coordinates[indexMaxValues], 5.0,
+        cirlclePaint(color: Colors.tealAccent));
+    canvas.drawCircle(
+        coordinates[indexMinValues], 5.0, cirlclePaint(color: Colors.red));
+  }
+
+  Paint cirlclePaint({Color color = Colors.black}) {
+    var paint = Paint();
+    paint.color = color;
+    paint.strokeCap = StrokeCap.round;
+    paint.strokeJoin = StrokeJoin.round;
+    paint.strokeWidth = 1.0;
+    paint.style = PaintingStyle.fill;
+    return paint;
   }
 }
