@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:ui' as UI;
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
 
 class GraphCustomPaint extends CustomPainter {
@@ -165,6 +166,7 @@ class GraphCustomPaint extends CustomPainter {
         cirlclePaint(color: Colors.tealAccent));
     canvas.drawCircle(
         coordinates[indexMinValues], 5.0, cirlclePaint(color: Colors.red));
+    titleOfExtremumPoints(canvas, indexMaxValues, indexMinValues);
   }
 
   Paint cirlclePaint({Color color = Colors.black}) {
@@ -175,5 +177,35 @@ class GraphCustomPaint extends CustomPainter {
     paint.strokeWidth = 1.0;
     paint.style = PaintingStyle.fill;
     return paint;
+  }
+
+  //here we added text painter for minimum and maximum values
+
+  void titleOfExtremumPoints(
+      Canvas canvas, int indexMaxValue, int indexMinValue) {
+    double minValue = percentCoefficient[indexMinValue];
+    double maxValue = percentCoefficient[indexMaxValue];
+    Offset minOffset = coordinates[indexMinValue];
+    Offset maxOffset = coordinates[indexMaxValue];
+
+    TextPainter minPainter = textPainter(minValue.toString());
+    TextPainter maxPainter = textPainter(maxValue.toString());
+
+    minPainter.paint(canvas, Offset(minOffset.dx * 0.6, minOffset.dy + 5.0));
+    maxPainter.paint(canvas, Offset(maxOffset.dx * 0.6, maxOffset.dy + 5.0));
+  }
+
+  TextPainter textPainter(String title) {
+    TextPainter painter = TextPainter(
+        text: TextSpan(
+            text: title,
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold)),
+        textAlign: TextAlign.center,
+        textDirection: UI.TextDirection.rtl);
+    painter.layout();
+    return painter;
   }
 }
