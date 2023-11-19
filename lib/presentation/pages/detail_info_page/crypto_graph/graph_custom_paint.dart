@@ -7,9 +7,13 @@ import 'package:sheker/domain/models/responses/crypto_models/crypto_history_pric
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
   double progressValue;
+  bool onStartFlag = false, onUpdateFlag = false, onEndFlag = false;
+  Offset positionOfTouch = Offset.zero;
+  void Function(double value) callBack;
 
   List<double> percentageData = [];
   List<Offset> coordinates = [];
+  List<String> dates = [];
   List<double> percentCoefficient = [
     63006.5,
     63094.97,
@@ -27,7 +31,11 @@ class GraphCustomPaint extends CustomPainter {
     62806.18,
     63806.18,
   ];
-  GraphCustomPaint(this.model, this.progressValue) {
+  GraphCustomPaint(this.model, this.progressValue, this.callBack,
+      {this.onStartFlag = false,
+      this.onUpdateFlag = false,
+      this.onEndFlag = false,
+      this.positionOfTouch = Offset.zero}) {
     settingsModel();
   }
 
@@ -45,6 +53,7 @@ class GraphCustomPaint extends CustomPainter {
     canvas.drawPath(path, paint);
     canvas.drawPath(drawFunction(canvas, size, false), paintConfigure(false));
     minMaxCircleDraw(canvas, size);
+    drawRulerScaleOfIndicator(canvas, size);
   }
 
   Path drawFunction(Canvas canvas, Size size, bool isFull) {
@@ -113,7 +122,7 @@ class GraphCustomPaint extends CustomPainter {
 
   Paint paintConfigure(bool isFill, {Color color = Colors.transparent}) {
     var paint = Paint();
-    paint.color = isFill ? Colors.black : Colors.grey.shade600;
+    paint.color = isFill ? Colors.black : Colors.purple;
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeMiterLimit = 100.0;
@@ -146,10 +155,10 @@ class GraphCustomPaint extends CustomPainter {
         return (e / maxValueFromSubtracted - 0.2).abs();
       }
     }).toList();
-    for (var element in cryptoHistoryModel) {
-      print(DateFormat('d,M,y,')
-          .format(DateTime.fromMillisecondsSinceEpoch(element.time)));
-    }
+    dates = cryptoHistoryModel
+        .map((e) => DateFormat('dd.mm.yyyy \nHH:mm:ss')
+            .format(DateTime.fromMillisecondsSinceEpoch(e.time)))
+        .toList();
   }
 
   @override
@@ -183,7 +192,6 @@ class GraphCustomPaint extends CustomPainter {
   }
 
   //here we added text painter for minimum and maximum values
-
   void titleOfExtremumPoints(
       Canvas canvas, int indexMaxValue, int indexMinValue) {
     double minValue = percentCoefficient[indexMinValue];
@@ -210,5 +218,48 @@ class GraphCustomPaint extends CustomPainter {
         textDirection: UI.TextDirection.rtl);
     painter.layout();
     return painter;
+  }
+
+  //Here we added scale indicator
+  void drawRulerScaleOfIndicator(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round
+      ..strokeWidth = 1.5
+      ..style = PaintingStyle.stroke;
+    double lineStep = size.height / 10.0;
+    double stepSumm = 0.0;
+    bool isFirst = true;
+
+    Path bezierPath = Path();
+    double percentOfWidth = positionOfTouch.dx / size.width;
+    int index = (percentOfWidth * (coordinates.length - 1)).toInt();
+    bezierPath.moveTo(coordinates[index].dx, 0.0);
+    for (var i = 0; i < 10; i++) {
+      bezierPath.lineTo(coordinates[index].dx, isFirst ? 10.0 : stepSumm);
+      stepSumm += lineStep;
+      bezierPath.moveTo(coordinates[index].dx, stepSumm + 10);
+      isFirst = false;
+    }
+    canvas.drawPath(bezierPath, paint);
+    drawCircleRulerIndicator(canvas, size);
+  }
+
+  void drawCircleRulerIndicator(Canvas canvas, Size size) {
+    double percentOfWidth = positionOfTouch.dx / size.width;
+    int index = (percentOfWidth * (coordinates.length - 1)).toInt();
+    Paint paint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4.0;
+    Path bezierPath = Path();
+    // bezierPath.moveTo(0.0, 0.0);
+    bezierPath.addArc(
+        Offset(coordinates[index].dx - 4.0, coordinates[index].dy - 4) &
+            const Size(8.0, 8.0),
+        0.0,
+        pi * 2);
+    canvas.drawPath(bezierPath, paint);
   }
 }

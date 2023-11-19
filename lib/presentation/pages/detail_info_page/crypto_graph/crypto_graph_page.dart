@@ -16,12 +16,14 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  bool onStartFlag = false, onUpdateFlag = false, onEndFlag = false;
+  Offset globalPoints = Offset.zero;
   @override
   void initState() {
     super.initState();
 
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 400));
     _animation =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController)
           ..addListener(() {
@@ -51,9 +53,36 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                 return AnimatedBuilder(
                   animation: _animationController,
                   builder: (BuildContext context, Widget? child) {
-                    return CustomPaint(
-                      painter: GraphCustomPaint(state.model, _animation.value),
-                      isComplex: true,
+                    return GestureDetector(
+                      onHorizontalDragStart: (onStart) {
+                        // print("on start horizontal");
+                        // setState(() {
+                        //   onStartFlag = true;
+                        //   globalPoints = onStart.globalPosition;
+                        // });
+                      },
+                      onHorizontalDragEnd: (onEnd) {
+                        print("on horizontal drag end");
+                        setState(() {
+                          onEndFlag = true;
+                        });
+                      },
+                      onHorizontalDragUpdate: (onUpdate) {
+                        print("on update");
+                        setState(() {
+                          onUpdateFlag = true;
+                          globalPoints = onUpdate.globalPosition;
+                        });
+                      },
+                      child: RepaintBoundary(
+                        child: CustomPaint(
+                          painter: GraphCustomPaint(
+                              state.model, _animation.value, (valueOfCoin) {
+                            print('CALLBACK value of coin == ${valueOfCoin}');
+                          }, positionOfTouch: globalPoints),
+                          isComplex: true,
+                        ),
+                      ),
                     );
                   },
                   child: null,
