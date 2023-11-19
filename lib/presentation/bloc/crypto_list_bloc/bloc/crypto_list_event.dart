@@ -7,3 +7,12 @@ sealed class CryptoListEvent extends Equatable {
 }
 
 class CryptoListLoadEvent extends CryptoListEvent {}
+
+class CryptoListCallBackEvent extends CryptoListEvent {
+  final String date;
+  final double priceCoin;
+  CryptoListCallBackEvent(this.date, this.priceCoin);
+
+  @override
+  List<Object> get props => [date, priceCoin];
+}

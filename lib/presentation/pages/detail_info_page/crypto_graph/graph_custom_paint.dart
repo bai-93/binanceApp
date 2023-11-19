@@ -31,11 +31,12 @@ class GraphCustomPaint extends CustomPainter {
     62806.18,
     63806.18,
   ];
-  GraphCustomPaint(this.model, this.progressValue, this.callBack,
+  GraphCustomPaint(this.model, this.callBack,
       {this.onStartFlag = false,
       this.onUpdateFlag = false,
       this.onEndFlag = false,
-      this.positionOfTouch = Offset.zero}) {
+      this.positionOfTouch = Offset.zero,
+      this.progressValue = 1.0}) {
     settingsModel();
   }
 

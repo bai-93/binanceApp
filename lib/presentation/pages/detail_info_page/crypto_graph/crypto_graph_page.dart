@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.dart';
 import 'package:sheker/presentation/bloc/detail_info_graph_bloc/bloc/detail_info_graph_bloc.dart';
 import 'package:sheker/presentation/pages/detail_info_page/crypto_graph/graph_custom_paint.dart';
 import 'package:sheker/presentation/pages/detail_info_page/crypto_graph/interval_date_component.dart';
@@ -49,7 +50,7 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                 return shimmerGraph();
               }
               if (state is SuccessGraphDataLoaded) {
-                _animationController.forward();
+                // _animationController.forward();
                 return AnimatedBuilder(
                   animation: _animationController,
                   builder: (BuildContext context, Widget? child) {
@@ -69,10 +70,11 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                       },
                       child: RepaintBoundary(
                         child: CustomPaint(
-                          painter: GraphCustomPaint(
-                              state.model, _animation.value, (priceCoin, date) {
-                            print(
-                                'CALLBACK price of Coin == ${priceCoin} and date == ${date}');
+                          painter:
+                              GraphCustomPaint(state.model, (priceCoin, date) {
+                            context
+                                .read<CryptoListBloc>()
+                                .add(CryptoListCallBackEvent(date, priceCoin));
                           }, positionOfTouch: globalPoints),
                           isComplex: true,
                         ),
@@ -87,6 +89,30 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
               );
             },
           ),
+        ),
+        const SizedBox(
+          height: 20.0,
+        ),
+        BlocBuilder<CryptoListBloc, CryptoListState>(
+          builder: (context, state) {
+            if (state is CryptoListCallBackState) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Text(state.priceCoin.toString()),
+                  Text(state.date),
+                  const SizedBox(
+                    width: 10.0,
+                  )
+                ],
+              );
+            } else {
+              return const Center();
+            }
+          },
         ),
         const SizedBox(
           height: 20.0,
