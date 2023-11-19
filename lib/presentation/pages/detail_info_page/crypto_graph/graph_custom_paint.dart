@@ -6,6 +6,8 @@ import 'package:sheker/domain/models/responses/crypto_models/crypto_history_pric
 
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
+  double progressValue;
+
   List<double> percentageData = [];
   List<Offset> coordinates = [];
   List<double> percentCoefficient = [
@@ -25,7 +27,7 @@ class GraphCustomPaint extends CustomPainter {
     62806.18,
     63806.18,
   ];
-  GraphCustomPaint(this.model) {
+  GraphCustomPaint(this.model, this.progressValue) {
     settingsModel();
   }
 
@@ -56,37 +58,38 @@ class GraphCustomPaint extends CustomPainter {
     for (var i = 0; i < percentageData.length; i++) {
       if (isFirst) {
         isFirst = false;
-        path.moveTo(0.0, (percentageData[i]) * (limitSize.height));
+        path.moveTo(
+            0.0, (percentageData[i]) * (limitSize.height * progressValue));
         coordinates.add(Offset(2.0, percentageData[i] * limitSize.height));
 
         path.cubicTo(
             nextStepX + stepWidth / 2,
-            (((percentageData[i]) * limitSize.height)),
+            (((percentageData[i]) * limitSize.height * progressValue)),
             nextStepX + stepWidth / 2,
-            ((percentageData[i + 1]) * limitSize.height),
+            ((percentageData[i + 1]) * limitSize.height * progressValue),
             nextStepX + stepWidth,
-            ((percentageData[i + 1]) * limitSize.height));
-        coordinates.add(Offset(
-            nextStepX + stepWidth, percentageData[i + 1] * limitSize.height));
+            ((percentageData[i + 1]) * limitSize.height * progressValue));
+        coordinates.add(Offset(nextStepX + stepWidth,
+            percentageData[i + 1] * limitSize.height * progressValue));
       } else {
         if (nextIndex + 1 < percentageData.length) {
           path.cubicTo(
               nextStepX + stepWidth / 2,
-              (((percentageData[i]) * limitSize.height)),
+              (((percentageData[i]) * limitSize.height * progressValue)),
               nextStepX + stepWidth / 2,
-              (percentageData[i + 1]) * limitSize.height,
+              (percentageData[i + 1]) * limitSize.height * progressValue,
               nextStepX + stepWidth,
-              ((percentageData[i + 1]) * limitSize.height));
-          coordinates.add(Offset(
-              nextStepX + stepWidth, percentageData[i + 1] * limitSize.height));
+              ((percentageData[i + 1]) * limitSize.height * progressValue));
+          coordinates.add(Offset(nextStepX + stepWidth,
+              percentageData[i + 1] * limitSize.height * progressValue));
         } else {
           path.cubicTo(
               nextStepX + stepWidth,
-              (((percentageData[i]) * limitSize.height)),
+              (((percentageData[i]) * limitSize.height * progressValue)),
               nextStepX + stepWidth,
-              (percentageData[i]) * limitSize.height,
+              (percentageData[i]) * limitSize.height * progressValue,
               nextStepX + stepWidth,
-              ((percentageData[i]) * limitSize.height));
+              ((percentageData[i]) * limitSize.height * progressValue));
         }
       }
       nextStepX += stepWidth;

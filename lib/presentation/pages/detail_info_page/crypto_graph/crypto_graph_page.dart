@@ -12,10 +12,27 @@ class CryptoGraphPage extends StatefulWidget {
   State<CryptoGraphPage> createState() => _CryptoGraphPageState();
 }
 
-class _CryptoGraphPageState extends State<CryptoGraphPage> {
+class _CryptoGraphPageState extends State<CryptoGraphPage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
   @override
   void initState() {
     super.initState();
+
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    _animation =
+        Tween<double>(begin: 0.0, end: 1.0).animate(_animationController)
+          ..addListener(() {
+            setState(() {});
+          });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
   }
 
   @override
@@ -30,9 +47,16 @@ class _CryptoGraphPageState extends State<CryptoGraphPage> {
                 return shimmerGraph();
               }
               if (state is SuccessGraphDataLoaded) {
-                return CustomPaint(
-                  painter: GraphCustomPaint(state.model),
-                  isComplex: true,
+                _animationController.forward();
+                return AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (BuildContext context, Widget? child) {
+                    return CustomPaint(
+                      painter: GraphCustomPaint(state.model, _animation.value),
+                      isComplex: true,
+                    );
+                  },
+                  child: null,
                 );
               }
               return Container(
