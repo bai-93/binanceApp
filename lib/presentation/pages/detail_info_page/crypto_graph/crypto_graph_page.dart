@@ -54,13 +54,6 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                   animation: _animationController,
                   builder: (BuildContext context, Widget? child) {
                     return GestureDetector(
-                      onHorizontalDragStart: (onStart) {
-                        // print("on start horizontal");
-                        // setState(() {
-                        //   onStartFlag = true;
-                        //   globalPoints = onStart.globalPosition;
-                        // });
-                      },
                       onHorizontalDragEnd: (onEnd) {
                         print("on horizontal drag end");
                         setState(() {
@@ -77,8 +70,9 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                       child: RepaintBoundary(
                         child: CustomPaint(
                           painter: GraphCustomPaint(
-                              state.model, _animation.value, (valueOfCoin) {
-                            print('CALLBACK value of coin == ${valueOfCoin}');
+                              state.model, _animation.value, (priceCoin, date) {
+                            print(
+                                'CALLBACK price of Coin == ${priceCoin} and date == ${date}');
                           }, positionOfTouch: globalPoints),
                           isComplex: true,
                         ),

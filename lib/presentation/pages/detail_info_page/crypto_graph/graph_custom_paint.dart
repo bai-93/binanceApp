@@ -9,7 +9,7 @@ class GraphCustomPaint extends CustomPainter {
   double progressValue;
   bool onStartFlag = false, onUpdateFlag = false, onEndFlag = false;
   Offset positionOfTouch = Offset.zero;
-  void Function(double value) callBack;
+  void Function(double value, String date) callBack;
 
   List<double> percentageData = [];
   List<Offset> coordinates = [];
@@ -122,11 +122,11 @@ class GraphCustomPaint extends CustomPainter {
 
   Paint paintConfigure(bool isFill, {Color color = Colors.transparent}) {
     var paint = Paint();
-    paint.color = isFill ? Colors.black : Colors.purple;
+    paint.color = isFill ? Colors.black : Colors.orange;
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeMiterLimit = 100.0;
-    paint.strokeWidth = isFill ? 0.0 : 3.0;
+    paint.strokeWidth = isFill ? 0.0 : 2.0;
     paint.style = isFill ? PaintingStyle.fill : PaintingStyle.stroke;
     // paint.maskFilter = const MaskFilter.blur(BlurStyle.inner, 1.0);
     return paint;
@@ -175,7 +175,7 @@ class GraphCustomPaint extends CustomPainter {
     int indexMaxValues = percentCoefficient.indexOf(maxValues);
     int indexMinValues = percentCoefficient.indexOf(minValues);
     canvas.drawCircle(coordinates[indexMaxValues], 5.0,
-        cirlclePaint(color: Colors.tealAccent));
+        cirlclePaint(color: Colors.lightGreenAccent.shade400));
     canvas.drawCircle(
         coordinates[indexMinValues], 5.0, cirlclePaint(color: Colors.red));
     titleOfExtremumPoints(canvas, indexMaxValues, indexMinValues);
@@ -244,13 +244,14 @@ class GraphCustomPaint extends CustomPainter {
     }
     canvas.drawPath(bezierPath, paint);
     drawCircleRulerIndicator(canvas, size);
+    callBack(percentCoefficient[index], dates[index]);
   }
 
   void drawCircleRulerIndicator(Canvas canvas, Size size) {
     double percentOfWidth = positionOfTouch.dx / size.width;
     int index = (percentOfWidth * (coordinates.length - 1)).toInt();
     Paint paint = Paint()
-      ..color = Colors.black
+      ..color = Colors.cyan.shade500
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
     Path bezierPath = Path();
