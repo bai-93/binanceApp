@@ -252,12 +252,11 @@ class GraphCustomPaint extends CustomPainter {
     Paint paint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 4.0;
+      ..strokeWidth = 3.0;
     Path bezierPath = Path();
-    // bezierPath.moveTo(0.0, 0.0);
     bezierPath.addArc(
-        Offset(coordinates[index].dx - 4.0, coordinates[index].dy - 4) &
-            const Size(8.0, 8.0),
+        Offset(coordinates[index].dx - 5.0, coordinates[index].dy - 5) &
+            const Size(10.0, 10.0),
         0.0,
         pi * 2);
     canvas.drawPath(bezierPath, paint);
