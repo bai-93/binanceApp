@@ -51,37 +51,30 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
               }
               if (state is SuccessGraphDataLoaded) {
                 // _animationController.forward();
-                return AnimatedBuilder(
-                  animation: _animationController,
-                  builder: (BuildContext context, Widget? child) {
-                    return GestureDetector(
-                      onHorizontalDragEnd: (onEnd) {
-                        print("on horizontal drag end");
-                        setState(() {
-                          onEndFlag = true;
-                        });
-                      },
-                      onHorizontalDragUpdate: (onUpdate) {
-                        print("on update");
-                        setState(() {
-                          onUpdateFlag = true;
-                          globalPoints = onUpdate.globalPosition;
-                        });
-                      },
-                      child: RepaintBoundary(
-                        child: CustomPaint(
-                          painter:
-                              GraphCustomPaint(state.model, (priceCoin, date) {
-                            context
-                                .read<CryptoListBloc>()
-                                .add(CryptoListCallBackEvent(date, priceCoin));
-                          }, positionOfTouch: globalPoints),
-                          isComplex: true,
-                        ),
-                      ),
-                    );
+                return GestureDetector(
+                  onHorizontalDragEnd: (onEnd) {
+                    print("on horizontal drag end");
+                    setState(() {
+                      onEndFlag = true;
+                    });
                   },
-                  child: null,
+                  onHorizontalDragUpdate: (onUpdate) {
+                    print("on update");
+                    setState(() {
+                      onUpdateFlag = true;
+                      globalPoints = onUpdate.globalPosition;
+                    });
+                  },
+                  child: RepaintBoundary(
+                    child: CustomPaint(
+                      painter: GraphCustomPaint(state.model, (priceCoin, date) {
+                        context
+                            .read<CryptoListBloc>()
+                            .add(CryptoListCallBackEvent(date, priceCoin));
+                      }, positionOfTouch: globalPoints),
+                      isComplex: true,
+                    ),
+                  ),
                 );
               }
               return Container(
