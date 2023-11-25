@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/config/theme/themes.dart';
 import 'package:sheker/presentation/bloc/providers.dart';
-import 'presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
+import 'package:sheker/config/route/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,13 +27,13 @@ class MyApp extends StatelessWidget {
           debugShowFloatingThemeButton: false,
           initial: AdaptiveThemeMode.light,
           builder: (theme, darkThemes) {
-            return MaterialApp(
+            return MaterialApp.router(
                 theme: theme,
                 darkTheme: darkThemes,
                 title: 'Flutter Demo',
                 debugShowCheckedModeBanner: false,
                 debugShowMaterialGrid: false,
-                home: const BottomMenuTabBar());
+                routerConfig: AppRouter().router);
           }),
     );
   }

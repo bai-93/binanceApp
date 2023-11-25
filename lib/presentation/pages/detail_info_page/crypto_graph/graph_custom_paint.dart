@@ -46,11 +46,20 @@ class GraphCustomPaint extends CustomPainter {
     var path = drawFunction(canvas, size, true);
 
     paint.shader = LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomRight,
-            stops: const [0.0, 1.0, 1.0],
-            colors: [Colors.red, Colors.blue, Colors.blue.withAlpha(127)])
-        .createShader(path.getBounds());
+        begin: Alignment.topRight,
+        end: Alignment.bottomRight,
+        stops: const [
+          0.2,
+          0.3,
+          0.8,
+          1.0
+        ],
+        colors: [
+          Colors.yellowAccent.withAlpha(100),
+          Colors.purple.withAlpha(100),
+          Colors.blue.withAlpha(127),
+          Colors.red.withAlpha(200),
+        ]).createShader(path.getBounds());
     canvas.drawPath(path, paint);
     canvas.drawPath(drawFunction(canvas, size, false), paintConfigure(false));
     minMaxCircleDraw(canvas, size);
@@ -123,7 +132,7 @@ class GraphCustomPaint extends CustomPainter {
 
   Paint paintConfigure(bool isFill, {Color color = Colors.transparent}) {
     var paint = Paint();
-    paint.color = isFill ? Colors.black : Colors.orange;
+    paint.color = isFill ? Colors.black : Colors.green;
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeMiterLimit = 100.0;
@@ -176,9 +185,9 @@ class GraphCustomPaint extends CustomPainter {
     int indexMaxValues = percentCoefficient.indexOf(maxValues);
     int indexMinValues = percentCoefficient.indexOf(minValues);
     canvas.drawCircle(coordinates[indexMaxValues], 5.0,
-        cirlclePaint(color: Colors.lightGreenAccent.shade400));
+        cirlclePaint(color: Colors.redAccent.shade400));
     canvas.drawCircle(
-        coordinates[indexMinValues], 5.0, cirlclePaint(color: Colors.red));
+        coordinates[indexMinValues], 5.0, cirlclePaint(color: Colors.black));
     titleOfExtremumPoints(canvas, indexMaxValues, indexMinValues);
   }
 

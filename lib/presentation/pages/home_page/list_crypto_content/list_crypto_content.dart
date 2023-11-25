@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
 import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.dart';
-import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 
 class CryptoListContent extends StatelessWidget {
   const CryptoListContent({super.key});
@@ -44,11 +44,7 @@ class CryptoListContent extends StatelessWidget {
             color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w300),
       ),
       onTap: () {
-        debugPrint(model.id);
-        debugPrint('tapped list tile and index === ${index}');
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-          return GraphDetailPage(model.id!);
-        }));
+        context.go('/a/detailInfo/${model.id}');
       },
     );
   }

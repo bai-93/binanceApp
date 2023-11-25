@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/tab_bar/bottom_menu_indicator/tab_bar_indicator.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
 
 class BottomMenuTabBar extends StatefulWidget {
-  const BottomMenuTabBar({super.key});
+  final StatefulNavigationShell navigationShell;
+  const BottomMenuTabBar(this.navigationShell, {super.key});
 
   @override
   State<BottomMenuTabBar> createState() => _BottomMenuTabBarState();
@@ -12,57 +14,28 @@ class BottomMenuTabBar extends StatefulWidget {
 
 class _BottomMenuTabBarState extends State<BottomMenuTabBar>
     with SingleTickerProviderStateMixin {
-  int selectedIndexStack = 0;
-  late List<Widget> stackItems = [];
   late TabController _tabController;
 
   @override
   void initState() {
-    stackItems = [
-      const CryptoHomePage(),
-      Container(
-        color: Colors.blue,
-        child: const Center(
-          child: Text(
-            'Feed',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      ),
-      Container(
-        color: Colors.yellow,
-        child: const Center(
-          child: Text('Trade'),
-        ),
-      ),
-      Container(
-        color: Colors.deepPurpleAccent,
-        child: const Center(
-            child: Text(
-          'Services',
-          style: TextStyle(color: Colors.white),
-        )),
-      ),
-      WalletShimmerPage()
-    ];
-    _tabController = TabController(length: stackItems.length, vsync: this);
-    _tabController.addListener(() {
-      debugPrint('tab bar controller LISTENER === ${_tabController.index}');
-    });
+    _tabController = TabController(
+        initialIndex: widget.navigationShell.currentIndex,
+        length: 5,
+        vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-        body: IndexedStack(index: selectedIndexStack, children: stackItems),
+        backgroundColor: Colors.white,
+        body: widget.navigationShell,
         bottomNavigationBar: Theme(
           data: ThemeData(
               splashColor: Colors.transparent,
@@ -99,9 +72,9 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
             ],
             onTap: (value) {
               {
-                setState(() {
-                  selectedIndexStack = value;
-                });
+                widget.navigationShell.goBranch(value,
+                    initialLocation:
+                        value == widget.navigationShell.currentIndex);
               }
             },
           ),
