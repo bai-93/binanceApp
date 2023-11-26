@@ -36,7 +36,7 @@ class _TopBalanceContentSliverBarPageViewState
     return Padding(
       padding: const EdgeInsets.only(left: 10.0, right: 10.0),
       child: Container(
-        height: 130.0,
+        height: 140.0,
         decoration: BoxDecoration(
             color: Colors.white,
             border: Border.all(color: Colors.grey.withAlpha(80)),

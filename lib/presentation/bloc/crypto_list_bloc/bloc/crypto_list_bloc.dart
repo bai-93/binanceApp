@@ -18,9 +18,5 @@ class CryptoListBloc extends Bloc<CryptoListEvent, CryptoListState> {
       final cryptoDataList = await getCryptoListUsecase.call(() {});
       emit(CryptoListLoaded(cryptoDataList));
     });
-
-    on<CryptoListCallBackEvent>((event, emit) async {
-      emit(CryptoListCallBackState(event.date, event.priceCoin));
-    });
   }
 }

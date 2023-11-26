@@ -68,9 +68,9 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                   child: RepaintBoundary(
                     child: CustomPaint(
                       painter: GraphCustomPaint(state.model, (priceCoin, date) {
-                        context
-                            .read<CryptoListBloc>()
-                            .add(CryptoListCallBackEvent(date, priceCoin));
+                        // context
+                        //     .read<CryptoListBloc>()
+                        //     .add(CryptoListCallBackEvent(date, priceCoin));
                       }, positionOfTouch: globalPoints),
                       isComplex: true,
                     ),

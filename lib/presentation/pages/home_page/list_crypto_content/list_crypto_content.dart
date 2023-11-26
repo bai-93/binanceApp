@@ -19,7 +19,7 @@ class CryptoListContent extends StatelessWidget {
                 return contentList(index, state.modelList.data[index], context);
               });
         }
-        return const SizedBox();
+        return SliverList(delegate: SliverChildListDelegate([]));
       },
     );
   }
