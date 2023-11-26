@@ -23,12 +23,3 @@ class CryptoListLoaded extends CryptoListState {
   @override
   List<Object> get props => [modelList];
 }
-
-class CryptoListCallBackState extends CryptoListState {
-  final String date;
-  final double priceCoin;
-
-  CryptoListCallBackState(this.date, this.priceCoin);
-  @override
-  List<Object> get props => [date, priceCoin];
-}

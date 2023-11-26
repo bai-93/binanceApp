@@ -29,8 +29,6 @@ class _CryptoHomePageState extends State<CryptoHomePage> {
                 debugPrint("shimmer turn OFF");
               case CryptoListLoaded():
                 debugPrint("data was LOADED");
-              case CryptoListCallBackState():
-                debugPrint("call back");
             }
           })
         ],
