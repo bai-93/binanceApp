@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_detail_model.dart';
+import 'package:sheker/utilities/money_formatter.dart';
 
 class CryptoTopDescription extends StatelessWidget {
   final CryptoDetailModel? model;
@@ -12,16 +13,19 @@ class CryptoTopDescription extends StatelessWidget {
         '${model?.data.symbol}',
         Colors.grey.shade500,
         FontWeight.w500,
-        23,
+        28,
       ),
       const SizedBox(
         height: 10.0,
       ),
-      textContent('${model?.data.name}', Colors.black, FontWeight.bold, 32),
+      textContent('${model?.data.name}', Colors.black, FontWeight.bold, 28),
       Row(children: [
         Expanded(
             child: textContent(
-                '${model?.data.priceUsd}', Colors.black, FontWeight.bold, 32)),
+                MoneyFormatter.dollarFormat(model?.data.priceUsd),
+                Colors.black,
+                FontWeight.bold,
+                23)),
         const SizedBox(
           width: 5.0,
         ),

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:sheker/presentation/bloc/crypto_list_bloc/bloc/crypto_list_bloc.dart';
 import 'package:sheker/presentation/pages/home_page/top_content_sliver_bar/top_content_page_view.dart';
+import 'package:sheker/utilities/money_formatter.dart';
 
 class BalanceContentSliverBar extends StatefulWidget {
   final String money;
@@ -43,12 +44,10 @@ class _BalanceContentSliverBarState extends State<BalanceContentSliverBar> {
             child: BlocBuilder<CryptoListBloc, CryptoListState>(
               builder: (context, state) {
                 if (state is CryptoListLoaded) {
-                  NumberFormat format = NumberFormat.decimalPatternDigits(
-                      locale: 'en_us', decimalDigits: 2);
-                  double money =
-                      double.parse(state.modelList.data.first.priceUsd!);
                   return Text(
-                    "${moneyFlag ? format.format(money).replaceAll(RegExp('[0-9]'), '*') : format.format(money)} \$",
+                    MoneyFormatter.dollarFormat(
+                        state.modelList.data.first.priceUsd,
+                        isSecured: moneyFlag),
                     overflow: TextOverflow.clip,
                     softWrap: true,
                     maxLines: 1,

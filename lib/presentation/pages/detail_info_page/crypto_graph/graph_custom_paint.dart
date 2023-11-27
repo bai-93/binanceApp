@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:ui' as UI;
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
+import 'package:sheker/utilities/money_formatter.dart';
 
 class GraphCustomPaint extends CustomPainter {
   CryptoHistoryPriceListModel model;
@@ -209,8 +210,10 @@ class GraphCustomPaint extends CustomPainter {
     Offset minOffset = coordinates[indexMinValue];
     Offset maxOffset = coordinates[indexMaxValue];
 
-    TextPainter minPainter = textPainter(minValue.toString());
-    TextPainter maxPainter = textPainter(maxValue.toString());
+    TextPainter minPainter =
+        textPainter(MoneyFormatter.dollarFormat(minValue.toString()));
+    TextPainter maxPainter =
+        textPainter(MoneyFormatter.dollarFormat(maxValue.toString()));
 
     minPainter.paint(canvas, Offset(minOffset.dx * 0.6, minOffset.dy + 5.0));
     maxPainter.paint(canvas, Offset(maxOffset.dx * 0.6, maxOffset.dy + 5.0));

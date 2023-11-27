@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_detail_model.dart';
+import 'package:sheker/utilities/money_formatter.dart';
 
 class CryptoDescription extends StatelessWidget {
   final CryptoDetailModel? object;
@@ -23,37 +24,37 @@ class CryptoDescription extends StatelessWidget {
         height: 15.0,
       ),
       listDescription(context, 'Доступное предложение для торговли',
-          value: '${object?.data.supply}'),
+          value: MoneyFormatter.dollarFormat(object?.data.supply)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Количество выпущенных активов',
-          value: '${object?.data.maxSupply}'),
+          value: MoneyFormatter.dollarFormat(object?.data.maxSupply)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Предложение х цена',
-          value: '${object?.data.marketCapUsd}'),
+          value: MoneyFormatter.dollarFormat(object?.data.marketCapUsd)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Торги за 24 часа',
-          value: '${object?.data.volumeUsd24Hr}'),
+          value: MoneyFormatter.dollarFormat(object?.data.volumeUsd24Hr)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Взвешенная по объему цена',
-          value: '${object?.data.priceUsd}'),
+          value: MoneyFormatter.dollarFormat(object?.data.priceUsd)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Последние изменения 24 часа',
-          value: '${object?.data.changePercent24Hr}'),
+          value: MoneyFormatter.dollarFormat(object?.data.changePercent24Hr)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Средняя цена за последние 24 часа',
-          value: '${object?.data.vwap24Hr}'),
+          value: MoneyFormatter.dollarFormat(object?.data.vwap24Hr)),
       const SizedBox(height: 40.0)
     ]);
   }
@@ -74,7 +75,7 @@ class CryptoDescription extends StatelessWidget {
 
   Widget textTitle(String title,
       {Color color = Colors.black,
-      double fontSize = 20.0,
+      double fontSize = 17.0,
       FontWeight fontWeight = FontWeight.normal}) {
     return Text(
       title,

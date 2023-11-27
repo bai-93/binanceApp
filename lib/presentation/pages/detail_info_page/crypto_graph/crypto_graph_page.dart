@@ -5,6 +5,7 @@ import 'package:sheker/presentation/bloc/detail_info_graph_bloc/bloc/detail_info
 import 'package:sheker/presentation/bloc/detail_info_graph_bloc/indicator_price_gesture_bloc/bloc/interval_price_drag_gesture_bloc.dart';
 import 'package:sheker/presentation/pages/detail_info_page/crypto_graph/graph_custom_paint.dart';
 import 'package:sheker/presentation/pages/detail_info_page/crypto_graph/interval_date_component.dart';
+import 'package:sheker/utilities/money_formatter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CryptoGraphPage extends StatefulWidget {
@@ -97,8 +98,11 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                   const SizedBox(
                     width: 10.0,
                   ),
-                  Text(state.price.toString()),
-                  Text(state.date),
+                  Text(
+                    MoneyFormatter.dollarFormat(state.price.toString()),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  Text(state.date, style: const TextStyle(fontSize: 16)),
                   const SizedBox(
                     width: 10.0,
                   )

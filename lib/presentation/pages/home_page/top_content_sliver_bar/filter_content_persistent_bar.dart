@@ -13,27 +13,6 @@ class _FilterContentPersistentBarState
   List<String> titleFilters = ['Hot', 'Капитализация', 'Цена', 'Изм за 24ч'];
   int indexOfFilter = 0;
   int indexOfList = 0;
-  // List<GlobalKey> coordinateSliderKey = [GlobalKey(), GlobalKey()];
-
-  // late final AnimationController controller;
-  // late Animation<Offset> sliderXcoordAnimValue;
-
-  @override
-  void initState() {
-    // controller = AnimationController(
-    //     vsync: this, duration: const Duration(milliseconds: 500));
-    // sliderXcoordAnimValue =
-    //     Tween<Offset>(begin: Offset(100.0, 100.0), end: sliderPreviousPosition)
-    //         .animate(controller)
-    //       ..addListener(() {
-    //         debugPrint('asd');
-    //         setState(() {});
-    //       });
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   calculatePositions(coordinateSliderKey.first, true);
-    // });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,12 +91,4 @@ class _FilterContentPersistentBarState
           }),
     );
   }
-
-  // void calculatePositions(GlobalKey key, bool flag) {
-  //   positionIsReadyFlag = false;
-  //   RenderBox render = key.currentContext!.findRenderObject() as RenderBox;
-  //   Offset position = render.localToGlobal(Offset.zero);
-  //   sliderCurrentPosition =
-  //       Offset(position.dx + render.size.width / 2 - 15.0, 40.0);
-  // }
 }
