@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+Long press on the chart and drag, let to see the change price of the crypto
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
