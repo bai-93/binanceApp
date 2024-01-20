@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/login_page/loginScreen.dart';
+import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
 
@@ -22,14 +23,20 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/a',
+      initialLocation: '/onboarding',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
-            path: '/loginFlow',
+            path: '/b',
             builder: (context, state) {
-              return const LoginScreen();
+              return LoginScreen();
             }),
+        GoRoute(
+          path: '/onboarding',
+          builder: (context, state) {
+            return const Onboarding();
+          },
+        ),
         shelRouter()
       ],
     );

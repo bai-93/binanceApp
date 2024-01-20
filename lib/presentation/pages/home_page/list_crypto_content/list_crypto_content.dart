@@ -34,13 +34,13 @@ class CryptoListContent extends StatelessWidget {
       leading: Container(color: Colors.yellow, height: 50.0, width: 50.0),
       title: Text(
         "${model.name}",
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500),
       ),
       subtitle: Text("${model.symbol}"),
       trailing: Text(
         '${format.format(money)} \$',
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.black, fontSize: 18.0, fontWeight: FontWeight.w300),
       ),
       onTap: () {
