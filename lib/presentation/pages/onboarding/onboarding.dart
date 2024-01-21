@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding_description.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -62,7 +61,6 @@ class _OnboardingState extends State<Onboarding>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: AppColors.onboardingPrimary,
       body: Stack(children: [
         Column(
           children: [OnboardingDescription()],
@@ -101,7 +99,6 @@ class _OnboardingState extends State<Onboarding>
               ],
             ),
           ),
-          
         ),
       ]),
     );

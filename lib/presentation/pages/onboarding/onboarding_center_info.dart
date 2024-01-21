@@ -24,11 +24,10 @@ class OnboardingImageTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(alignment: Alignment.bottomCenter, children: [
       Padding(
-        padding: const EdgeInsets.only(bottom: 25.0),
+        padding: const EdgeInsets.only(bottom: 20.0),
         child: AspectRatio(
           aspectRatio: 2.0 / 3.0,
           child: AnimatedSwitcher(
-            // key: UniqueKey(),
             duration: const Duration(milliseconds: 200),
             child: Image.asset(
               'lib/images/onboarding/${imagesName[indexItem]}',
