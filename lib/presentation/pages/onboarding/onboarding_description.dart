@@ -10,8 +10,9 @@ class OnboardingDescription extends StatefulWidget {
 }
 
 class _OnboardingDescriptionState extends State<OnboardingDescription>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController controller;
+  late AnimationController opacityContorller;
   late Animation<Color?> colorBackgroundTween;
   late Animation<Color?> colorButtonTween;
 
@@ -29,11 +30,21 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
       ..addListener(() {
         setState(() {});
       });
+    opacityContorller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500))
+      ..addListener(() {
+        setState(() {});
+      });
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(const Duration(milliseconds: 3000), () {
         if (mounted) {
           controller.forward();
+        }
+      });
+      Future.delayed(const Duration(milliseconds: 4000), () {
+        if (mounted) {
+          opacityContorller.forward();
         }
       });
     });
@@ -43,6 +54,7 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
   void dispose() {
     super.dispose();
     controller.dispose();
+    opacityContorller.dispose();
   }
 
   @override
@@ -57,30 +69,35 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                OnboardingImageTitle(count),
+                OnboardingImageTitle(count, opacityContorller),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30.0),
                   child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: FilledButton(
-                        onPressed: () {
-                          if (count != 2) {
-                            setState(() {
-                              count++;
-                            });
-                          }
-                        },
-                        child: Text(
-                          'Next',
-                          style: TextStyle(
-                              color: colorBackgroundTween.value,
-                              fontSize: 16.0),
-                        ),
-                        style: FilledButton.styleFrom(
-                            fixedSize: Size(
-                                MediaQuery.of(context).size.width - 32.0, 48.0),
-                            backgroundColor: AppColors.onboardingPrimary,
-                            splashFactory: NoSplash.splashFactory)),
+                    child: AnimatedOpacity(
+                      opacity: opacityContorller.value,
+                      duration: const Duration(milliseconds: 500),
+                      child: FilledButton(
+                          onPressed: () {
+                            if (count != 2) {
+                              setState(() {
+                                count++;
+                              });
+                            }
+                          },
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                                color: colorBackgroundTween.value,
+                                fontSize: 16.0),
+                          ),
+                          style: FilledButton.styleFrom(
+                              fixedSize: Size(
+                                  MediaQuery.of(context).size.width - 32.0,
+                                  48.0),
+                              backgroundColor: AppColors.onboardingPrimary,
+                              splashFactory: NoSplash.splashFactory)),
+                    ),
                   ),
                 ),
               ],

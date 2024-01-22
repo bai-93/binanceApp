@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class OnboardingImageTitle extends StatelessWidget {
+  late Animation<double> controller;
   int indexItem = 0;
   String subtitle =
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut eget mauris massa pharetra.';
@@ -16,55 +17,60 @@ class OnboardingImageTitle extends StatelessWidget {
     'illustration3.png'
   ];
 
-  OnboardingImageTitle(int index, {super.key}) {
+  OnboardingImageTitle(int index, Animation<double> parent, {super.key}) {
     indexItem = index;
+    controller = parent;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(alignment: Alignment.bottomCenter, children: [
-      Padding(
-        padding: const EdgeInsets.only(bottom: 20.0),
-        child: AspectRatio(
-          aspectRatio: 2.0 / 3.0,
-          child: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 200),
-            child: Image.asset(
-              'lib/images/onboarding/${imagesName[indexItem]}',
-              key: ValueKey(indexItem),
-              fit: BoxFit.scaleDown,
-            ),
-          ),
-        ),
-      ),
-      Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+    return AnimatedOpacity(
+      opacity: controller.value,
+      duration: const Duration(milliseconds: 900),
+      child: Stack(alignment: Alignment.bottomCenter, children: [
         Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 15.0, bottom: 8.0),
-          child: Text(
-            titleContent[indexItem],
-            textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text, fontSize: 32.0),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0),
-          child: Row(children: [
-            Expanded(
-              child: Text(
-                subtitle,
-                softWrap: true,
-                textAlign: TextAlign.center,
-                style: TextStyle(color: AppColors.text, fontSize: 14.0),
+          padding: const EdgeInsets.only(bottom: 20.0),
+          child: AspectRatio(
+            aspectRatio: 2.0 / 3.0,
+            child: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              child: Image.asset(
+                'lib/images/onboarding/${imagesName[indexItem]}',
+                key: ValueKey(indexItem),
+                fit: BoxFit.scaleDown,
               ),
             ),
-          ]),
+          ),
         ),
-        dotIndicator(),
-        const SizedBox(
-          height: 24.0,
-        ),
+        Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 15.0, bottom: 8.0),
+            child: Text(
+              titleContent[indexItem],
+              textAlign: TextAlign.center,
+              style: TextStyle(color: AppColors.text, fontSize: 32.0),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0),
+            child: Row(children: [
+              Expanded(
+                child: Text(
+                  subtitle,
+                  softWrap: true,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                ),
+              ),
+            ]),
+          ),
+          dotIndicator(),
+          const SizedBox(
+            height: 24.0,
+          ),
+        ]),
       ]),
-    ]);
+    );
   }
 
   Widget dotIndicator() {
