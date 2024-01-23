@@ -31,7 +31,7 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
         setState(() {});
       });
     opacityContorller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 500))
+        vsync: this, duration: const Duration(milliseconds: 10))
       ..addListener(() {
         setState(() {});
       });
