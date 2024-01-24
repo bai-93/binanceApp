@@ -42,7 +42,7 @@ class AppRouter {
         GoRoute(
           path: '/sign_up',
           builder: (context, state) {
-            return const SignUpWelcomeScreen();
+            return SignUpWelcomeScreen();
           },
         ),
         shelRouter()

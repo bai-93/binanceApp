@@ -5,7 +5,9 @@ import 'package:sheker/utilities/app_colors.dart';
 enum AppbarType { onboarding, signUp, custom, none }
 
 abstract class BaseScreenStateless extends StatelessWidget {
-  const BaseScreenStateless({super.key});
+  Size sizeOfScreen = Size(0.0, 0.0);
+
+  BaseScreenStateless({super.key});
 
   Widget body() {
     return Container(color: Colors.yellow);
@@ -14,12 +16,14 @@ abstract class BaseScreenStateless extends StatelessWidget {
   AppBar _onboardingAppbar() {
     return AppBar(
       backgroundColor: AppColors.backgroundWhiteTheme,
+      surfaceTintColor: Colors.transparent,
       title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
     );
   }
 
   AppBar _signUpAppbar() {
     return AppBar(
+      surfaceTintColor: Colors.transparent,
       backgroundColor: AppColors.backgroundWhiteTheme,
       title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
     );
@@ -27,6 +31,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
 
   AppBar customAppbar() {
     return AppBar(
+      surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.black,
       title: const Text(
         'override !customAppbar! method',
@@ -48,10 +53,16 @@ abstract class BaseScreenStateless extends StatelessWidget {
     }
   }
 
+  void getSizeScreen(BuildContext context) {
+    sizeOfScreen = MediaQuery.of(context).size;
+  }
+
   @override
   Widget build(BuildContext context) {
+    getSizeScreen(context);
     if (typeOfAppbar() != null) {
       return Scaffold(
+        backgroundColor: AppColors.backgroundWhiteTheme,
         appBar: typeOfAppbar(),
         body: body(),
       );
@@ -62,7 +73,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
 }
 
 class TestBaseScreenUse extends BaseScreenStateless {
-  const TestBaseScreenUse({super.key});
+  TestBaseScreenUse({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,4 +6,6 @@ class AppColors {
   static Color backgroundWhiteTheme = "#F8F9FC".toColor();
   static Color secondary = '#696F8C'.toColor();
   static Color text = '#11183C'.toColor();
+  static Color otline = '#D7D9E4'.toColor();
+  static Color surface = '#FFFFFF'.toColor();
 }
