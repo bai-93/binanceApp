@@ -2,10 +2,12 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
-import 'package:sheker/presentation/pages/login_page/loginScreen.dart';
+import 'package:sheker/presentation/pages/login_page/SecondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
+
+import '../../presentation/pages/login_page/SignUp/sign_up_welcome.dart';
 
 class AppRouter {
   final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -23,18 +25,24 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/onboarding',
+      initialLocation: '/sign_up',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
             path: '/b',
             builder: (context, state) {
-              return LoginScreen();
+              return const SecondVersionLoginScreen();
             }),
         GoRoute(
           path: '/onboarding',
           builder: (context, state) {
             return const Onboarding();
+          },
+        ),
+        GoRoute(
+          path: '/sign_up',
+          builder: (context, state) {
+            return const SignUpWelcomeScreen();
           },
         ),
         shelRouter()

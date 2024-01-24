@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/config/base_widgets/baseWidget.dart';
+import 'package:sheker/config/base_widgets/base_statefull.dart';
 import '../../widgets/login_widgets/login_top_bottom.dart';
 
-class LoginScreen extends BaseScreen {
-  const LoginScreen({super.key});
+class SecondVersionLoginScreen extends BaseScreen {
+  const SecondVersionLoginScreen({super.key});
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SecondVersionLoginScreen> createState() => _SecondVersionLoginScreenState();
 }
 
-class _LoginScreenState extends BaseScreenState<LoginScreen>
+class _SecondVersionLoginScreenState extends BaseScreenState<SecondVersionLoginScreen>
     with BaseScreenMixin, SingleTickerProviderStateMixin {
   VoidCallback? signUp;
   late AnimationController controller;
