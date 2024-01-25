@@ -41,13 +41,13 @@ class _SecondVersionLoginScreenState extends BaseScreenState<SecondVersionLoginS
         child: SingleChildScrollView(
           child: Stack(children: [
             gradientContainer(
-                [Colors.white, Colors.white], getSizeScreen().height),
+                [Colors.white, Colors.white], sizeOfScreen().height),
             Positioned(
-              top: getSizeScreen().height * 0.2,
+              top: sizeOfScreen().height * 0.2,
               child: Container(
                 color: Colors.white,
-                width: getSizeScreen().width,
-                height: getSizeScreen().height * 0.6,
+                width: sizeOfScreen().width,
+                height: sizeOfScreen().height * 0.6,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 35.0, right: 35.0),
                   child: Column(
@@ -100,7 +100,7 @@ class _SecondVersionLoginScreenState extends BaseScreenState<SecondVersionLoginS
             gradientContainer([
               const Color.fromARGB(255, 103, 210, 140),
               const Color.fromARGB(255, 50, 193, 178)
-            ], getSizeScreen().height * 0.1),
+            ], sizeOfScreen().height * 0.1),
             Positioned(
                 top: 0.0,
                 left: 0.0,
@@ -108,8 +108,8 @@ class _SecondVersionLoginScreenState extends BaseScreenState<SecondVersionLoginS
                   clipper: TopContentClip(),
                   child: Container(
                       color: const Color.fromARGB(255, 35, 38, 65),
-                      width: getSizeScreen().width,
-                      height: getSizeScreen().height * 0.5,
+                      width: sizeOfScreen().width,
+                      height: sizeOfScreen().height * 0.5,
                       child: Stack(
                         children: [
                           const Positioned(
@@ -171,13 +171,13 @@ class _SecondVersionLoginScreenState extends BaseScreenState<SecondVersionLoginS
                 child: gradientContainer([
                   const Color.fromARGB(255, 103, 210, 140),
                   const Color.fromARGB(255, 50, 193, 178)
-                ], getSizeScreen().height * 0.27),
+                ], sizeOfScreen().height * 0.27),
               ),
             ),
             Positioned(
-              bottom: getSizeScreen().height * 0.05,
+              bottom: sizeOfScreen().height * 0.05,
               child: SizedBox(
-                width: getSizeScreen().width,
+                width: sizeOfScreen().width,
                 child: Opacity(
                   opacity: opacity.value,
                   child: Row(
@@ -213,7 +213,7 @@ class _SecondVersionLoginScreenState extends BaseScreenState<SecondVersionLoginS
   Container gradientContainer(List<Color> gradientColors, double heigh,
       {Color? color}) {
     return Container(
-      width: getSizeScreen().width,
+      width: sizeOfScreen().width,
       height: heigh,
       color: color,
       decoration: BoxDecoration(

@@ -2,8 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
-import 'package:sheker/presentation/pages/login_page/SecondVersionloginScreen.dart';
+import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/account_creation_verification.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
@@ -49,6 +50,12 @@ class AppRouter {
                 path: 'account_verification',
                 builder: (context, state) {
                   return SignUpAccountCreationVerification();
+                },
+              ),
+              GoRoute(
+                path: 'add_mail',
+                builder: (context, state) {
+                  return SignUpAddMail();
                 },
               )
             ]),
