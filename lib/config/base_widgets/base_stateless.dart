@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
-enum AppbarType { onboarding, signUp, custom, none }
+enum AppbarType { onboarding, signUp, custom, none, empty }
 
 abstract class BaseScreenStateless extends StatelessWidget {
   Size sizeOfScreen = Size(0.0, 0.0);
 
   BaseScreenStateless({super.key});
 
-  Widget body() {
+  Widget body(BuildContext context) {
     return Container(color: Colors.yellow);
   }
 
@@ -40,6 +40,21 @@ abstract class BaseScreenStateless extends StatelessWidget {
     );
   }
 
+  AppBar emptyAppBar(
+      {Color? backgroundColor, Widget? title, Color? backButtonColor}) {
+    return AppBar(
+      title: title,
+      surfaceTintColor: Colors.transparent,
+      leading: BackButton(
+        color: backButtonColor,
+        style: const ButtonStyle(
+            splashFactory: NoSplash.splashFactory,
+            overlayColor: MaterialStatePropertyAll(Colors.transparent)),
+      ),
+      backgroundColor: backgroundColor ?? AppColors.backgroundWhiteTheme,
+    );
+  }
+
   AppBar? typeOfAppbar({AppbarType type = AppbarType.none}) {
     switch (type) {
       case AppbarType.onboarding:
@@ -48,6 +63,8 @@ abstract class BaseScreenStateless extends StatelessWidget {
         return _signUpAppbar();
       case AppbarType.custom:
         return customAppbar();
+      case AppbarType.empty:
+        return emptyAppBar();
       case AppbarType.none:
         return null;
     }
@@ -64,14 +81,15 @@ abstract class BaseScreenStateless extends StatelessWidget {
       return Scaffold(
         backgroundColor: AppColors.backgroundWhiteTheme,
         appBar: typeOfAppbar(),
-        body: body(),
+        body: body(context),
       );
     } else {
-      return body();
+      return body(context);
     }
   }
 }
 
+//here example how we have to use
 class TestBaseScreenUse extends BaseScreenStateless {
   TestBaseScreenUse({super.key});
 

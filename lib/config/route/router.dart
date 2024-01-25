@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/login_page/SecondVersionloginScreen.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/account_creation_verification.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
-
-import '../../presentation/pages/login_page/SignUp/sign_up_welcome.dart';
+import '../../presentation/pages/login_page/signUp/welcome.dart';
 
 class AppRouter {
   final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
@@ -40,11 +40,18 @@ class AppRouter {
           },
         ),
         GoRoute(
-          path: '/sign_up',
-          builder: (context, state) {
-            return SignUpWelcomeScreen();
-          },
-        ),
+            path: '/sign_up',
+            builder: (context, state) {
+              return SignUpWelcomeScreen();
+            },
+            routes: [
+              GoRoute(
+                path: 'account_verification',
+                builder: (context, state) {
+                  return SignUpAccountCreationVerification();
+                },
+              )
+            ]),
         shelRouter()
       ],
     );

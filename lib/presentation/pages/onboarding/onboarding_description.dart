@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sheker/presentation/pages/login_page/SignUp/sign_up_welcome.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding_center_info.dart';
 import 'package:sheker/utilities/app_colors.dart';
 

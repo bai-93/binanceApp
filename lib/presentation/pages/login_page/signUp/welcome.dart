@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -11,7 +12,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
   }
 
   @override
-  Widget body() {
+  Widget body(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         color: AppColors.backgroundWhiteTheme,
@@ -76,6 +77,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
           ),
           button(() {
             debugPrint('Sign in');
+            context.push('/sign_up/account_verification');
           }, 'Sign in', false),
           const SizedBox(height: 64.0)
         ]),
