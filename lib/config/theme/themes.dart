@@ -6,7 +6,7 @@ final lightTheme = ThemeData(
         bodyLarge: TextStyle(
             color: Colors.black,
             fontSize: 20.0,
-            decoration: TextDecoration.underline,
+            // decoration: TextDecoration.underline,
             decorationThickness: 0.5,
             decorationColor: Colors.black)));
 
@@ -16,6 +16,6 @@ final darkTheme = ThemeData(
         bodyLarge: TextStyle(
             color: Colors.white,
             fontSize: 20.0,
-            decoration: TextDecoration.underline,
+            // decoration: TextDecoration.underline,
             decorationThickness: 0.5,
             decorationColor: Colors.white)));

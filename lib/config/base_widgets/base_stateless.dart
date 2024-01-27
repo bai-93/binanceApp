@@ -70,13 +70,13 @@ abstract class BaseScreenStateless extends StatelessWidget {
     }
   }
 
-  void getSizeScreen(BuildContext context) {
+  void _getSizeScreen(BuildContext context) {
     sizeOfScreen = MediaQuery.of(context).size;
   }
 
   @override
   Widget build(BuildContext context) {
-    getSizeScreen(context);
+    _getSizeScreen(context);
     if (typeOfAppbar() != null) {
       return Scaffold(
         backgroundColor: AppColors.backgroundWhiteTheme,
