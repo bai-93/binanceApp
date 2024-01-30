@@ -1,8 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
+import 'package:sheker/utilities/regex_pattern.dart';
 
 class SignUpAddMail extends BaseScreen {
   const SignUpAddMail({super.key});
@@ -13,6 +15,25 @@ class SignUpAddMail extends BaseScreen {
 
 class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
     with BaseScreenMixin {
+  final _form = GlobalKey<FormState>();
+  final controller = TextEditingController();
+  final focus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    focus.addListener(() {
+      debugPrint("focus listener");
+    });
+
+    controller.addListener(() {
+      if (controller.text.isNotEmpty) {
+        setState(() {});
+      }
+    });
+  }
+
   @override
   bool isActiveBottomSocialApp() {
     return true;
@@ -59,16 +80,64 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
         const SizedBox(height: 24.0),
         Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: SizedBox(
-              height: 48.0,
-              child: TextField(
+          child: Container(
+            decoration: BoxDecoration(
+                color: AppColors.surface,
+                boxShadow: controller.text.isNotEmpty
+                    ? null
+                    : [
+                        BoxShadow(
+                            color: AppColors.internal,
+                            offset: const Offset(0.0, -1.0),
+                            blurRadius: 2.0)
+                      ],
+                border: Border.all(
+                    color: controller.text.isNotEmpty
+                        ? AppColors.onboardingPrimary
+                        : AppColors.otline),
+                borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+            height: 48.0,
+            child: Form(
+              child: TextFormField(
+                controller: controller,
+                focusNode: focus,
+                style: TextStyle(color: AppColors.text, fontSize: 16.0),
+                key: _form,
+                autovalidateMode: AutovalidateMode.disabled,
                 decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.mail_lock_outlined),
-                    border: OutlineInputBorder(),
-                    hintText: 'Email address',
-                    hintStyle:
-                        TextStyle(color: AppColors.otline, fontSize: 16.0)),
-              )),
+                    contentPadding: const EdgeInsets.all(0.0),
+                    prefixIcon: Image.asset(
+                      'lib/images/login/signup/mail_signup.png',
+                      width: 18.0,
+                      height: 14.0,
+                      alignment: Alignment.center,
+                      color: controller.text.isNotEmpty
+                          ? AppColors.onboardingPrimary
+                          : AppColors.otline,
+                    ),
+                    labelText: 'Email address',
+                    labelStyle:
+                        TextStyle(color: AppColors.secondary, fontSize: 16.0),
+                    suffixIcon: controller.text.isNotEmpty
+                        ? SizedBox(
+                            width: 24.0,
+                            height: 24.0,
+                            child: Image.asset(
+                              'lib/images/login/signup/check_ring_light.png',
+                            ),
+                          )
+                        : null,
+                    border: InputBorder.none),
+                onChanged: (String input) {
+                  if (RegexPattern.emailValidator(input) == null) {
+                    debugPrint(" wrong === ${input}");
+                  } else {
+                    debugPrint("success == ${input}");
+                  }
+                },
+              ),
+            ),
+          ),
         ),
         const SizedBox(
           height: 24.0,
@@ -94,13 +163,17 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
         ),
         const SizedBox(height: 114.0),
         ElevatedButton(
-            onPressed: () {
-              debugPrint("Continue");
-            },
+            onPressed: controller.text.isNotEmpty
+                ? () {
+                    context.go('/a');
+                  }
+                : null,
             style: ElevatedButton.styleFrom(
                 fixedSize: Size(sizeOfScreen().width - 32.0, 48.0),
                 splashFactory: NoSplash.splashFactory,
-                backgroundColor: AppColors.otline,
+                backgroundColor: controller.text.isNotEmpty
+                    ? AppColors.onboardingPrimary
+                    : AppColors.otline,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0)))),
             child: Padding(
@@ -108,7 +181,11 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
               child: Text(
                 'Continue',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16.0, color: AppColors.secondary),
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: controller.text.isNotEmpty
+                        ? AppColors.surface
+                        : AppColors.secondary),
               ),
             )),
         const SizedBox(height: 42.0),
