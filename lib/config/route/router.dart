@@ -5,6 +5,7 @@ import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/account_creation_verification.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/letter_send.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
@@ -26,7 +27,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/add_mail',
+      initialLocation: '/sign_up/letter_send',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -55,7 +56,13 @@ class AppRouter {
               GoRoute(
                 path: 'add_mail',
                 builder: (context, state) {
-                  return SignUpAddMail();
+                  return const SignUpAddMail();
+                },
+              ),
+              GoRoute(
+                path: 'letter_send',
+                builder: (context, state) {
+                  return const LetterSend();
                 },
               )
             ]),
