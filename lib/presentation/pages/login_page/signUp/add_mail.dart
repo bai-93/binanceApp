@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sheker/component/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
 import 'package:sheker/utilities/regex_pattern.dart';
+import 'package:sheker/component/verification_step.dart';
 
 class SignUpAddMail extends BaseScreen {
   const SignUpAddMail({super.key});
@@ -52,7 +54,20 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
 
   @override
   AppBar? typeAppbar({AppbarType type = AppbarType.none}) {
-    return super.typeAppbar(type: AppbarType.signUp);
+    return super.typeAppbar(type: AppbarType.custom);
+  }
+
+  @override
+  AppBar customAppbar() {
+    return AppBar(
+      clipBehavior: Clip.hardEdge,
+      surfaceTintColor: Colors.transparent,
+      backgroundColor: AppColors.backgroundWhiteTheme,
+      title: VerificationStep(
+        0.0,
+        0.41,
+      ),
+    );
   }
 
   @override

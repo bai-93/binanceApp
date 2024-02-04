@@ -26,7 +26,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up',
+      initialLocation: '/sign_up/add_mail',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
