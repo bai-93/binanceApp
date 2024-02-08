@@ -6,6 +6,7 @@ import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.da
 import 'package:sheker/presentation/pages/login_page/signUp/account_creation_verification.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/letter_send.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/otp/otp.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
@@ -27,7 +28,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/letter_send',
+      initialLocation: '/sign_up/otp',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -63,6 +64,12 @@ class AppRouter {
                 path: 'letter_send',
                 builder: (context, state) {
                   return const LetterSend();
+                },
+              ),
+              GoRoute(
+                path: 'otp',
+                builder: (context, state) {
+                  return const Otp();
                 },
               )
             ]),

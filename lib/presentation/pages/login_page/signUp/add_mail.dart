@@ -6,7 +6,6 @@ import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
 import 'package:sheker/utilities/regex_pattern.dart';
-import 'package:sheker/component/verification_step.dart';
 
 class SignUpAddMail extends BaseScreen {
   const SignUpAddMail({super.key});
@@ -102,7 +101,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                     ? null
                     : [
                         BoxShadow(
-                            color: AppColors.internal,
+                            color: AppColors.internalShadow,
                             offset: const Offset(0.0, -1.0),
                             blurRadius: 2.0)
                       ],
