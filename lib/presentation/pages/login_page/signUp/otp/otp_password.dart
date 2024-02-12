@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/presentation/bloc/sign_up/bloc/otp_bloc.dart';
 import 'package:sheker/utilities/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,8 @@ class _OtpPasswordFieldsState extends State<OtpPasswordFields> {
   List<bool> flagBorderColor = [];
   List<TextEditingController> controller = [];
   List<Widget> allItems = [];
-
+  String? smsMessage;
+  int count = 0;
   @override
   void initState() {
     super.initState();
@@ -32,6 +34,16 @@ class _OtpPasswordFieldsState extends State<OtpPasswordFields> {
     for (var i = 0; i < 6; i++) {
       controller[i].dispose();
       focus[i].dispose();
+    }
+  }
+
+  void checkCountItems(int itemCount) {
+    debugPrint('$itemCount');
+    if (itemCount == 6) {
+      focus.forEach((element) {
+        element.unfocus();
+      });
+      context.read<OtpBloc>().add(OtpSendEvent());
     }
   }
 
@@ -60,6 +72,7 @@ class _OtpPasswordFieldsState extends State<OtpPasswordFields> {
         focus[index],
         (value) {
           if (value == '') {
+            count--;
             if (index - 1 >= 0) {
               focus[index - 1].requestFocus();
             } else {
@@ -68,6 +81,8 @@ class _OtpPasswordFieldsState extends State<OtpPasswordFields> {
               }
             }
           } else {
+            count++;
+            checkCountItems(count);
             if (index + 1 < 6) {
               focus[index + 1].requestFocus();
             } else {
@@ -104,7 +119,14 @@ class _OtpPasswordFieldsState extends State<OtpPasswordFields> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: allItems,
-            )
+            ),
+            BlocBuilder<OtpBloc, OtpState>(builder: ((context, state) {
+              if (state is OtpSendState || state is OtpSuccessState) {
+                return Container(
+                    width: 328, height: 48.0, color: Colors.transparent);
+              }
+              return Center();
+            }))
           ],
         ));
   }

@@ -21,7 +21,7 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
   @override
   void initState() {
     super.initState();
-    context.read<OtpBloc>().add(OtpSendEvent());
+    // context.read<OtpBloc>().add(OtpSendEvent());
   }
 
   @override

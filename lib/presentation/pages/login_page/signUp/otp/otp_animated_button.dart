@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/component/mark_positive_draw.dart';
+import 'package:sheker/presentation/bloc/sign_up/bloc/otp_bloc.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_arc_refresh.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -40,11 +42,11 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
   void initState() {
     super.initState();
     animationSettings();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      if (mounted) {
-        controller.forward();
-      }
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   if (mounted) {
+    //     controller.forward();
+    //   }
+    // });
   }
 
   void animationSettings() {
@@ -126,68 +128,77 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.only(left: 17.0, right: 15),
-        child: Stack(children: [
-          Center(
-            child: controllerFinal.status == AnimationStatus.completed
-                ? containerButtonInkWell()
-                : Container(
-                    height: 48.0,
-                    width: controllerRotate.status == AnimationStatus.completed
-                        ? widthAnimFinal.value
-                        : widthAnim.value,
-                    decoration: BoxDecoration(
-                        color:
-                            controllerRotate.status == AnimationStatus.completed
-                                ? colorBackgroundFinal.value
-                                : colorBackgroundAnim.value,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(24.0))),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Opacity(
-                          opacity: opacityFinal.value,
-                          child: Transform.rotate(
-                              angle: rotateAnim.value,
-                              child: OtpArRefresh(
-                                controller,
-                              )),
-                        )
-                      ],
+    return BlocListener<OtpBloc, OtpState>(
+      listener: (context, state) {
+        if (state is OtpSendState) {
+          controller.forward();
+        }
+      },
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 17.0, right: 15),
+          child: Stack(children: [
+            Center(
+              child: controllerFinal.status == AnimationStatus.completed
+                  ? containerButtonInkWell()
+                  : Container(
+                      height: 48.0,
+                      width:
+                          controllerRotate.status == AnimationStatus.completed
+                              ? widthAnimFinal.value
+                              : widthAnim.value,
+                      decoration: BoxDecoration(
+                          color: controllerRotate.status ==
+                                  AnimationStatus.completed
+                              ? colorBackgroundFinal.value
+                              : colorBackgroundAnim.value,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(24.0))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Opacity(
+                            opacity: opacityFinal.value,
+                            child: Transform.rotate(
+                                angle: rotateAnim.value,
+                                child: OtpArRefresh(
+                                  controller,
+                                )),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-          ),
-          Positioned(
-            left: positionedAnim.value,
-            child: InkWell(
-              onTap: () {
-                debugPrint("entered");
-              },
-              borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-              child: Opacity(
-                opacity: opacityText.value,
-                child: Container(
-                  color: Colors.transparent,
-                  width: MediaQuery.of(context).size.width - 32,
-                  height: 48.0,
-                  child: Center(
-                    child: Opacity(
-                      opacity: opacityText.value,
-                      child: Text(
-                        'Entered',
-                        style: TextStyle(
-                            color: colorTextAnim.value, fontSize: 16.0),
+            ),
+            Positioned(
+              left: positionedAnim.value,
+              child: InkWell(
+                onTap: () {
+                  debugPrint("entered");
+                  context.read<OtpBloc>().add(OtpSendEvent());
+                },
+                borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+                child: Opacity(
+                  opacity: opacityText.value,
+                  child: Container(
+                    color: Colors.transparent,
+                    width: MediaQuery.of(context).size.width - 32,
+                    height: 48.0,
+                    child: Center(
+                      child: Opacity(
+                        opacity: opacityText.value,
+                        child: Text(
+                          'Entered',
+                          style: TextStyle(
+                              color: colorTextAnim.value, fontSize: 16.0),
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-          )
-        ]),
+            )
+          ]),
+        ),
       ),
     );
   }

@@ -7,7 +7,7 @@ part 'otp_state.dart';
 class OtpBloc extends Bloc<OtpEvent, OtpState> {
   OtpBloc() : super(OtpInitialState()) {
     on<OtpSendEvent>((event, emit) async {
-      await Future.delayed(const Duration(seconds: 4));
+      emit(OtpSendState());
       emit(OtpSuccessState());
     });
   }
