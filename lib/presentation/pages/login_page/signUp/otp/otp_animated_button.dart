@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sheker/component/mark_positive_draw.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_arc_refresh.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -130,43 +131,41 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
         padding: const EdgeInsets.only(left: 17.0, right: 15),
         child: Stack(children: [
           Center(
-            child: InkWell(
-              borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-              onTap: controllerFinal.status == AnimationStatus.completed
-                  ? () {
-                      debugPrint("ON TAP");
-                    }
-                  : null,
-              child: Container(
-                height: 48.0,
-                width: controllerRotate.status == AnimationStatus.completed
-                    ? widthAnimFinal.value
-                    : widthAnim.value,
-                decoration: BoxDecoration(
-                    color: controllerRotate.status == AnimationStatus.completed
-                        ? colorBackgroundFinal.value
-                        : colorBackgroundAnim.value,
-                    borderRadius:
-                        const BorderRadius.all(Radius.circular(24.0))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Opacity(
-                      opacity: opacityFinal.value,
-                      child: Transform.rotate(
-                          angle: rotateAnim.value,
-                          child: OtpArRefresh(
-                            controller,
-                          )),
-                    )
-                  ],
-                ),
-              ),
-            ),
+            child: controllerFinal.status == AnimationStatus.completed
+                ? containerButtonInkWell()
+                : Container(
+                    height: 48.0,
+                    width: controllerRotate.status == AnimationStatus.completed
+                        ? widthAnimFinal.value
+                        : widthAnim.value,
+                    decoration: BoxDecoration(
+                        color:
+                            controllerRotate.status == AnimationStatus.completed
+                                ? colorBackgroundFinal.value
+                                : colorBackgroundAnim.value,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(24.0))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Opacity(
+                          opacity: opacityFinal.value,
+                          child: Transform.rotate(
+                              angle: rotateAnim.value,
+                              child: OtpArRefresh(
+                                controller,
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
           ),
           Positioned(
             left: positionedAnim.value,
             child: InkWell(
+              onTap: () {
+                debugPrint("entered");
+              },
               borderRadius: const BorderRadius.all(Radius.circular(24.0)),
               child: Opacity(
                 opacity: opacityText.value,
@@ -189,6 +188,23 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
             ),
           )
         ]),
+      ),
+    );
+  }
+
+  Widget containerButtonInkWell() {
+    return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(24.0)),
+      onTap: () {
+        debugPrint("ink well button ON TAP");
+      },
+      child: Container(
+        height: 48.0,
+        width: 700,
+        decoration: BoxDecoration(
+            color: AppColors.onboardingPrimary,
+            borderRadius: const BorderRadius.all(Radius.circular(24.0))),
+        child: CustomPaint(painter: PositiveMarkDraw()),
       ),
     );
   }
