@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/component/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/bloc/sign_up/bloc/otp_bloc.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_animated_button.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_image_animation.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_password.dart';
 import 'package:sheker/utilities/app_colors.dart';
@@ -80,7 +82,27 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
           const SizedBox(
             height: 24.0,
           ),
-          const OtpPasswordFields()
+          const OtpPasswordFields(),
+          const SizedBox(height: 24.0),
+          RichText(
+              textAlign: TextAlign.center,
+              softWrap: true,
+              text: TextSpan(
+                  text: "Didn't get a mail?",
+                  style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                  children: [
+                    TextSpan(
+                        text: " Send again",
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            debugPrint("send again");
+                          },
+                        style: TextStyle(
+                            color: AppColors.onboardingPrimary, fontSize: 14.0))
+                  ])),
+          const SizedBox(height: 24.0),
+          const OtpButtonAnimated(),
+          const SizedBox(height: 154.0)
         ],
       ),
     );
