@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
+import 'package:sheker/presentation/pages/login_page/create_password/create_password.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/account_creation_verification.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
@@ -28,7 +29,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/otp',
+      initialLocation: '/sign_up/create_password',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -70,6 +71,12 @@ class AppRouter {
                 path: 'otp',
                 builder: (context, state) {
                   return const Otp();
+                },
+              ),
+              GoRoute(
+                path: 'create_password',
+                builder: (context, state) {
+                  return const CreatePassword();
                 },
               )
             ]),
