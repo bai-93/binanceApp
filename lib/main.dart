@@ -5,6 +5,7 @@ import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/config/theme/themes.dart';
 import 'package:sheker/presentation/bloc/providers.dart';
 import 'package:sheker/config/route/router.dart';
+import 'package:sheker/utilities/biometryhelper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

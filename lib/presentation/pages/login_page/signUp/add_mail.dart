@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sheker/component/verification_step.dart';
+import 'package:sheker/uicomponent/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';

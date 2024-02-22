@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/component/verification_step.dart';
+import 'package:sheker/uicomponent/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/pages/login_page/create_password/password_content.dart';

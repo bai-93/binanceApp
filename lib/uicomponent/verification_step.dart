@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/component/animate_line_custom_painter.dart';
-import 'package:sheker/component/circle_container.dart';
+import 'package:sheker/uicomponent/animate_line_custom_painter.dart';
+import 'package:sheker/uicomponent/circle_container.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class VerificationStep extends StatefulWidget {

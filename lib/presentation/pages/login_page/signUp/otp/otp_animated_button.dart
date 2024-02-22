@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sheker/component/mark_positive_draw.dart';
+import 'package:sheker/uicomponent/mark_positive_draw.dart';
 import 'package:sheker/presentation/bloc/sign_up/bloc/otp_bloc.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_arc_refresh.dart';
 import 'package:sheker/utilities/app_colors.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sheker/component/verification_step.dart';
+import 'package:sheker/uicomponent/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/bloc/sign_up/bloc/otp_bloc.dart';

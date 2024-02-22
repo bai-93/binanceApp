@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/component/arc_draw.dart';
+import 'package:sheker/uicomponent/arc_draw.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class OtpArRefresh extends StatelessWidget {

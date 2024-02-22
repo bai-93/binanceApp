@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/utilities/app_colors.dart';
+import 'package:sheker/utilities/biometryhelper.dart';
 import 'package:sheker/utilities/regex_pattern.dart';
 
 class PasswordContentField extends StatefulWidget {
