@@ -12,6 +12,7 @@ import 'package:sheker/presentation/pages/login_page/signUp/submit_documents/sub
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
+import '../../presentation/pages/login_page/signUp/scan_documents/scan_documents.dart';
 import '../../presentation/pages/login_page/signUp/welcome.dart';
 
 class AppRouter {
@@ -30,7 +31,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/submit_documents',
+      initialLocation: '/sign_up/scan_documents',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -84,6 +85,12 @@ class AppRouter {
                 path: 'submit_documents',
                 builder: (context, state) {
                   return const SubmitDocuments();
+                },
+              ),
+              GoRoute(
+                path: 'scan_documents',
+                builder: (context, state) {
+                  return const ScanDocuments();
                 },
               )
             ]),
