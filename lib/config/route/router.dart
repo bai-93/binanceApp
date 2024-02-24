@@ -8,6 +8,7 @@ import 'package:sheker/presentation/pages/login_page/signUp/account_creation_ver
 import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/letter_send.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/submit_documents/submit_documents.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_shimmer_page.dart';
@@ -29,7 +30,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/create_password',
+      initialLocation: '/sign_up/submit_documents',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -77,6 +78,12 @@ class AppRouter {
                 path: 'create_password',
                 builder: (context, state) {
                   return const CreatePassword();
+                },
+              ),
+              GoRoute(
+                path: 'submit_documents',
+                builder: (context, state) {
+                  return const SubmitDocuments();
                 },
               )
             ]),
