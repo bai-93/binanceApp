@@ -59,7 +59,7 @@ class _VerificationStepState extends State<VerificationStep>
     }
     if (widget.to == 0.99) {
       first = typeOfCircle.full;
-      second = typeOfCircle.middle;
+      second = typeOfCircle.full;
       third = typeOfCircle.middle;
     }
     if (widget.to >= 1.0) {

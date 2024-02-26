@@ -8,6 +8,7 @@ import 'package:sheker/presentation/pages/login_page/signUp/account_creation_ver
 import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/letter_send.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp.dart';
+import 'package:sheker/presentation/pages/login_page/signUp/scan_documents/selfie_verification/selfie_verification.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/scan_documents/take_photo_verification/take_photo_verification.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/submit_documents/submit_documents.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
@@ -32,7 +33,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/take_photo_verification',
+      initialLocation: '/sign_up/selfie_verfication',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -98,6 +99,12 @@ class AppRouter {
                 path: 'take_photo_verification',
                 builder: (context, state) {
                   return const TakePhotoVerification();
+                },
+              ),
+              GoRoute(
+                path: 'selfie_verfication',
+                builder: (context, state) {
+                  return const SelfieVerification();
                 },
               )
             ]),
