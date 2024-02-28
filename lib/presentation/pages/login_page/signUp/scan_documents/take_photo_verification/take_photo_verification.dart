@@ -29,7 +29,7 @@ class _TakePhotoVerificationState extends BaseScreenState<TakePhotoVerification>
       backgroundColor: Colors.transparent,
       title: VerificationStep(
         0.65,
-        0.8,
+        0.5,
       ),
     );
   }
@@ -38,7 +38,7 @@ class _TakePhotoVerificationState extends BaseScreenState<TakePhotoVerification>
   Widget cameraLayer() {
     return Stack(children: [
       Container(
-        color: Colors.black,
+        color: Colors.white,
         width: sizeOfScreen().width,
         height: sizeOfScreen().height,
       ),
@@ -50,12 +50,20 @@ class _TakePhotoVerificationState extends BaseScreenState<TakePhotoVerification>
           height: sizeOfScreen().height,
         ),
       ),
+      Positioned(
+        top: sizeOfScreen().height * 0.34,
+        left: 16.5,
+        child: SizedBox(
+            width: sizeOfScreen().width - 33.0,
+            height: 298.0,
+            child: Image.asset("lib/images/login/signup/area_photo.png")),
+      )
     ]);
   }
 
   @override
   Widget body() {
-    return Container(
+    return SizedBox(
       height: sizeOfScreen().height,
       width: sizeOfScreen().width,
       child: Padding(
@@ -67,7 +75,7 @@ class _TakePhotoVerificationState extends BaseScreenState<TakePhotoVerification>
             ),
             Center(
               child: Text(
-                'Scan document',
+                getTitle(),
                 textAlign: TextAlign.center,
                 style: TextStyle(color: AppColors.surface, fontSize: 32.0),
               ),
@@ -76,7 +84,7 @@ class _TakePhotoVerificationState extends BaseScreenState<TakePhotoVerification>
               height: 8.0,
             ),
             Text(
-              'Now hold the phone directly over the passport, when the frame turns blue, take the picture.',
+              getSubTitle(),
               softWrap: true,
               textAlign: TextAlign.center,
               style: TextStyle(color: AppColors.surface, fontSize: 14.0),

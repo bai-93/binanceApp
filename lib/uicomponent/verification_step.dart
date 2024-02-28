@@ -22,7 +22,7 @@ class _VerificationStepState extends State<VerificationStep>
   void initState() {
     super.initState();
     controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 800));
+        vsync: this, duration: const Duration(milliseconds: 500));
 
     tweenAnimation = Tween<double>(
             begin: widget.from, end: widget.to > 1.0 ? 1.0 : widget.to)

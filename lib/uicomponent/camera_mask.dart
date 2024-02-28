@@ -9,8 +9,8 @@ class CustomCameraShapeMaskClipper extends CustomClipper<Path> {
     Path innerPath = Path()
       ..addRRect(RRect.fromRectXY(
           Rect.fromLTWH(17.0, size.height * 0.34, size.width - 33.0, 298.0),
-          10.0,
-          10.0));
+          20.0,
+          20.0));
     Path basePath =
         Path.combine(PathOperation.difference, entirePath, innerPath);
     return basePath;

@@ -3,12 +3,41 @@ import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import '../../../utilities/app_colors.dart';
 
+enum PhotoType { selfiePhoto, passportPhoto }
+
 mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
+  PhotoType typeOfPhoto = PhotoType.passportPhoto;
+
   Widget cameraLayer();
   Widget body();
 
   bool isActiveBottomSocialApp() {
     return false;
+  }
+
+  String getTitle() {
+    String temp = '';
+    switch (typeOfPhoto) {
+      case PhotoType.selfiePhoto:
+        temp = 'Selfie verification';
+      case PhotoType.passportPhoto:
+        temp = 'Scan document';
+    }
+    return temp;
+  }
+
+  String getSubTitle() {
+    String temp = '';
+    switch (typeOfPhoto) {
+      case PhotoType.passportPhoto:
+        temp =
+            "Now hold the phone directly over the passport, when the frame turns blue, take the picture.";
+      case PhotoType.selfiePhoto:
+        temp =
+            "Hold your phone at eye level and look directly into the camera,\nwhen the frame turns blue take a photo";
+      default:
+    }
+    return temp;
   }
 
   Widget showAlert() {
