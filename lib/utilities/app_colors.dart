@@ -9,5 +9,5 @@ class AppColors {
   static Color otline = '#D7D9E4'.toColor();
   static Color surface = '#FFFFFF'.toColor();
   static Color internalShadow = Colors.black.withOpacity(0.2);
-  static Color cameraBackgroundColor = Colors.black.withOpacity(0.2);
+  static Color cameraBackgroundColor = Colors.black.withOpacity(0.52);
 }

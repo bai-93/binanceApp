@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
+import 'package:sheker/uicomponent/camera_mask.dart';
+import 'package:sheker/uicomponent/verification_step.dart';
 import '../../../utilities/app_colors.dart';
 
 enum PhotoType { selfiePhoto, passportPhoto }
@@ -9,11 +11,8 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
   PhotoType typeOfPhoto = PhotoType.passportPhoto;
 
   Widget cameraLayer();
-  Widget body();
 
-  bool isActiveBottomSocialApp() {
-    return false;
-  }
+  void photoTapButton();
 
   String getTitle() {
     String temp = '';
@@ -40,57 +39,17 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
     return temp;
   }
 
-  Widget showAlert() {
-    return Container();
-  }
-
-  AppBar? _signUpAppbar() {
+  AppBar customAppbar({double from = 0, double to = 0}) {
     return AppBar(
+      leading: BackButton(color: AppColors.secondary),
+      clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
-      title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
-    );
-  }
-
-  AppBar customAppbar() {
-    return AppBar(
-      surfaceTintColor: Colors.transparent,
-      backgroundColor: Colors.black,
-      title: const Text(
-        'override !customAppbar! method',
-        style: TextStyle(color: Colors.white),
+      backgroundColor: Colors.transparent,
+      title: VerificationStep(
+        from,
+        to,
       ),
     );
-  }
-
-  AppBar? _emptyAppBar(
-      {Color? backgroundColor, Widget? title, Color? backButtonColor}) {
-    return AppBar(
-      title: title,
-      surfaceTintColor: Colors.transparent,
-      leading: BackButton(
-        color: backButtonColor,
-        style: const ButtonStyle(
-            splashFactory: NoSplash.splashFactory,
-            overlayColor: MaterialStatePropertyAll(Colors.transparent)),
-      ),
-      backgroundColor: backgroundColor ?? AppColors.backgroundWhiteTheme,
-    );
-  }
-
-  AppBar? typeAppbar({AppbarType type = AppbarType.none}) {
-    switch (type) {
-      case AppbarType.signUp:
-        return _signUpAppbar();
-      case AppbarType.custom:
-        return customAppbar();
-      case AppbarType.empty:
-        return _emptyAppBar();
-      case AppbarType.none:
-        return null;
-      default:
-        return null;
-    }
   }
 
   @override
@@ -100,51 +59,87 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
   }
 
   @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    switch (state) {
-      case AppLifecycleState.paused:
-        debugPrint('app is paused');
-        break;
-      case AppLifecycleState.inactive:
-        debugPrint('app is inactive');
-        break;
-      case AppLifecycleState.resumed:
-        debugPrint('app is resumed');
-        break;
-      case AppLifecycleState.detached:
-        debugPrint('app is detached');
-        break;
-      default:
-    }
-    super.didChangeAppLifecycleState(state);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (typeAppbar() != null) {
-      return Stack(
-        children: [
-          cameraLayer(),
-          Scaffold(
-            backgroundColor: Colors.transparent,
-            appBar: typeAppbar(),
-            body: body(),
+    return Stack(
+      children: [
+        Stack(children: [
+          Container(
+            color: Colors.transparent,
+            width: sizeOfScreen().width,
+            height: sizeOfScreen().height,
+            child: cameraLayer(),
           ),
-        ],
-      );
-    } else {
-      return Stack(children: [
-        SingleChildScrollView(
-            child: Column(
-          children: [cameraLayer(), body()],
-        )),
-      ]);
-    }
+          ClipPath(
+            clipper: CustomCameraShapeMaskClipper(),
+            child: Container(
+              color: AppColors.cameraBackgroundColor,
+              width: sizeOfScreen().width,
+              height: sizeOfScreen().height,
+            ),
+          ),
+          Positioned(
+            top: sizeOfScreen().height * 0.34,
+            left: 16.8,
+            child: SizedBox(
+                width: sizeOfScreen().width - 33.0,
+                height: 298.0,
+                child: Image.asset("lib/images/login/signup/area_photo.png")),
+          )
+        ]),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: customAppbar(),
+          body: SizedBox(
+            height: sizeOfScreen().height,
+            width: sizeOfScreen().width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 13.0, right: 19.0),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 24.0,
+                  ),
+                  Center(
+                    child: Text(
+                      getTitle(),
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(color: AppColors.surface, fontSize: 32.0),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Text(
+                    getSubTitle(),
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: AppColors.surface, fontSize: 14.0),
+                  ),
+                  const Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: GestureDetector(
+                      onTap: photoTapButton,
+                      child: SizedBox(
+                        height: 78.0,
+                        width: 78.0,
+                        child: Image.asset(
+                          'lib/images/login/signup/photo_button.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50.0,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

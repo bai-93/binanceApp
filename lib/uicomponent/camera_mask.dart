@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// left 16, right 17, height 298
 class CustomCameraShapeMaskClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
