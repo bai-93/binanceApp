@@ -15,7 +15,7 @@ class PassportPhotoVerification extends BaseScreen {
 class _PassportPhotoVerificationState
     extends BaseScreenState<PassportPhotoVerification>
     with BaseScreenVerificationMixin {
-  late CameraController? _controller;
+  CameraController? _controller;
 
   @override
   AppBar customAppbar({double from = 0, double to = 0}) {
@@ -29,27 +29,29 @@ class _PassportPhotoVerificationState
   }
 
   Future<void> configureCameraController() async {
-    _controller = CameraController(cameras[0], ResolutionPreset.max);
-    await _controller?.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object error) {
-      if (error is CameraException) {
-        switch (error.code) {
-          case 'CameraAccessDeniedWithoutPrompt':
-            debugPrint("CAMERA DENIED");
-            break;
-          case 'AudioAccessDenied':
-            debugPrint("AUDIO DENIED");
-            break;
-          default:
-            print("Something another == $error");
+    if (cameras.isNotEmpty) {
+      _controller = CameraController(cameras[0], ResolutionPreset.max);
+      await _controller?.initialize().then((_) {
+        if (!mounted) {
+          return;
         }
-        print("SOME SOME == ${error}");
-      }
-    });
+        setState(() {});
+      }).catchError((Object error) {
+        if (error is CameraException) {
+          switch (error.code) {
+            case 'CameraAccessDeniedWithoutPrompt':
+              debugPrint("CAMERA DENIED");
+              break;
+            case 'AudioAccessDenied':
+              debugPrint("AUDIO DENIED");
+              break;
+            default:
+              print("Something another == $error");
+          }
+          print("SOME SOME == ${error}");
+        }
+      });
+    }
   }
 
   @override
@@ -92,30 +94,30 @@ class _PassportPhotoVerificationState
         break;
       default:
     }
-    // super.didChangeAppLifecycleState(state);
   }
 
   Future<void> _cameraInitializer(CameraDescription? description) async {
-    _controller = CameraController(description!, ResolutionPreset.max);
-    await _controller?.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object error) {
-      if (error is CameraException) {
-        switch (error.code) {
-          case 'CameraAccessDeniedWithoutPrompt':
-            debugPrint("CAMERA DENIED");
-            break;
-          case 'AudioAccessDenied':
-            debugPrint("AUDIO DENIED");
-            break;
-          default:
-            print("Something another == $error");
+    if (description != null) {
+      _controller = CameraController(description, ResolutionPreset.max);
+      await _controller?.initialize().then((_) {
+        if (!mounted) {
+          return;
         }
-        print("SOME SOME == ${error}");
-      }
-    });
+        setState(() {});
+      }).catchError((Object error) {
+        if (error is CameraException) {
+          switch (error.code) {
+            case 'CameraAccessDeniedWithoutPrompt':
+              debugPrint("CAMERA DENIED");
+              break;
+            case 'AudioAccessDenied':
+              debugPrint("AUDIO DENIED");
+              break;
+            default:
+              print("Something another == $error");
+          }
+        }
+      });
+    }
   }
 }
