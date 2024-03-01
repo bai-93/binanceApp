@@ -69,10 +69,12 @@ class _PassportPhotoVerificationState
   Widget cameraLayer() {
     if (_controller != null) {
       if (_controller!.value.isInitialized) {
-        return AspectRatio(
-            aspectRatio:
-                _controller!.value.aspectRatio / sizeOfScreen().aspectRatio,
-            child: CameraPreview(_controller!));
+        return FittedBox(
+          fit: BoxFit.cover,
+          child: SizedBox(
+              height: sizeOfScreen().height,
+              child: CameraPreview(_controller!)),
+        );
       } else {
         return const Center();
       }
