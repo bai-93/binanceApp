@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_verification/base_verification_camera.dart';
@@ -62,8 +63,25 @@ class _PassportPhotoVerificationState
     if (isReady) {
       if (typeOfPhoto == PhotoType.passportPhoto) {
         debugPrint("passport photo");
+        takePhoto();
       } else {
         debugPrint("selfie photo");
+        takePhoto();
+      }
+    }
+  }
+
+  Future<void> takePhoto() async {
+    if (_cameraController == null) {
+      debugPrint("camera is nul");
+      return;
+    } else {
+      try {
+        _cameraController!.pausePreview();
+        XFile file = await _cameraController!.takePicture();
+        debugPrint(file.path);
+      } on CameraException catch (error) {
+        debugPrint("PICTURE EXCEPTION");
       }
     }
   }
