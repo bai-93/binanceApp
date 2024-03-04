@@ -10,29 +10,6 @@ abstract class BaseScreen extends StatefulWidget {
 
 abstract class BaseScreenState<T extends BaseScreen> extends State<T>
     with WidgetsBindingObserver {
-  // bool _isBack = true;
-  // bool _isCart = true;
-  // bool _isHiddenAppBar = false;
-
-  // set appBarIsHiddenSet(bool flag) => {_isHiddenAppBar = flag};
-  // bool get appBarIsHiddenGet => _isHiddenAppBar;
-
-  // String appBarTitle() => '';
-
-  // void onClickBackButton() {}
-
-  // void onClickCart() {}
-
-  // set isBackButton(bool isBack) {
-  //   debugPrint('BACK button is tapped');
-  //   _isBack = isBack;
-  // }
-
-  // set isCartButton(bool isCart) {
-  //   debugPrint('CART button is tapped');
-  //   _isCart = isCart;
-  // }
-
   Size sizeOfScreen() {
     return Size(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
@@ -243,7 +220,6 @@ class MyWidget extends BaseScreen {
 class _MyWidgetState extends BaseScreenState<MyWidget> with BaseScreenMixin {
   @override
   Widget body() {
-    // appBarIsHiddenSet = true;
     return Container(
       color: Colors.white,
       child: Center(

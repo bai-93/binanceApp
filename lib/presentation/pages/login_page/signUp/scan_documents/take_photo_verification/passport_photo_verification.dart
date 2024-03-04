@@ -15,7 +15,8 @@ class PassportPhotoVerification extends BaseScreen {
 class _PassportPhotoVerificationState
     extends BaseScreenState<PassportPhotoVerification>
     with BaseScreenVerificationMixin {
-  CameraController? _controller;
+  CameraController? _cameraController;
+  bool isReady = false;
 
   @override
   AppBar customAppbar({double from = 0, double to = 0}) {
@@ -24,18 +25,20 @@ class _PassportPhotoVerificationState
 
   @override
   void initState() {
-    super.initState();
     configureCameraController();
+    super.initState();
   }
 
   Future<void> configureCameraController() async {
     if (cameras.isNotEmpty) {
-      _controller = CameraController(cameras[0], ResolutionPreset.max);
-      await _controller?.initialize().then((_) {
+      _cameraController = CameraController(cameras[0], ResolutionPreset.max);
+      await _cameraController?.initialize().then((_) {
         if (!mounted) {
           return;
         }
-        setState(() {});
+        setState(() {
+          isReady = true;
+        });
       }).catchError((Object error) {
         if (error is CameraException) {
           switch (error.code) {
@@ -56,70 +59,30 @@ class _PassportPhotoVerificationState
 
   @override
   void photoTapButton() {
-    if (_controller != null) {
-      if (_controller!.value.isInitialized) {
-        debugPrint("Yes is ready");
+    if (isReady) {
+      if (typeOfPhoto == PhotoType.passportPhoto) {
+        debugPrint("passport photo");
       } else {
-        debugPrint("No it is NOT YEAT ready");
+        debugPrint("selfie photo");
       }
     }
   }
 
   @override
   Widget cameraLayer() {
-    if (_controller != null) {
-      if (_controller!.value.isInitialized) {
+    if (isReady) {
+      if (_cameraController!.value.isInitialized) {
         return FittedBox(
           fit: BoxFit.cover,
           child: SizedBox(
-              height: sizeOfScreen().height,
-              child: CameraPreview(_controller!)),
+              height: MediaQuery.of(context).size.height,
+              child: CameraPreview(_cameraController!)),
         );
       } else {
         return const Center();
       }
     } else {
       return const Center();
-    }
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        debugPrint("RESUMED");
-        _cameraInitializer(_controller?.description);
-        break;
-      case AppLifecycleState.inactive:
-        debugPrint("INACTIVE");
-        _controller?.dispose();
-        break;
-      default:
-    }
-  }
-
-  Future<void> _cameraInitializer(CameraDescription? description) async {
-    if (description != null) {
-      _controller = CameraController(description, ResolutionPreset.max);
-      await _controller?.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
-      }).catchError((Object error) {
-        if (error is CameraException) {
-          switch (error.code) {
-            case 'CameraAccessDeniedWithoutPrompt':
-              debugPrint("CAMERA DENIED");
-              break;
-            case 'AudioAccessDenied':
-              debugPrint("AUDIO DENIED");
-              break;
-            default:
-              print("Something another == $error");
-          }
-        }
-      });
     }
   }
 }

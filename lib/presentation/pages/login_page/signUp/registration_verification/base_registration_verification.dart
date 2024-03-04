@@ -41,7 +41,7 @@ mixin BaseRegistrationVerification<T extends BaseScreen> on BaseScreenState<T> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: progressOfAppBar(),
       body: SingleChildScrollView(
         child: Column(

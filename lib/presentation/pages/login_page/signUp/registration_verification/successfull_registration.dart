@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
-import 'package:sheker/config/base_widgets/base_verification/base_verification_camera.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/registration_verification/base_registration_verification.dart';
 
 class SuccessfullRegistration extends BaseScreen {
