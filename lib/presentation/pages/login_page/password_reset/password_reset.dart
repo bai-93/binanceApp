@@ -22,6 +22,11 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
   }
 
   @override
+  bool isActiveBottomSocialApp() {
+    return true;
+  }
+
+  @override
   AppBar customAppbar() {
     return AppBar(
         leading: BackButton(
@@ -96,6 +101,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0))),
                 surfaceTintColor: AppColors.backgroundWhiteTheme,
+                foregroundColor: AppColors.backgroundWhiteTheme,
                 backgroundColor: isActiveButton
                     ? AppColors.onboardingPrimary
                     : AppColors.otline),
@@ -105,7 +111,19 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
                   color:
                       isActiveButton ? AppColors.surface : AppColors.secondary,
                   fontSize: 16.0),
-            ))
+            )),
+        const SizedBox(
+          height: 42.0,
+        ),
+        Text(
+          'By registering you accept our Terms & Conditions and Privacy Policy. Your data will be security encrypted with TLS',
+          softWrap: true,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: AppColors.text, fontSize: 12.0),
+        ),
+        const SizedBox(
+          height: 70.0,
+        )
       ]),
     );
   }
