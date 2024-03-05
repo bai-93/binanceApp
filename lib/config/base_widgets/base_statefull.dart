@@ -29,6 +29,9 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
 
   AppBar? _signUpAppbar() {
     return AppBar(
+      leading: BackButton(
+        color: AppColors.secondary,
+      ),
       surfaceTintColor: Colors.transparent,
       backgroundColor: AppColors.backgroundWhiteTheme,
       title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),

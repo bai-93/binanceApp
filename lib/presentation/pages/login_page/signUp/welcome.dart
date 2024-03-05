@@ -44,6 +44,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
           const SizedBox(height: 16.0),
           button(() {
             debugPrint("Sign up with email");
+            context.push('/sign_up/account_verification');
           }, 'Sign up with email', true),
           const SizedBox(height: 108.0),
           Row(
@@ -78,7 +79,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
           ),
           button(() {
             debugPrint('Sign in');
-            context.push('/sign_up/account_verification');
+            context.push('/sign_up/login');
           }, 'Sign in', false),
           const SizedBox(height: 64.0)
         ]),
