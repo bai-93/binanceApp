@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/login_page/create_password/create_password.dart';
+import 'package:sheker/presentation/pages/login_page/password_reset/password_reset.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/account_creation_verification.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/add_mail.dart';
@@ -35,7 +36,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/sign_up/login',
+      initialLocation: '/sign_up/password_reset',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -59,6 +60,12 @@ class AppRouter {
                 path: 'login',
                 builder: (context, state) {
                   return const Login();
+                },
+              ),
+              GoRoute(
+                path: 'password_reset',
+                builder: (context, state) {
+                  return const PasswordReset();
                 },
               ),
               GoRoute(

@@ -183,9 +183,9 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
                   : AppColors.internalShadow),
           boxShadow: [
             BoxShadow(
-                color: AppColors.internalShadow,
-                blurRadius: 2.0,
-                offset: const Offset(0.0, -0.9))
+                blurStyle: BlurStyle.inner,
+                color: AppColors.internalShadow.withOpacity(0.2),
+                offset: const Offset(0.0, -1.0))
           ],
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
       child: TextFormField(
