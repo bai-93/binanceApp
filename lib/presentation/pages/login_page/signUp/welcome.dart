@@ -78,7 +78,6 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
             height: 36.0,
           ),
           button(() {
-            debugPrint('Sign in');
             context.push('/sign_up/login');
           }, 'Sign in', false),
           const SizedBox(height: 64.0)

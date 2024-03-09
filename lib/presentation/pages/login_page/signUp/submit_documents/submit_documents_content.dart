@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class SubmitDocumentsContent extends StatefulWidget {
@@ -129,7 +130,7 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
             child: ElevatedButton(
                 onPressed: idCardFlag || passportFlag || licenseFlag
                     ? () {
-                        debugPrint('pressed');
+                        context.go('/sign_up/scan_documents');
                       }
                     : null,
                 style: ElevatedButton.styleFrom(

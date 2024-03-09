@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/uicomponent/verification_step.dart';
@@ -112,7 +113,7 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
             width: sizeOfScreen().width,
             child: ElevatedButton(
                 onPressed: () {
-                  debugPrint("Open camera");
+                  context.push('/sign_up/take_photo_verification', extra: true);
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.onboardingPrimary,

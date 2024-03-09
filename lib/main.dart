@@ -1,12 +1,9 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/injection/injection_configure.dart';
-import 'package:sheker/config/theme/themes.dart';
 import 'package:sheker/presentation/bloc/providers.dart';
-import 'package:sheker/config/route/router.dart';
-import 'package:sheker/utilities/biometryhelper.dart';
+import 'package:sheker/config/route/main_router.dart';
 
 late List<CameraDescription> cameras;
 void main() async {
@@ -24,21 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: Providers.getProviders,
-      child: AdaptiveTheme(
-          light: lightTheme,
-          dark: darkTheme,
-          debugShowFloatingThemeButton: false,
-          initial: AdaptiveThemeMode.light,
-          builder: (theme, darkThemes) {
-            return MaterialApp.router(
-                theme: theme,
-                darkTheme: darkThemes,
-                title: 'Flutter Demo',
-                debugShowCheckedModeBanner: false,
-                debugShowMaterialGrid: false,
-                routerConfig: AppRouter().router);
-          }),
-    );
+        providers: Providers.getProviders,
+        child: MaterialApp.router(
+            title: 'Flutter Demo',
+            debugShowCheckedModeBanner: false,
+            debugShowMaterialGrid: false,
+            routerConfig: AppRouter().router));
   }
 }

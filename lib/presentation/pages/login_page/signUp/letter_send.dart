@@ -1,12 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/uicomponent/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class LetterSend extends BaseScreen {
-  const LetterSend({super.key});
+  String emailData = "email";
+  LetterSend(this.emailData, {super.key});
 
   @override
   State<LetterSend> createState() => _LetterSendState();
@@ -57,7 +59,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
           Padding(
             padding: const EdgeInsets.only(left: 13.0, right: 18.0),
             child: Text(
-              'We just sent you an email to tomashuk.dima.1992@gmail.com',
+              'We just sent you an email to ${widget.emailData}',
               textAlign: TextAlign.center,
               softWrap: true,
               style: TextStyle(color: AppColors.text, fontSize: 14.0),
@@ -66,9 +68,11 @@ class _LetterSendState extends BaseScreenState<LetterSend>
           const SizedBox(height: 56.0),
           ElevatedButton(
             onPressed: () {
-              debugPrint('Confirm');
+              context.push('/sign_up/otp', extra: widget.emailData);
             },
             style: ElevatedButton.styleFrom(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0))),
                 backgroundColor: AppColors.onboardingPrimary,
                 fixedSize: Size(sizeOfScreen().width - 32.0, 48.0)),
             child: Center(

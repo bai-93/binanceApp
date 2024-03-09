@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -209,25 +210,5 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
         ],
       ));
     }
-  }
-}
-
-//example stateFull widgets
-class MyWidget extends BaseScreen {
-  const MyWidget({super.key});
-
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends BaseScreenState<MyWidget> with BaseScreenMixin {
-  @override
-  Widget body() {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Text('Hello world'),
-      ),
-    );
   }
 }

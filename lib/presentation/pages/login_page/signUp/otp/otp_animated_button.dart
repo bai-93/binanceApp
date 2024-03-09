@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sheker/config/route/main_router.dart';
 import 'package:sheker/uicomponent/mark_positive_draw.dart';
 import 'package:sheker/presentation/bloc/sign_up/bloc/otp_bloc.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_arc_refresh.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class OtpButtonAnimated extends StatefulWidget {
-  const OtpButtonAnimated({super.key});
+  void Function() callback;
+  OtpButtonAnimated(this.callback, {super.key});
 
   @override
   State<OtpButtonAnimated> createState() => _OtpButtonAnimatedState();
@@ -42,11 +44,6 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
   void initState() {
     super.initState();
     animationSettings();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   if (mounted) {
-    //     controller.forward();
-    //   }
-    // });
   }
 
   void animationSettings() {
@@ -113,6 +110,9 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
     opacityFinal =
         Tween<double>(begin: 1.0, end: 0.0).animate(controllerOpacityFinal)
           ..addListener(() {
+            if (controllerOpacityFinal.status == AnimationStatus.completed) {
+              widget.callback();
+            }
             setState(() {});
           });
   }

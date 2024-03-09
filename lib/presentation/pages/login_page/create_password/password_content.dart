@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/utilities/app_colors.dart';
 import 'package:sheker/utilities/regex_pattern.dart';
 
 class PasswordContentField extends StatefulWidget {
-  const PasswordContentField({super.key});
+  String path;
+  PasswordContentField(this.path, {super.key});
 
   @override
   State<PasswordContentField> createState() => _PasswordContentFieldState();
@@ -117,7 +119,7 @@ class _PasswordContentFieldState extends State<PasswordContentField> {
       child: ElevatedButton(
         onPressed: isActiveButton
             ? () {
-                debugPrint('Continue button');
+                context.push(widget.path);
               }
             : null,
         child: Text(

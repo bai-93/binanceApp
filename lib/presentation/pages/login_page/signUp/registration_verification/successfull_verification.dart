@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/registration_verification/base_registration_verification.dart';
 
@@ -29,8 +30,7 @@ class _SuccessVerificationState extends BaseScreenState<SuccessVerification>
 
   @override
   void onTap() {
-    debugPrint("Start now");
-    AdaptiveTheme.of(context).setDark();
+    context.go('/a');
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/uicomponent/verification_step.dart';
@@ -24,6 +25,22 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
   @override
   bool isActiveBottomSocialApp() {
     return true;
+  }
+
+  @override
+  void initState() {
+    _controller.addListener(() {
+      if (_controller.text.isNotEmpty) {
+        setState(() {
+          isActiveButton = true;
+        });
+      } else {
+        setState(() {
+          isActiveButton = false;
+        });
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -66,7 +83,10 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
           child: Container(
             decoration: BoxDecoration(
                 color: AppColors.backgroundWhiteTheme,
-                border: Border.all(color: AppColors.otline),
+                border: Border.all(
+                    color: isActiveButton
+                        ? AppColors.onboardingPrimary
+                        : AppColors.otline),
                 boxShadow: [
                   BoxShadow(
                       blurStyle: BlurStyle.inner,
@@ -95,7 +115,12 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
           height: 154.0,
         ),
         ElevatedButton(
-            onPressed: () {},
+            onPressed: isActiveButton
+                ? () {
+                    context.push('/sign_up/letter_send',
+                        extra: _controller.text);
+                  }
+                : null,
             style: ElevatedButton.styleFrom(
                 fixedSize: Size(sizeOfScreen().width, 48.0),
                 shape: const RoundedRectangleBorder(

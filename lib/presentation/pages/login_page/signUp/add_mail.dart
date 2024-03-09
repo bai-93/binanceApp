@@ -119,18 +119,18 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                 key: _form,
                 autovalidateMode: AutovalidateMode.disabled,
                 decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(0.0),
+                    isDense: true,
                     prefixIcon: Image.asset(
                       'lib/images/login/signup/mail_signup.png',
-                      width: 18.0,
-                      height: 14.0,
+                      width: 24.0,
+                      height: 24.0,
                       alignment: Alignment.center,
                       color: controller.text.isNotEmpty
                           ? AppColors.onboardingPrimary
                           : AppColors.otline,
                     ),
-                    labelText: 'Email address',
-                    labelStyle:
+                    hintText: 'Email address',
+                    hintStyle:
                         TextStyle(color: AppColors.secondary, fontSize: 16.0),
                     suffixIcon: controller.text.isNotEmpty
                         ? SizedBox(
@@ -179,7 +179,8 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
         ElevatedButton(
             onPressed: controller.text.isNotEmpty
                 ? () {
-                    context.go('/a');
+                    context.push('/sign_up/letter_send',
+                        extra: controller.text);
                   }
                 : null,
             style: ElevatedButton.styleFrom(

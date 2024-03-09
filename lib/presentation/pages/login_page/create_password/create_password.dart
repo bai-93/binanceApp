@@ -6,7 +6,8 @@ import 'package:sheker/presentation/pages/login_page/create_password/password_co
 import 'package:sheker/utilities/app_colors.dart';
 
 class CreatePassword extends BaseScreen {
-  const CreatePassword({super.key});
+  String path;
+  CreatePassword(this.path, {super.key});
 
   @override
   State<CreatePassword> createState() => _CreatePasswordState();
@@ -80,7 +81,7 @@ class _CreatePasswordState extends BaseScreenState<CreatePassword>
         const SizedBox(
           height: 24.0,
         ),
-        const PasswordContentField(),
+        PasswordContentField(widget.path),
         const SizedBox(height: 42.0),
         Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 15.0),

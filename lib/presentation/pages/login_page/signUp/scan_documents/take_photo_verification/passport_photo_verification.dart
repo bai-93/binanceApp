@@ -1,12 +1,13 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_verification/base_verification_camera.dart';
 import 'package:camera/camera.dart';
 import 'package:sheker/main.dart';
 
 class PassportPhotoVerification extends BaseScreen {
-  const PassportPhotoVerification({super.key});
+  bool isPassportPhoto;
+  PassportPhotoVerification(this.isPassportPhoto, {super.key});
 
   @override
   State<PassportPhotoVerification> createState() =>
@@ -18,6 +19,10 @@ class _PassportPhotoVerificationState
     with BaseScreenVerificationMixin {
   CameraController? _cameraController;
   bool isReady = false;
+
+  @override
+  PhotoType get typeOfPhoto =>
+      widget.isPassportPhoto ? PhotoType.passportPhoto : PhotoType.selfiePhoto;
 
   @override
   AppBar customAppbar({double from = 0, double to = 0}) {
@@ -50,9 +55,8 @@ class _PassportPhotoVerificationState
               debugPrint("AUDIO DENIED");
               break;
             default:
-              print("Something another == $error");
+              debugPrint(error.toString());
           }
-          print("SOME SOME == ${error}");
         }
       });
     }
@@ -60,12 +64,19 @@ class _PassportPhotoVerificationState
 
   @override
   void photoTapButton() {
+    if (typeOfPhoto == PhotoType.passportPhoto) {
+      context.pushReplacement('/sign_up/selfie_verfication');
+      // takePhoto();
+    } else {
+      context.pushReplacement('/sign_up/success_verification');
+      // takePhoto();
+    }
     if (isReady) {
       if (typeOfPhoto == PhotoType.passportPhoto) {
-        debugPrint("passport photo");
+        context.pushReplacement('/sign_up/selfie_verfication');
         takePhoto();
       } else {
-        debugPrint("selfie photo");
+        context.pushReplacement('/sign_up/success_verification');
         takePhoto();
       }
     }

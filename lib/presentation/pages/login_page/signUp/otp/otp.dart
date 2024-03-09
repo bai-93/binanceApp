@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/uicomponent/verification_step.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
@@ -11,7 +12,8 @@ import 'package:sheker/presentation/pages/login_page/signUp/otp/otp_password.dar
 import 'package:sheker/utilities/app_colors.dart';
 
 class Otp extends BaseScreen {
-  const Otp({super.key});
+  String email = '';
+  Otp(this.email, {super.key});
 
   @override
   State<Otp> createState() => _OtpState();
@@ -72,7 +74,7 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
           ),
           const SizedBox(height: 8.0),
           Text(
-            'We sent email to tomashuk.dima.1992@gmail.com',
+            'We sent email to ${widget.email}',
             softWrap: true,
             textAlign: TextAlign.center,
             style: TextStyle(color: AppColors.text, fontSize: 14.0),
@@ -101,7 +103,9 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
                             color: AppColors.onboardingPrimary, fontSize: 14.0))
                   ])),
           const SizedBox(height: 24.0),
-          const OtpButtonAnimated(),
+          OtpButtonAnimated(() {
+            context.pushReplacement('/sign_up/create_password');
+          }),
           const SizedBox(height: 154.0)
         ],
       ),

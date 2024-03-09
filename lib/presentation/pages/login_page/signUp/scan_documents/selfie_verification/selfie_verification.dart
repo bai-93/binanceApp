@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/uicomponent/verification_step.dart';
@@ -118,7 +119,8 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
           width: sizeOfScreen().width,
           child: ElevatedButton(
               onPressed: () {
-                debugPrint("Open camera");
+                context.pushReplacement('/sign_up/take_photo_verification',
+                    extra: false);
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.onboardingPrimary,
