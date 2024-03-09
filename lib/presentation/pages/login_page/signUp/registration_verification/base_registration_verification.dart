@@ -29,7 +29,7 @@ mixin BaseRegistrationVerification<T extends BaseScreen> on BaseScreenState<T> {
         child: ElevatedButton(
             onPressed: onTap,
             style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.onboardingPrimary,
+                backgroundColor: Theme.of(context).colorScheme.background,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0)))),
             child: Text(

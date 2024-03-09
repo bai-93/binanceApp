@@ -12,6 +12,7 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i9;
 
+import '../config/theme/theme_manager.dart' as _i10;
 import '../domain/repository/detail_info_repository/detail_info_repository_impl.dart'
     as _i3;
 import '../domain/repository/home_page_repository/home_page_repository_impl.dart'
@@ -23,8 +24,8 @@ import '../domain/usecases/history_page_usecase/get_history_crypto_detail_usecas
 import '../domain/usecases/home_page_usecase/get_crypto_list_usecase.dart'
     as _i7;
 import '../network_layer/dio_client/dio_client.dart' as _i4;
-import '../network_layer/retofit_layer/rest_client.dart' as _i10;
-import 'dependency.dart' as _i11;
+import '../network_layer/retofit_layer/rest_client.dart' as _i11;
+import 'dependency.dart' as _i12;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -51,10 +52,11 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModules.prefs,
       preResolve: true,
     );
-    gh.factory<_i10.ApiClientRetrofit>(
+    gh.factory<_i10.ThemeManager>(() => _i10.ThemeManager());
+    gh.factory<_i11.ApiClientRetrofit>(
         () => registerModules.apiRetrofit(gh<_i4.DioClient>()));
     return this;
   }
 }
 
-class _$RegisterModules extends _i11.RegisterModules {}
+class _$RegisterModules extends _i12.RegisterModules {}
