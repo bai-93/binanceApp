@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/config/route/signup_router.dart';
+import 'package:sheker/config/route/tabbar_routes/home/home_route.dart';
 import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
 import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
@@ -24,7 +25,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/a',
+      initialLocation: '/home',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -56,20 +57,7 @@ class AppRouter {
         branches: [
           StatefulShellBranch(
             navigatorKey: _cryptoHomeNavigatorKey,
-            routes: [
-              GoRoute(
-                  path: '/a',
-                  builder: (context, state) {
-                    return const CryptoHomePage();
-                  },
-                  routes: [
-                    GoRoute(
-                        path: 'detailInfo/:id',
-                        builder: (context, state) {
-                          return GraphDetailPage(state.pathParameters["id"]!);
-                        })
-                  ])
-            ],
+            routes: [HomeRoute.router],
           ),
           StatefulShellBranch(navigatorKey: _feedNavigatorKey, routes: [
             GoRoute(

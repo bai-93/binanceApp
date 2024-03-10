@@ -6,12 +6,21 @@ enum AppbarType { onboarding, signUp, custom, none, empty }
 
 abstract class BaseScreenStateless extends StatelessWidget {
   Size sizeOfScreen = Size(0.0, 0.0);
+  BuildContext? buildContext;
 
   BaseScreenStateless({super.key});
 
-  Widget body(BuildContext context) {
-    return Container(color: Colors.yellow);
+  Widget body(BuildContext context);
+
+  Widget? leadingAppBar() {
+    return null;
   }
+
+  List<Widget>? actionsAppBar() {
+    return null;
+  }
+
+  Widget? title() {}
 
   AppBar _onboardingAppbar() {
     return AppBar(
@@ -23,9 +32,13 @@ abstract class BaseScreenStateless extends StatelessWidget {
 
   AppBar _signUpAppbar() {
     return AppBar(
+      leading: leadingAppBar(),
+      actions: actionsAppBar(),
       surfaceTintColor: Colors.transparent,
       backgroundColor: AppColors.backgroundWhiteTheme,
-      title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
+      title: Center(
+          child: title() ??
+              Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
     );
   }
 
@@ -76,25 +89,16 @@ abstract class BaseScreenStateless extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    buildContext = context;
     _getSizeScreen(context);
     if (typeOfAppbar() != null) {
       return Scaffold(
         backgroundColor: AppColors.backgroundWhiteTheme,
         appBar: typeOfAppbar(),
-        body: body(context),
+        body: SingleChildScrollView(child: body(context)),
       );
     } else {
-      return body(context);
+      return SingleChildScrollView(child: body(context));
     }
-  }
-}
-
-//here example how we have to use
-class TestBaseScreenUse extends BaseScreenStateless {
-  TestBaseScreenUse({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

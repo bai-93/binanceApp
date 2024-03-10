@@ -35,7 +35,8 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
       ),
       surfaceTintColor: Colors.transparent,
       backgroundColor: AppColors.backgroundWhiteTheme,
-      title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
+      title: Center(
+          child: Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
     );
   }
 

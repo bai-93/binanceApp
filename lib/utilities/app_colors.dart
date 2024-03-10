@@ -10,4 +10,5 @@ class AppColors {
   static Color surface = '#FFFFFF'.toColor();
   static Color internalShadow = Colors.black.withOpacity(0.2);
   static Color cameraBackgroundColor = Colors.black.withOpacity(0.52);
+  static Color verified = '#CDFFC5'.toColor();
 }
