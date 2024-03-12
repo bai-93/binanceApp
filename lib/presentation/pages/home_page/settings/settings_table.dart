@@ -37,10 +37,6 @@ class _SettingsTableState extends State<SettingsTable> {
         const SizedBox(
           height: 24.0,
         ),
-        makeLogOutButton(),
-        const SizedBox(
-          height: 24.0,
-        )
       ],
     );
   }
@@ -80,14 +76,20 @@ class _SettingsTableState extends State<SettingsTable> {
           return makeContentRow(data[index],
               isFirst: index == 0,
               isLast: index == length - 1,
-              isTheme: data[index] == 'Theme');
+              isTheme: data[index] == 'Theme',
+              indexSection: sectionIndex,
+              index: index);
         },
       ),
     );
   }
 
   Widget makeContentRow(String text,
-      {bool isTheme = false, bool isLast = false, bool isFirst = false}) {
+      {bool isTheme = false,
+      bool isLast = false,
+      bool isFirst = false,
+      int indexSection = 0,
+      int index = 0}) {
     BorderRadius topRadius = const BorderRadius.only(
         topLeft: Radius.circular(14.0), topRight: Radius.circular(14.0));
     BorderRadius bottomRadius = const BorderRadius.only(
@@ -108,23 +110,25 @@ class _SettingsTableState extends State<SettingsTable> {
           width: size.width,
           decoration: BoxDecoration(
               color: AppColors.surface, borderRadius: finalRadius),
-          child: makeRow(isTheme, text),
+          child:
+              makeRow(isTheme, text, indexSection: indexSection, index: index),
         ),
         makeDivider(isLast)
       ],
     );
   }
 
-  Widget makeRow(bool flag, String text) {
+  Widget makeRow(bool flag, String text,
+      {int indexSection = 0, int index = 0}) {
     if (flag) {
       return Row(
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 14.0, top: 16.0, bottom: 16.0),
-            child: Container(
-              color: Colors.amber,
-              width: 24.0,
+            child: SizedBox(
               height: 24.0,
+              width: 24.0,
+              child: makeImageAsset(indexSection, index),
             ),
           ),
           const SizedBox(
@@ -159,10 +163,10 @@ class _SettingsTableState extends State<SettingsTable> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 14.0, top: 16.0, bottom: 16.0),
-            child: Container(
-              color: Colors.amber,
-              width: 24.0,
+            child: SizedBox(
               height: 24.0,
+              width: 24.0,
+              child: makeImageAsset(indexSection, index),
             ),
           ),
           const SizedBox(
@@ -171,10 +175,23 @@ class _SettingsTableState extends State<SettingsTable> {
           Text(
             text,
             style: TextStyle(color: AppColors.text, fontSize: 16.0),
-          )
+          ),
+          const Spacer(),
+          Padding(
+              padding:
+                  const EdgeInsets.only(top: 20.79, bottom: 20.79, right: 14.0),
+              child: SizedBox(
+                  width: 8.12,
+                  height: 14.41,
+                  child: Image.asset('lib/images/home/settings/arrow.png')))
         ],
       );
     }
+  }
+
+  Widget makeImageAsset(int indexSection, int index) {
+    String value = SettingsTableModel.iconsImages[indexSection][index];
+    return Image.asset('lib/images/home/settings/$value.png');
   }
 
   Widget makeDivider(bool isLast) {
@@ -195,23 +212,5 @@ class _SettingsTableState extends State<SettingsTable> {
               ),
             ],
           );
-  }
-
-  Widget makeLogOutButton() {
-    return SizedBox(
-      height: 48.0,
-      width: MediaQuery.of(context).size.width,
-      child: ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-              side: BorderSide(color: AppColors.onboardingPrimary, width: 2.0),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0)))),
-          child: Text(
-            'Log Out',
-            style:
-                TextStyle(color: AppColors.onboardingPrimary, fontSize: 16.0),
-          )),
-    );
   }
 }

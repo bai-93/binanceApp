@@ -21,9 +21,31 @@ class _SettingsContentState extends State<SettingsContent> {
             height: 16.0,
           ),
           makeProfileContainer(),
-          const SettingsTable()
+          const SettingsTable(),
+          makeLogOutButton(),
+          const SizedBox(
+            height: 24.0,
+          )
         ],
       ),
+    );
+  }
+
+  Widget makeLogOutButton() {
+    return SizedBox(
+      height: 48.0,
+      width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+              side: BorderSide(color: AppColors.onboardingPrimary, width: 2.0),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)))),
+          child: Text(
+            'Log Out',
+            style:
+                TextStyle(color: AppColors.onboardingPrimary, fontSize: 16.0),
+          )),
     );
   }
 
