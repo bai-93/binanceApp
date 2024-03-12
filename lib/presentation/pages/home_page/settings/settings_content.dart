@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/utilities/app_colors.dart';
-
 import 'settings_table.dart';
 
 class SettingsContent extends StatefulWidget {
-  const SettingsContent({super.key});
+  SettingsDelegateActionsHandle? delegate;
+  SettingsContent({this.delegate, super.key});
 
   @override
   State<SettingsContent> createState() => _SettingsContentState();
@@ -21,7 +22,9 @@ class _SettingsContentState extends State<SettingsContent> {
             height: 16.0,
           ),
           makeProfileContainer(),
-          const SettingsTable(),
+          SettingsTable(
+            delegate: widget.delegate,
+          ),
           makeLogOutButton(),
           const SizedBox(
             height: 24.0,

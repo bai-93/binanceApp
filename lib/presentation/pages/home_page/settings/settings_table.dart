@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/config/theme/theme_manager.dart';
-import 'package:sheker/injection/injection_configure.dart';
+import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class SettingsTable extends StatefulWidget {
-  const SettingsTable({super.key});
+  SettingsDelegateActionsHandle? delegate;
+  SettingsTable({this.delegate, super.key});
 
   @override
   State<SettingsTable> createState() => _SettingsTableState();
@@ -103,18 +103,26 @@ class _SettingsTableState extends State<SettingsTable> {
       finalRadius = bottomRadius;
     }
     Size size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Container(
-          height: 56.0,
-          width: size.width,
-          decoration: BoxDecoration(
-              color: AppColors.surface, borderRadius: finalRadius),
-          child:
-              makeRow(isTheme, text, indexSection: indexSection, index: index),
-        ),
-        makeDivider(isLast)
-      ],
+    return GestureDetector(
+      onTap: () {
+        widget.delegate?.selectedRows(
+            SettingsTableModel.contentRow[indexSection][index],
+            indexSection,
+            index);
+      },
+      child: Column(
+        children: [
+          Container(
+            height: 56.0,
+            width: size.width,
+            decoration: BoxDecoration(
+                color: AppColors.surface, borderRadius: finalRadius),
+            child: makeRow(isTheme, text,
+                indexSection: indexSection, index: index),
+          ),
+          makeDivider(isLast)
+        ],
+      ),
     );
   }
 
@@ -153,6 +161,7 @@ class _SettingsTableState extends State<SettingsTable> {
               onChanged: (value) {
                 setState(() {
                   isActiveDark = value;
+                  widget.delegate?.selectedTheme(isActiveDark);
                 });
               }),
           const SizedBox(width: 14.0)

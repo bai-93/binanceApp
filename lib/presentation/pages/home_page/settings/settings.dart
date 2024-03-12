@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_content.dart';
+import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
-class Settings extends BaseScreenStateless {
+class Settings extends BaseScreenStateless
+    implements SettingsDelegateActionsHandle {
   Settings({super.key});
 
   @override
@@ -37,6 +39,18 @@ class Settings extends BaseScreenStateless {
 
   @override
   Widget body(BuildContext context) {
-    return const SettingsContent();
+    return SettingsContent(
+      delegate: this,
+    );
+  }
+
+  @override
+  void selectedRows(String data, int indexSection, int index) {
+    debugPrint("Settings main $data");
+  }
+
+  @override
+  void selectedTheme(bool isDark) {
+    debugPrint("Settings main theme $isDark");
   }
 }
