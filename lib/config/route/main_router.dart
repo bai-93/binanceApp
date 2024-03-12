@@ -13,6 +13,7 @@ class AppRouter {
   final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
   final _signNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'sign');
   final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
+
   //bottom navigator keys
   final _cryptoHomeNavigatorKey =
       GlobalKey<NavigatorState>(debugLabel: 'cryptoHome');
@@ -40,7 +41,7 @@ class AppRouter {
           },
         ),
         SignupRouter.router,
-        shelRouter()
+        shelRouter(),
       ],
     );
     return goRouter;
@@ -48,7 +49,6 @@ class AppRouter {
 
   StatefulShellRoute shelRouter() {
     return StatefulShellRoute.indexedStack(
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (context, state, router) {
           return NoTransitionPage<void>(
               child: BottomMenuTabBar(
@@ -57,7 +57,7 @@ class AppRouter {
         branches: [
           StatefulShellBranch(
             navigatorKey: _cryptoHomeNavigatorKey,
-            routes: [HomeRoute.router],
+            routes: [HomeRoute.getRouter(key: _rootNavigatorKey)],
           ),
           StatefulShellBranch(navigatorKey: _feedNavigatorKey, routes: [
             GoRoute(

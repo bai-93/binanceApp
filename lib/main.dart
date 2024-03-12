@@ -30,9 +30,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _themeManager.addListener(() {
-      if (mounted) {
-        setState(() {});
-      }
+      debugPrint("listener of THEMEMANAGER");
+      // if (mounted) {
+      //   setState(() {});
+      // }
     });
     super.initState();
   }

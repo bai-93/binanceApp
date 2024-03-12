@@ -52,7 +52,7 @@ extension GetItInjectableX on _i1.GetIt {
       () => registerModules.prefs,
       preResolve: true,
     );
-    gh.factory<_i10.ThemeManager>(() => _i10.ThemeManager());
+    gh.singleton<_i10.ThemeManager>(_i10.ThemeManager());
     gh.factory<_i11.ApiClientRetrofit>(
         () => registerModules.apiRetrofit(gh<_i4.DioClient>()));
     return this;

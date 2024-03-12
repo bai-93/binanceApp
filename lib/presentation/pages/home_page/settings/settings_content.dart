@@ -61,7 +61,7 @@ class _SettingsContentState extends State<SettingsContent> {
                       ),
                       Expanded(
                         child: Text(
-                          'baiaman_luckiest_man_develop.com',
+                          'baiaman_happy_life.com',
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
