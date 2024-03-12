@@ -11,4 +11,5 @@ class SettingsTableModel {
     ['Theme', 'Notifications'],
     ['My bonus', 'Share with friends', 'Support']
   ];
+  static final List<List<String>> iconsImages = [[], [], []];
 }

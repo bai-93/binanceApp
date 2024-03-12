@@ -31,9 +31,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     _themeManager.addListener(() {
       debugPrint("listener of THEMEMANAGER");
-      // if (mounted) {
-      //   setState(() {});
-      // }
+      if (mounted) {
+        setState(() {});
+      }
     });
     super.initState();
   }
