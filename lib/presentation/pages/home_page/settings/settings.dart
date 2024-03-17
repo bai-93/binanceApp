@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
+import 'package:sheker/config/theme/bloc/theme_bloc.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_content.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/utilities/app_colors.dart';
@@ -33,7 +36,7 @@ class Settings extends BaseScreenStateless
   Widget? title() {
     return Text(
       'Settings',
-      style: TextStyle(color: AppColors.text, fontSize: 18.0),
+      style: Theme.of(buildContext!).textTheme.bodyLarge,
     );
   }
 
@@ -50,7 +53,13 @@ class Settings extends BaseScreenStateless
   }
 
   @override
-  void selectedTheme(bool isDark) {
+  void selectedTheme(bool isDark) async {
     debugPrint("Settings main theme $isDark");
+    buildContext?.read<ThemeBloc>().add(ThemeChangeEvent(isDark));
+  }
+
+  Future changeTheme(bool isDark) async {
+    final data = await SharedPreferences.getInstance();
+    await data.setBool('isDark', isDark);
   }
 }

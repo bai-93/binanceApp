@@ -14,7 +14,7 @@ class _BalanceGraphState extends State<BalanceGraph> {
     return Column(
       children: [
         Container(
-          color: AppColors.backgroundWhiteTheme,
+          color: AppColors.lightBackground,
           child: Column(
             children: [
               const SizedBox(

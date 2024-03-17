@@ -16,7 +16,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
   Widget body(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: AppColors.backgroundWhiteTheme,
+        color: AppColors.lightBackground,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.only(top: 44.0, left: 16.0, right: 16.0),

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:sheker/config/theme/themes.dart';
 
 @singleton
-class ThemeManager with ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.light;
+class ThemeManager {
+  bool _isDark = false;
+
+  ThemeData _themeData = ThemeData.light();
 
   void changeThemeMode(bool isDark) {
-    _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
+    _themeData = isDark ? darkTheme : lightTheme;
+    _isDark = isDark;
   }
 
-  ThemeMode getThemeMode() {
-    return _themeMode;
+  ThemeData getThemeData() {
+    return _themeData;
   }
+
+  bool get isDark => _isDark;
 }

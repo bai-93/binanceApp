@@ -21,7 +21,7 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
   Widget body(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: AppColors.backgroundWhiteTheme,
+        color: AppColors.lightBackground,
         child: Column(
           children: [
             Padding(

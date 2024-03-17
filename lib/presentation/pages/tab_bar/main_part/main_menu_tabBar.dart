@@ -34,7 +34,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: widget.navigationShell,
         bottomNavigationBar: TabBar(
           indicator: const DotIndicatorTabBar(color: Colors.black, radius: 2.0),

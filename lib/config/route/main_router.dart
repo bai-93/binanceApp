@@ -26,7 +26,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/home/settings',
+      initialLocation: '/home',
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(

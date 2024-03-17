@@ -24,7 +24,7 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: VerificationStep(
         0.5,
         0.72,

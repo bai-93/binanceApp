@@ -25,7 +25,7 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: VerificationStep(
         0.78,
         0.8,

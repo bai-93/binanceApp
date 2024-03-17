@@ -36,7 +36,7 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: VerificationStep(
         0.0,
         0.41,

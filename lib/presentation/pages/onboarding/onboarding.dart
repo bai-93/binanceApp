@@ -23,7 +23,7 @@ class _OnboardingState extends State<Onboarding>
     _controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
     coinLogoTweenColor = ColorTween(
-            begin: AppColors.backgroundWhiteTheme,
+            begin: AppColors.lightBackground,
             end: AppColors.onboardingPrimary)
         .animate(_controller)
       ..addListener(() {

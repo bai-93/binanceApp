@@ -26,7 +26,7 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
         vsync: this, duration: const Duration(milliseconds: 500));
     colorBackgroundTween = ColorTween(
             begin: AppColors.onboardingPrimary,
-            end: AppColors.backgroundWhiteTheme)
+            end: AppColors.lightBackground)
         .animate(controller)
       ..addListener(() {
         setState(() {});

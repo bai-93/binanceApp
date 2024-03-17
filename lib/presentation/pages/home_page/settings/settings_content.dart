@@ -40,14 +40,10 @@ class _SettingsContentState extends State<SettingsContent> {
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
           onPressed: () {},
-          style: ElevatedButton.styleFrom(
-              side: BorderSide(color: AppColors.onboardingPrimary, width: 2.0),
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0)))),
+          style: Theme.of(context).elevatedButtonTheme.style,
           child: Text(
             'Log Out',
-            style:
-                TextStyle(color: AppColors.onboardingPrimary, fontSize: 16.0),
+            style: Theme.of(context).textTheme.bodyMedium,
           )),
     );
   }
@@ -55,7 +51,7 @@ class _SettingsContentState extends State<SettingsContent> {
   Widget makeProfileContainer() {
     return Container(
       decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: Theme.of(context).colorScheme.background,
           boxShadow: [
             BoxShadow(
                 color: AppColors.onboardingPrimary.withOpacity(0.12),
@@ -90,8 +86,7 @@ class _SettingsContentState extends State<SettingsContent> {
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
-                          style:
-                              TextStyle(color: AppColors.text, fontSize: 14.0),
+                          style: Theme.of(context).textTheme.bodySmall,
                         ),
                       )
                     ],
@@ -103,7 +98,7 @@ class _SettingsContentState extends State<SettingsContent> {
                     children: [
                       Text(
                         'ID 28954761',
-                        style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(
                         width: 4.0,
@@ -154,7 +149,10 @@ class _SettingsContentState extends State<SettingsContent> {
                         top: 9.0, bottom: 10.0, right: 6.0),
                     child: Text(
                       'Verified',
-                      style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                      style: TextStyle(
+                          color: AppColors.text,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.w400),
                     ),
                   )
                 ],

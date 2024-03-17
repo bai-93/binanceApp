@@ -26,7 +26,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: VerificationStep(
         0.0,
         0.15,
@@ -37,7 +37,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
   @override
   Widget body() {
     return Container(
-      color: AppColors.backgroundWhiteTheme,
+      color: AppColors.lightBackground,
       child: Column(
         children: [
           const SizedBox(height: 56.0),

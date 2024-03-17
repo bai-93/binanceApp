@@ -49,7 +49,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
         leading: BackButton(
           color: AppColors.secondary,
         ),
-        backgroundColor: AppColors.backgroundWhiteTheme,
+        backgroundColor: AppColors.lightBackground,
         title: VerificationStep(0.0, 0.001));
   }
 
@@ -82,7 +82,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
           width: sizeOfScreen().width,
           child: Container(
             decoration: BoxDecoration(
-                color: AppColors.backgroundWhiteTheme,
+                color: AppColors.lightBackground,
                 border: Border.all(
                     color: isActiveButton
                         ? AppColors.onboardingPrimary
@@ -125,8 +125,8 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
                 fixedSize: Size(sizeOfScreen().width, 48.0),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                surfaceTintColor: AppColors.backgroundWhiteTheme,
-                foregroundColor: AppColors.backgroundWhiteTheme,
+                surfaceTintColor: AppColors.lightBackground,
+                foregroundColor: AppColors.lightBackground,
                 backgroundColor: isActiveButton
                     ? AppColors.onboardingPrimary
                     : AppColors.otline),

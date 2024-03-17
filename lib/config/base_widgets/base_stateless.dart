@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 enum AppbarType { onboarding, signUp, custom, none, empty }
@@ -24,7 +23,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
 
   AppBar _onboardingAppbar() {
     return AppBar(
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       surfaceTintColor: Colors.transparent,
       title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
     );
@@ -35,7 +34,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
       leading: leadingAppBar(),
       actions: actionsAppBar(),
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: Center(
           child: title() ??
               Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
@@ -64,7 +63,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
             splashFactory: NoSplash.splashFactory,
             overlayColor: MaterialStatePropertyAll(Colors.transparent)),
       ),
-      backgroundColor: backgroundColor ?? AppColors.backgroundWhiteTheme,
+      backgroundColor: backgroundColor ?? AppColors.lightBackground,
     );
   }
 
@@ -93,7 +92,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
     _getSizeScreen(context);
     if (typeOfAppbar() != null) {
       return Scaffold(
-        backgroundColor: AppColors.backgroundWhiteTheme,
+        backgroundColor: AppColors.lightBackground,
         appBar: typeOfAppbar(),
         body: SingleChildScrollView(child: body(context)),
       );

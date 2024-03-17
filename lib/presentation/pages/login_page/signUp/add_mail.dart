@@ -61,7 +61,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: VerificationStep(
         0.0,
         0.41,
@@ -72,7 +72,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
   @override
   Widget body() {
     return Container(
-      color: AppColors.backgroundWhiteTheme,
+      color: AppColors.lightBackground,
       width: sizeOfScreen().width,
       child: Column(children: [
         Text(

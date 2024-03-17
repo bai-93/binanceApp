@@ -34,7 +34,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
         color: AppColors.secondary,
       ),
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: Center(
           child: Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
     );
@@ -62,7 +62,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
             splashFactory: NoSplash.splashFactory,
             overlayColor: MaterialStatePropertyAll(Colors.transparent)),
       ),
-      backgroundColor: backgroundColor ?? AppColors.backgroundWhiteTheme,
+      backgroundColor: backgroundColor ?? AppColors.lightBackground,
     );
   }
 
@@ -182,7 +182,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
   Widget build(BuildContext context) {
     if (typeAppbar() != null) {
       return Scaffold(
-        backgroundColor: AppColors.backgroundWhiteTheme,
+        backgroundColor: AppColors.lightBackground,
         appBar: typeAppbar(),
         body: SingleChildScrollView(
             child: Column(

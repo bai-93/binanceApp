@@ -45,7 +45,7 @@ class _CreatePasswordState extends BaseScreenState<CreatePassword>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.backgroundWhiteTheme,
+      backgroundColor: AppColors.lightBackground,
       title: VerificationStep(
         0.0,
         0.24,

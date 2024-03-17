@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sheker/config/theme/theme_manager.dart';
+import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
@@ -116,7 +119,8 @@ class _SettingsTableState extends State<SettingsTable> {
             height: 56.0,
             width: size.width,
             decoration: BoxDecoration(
-                color: AppColors.surface, borderRadius: finalRadius),
+                color: Theme.of(context).colorScheme.background,
+                borderRadius: finalRadius),
             child: makeRow(isTheme, text,
                 indexSection: indexSection, index: index),
           ),
@@ -144,7 +148,7 @@ class _SettingsTableState extends State<SettingsTable> {
           ),
           Text(
             text,
-            style: TextStyle(color: AppColors.text, fontSize: 16.0),
+            style: Theme.of(context).textTheme.labelMedium,
           ),
           const Spacer(),
           Padding(
@@ -183,7 +187,7 @@ class _SettingsTableState extends State<SettingsTable> {
           ),
           Text(
             text,
-            style: TextStyle(color: AppColors.text, fontSize: 16.0),
+            style: Theme.of(context).textTheme.labelMedium,
           ),
           const Spacer(),
           Padding(
@@ -204,22 +208,24 @@ class _SettingsTableState extends State<SettingsTable> {
   }
 
   Widget makeDivider(bool isLast) {
-    return isLast
+    return isActiveDark
         ? const Center()
-        : Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Container(
-                height: 1,
-                color: AppColors.surface,
-                width: 43.0,
-              ),
-              Container(
-                height: 1.0,
-                width: MediaQuery.of(context).size.width - 43.0 - 31.0,
-                color: AppColors.otline,
-              ),
-            ],
-          );
+        : isLast
+            ? const Center()
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    height: 1,
+                    color: AppColors.surface,
+                    width: 43.0,
+                  ),
+                  Container(
+                    height: 1.0,
+                    width: MediaQuery.of(context).size.width - 43.0 - 31.0,
+                    color: AppColors.otline,
+                  ),
+                ],
+              );
   }
 }
