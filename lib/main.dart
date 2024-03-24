@@ -1,8 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sheker/config/theme/theme_manager.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sheker/config/theme/themes.dart';
+import 'package:sheker/domain/entities/adapter_registration.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/presentation/bloc/providers.dart';
 import 'package:sheker/config/route/main_router.dart';
@@ -15,6 +16,9 @@ void main() async {
   await configureDependencies(
       environment:
           prod); // we can switch just passing a values like 'prod' and 'dev'
+  await Hive.initFlutter();
+  await HiveSettings.registerAdapters();
+  await HiveSettings.openAllBox();
   runApp(const MyApp());
 }
 

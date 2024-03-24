@@ -50,6 +50,8 @@ dependencies:
   go_router: ^12.1.1
   local_auth: ^2.1.8
   camera: ^0.10.5+9
+  hive:
+  hive_flutter:
 
 dev_dependencies:
   flutter_test:
@@ -59,6 +61,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   retrofit_generator: ^7.0.8
   injectable_generator: ^2.4.0
+  hive_generator:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -8,7 +8,6 @@ part 'theme_event.dart';
 part 'theme_state.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
-  int counter = 0;
   final ThemeManager _manager = getIt<ThemeManager>();
 
   ThemeBloc() : super(const ThemeLightState()) {
@@ -16,12 +15,8 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       if (event is ThemeChangeEvent) {
         _manager.changeThemeMode(event.isDark);
         if (event.isDark) {
-          counter++;
-          print('DARK === $counter');
           emit(const ThemeDarkState());
         } else {
-          counter++;
-          print('LIGHT === $counter');
           emit(const ThemeLightState());
         }
       }

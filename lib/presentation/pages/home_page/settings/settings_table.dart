@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sheker/config/theme/theme_manager.dart';
-import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
