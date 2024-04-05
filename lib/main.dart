@@ -17,8 +17,8 @@ void main() async {
       environment:
           prod); // we can switch just passing a values like 'prod' and 'dev'
   await Hive.initFlutter();
-  await HiveSettings.registerAdapters();
-  await HiveSettings.openAllBox();
+  await HiveService.registerAdapters();
+  await HiveService.openAllBox();
   runApp(const MyApp());
 }
 

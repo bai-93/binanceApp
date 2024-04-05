@@ -3,7 +3,7 @@ import 'package:sheker/domain/entities/favorites_hive.dart';
 import 'package:sheker/domain/entities/portfolio_hive.dart';
 import 'package:sheker/domain/entities/user_hive.dart';
 
-class HiveSettings {
+class HiveService {
   static Future<void> registerAdapters() async {
     Hive.registerAdapter(UserHiveAdapter());
     Hive.registerAdapter(FavoritesHiveAdapter());
