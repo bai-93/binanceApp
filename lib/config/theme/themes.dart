@@ -7,6 +7,8 @@ MaterialStateColor convertColor(Color color) {
 
 final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
     primaryColor: AppColors.surface,
+    scaffoldBackgroundColor: AppColors.lightBackground,
+    appBarTheme: AppBarTheme(backgroundColor: AppColors.lightBackground),
     colorScheme: ColorScheme.light(background: AppColors.surface),
     tabBarTheme: TabBarTheme(
         splashFactory: NoSplash.splashFactory,
@@ -36,6 +38,8 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
 
 final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
     primaryColor: AppColors.darkBackground, // background
+    scaffoldBackgroundColor: AppColors.darkBackground,
+    appBarTheme: AppBarTheme(backgroundColor: AppColors.darkBackground),
     tabBarTheme: TabBarTheme(
         splashFactory: NoSplash.splashFactory,
         overlayColor: convertColor(Colors.transparent)),

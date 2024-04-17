@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
@@ -12,7 +13,7 @@ class SettingsTable extends StatefulWidget {
 }
 
 class _SettingsTableState extends State<SettingsTable> {
-  bool isActiveDark = false;
+  bool isActiveDark = UserServiceHive.getIsDarkTheme();
 
   @override
   void initState() {

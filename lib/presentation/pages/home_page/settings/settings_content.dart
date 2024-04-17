@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
 import 'package:sheker/presentation/pages/home_page/settings/settings_table_delegate.dart';
 import 'package:sheker/utilities/app_colors.dart';
 import 'settings_table.dart';
@@ -12,6 +13,13 @@ class SettingsContent extends StatefulWidget {
 }
 
 class _SettingsContentState extends State<SettingsContent> {
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(

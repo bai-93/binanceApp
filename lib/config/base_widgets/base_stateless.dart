@@ -34,7 +34,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
       leading: leadingAppBar(),
       actions: actionsAppBar(),
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: Theme.of(buildContext!).appBarTheme.backgroundColor,
       title: Center(
           child: title() ??
               Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
@@ -92,12 +92,12 @@ abstract class BaseScreenStateless extends StatelessWidget {
     _getSizeScreen(context);
     if (typeOfAppbar() != null) {
       return Scaffold(
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: typeOfAppbar(),
-        body: SingleChildScrollView(child: body(context)),
+        body: body(context),
       );
     } else {
-      return SingleChildScrollView(child: body(context));
+      return body(context);
     }
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sheker/config/theme/themes.dart';
-import 'package:sheker/domain/entities/adapter_registration.dart';
+import 'package:sheker/domain/entities/hive_services/hive_service.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/presentation/bloc/providers.dart';
 import 'package:sheker/config/route/main_router.dart';
@@ -17,8 +17,7 @@ void main() async {
       environment:
           prod); // we can switch just passing a values like 'prod' and 'dev'
   await Hive.initFlutter();
-  await HiveService.registerAdapters();
-  await HiveService.openAllBox();
+  await getIt<MainHiveService>().registerAdapters();
   runApp(const MyApp());
 }
 
@@ -31,14 +30,11 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<ThemeBloc, ThemeState>(
           builder: (context, state) {
             if (state is ThemeLightState) {
-              print(state.mode);
               return main(state.mode);
             }
             if (state is ThemeDarkState) {
-              print(state.mode);
               return main(state.mode);
             }
-            print("something another");
             return const Center();
           },
         ));

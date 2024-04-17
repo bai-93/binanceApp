@@ -1,9 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:sheker/config/route/router_manager/router_manager.dart';
 import 'package:sheker/config/route/signup_router.dart';
 import 'package:sheker/config/route/tabbar_routes/home/home_route.dart';
-import 'package:sheker/presentation/pages/detail_info_page/graph_detail_main.dart';
-import 'package:sheker/presentation/pages/home_page/crypto_home_list_page.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
@@ -26,7 +25,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/home',
+      initialLocation: RouterPathManager.getRouterPath(),
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(

@@ -1,7 +1,8 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
+import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
+import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/presentation/pages/login_page/signUp/registration_verification/base_registration_verification.dart';
 
 class SuccessVerification extends BaseScreen {
@@ -30,7 +31,9 @@ class _SuccessVerificationState extends BaseScreenState<SuccessVerification>
 
   @override
   void onTap() {
-    context.go('/a');
+    UserServiceHive.setRegisterFlag(true);
+    print(UserServiceHive.getIsRegistered());
+    context.go('/home');
   }
 
   @override
