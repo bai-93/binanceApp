@@ -27,15 +27,25 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
     return Container();
   }
 
+  Widget? leadingAppBar() {
+    return null;
+  }
+
+  List<Widget>? actionsAppBar() {
+    return null;
+  }
+
+  Widget? title() {}
+
   AppBar? _signUpAppbar() {
     return AppBar(
-      leading: BackButton(
-        color: AppColors.secondary,
-      ),
+      leading: leadingAppBar(),
+      actions: actionsAppBar(),
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       title: Center(
-          child: Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
+          child: title() ??
+              Image.asset('lib/images/login/signup/coinmoney_appbar.png')),
     );
   }
 
@@ -181,7 +191,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
   Widget build(BuildContext context) {
     if (typeAppbar() != null) {
       return Scaffold(
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: typeAppbar(),
         body: SingleChildScrollView(
             child: Column(

@@ -14,4 +14,5 @@ class AppColors {
   static Color darkSurface = '#22283A'.toColor();
   static Color darkBackground = '#121212'.toColor();
   static Color lightBackground = "#F8F9FC".toColor();
+  static Color green = '#098C26'.toColor();
 }

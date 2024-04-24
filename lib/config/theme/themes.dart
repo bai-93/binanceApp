@@ -6,10 +6,11 @@ MaterialStateColor convertColor(Color color) {
 }
 
 final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
-    primaryColor: AppColors.surface,
+    primaryColor: AppColors.lightBackground,
+    hintColor: AppColors.darkBackground.withAlpha(80),
     scaffoldBackgroundColor: AppColors.lightBackground,
     appBarTheme: AppBarTheme(backgroundColor: AppColors.lightBackground),
-    colorScheme: ColorScheme.light(background: AppColors.surface),
+    colorScheme: ColorScheme.light(background: AppColors.surface), // container
     tabBarTheme: TabBarTheme(
         splashFactory: NoSplash.splashFactory,
         overlayColor: convertColor(Colors.transparent)),
@@ -23,6 +24,10 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             foregroundColor: Colors.grey.shade500,
             surfaceTintColor: AppColors.lightBackground)),
     textTheme: TextTheme(
+        titleSmall: TextStyle(
+            color: AppColors.secondary,
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
             color: AppColors.text, fontSize: 16.0, fontWeight: FontWeight.w400),
         bodySmall: TextStyle(
@@ -38,6 +43,7 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
 
 final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
     primaryColor: AppColors.darkBackground, // background
+    hintColor: Color.fromARGB(255, 126, 144, 147),
     scaffoldBackgroundColor: AppColors.darkBackground,
     appBarTheme: AppBarTheme(backgroundColor: AppColors.darkBackground),
     tabBarTheme: TabBarTheme(
@@ -55,7 +61,12 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
       foregroundColor: AppColors.text,
     )),
     textTheme: TextTheme(
+        titleSmall: TextStyle(
+            color: AppColors.secondary,
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
+            // label is color of text inside
             color: AppColors.surface,
             fontSize: 16.0,
             fontWeight: FontWeight.w400),

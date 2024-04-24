@@ -50,7 +50,7 @@ class _GraphDetailPageState extends State<GraphDetailPage> {
                 color: Colors.yellowAccent.shade700,
               ))
         ],
-      ),
+      ), 
       body: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,

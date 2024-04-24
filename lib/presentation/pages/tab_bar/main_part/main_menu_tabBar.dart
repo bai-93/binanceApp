@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sheker/presentation/pages/tab_bar/bottom_menu_indicator/tab_bar_indicator.dart';
+import 'package:sheker/injection/injection_configure.dart';
+import 'package:sheker/presentation/pages/tab_bar/main_part/tab_index_observable.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class BottomMenuTabBar extends StatefulWidget {
@@ -13,6 +14,7 @@ class BottomMenuTabBar extends StatefulWidget {
 
 class _BottomMenuTabBarState extends State<BottomMenuTabBar>
     with SingleTickerProviderStateMixin {
+  TabIndexObserver observer = getIt<TabIndexObserver>();
   late TabController _tabController;
   int index = 0;
 
@@ -22,6 +24,13 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
         initialIndex: widget.navigationShell.currentIndex,
         length: 5,
         vsync: this);
+
+    observer.callback = (value) {
+      _tabController.index = value;
+      index = value;
+      widget.navigationShell.goBranch(value,
+          initialLocation: value == widget.navigationShell.currentIndex);
+    };
     super.initState();
   }
 
@@ -37,7 +46,6 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
         backgroundColor: Theme.of(context).colorScheme.background,
         body: widget.navigationShell,
         bottomNavigationBar: TabBar(
-          indicator: const DotIndicatorTabBar(color: Colors.black, radius: 2.0),
           indicatorColor: Colors.transparent,
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
@@ -108,6 +116,7 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
           ],
           onTap: (value) {
             {
+              _tabController.index = value;
               index = value;
               widget.navigationShell.goBranch(value,
                   initialLocation:

@@ -1,5 +1,4 @@
 import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
-import 'package:sheker/injection/injection_configure.dart';
 
 class RouterPathManager {
   static String _routerPath = '';
