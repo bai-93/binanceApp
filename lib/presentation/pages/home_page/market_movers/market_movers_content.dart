@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
+import 'package:sheker/presentation/bloc/detail_info_graph_bloc/bloc/detail_info_graph_bloc.dart';
+import 'package:sheker/presentation/pages/home_page/market_movers/market_movers_graph.dart';
 import 'package:sheker/utilities/app_colors.dart';
 import 'package:sheker/utilities/money_formatter.dart';
+import '../../../../utilities/shimmer_utility.dart';
 
 class MarketMoversContent extends StatefulWidget {
   CryptoModel model;
@@ -70,10 +74,11 @@ class _MarketMoversContentState extends State<MarketMoversContent> {
           const SizedBox(
             height: 4.0,
           ),
-          Container(
-            color: AppColors.green,
-            width: 85.0,
-            height: 36.0,
+          BlocProvider<DetailInfoGraphBloc>(
+            create: (context) {
+              return DetailInfoGraphBloc();
+            },
+            child: MarketMoversGraph(widget.model),
           ),
           const SizedBox(
             height: 4.0,
@@ -83,7 +88,7 @@ class _MarketMoversContentState extends State<MarketMoversContent> {
       ),
     );
   }
- 
+
   Widget makeNameCryptoText() {
     String text = widget.model.symbol ?? '';
     String data = "$text/USD";
@@ -99,7 +104,7 @@ class _MarketMoversContentState extends State<MarketMoversContent> {
     String data = widget.model.priceUsd ?? '0.0';
     double price = double.parse(data);
     return Text(
-      MoneyFormatter.moneyFormatShort(price),
+      MoneyFormatterUtility.moneyFormatShort(price),
       maxLines: 1,
       textAlign: TextAlign.left,
       style: Theme.of(context).textTheme.labelMedium,
@@ -108,7 +113,7 @@ class _MarketMoversContentState extends State<MarketMoversContent> {
 
   Widget make24hrVolume() {
     String data =
-        MoneyFormatter.moneyFormatOneComma(widget.model.volumeUsd24Hr);
+        MoneyFormatterUtility.moneyFormatOneComma(widget.model.volumeUsd24Hr);
     return Align(
       alignment: Alignment.topLeft,
       child: Padding(
@@ -134,13 +139,23 @@ class _MarketMoversContentState extends State<MarketMoversContent> {
     String text = widget.model.changePercent24Hr ?? '0.0';
     double data = double.parse(text);
     return Text(
-      "${MoneyFormatter.moneyFormatShort(data)}%",
+      "${MoneyFormatterUtility.moneyFormatShort(data)}%",
       maxLines: 1,
       textAlign: TextAlign.left,
       style: TextStyle(
-          color: data >= 0 ? AppColors.green : Colors.red,
+          color: data >= 0 ? AppColorsUtility.green : Colors.red,
           fontSize: 14.0,
           fontWeight: FontWeight.w400),
     );
+  }
+
+  Widget shimmerGraph() {
+    return makeShimmerUtility(
+        Container(
+          color: Colors.white,
+          width: 85.0,
+          height: 36.0,
+        ),
+        context);
   }
 }

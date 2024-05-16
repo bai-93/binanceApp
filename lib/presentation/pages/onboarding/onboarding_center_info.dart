@@ -57,7 +57,7 @@ class OnboardingImageTitle extends StatelessWidget {
             child: Text(
               titleContent[indexItem],
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.text, fontSize: 32.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
             ),
           ),
           Padding(
@@ -69,7 +69,7 @@ class OnboardingImageTitle extends StatelessWidget {
                   subtitle,
                   softWrap: true,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                  style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
                 ),
               ),
             ]),
@@ -125,8 +125,8 @@ class OnboardingImageTitle extends StatelessWidget {
         width: i == indexItem ? 24.0 : 12,
         decoration: BoxDecoration(
             color: i == indexItem
-                ? AppColors.onboardingPrimary
-                : AppColors.secondary,
+                ? AppColorsUtility.onboardingPrimary
+                : AppColorsUtility.secondary,
             borderRadius: BorderRadius.circular(2.0)),
       ));
       if (i != 2) {

@@ -72,13 +72,13 @@ class _PasswordContentFieldState extends State<PasswordContentField> {
                   'Unlock with Touch ID?',
                   softWrap: true,
                   textAlign: TextAlign.left,
-                  style: TextStyle(color: AppColors.text, fontSize: 14),
+                  style: TextStyle(color: AppColorsUtility.text, fontSize: 14),
                 ),
                 const Spacer(),
                 Switch.adaptive(
                     value: isActiveBiometry,
                     splashRadius: 0.0,
-                    activeColor: AppColors.onboardingPrimary,
+                    activeColor: AppColorsUtility.onboardingPrimary,
                     onChanged: (value) {
                       setState(() {
                         isActiveBiometry = value;
@@ -98,8 +98,8 @@ class _PasswordContentFieldState extends State<PasswordContentField> {
   void validationCheck() {
     if (passwordController.text.length == 8 &&
         passwordConfirmController.text.length == 8) {
-      if ((RegexPattern.passwordValidator(passwordController.text) &&
-              RegexPattern.passwordValidator(passwordConfirmController.text)) &&
+      if ((RegexPatternUtility.passwordValidator(passwordController.text) &&
+              RegexPatternUtility.passwordValidator(passwordConfirmController.text)) &&
           passwordConfirmController.text == passwordController.text) {
         setState(() {
           isActiveButton = true;
@@ -126,12 +126,12 @@ class _PasswordContentFieldState extends State<PasswordContentField> {
           'Continue',
           textAlign: TextAlign.center,
           style: TextStyle(
-              color: isActiveButton ? AppColors.surface : AppColors.secondary,
+              color: isActiveButton ? AppColorsUtility.surface : AppColorsUtility.secondary,
               fontSize: 16.0),
         ),
         style: ElevatedButton.styleFrom(
             backgroundColor:
-                isActiveButton ? AppColors.onboardingPrimary : AppColors.otline,
+                isActiveButton ? AppColorsUtility.onboardingPrimary : AppColorsUtility.otline,
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12)))),
       ),
@@ -150,14 +150,14 @@ class _PasswordContentFieldState extends State<PasswordContentField> {
         child: Container(
           height: 48.0,
           decoration: BoxDecoration(
-              color: AppColors.surface,
+              color: AppColorsUtility.surface,
               border: Border.all(
                   color: isActiveButton
-                      ? AppColors.onboardingPrimary
-                      : AppColors.internalShadow),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.internalShadow),
               boxShadow: [
                 BoxShadow(
-                    color: AppColors.internalShadow,
+                    color: AppColorsUtility.internalShadow,
                     blurRadius: 2.0,
                     offset: const Offset(0.0, -0.9))
               ],
@@ -170,17 +170,17 @@ class _PasswordContentFieldState extends State<PasswordContentField> {
             obscuringCharacter: '*',
             maxLength: 8,
             controller: controller,
-            style: TextStyle(color: AppColors.text),
+            style: TextStyle(color: AppColorsUtility.text),
             decoration: InputDecoration(
                 counterText: '',
                 prefixIcon: Image.asset(
                     'lib/images/login/signup/lock_light.png',
                     color:
-                        isActiveSecured ? AppColors.onboardingPrimary : null),
+                        isActiveSecured ? AppColorsUtility.onboardingPrimary : null),
                 isDense: false,
                 border: InputBorder.none,
                 hintText: 'Password',
-                hintStyle: TextStyle(fontSize: 16.0, color: AppColors.otline),
+                hintStyle: TextStyle(fontSize: 16.0, color: AppColorsUtility.otline),
                 suffixIcon: IconButton(
                     onPressed: callback,
                     icon: Image.asset(

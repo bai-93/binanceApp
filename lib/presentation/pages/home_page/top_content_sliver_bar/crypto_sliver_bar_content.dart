@@ -45,7 +45,7 @@ class _BalanceContentSliverBarState extends State<BalanceContentSliverBar> {
               builder: (context, state) {
                 if (state is CryptoListLoaded) {
                   return Text(
-                    MoneyFormatter.dollarFormat(
+                    MoneyFormatterUtility.dollarFormat(
                         state.modelList.data.first.priceUsd,
                         isSecured: moneyFlag),
                     overflow: TextOverflow.clip,

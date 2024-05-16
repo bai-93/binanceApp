@@ -5,7 +5,7 @@ class PositiveMarkDraw extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = AppColors.surface
+      ..color = AppColorsUtility.surface
       ..strokeWidth = 2.5
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round

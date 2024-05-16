@@ -61,7 +61,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.0,
         0.41,
@@ -72,14 +72,14 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
   @override
   Widget body() {
     return Container(
-      color: AppColors.lightBackground,
+      color: AppColorsUtility.lightBackground,
       width: sizeOfScreen().width,
       child: Column(children: [
         Text(
           'What’s your email?',
           textAlign: TextAlign.center,
           softWrap: true,
-          style: TextStyle(color: AppColors.text, fontSize: 32.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
         ),
         const SizedBox(height: 8.0),
         Padding(
@@ -88,7 +88,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
             'Enter the email address you want to use to register with coinmoney',
             textAlign: TextAlign.center,
             softWrap: true,
-            style: TextStyle(color: AppColors.text, fontSize: 14.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
           ),
         ),
         const SizedBox(height: 24.0),
@@ -96,26 +96,26 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
           child: Container(
             decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColorsUtility.surface,
                 boxShadow: controller.text.isNotEmpty
                     ? null
                     : [
                         BoxShadow(
-                            color: AppColors.internalShadow,
+                            color: AppColorsUtility.internalShadow,
                             offset: const Offset(0.0, -1.0),
                             blurRadius: 2.0)
                       ],
                 border: Border.all(
                     color: controller.text.isNotEmpty
-                        ? AppColors.onboardingPrimary
-                        : AppColors.otline),
+                        ? AppColorsUtility.onboardingPrimary
+                        : AppColorsUtility.otline),
                 borderRadius: const BorderRadius.all(Radius.circular(8.0))),
             height: 48.0,
             child: Form(
               child: TextFormField(
                 controller: controller,
                 focusNode: focus,
-                style: TextStyle(color: AppColors.text, fontSize: 16.0),
+                style: TextStyle(color: AppColorsUtility.text, fontSize: 16.0),
                 key: _form,
                 autovalidateMode: AutovalidateMode.disabled,
                 decoration: InputDecoration(
@@ -126,12 +126,12 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                       height: 24.0,
                       alignment: Alignment.center,
                       color: controller.text.isNotEmpty
-                          ? AppColors.onboardingPrimary
-                          : AppColors.otline,
+                          ? AppColorsUtility.onboardingPrimary
+                          : AppColorsUtility.otline,
                     ),
                     hintText: 'Email address',
                     hintStyle:
-                        TextStyle(color: AppColors.secondary, fontSize: 16.0),
+                        TextStyle(color: AppColorsUtility.secondary, fontSize: 16.0),
                     suffixIcon: controller.text.isNotEmpty
                         ? SizedBox(
                             width: 24.0,
@@ -143,7 +143,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                         : null,
                     border: InputBorder.none),
                 onChanged: (String input) {
-                  if (RegexPattern.emailValidator(input) == null) {
+                  if (RegexPatternUtility.emailValidator(input) == null) {
                     debugPrint(" wrong === ${input}");
                   } else {
                     debugPrint("success == ${input}");
@@ -162,7 +162,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
             RichText(
                 text: TextSpan(
                     text: 'Have an account? ',
-                    style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                    style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
                     children: [
                   TextSpan(
                       text: 'Login in here',
@@ -171,7 +171,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                           debugPrint("Login in here");
                         },
                       style: TextStyle(
-                          color: AppColors.onboardingPrimary, fontSize: 14.0))
+                          color: AppColorsUtility.onboardingPrimary, fontSize: 14.0))
                 ]))
           ],
         ),
@@ -187,8 +187,8 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                 fixedSize: Size(sizeOfScreen().width - 32.0, 48.0),
                 splashFactory: NoSplash.splashFactory,
                 backgroundColor: controller.text.isNotEmpty
-                    ? AppColors.onboardingPrimary
-                    : AppColors.otline,
+                    ? AppColorsUtility.onboardingPrimary
+                    : AppColorsUtility.otline,
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0)))),
             child: Padding(
@@ -199,8 +199,8 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
                 style: TextStyle(
                     fontSize: 16.0,
                     color: controller.text.isNotEmpty
-                        ? AppColors.surface
-                        : AppColors.secondary),
+                        ? AppColorsUtility.surface
+                        : AppColorsUtility.secondary),
               ),
             )),
         const SizedBox(height: 42.0),
@@ -210,7 +210,7 @@ class _SignUpAddMailState extends BaseScreenState<SignUpAddMail>
               'By registering you accept our Terms & Conditions and Privacy Policy. Your data will be security encrypted with TLS',
               textAlign: TextAlign.center,
               softWrap: true,
-              style: TextStyle(color: AppColors.text, fontSize: 12.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 12.0),
             )),
         const SizedBox(height: 70.0)
       ]),

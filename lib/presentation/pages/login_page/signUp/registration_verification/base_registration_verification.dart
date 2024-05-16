@@ -11,7 +11,7 @@ mixin BaseRegistrationVerification<T extends BaseScreen> on BaseScreenState<T> {
 
   AppBar progressOfAppBar({double from = 0, double to = 0}) {
     return AppBar(
-      leading: BackButton(color: AppColors.secondary),
+      leading: BackButton(color: AppColorsUtility.secondary),
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.transparent,
@@ -34,7 +34,7 @@ mixin BaseRegistrationVerification<T extends BaseScreen> on BaseScreenState<T> {
                     borderRadius: BorderRadius.all(Radius.circular(12.0)))),
             child: Text(
               getTitleOfButton(),
-              style: TextStyle(color: AppColors.surface, fontSize: 16.0),
+              style: TextStyle(color: AppColorsUtility.surface, fontSize: 16.0),
             )));
   }
 
@@ -66,7 +66,7 @@ mixin BaseRegistrationVerification<T extends BaseScreen> on BaseScreenState<T> {
                 getMainTitle(),
                 textAlign: TextAlign.center,
                 softWrap: true,
-                style: TextStyle(color: AppColors.text, fontSize: 32.0),
+                style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
               ),
             ),
             const SizedBox(
@@ -78,7 +78,7 @@ mixin BaseRegistrationVerification<T extends BaseScreen> on BaseScreenState<T> {
                 getSubtitle(),
                 textAlign: TextAlign.center,
                 softWrap: true,
-                style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
               ),
             ),
             const SizedBox(

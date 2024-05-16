@@ -71,7 +71,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
             splashFactory: NoSplash.splashFactory,
             overlayColor: MaterialStatePropertyAll(Colors.transparent)),
       ),
-      backgroundColor: backgroundColor ?? AppColors.lightBackground,
+      backgroundColor: backgroundColor ?? AppColorsUtility.lightBackground,
     );
   }
 
@@ -131,7 +131,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
           children: [
             Flexible(
               child: Container(
-                color: AppColors.otline,
+                color: AppColorsUtility.otline,
                 height: 1,
               ),
             ),
@@ -140,14 +140,14 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
             ),
             Text(
               'or continue with?',
-              style: TextStyle(color: AppColors.text, fontSize: 14.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
             ),
             const SizedBox(
               width: 8.0,
             ),
             Flexible(
               child: Container(
-                color: AppColors.otline,
+                color: AppColorsUtility.otline,
                 height: 1,
               ),
             )

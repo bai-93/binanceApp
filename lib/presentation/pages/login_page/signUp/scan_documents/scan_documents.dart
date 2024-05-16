@@ -24,7 +24,7 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.5,
         0.72,
@@ -45,13 +45,13 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
             'Scan document',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text, fontSize: 32.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
           ),
           Text(
             'Place the document in the frame until all 4 edges align around the document and turn blue',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text, fontSize: 14.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
           ),
           const SizedBox(
             height: 97.0,
@@ -74,7 +74,7 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
           Container(
             width: sizeOfScreen().width,
             decoration: BoxDecoration(
-                color: AppColors.otline,
+                color: AppColorsUtility.otline,
                 borderRadius: const BorderRadius.all(Radius.circular(14.0))),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -99,7 +99,7 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
                         softWrap: true,
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            color: AppColors.secondary, fontSize: 14.0),
+                            color: AppColorsUtility.secondary, fontSize: 14.0),
                       ),
                     ),
                   ),
@@ -116,12 +116,12 @@ class _ScanDocumentsState extends BaseScreenState<ScanDocuments>
                   context.push('/sign_up/take_photo_verification', extra: true);
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.onboardingPrimary,
+                    backgroundColor: AppColorsUtility.onboardingPrimary,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)))),
                 child: Text(
                   'Open camera',
-                  style: TextStyle(color: AppColors.surface, fontSize: 16.0),
+                  style: TextStyle(color: AppColorsUtility.surface, fontSize: 16.0),
                 )),
           ),
           const SizedBox(height: 98)

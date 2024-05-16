@@ -41,7 +41,7 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
 
   AppBar customAppbar({double from = 0, double to = 0}) {
     return AppBar(
-      leading: BackButton(color: AppColors.secondary),
+      leading: BackButton(color: AppColorsUtility.secondary),
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.transparent,
@@ -72,7 +72,7 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
           ClipPath(
             clipper: CustomCameraShapeMaskClipper(),
             child: Container(
-              color: AppColors.cameraBackgroundColor,
+              color: AppColorsUtility.cameraBackgroundColor,
               width: sizeOfScreen().width,
               height: sizeOfScreen().height,
             ),
@@ -104,7 +104,7 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
                       getTitle(),
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(color: AppColors.surface, fontSize: 32.0),
+                          TextStyle(color: AppColorsUtility.surface, fontSize: 32.0),
                     ),
                   ),
                   const SizedBox(
@@ -114,7 +114,7 @@ mixin BaseScreenVerificationMixin<T extends BaseScreen> on BaseScreenState<T> {
                     getSubTitle(),
                     softWrap: true,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.surface, fontSize: 14.0),
+                    style: TextStyle(color: AppColorsUtility.surface, fontSize: 14.0),
                   ),
                   const Spacer(),
                   Align(

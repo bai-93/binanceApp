@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-class MoneyFormatter {
+class MoneyFormatterUtility {
   static String dollarFormat(String? input, {bool isSecured = false}) {
     NumberFormat format =
         NumberFormat.decimalPatternDigits(locale: 'en_us', decimalDigits: 2);

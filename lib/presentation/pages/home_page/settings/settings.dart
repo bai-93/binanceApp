@@ -30,7 +30,7 @@ class Settings extends BaseScreenStateless
   @override
   Widget? leadingAppBar() {
     return BackButton(
-      color: AppColors.secondary,
+      color: AppColorsUtility.secondary,
     );
   }
 

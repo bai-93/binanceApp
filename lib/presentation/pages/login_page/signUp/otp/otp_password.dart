@@ -148,15 +148,15 @@ final class BottomBorderContainer extends StatelessWidget {
         height: 48.0,
         width: 48.0,
         decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: AppColorsUtility.surface,
             border: Border.all(
                 color: flagOfInidicator[i]
-                    ? AppColors.onboardingPrimary
-                    : AppColors.otline),
+                    ? AppColorsUtility.onboardingPrimary
+                    : AppColorsUtility.otline),
             borderRadius: const BorderRadius.all(Radius.circular(8.0)),
             boxShadow: [
               BoxShadow(
-                  color: AppColors.internalShadow,
+                  color: AppColorsUtility.internalShadow,
                   offset: const Offset(0.0, -1.0))
             ]),
       ));
@@ -200,7 +200,7 @@ class _TextFieldDataState extends State<TextFieldData> {
         counterText: '',
         border: InputBorder.none,
       ),
-      style: TextStyle(color: AppColors.text, fontSize: 18),
+      style: TextStyle(color: AppColorsUtility.text, fontSize: 18),
     );
   }
 }

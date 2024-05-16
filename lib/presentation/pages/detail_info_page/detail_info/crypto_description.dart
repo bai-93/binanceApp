@@ -24,37 +24,37 @@ class CryptoDescription extends StatelessWidget {
         height: 15.0,
       ),
       listDescription(context, 'Доступное предложение для торговли',
-          value: MoneyFormatter.dollarFormat(object?.data.supply)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.supply)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Количество выпущенных активов',
-          value: MoneyFormatter.dollarFormat(object?.data.maxSupply)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.maxSupply)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Предложение х цена',
-          value: MoneyFormatter.dollarFormat(object?.data.marketCapUsd)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.marketCapUsd)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Торги за 24 часа',
-          value: MoneyFormatter.dollarFormat(object?.data.volumeUsd24Hr)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.volumeUsd24Hr)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Взвешенная по объему цена',
-          value: MoneyFormatter.dollarFormat(object?.data.priceUsd)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.priceUsd)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Последние изменения 24 часа',
-          value: MoneyFormatter.dollarFormat(object?.data.changePercent24Hr)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.changePercent24Hr)),
       const SizedBox(
         height: 15.0,
       ),
       listDescription(context, 'Средняя цена за последние 24 часа',
-          value: MoneyFormatter.dollarFormat(object?.data.vwap24Hr)),
+          value: MoneyFormatterUtility.dollarFormat(object?.data.vwap24Hr)),
       const SizedBox(height: 40.0)
     ]);
   }

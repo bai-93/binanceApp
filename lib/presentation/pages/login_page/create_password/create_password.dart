@@ -45,7 +45,7 @@ class _CreatePasswordState extends BaseScreenState<CreatePassword>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.0,
         0.24,
@@ -64,7 +64,7 @@ class _CreatePasswordState extends BaseScreenState<CreatePassword>
               'Create a password',
               textAlign: TextAlign.center,
               softWrap: true,
-              style: TextStyle(color: AppColors.text, fontSize: 32.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
             )),
         const SizedBox(
           height: 8.0,
@@ -75,7 +75,7 @@ class _CreatePasswordState extends BaseScreenState<CreatePassword>
             'The password must be 8 characters, including 1 uppercase letter, 1 number and 1 special character.',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text, fontSize: 14.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
           ),
         ),
         const SizedBox(
@@ -89,7 +89,7 @@ class _CreatePasswordState extends BaseScreenState<CreatePassword>
             'By registering you accept our Terms & Conditions and Privacy Policy. Your data will be security encrypted with TLS',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text),
+            style: TextStyle(color: AppColorsUtility.text),
           ),
         ),
         const SizedBox(

@@ -58,60 +58,60 @@ class _BottomMenuTabBarState extends State<BottomMenuTabBar>
                 icon: makeImage(
                     'home',
                     index == 0
-                        ? AppColors.onboardingPrimary
-                        : AppColors.secondary),
+                        ? AppColorsUtility.onboardingPrimary
+                        : AppColorsUtility.secondary),
                 child: makeText(
                     'Home',
                     index == 0
-                        ? AppColors.onboardingPrimary
-                        : AppColors.secondary)),
+                        ? AppColorsUtility.onboardingPrimary
+                        : AppColorsUtility.secondary)),
             Tab(
               icon: makeImage(
                   'trade',
                   index == 1
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
               child: makeText(
                   'Trade',
                   index == 1
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
             ),
             Tab(
               icon: makeImage(
                   'market',
                   index == 2
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
               child: makeText(
                   'Market',
                   index == 2
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
             ),
             Tab(
               icon: makeImage(
                   'favorite',
                   index == 3
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
               child: makeText(
                   'Favorites',
                   index == 3
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
             ),
             Tab(
               icon: makeImage(
                   'wallet',
                   index == 4
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
               child: makeText(
                   'Wallet',
                   index == 4
-                      ? AppColors.onboardingPrimary
-                      : AppColors.secondary),
+                      ? AppColorsUtility.onboardingPrimary
+                      : AppColorsUtility.secondary),
             )
           ],
           onTap: (value) {

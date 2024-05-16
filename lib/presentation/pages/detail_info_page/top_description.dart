@@ -22,7 +22,7 @@ class CryptoTopDescription extends StatelessWidget {
       Row(children: [
         Expanded(
             child: textContent(
-                MoneyFormatter.dollarFormat(model?.data.priceUsd),
+                MoneyFormatterUtility.dollarFormat(model?.data.priceUsd),
                 Colors.black,
                 FontWeight.bold,
                 23)),

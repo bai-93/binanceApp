@@ -10,8 +10,8 @@ class OtpArRefresh extends StatelessWidget {
 
   OtpArRefresh(this.controllerAnimation, {this.flag = false, super.key})
       : colorBackgroundAnim = ColorTween(
-                begin: flag ? AppColors.surface : AppColors.otline,
-                end: flag ? AppColors.onboardingPrimary : AppColors.surface)
+                begin: flag ? AppColorsUtility.surface : AppColorsUtility.otline,
+                end: flag ? AppColorsUtility.onboardingPrimary : AppColorsUtility.surface)
             .animate(controllerAnimation);
 
   @override

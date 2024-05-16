@@ -48,10 +48,10 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
           aspectRatio: 10 / 6.92,
           child: BlocBuilder<DetailInfoGraphBloc, DetailInfoGraphState>(
             builder: (context, state) {
-              if (state is GraphDataIsLoading) {
+              if (state is GraphDataIsLoadingState) {
                 return shimmerGraph();
               }
-              if (state is SuccessGraphDataLoaded) {
+              if (state is SuccessGraphDataLoadedState) {
                 // _animationController.forward();
                 return GestureDetector(
                   onHorizontalDragEnd: (onEnd) {
@@ -99,7 +99,7 @@ class _CryptoGraphPageState extends State<CryptoGraphPage>
                     width: 10.0,
                   ),
                   Text(
-                    MoneyFormatter.dollarFormat(state.price.toString()),
+                    MoneyFormatterUtility.dollarFormat(state.price.toString()),
                     style: const TextStyle(fontSize: 16),
                   ),
                   Text(state.date, style: const TextStyle(fontSize: 16)),

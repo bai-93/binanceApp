@@ -16,7 +16,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
   Widget body(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: AppColors.lightBackground,
+        color: AppColorsUtility.lightBackground,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.only(top: 44.0, left: 16.0, right: 16.0),
@@ -24,7 +24,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
               'Hello! Start your crypto investment today',
               textAlign: TextAlign.center,
               softWrap: true,
-              style: TextStyle(color: AppColors.text, fontSize: 32.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
             ),
           ),
           const SizedBox(
@@ -52,7 +52,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
             children: [
               Flexible(
                 child: Container(
-                  color: AppColors.otline,
+                  color: AppColorsUtility.otline,
                   height: 1.0,
                 ),
               ),
@@ -61,14 +61,14 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
               ),
               Text(
                 'Already have an account?',
-                style: TextStyle(color: AppColors.text),
+                style: TextStyle(color: AppColorsUtility.text),
               ),
               const SizedBox(
                 width: 8.0,
               ),
               Flexible(
                 child: Container(
-                  color: AppColors.otline,
+                  color: AppColorsUtility.otline,
                   height: 1.0,
                 ),
               )
@@ -94,7 +94,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
         },
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
-                side: BorderSide(color: AppColors.otline),
+                side: BorderSide(color: AppColorsUtility.otline),
                 borderRadius: BorderRadius.circular(8.0)),
             fixedSize: Size(sizeOfScreen.width - 32.0, 48.0),
             backgroundColor: Colors.white,
@@ -112,7 +112,7 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
             const SizedBox(width: 8.0),
             Text(
               nameOfButton,
-              style: TextStyle(color: AppColors.text, fontSize: 14.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
             )
           ],
         ));
@@ -125,16 +125,16 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
             splashFactory: NoSplash.splashFactory,
             fixedSize: Size(sizeOfScreen.width - 32, 48.0),
             backgroundColor:
-                flag ? AppColors.onboardingPrimary : AppColors.surface,
+                flag ? AppColorsUtility.onboardingPrimary : AppColorsUtility.surface,
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: AppColors.onboardingPrimary, width: 2.0),
+              side: BorderSide(color: AppColorsUtility.onboardingPrimary, width: 2.0),
               borderRadius: const BorderRadius.all(Radius.circular(12.0)),
             )),
         child: Center(
           child: Text(
             title,
             style: TextStyle(
-                color: flag ? AppColors.surface : AppColors.onboardingPrimary,
+                color: flag ? AppColorsUtility.surface : AppColorsUtility.onboardingPrimary,
                 fontSize: 16.0),
           ),
         ));

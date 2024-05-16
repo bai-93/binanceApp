@@ -8,7 +8,7 @@ class ArcDraw extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = AppColors.onboardingPrimary.withOpacity(value)
+      ..color = AppColorsUtility.onboardingPrimary.withOpacity(value)
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..strokeWidth = 2.0

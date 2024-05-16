@@ -62,7 +62,7 @@ class _SettingsContentState extends State<SettingsContent> {
           color: Theme.of(context).colorScheme.background,
           boxShadow: [
             BoxShadow(
-                color: AppColors.onboardingPrimary.withOpacity(0.12),
+                color: AppColorsUtility.onboardingPrimary.withOpacity(0.12),
                 blurRadius: 4.0,
                 offset: const Offset(0.0, 3.0))
           ],
@@ -137,7 +137,7 @@ class _SettingsContentState extends State<SettingsContent> {
               height: 36.0,
               width: 94.0,
               decoration: BoxDecoration(
-                  color: AppColors.verified,
+                  color: AppColorsUtility.verified,
                   borderRadius: const BorderRadius.all(Radius.circular(14.0))),
               child: Row(
                 children: [
@@ -158,7 +158,7 @@ class _SettingsContentState extends State<SettingsContent> {
                     child: Text(
                       'Verified',
                       style: TextStyle(
-                          color: AppColors.text,
+                          color: AppColorsUtility.text,
                           fontSize: 14.0,
                           fontWeight: FontWeight.w400),
                     ),

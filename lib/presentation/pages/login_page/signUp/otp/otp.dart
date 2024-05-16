@@ -36,7 +36,7 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.0,
         0.41,
@@ -70,14 +70,14 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
             'Please enter the code',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text, fontSize: 32.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
           ),
           const SizedBox(height: 8.0),
           Text(
             'We sent email to ${widget.email}',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.text, fontSize: 14.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
           ),
           const SizedBox(height: 46.0),
           const OtpImageAnimation(),
@@ -91,7 +91,7 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
               softWrap: true,
               text: TextSpan(
                   text: "Didn't get a mail?",
-                  style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                  style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
                   children: [
                     TextSpan(
                         text: " Send again",
@@ -100,7 +100,7 @@ class _OtpState extends BaseScreenState<Otp> with BaseScreenMixin {
                             debugPrint("send again");
                           },
                         style: TextStyle(
-                            color: AppColors.onboardingPrimary, fontSize: 14.0))
+                            color: AppColorsUtility.onboardingPrimary, fontSize: 14.0))
                   ])),
           const SizedBox(height: 24.0),
           OtpButtonAnimated(() {

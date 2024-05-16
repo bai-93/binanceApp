@@ -83,7 +83,7 @@ class _VerificationStepState extends State<VerificationStep>
           Padding(
             padding: const EdgeInsets.only(top: 11.0, left: 21.0),
             child: Container(
-              color: AppColors.otline,
+              color: AppColorsUtility.otline,
               width: 139.0,
               height: 2.0,
               child: CustomPaint(painter: LineAnimation(tweenAnimation.value)),

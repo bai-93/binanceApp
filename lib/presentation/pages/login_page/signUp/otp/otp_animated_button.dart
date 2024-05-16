@@ -61,11 +61,11 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
       });
     positionedAnim = Tween<double>(begin: 0.0, end: 600.0).animate(controller);
     colorTextAnim =
-        ColorTween(begin: AppColors.secondary, end: AppColors.surface)
+        ColorTween(begin: AppColorsUtility.secondary, end: AppColorsUtility.surface)
             .animate(controller);
 
     colorBackgroundAnim =
-        ColorTween(begin: AppColors.otline, end: AppColors.surface)
+        ColorTween(begin: AppColorsUtility.otline, end: AppColorsUtility.surface)
             .animate(controller);
     opacityText = Tween<double>(begin: 1.0, end: 0.0).animate(controller);
 
@@ -95,14 +95,14 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
             setState(() {});
           });
     colorBackgroundFinal =
-        ColorTween(begin: AppColors.surface, end: AppColors.onboardingPrimary)
+        ColorTween(begin: AppColorsUtility.surface, end: AppColorsUtility.onboardingPrimary)
             .animate(controllerFinal)
           ..addListener(() {
             setState(() {});
           });
 
     colorRefreshIndicatorFinal =
-        ColorTween(begin: AppColors.surface, end: Colors.transparent)
+        ColorTween(begin: AppColorsUtility.surface, end: Colors.transparent)
             .animate(controllerFinal)
           ..addListener(() {
             setState(() {});
@@ -213,7 +213,7 @@ class _OtpButtonAnimatedState extends State<OtpButtonAnimated>
         height: 48.0,
         width: 700,
         decoration: BoxDecoration(
-            color: AppColors.onboardingPrimary,
+            color: AppColorsUtility.onboardingPrimary,
             borderRadius: const BorderRadius.all(Radius.circular(24.0))),
         child: CustomPaint(painter: PositiveMarkDraw()),
       ),

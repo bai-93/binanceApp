@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/extensions/color_extension.dart';
 
-class AppColors {
+class AppColorsUtility {
   static Color onboardingPrimary = "#2F66F6".toColor();
   static Color secondary = '#696F8C'.toColor();
   static Color text = '#11183C'.toColor();
@@ -15,4 +15,6 @@ class AppColors {
   static Color darkBackground = '#121212'.toColor();
   static Color lightBackground = "#F8F9FC".toColor();
   static Color green = '#098C26'.toColor();
+  static Color orange = '#F7931A'.toColor();
+  static Color red = '#CD0000'.toColor();
 }

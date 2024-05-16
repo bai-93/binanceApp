@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/utilities/app_colors.dart';
-import 'package:sheker/utilities/biometryhelper.dart';
 import 'package:sheker/utilities/regex_pattern.dart';
+
+import '../../../utilities/biometryhelper.dart';
 
 class Login extends BaseScreen {
   const Login({super.key});
@@ -61,7 +62,7 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
           'Login to your\nAccount',
           softWrap: true,
           textAlign: TextAlign.center,
-          style: TextStyle(color: AppColors.text, fontSize: 32.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
         ),
         const SizedBox(
           height: 16.0,
@@ -84,7 +85,7 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
             textAlign: TextAlign.center,
             text: TextSpan(
                 text: 'Forgot your password? ',
-                style: TextStyle(fontSize: 14.0, color: AppColors.text),
+                style: TextStyle(fontSize: 14.0, color: AppColorsUtility.text),
                 children: [
                   TextSpan(
                       text: 'Click here',
@@ -93,13 +94,15 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
                           context.push('/sign_up/password_reset');
                         },
                       style: TextStyle(
-                          color: AppColors.onboardingPrimary, fontSize: 14.0))
+                          color: AppColorsUtility.onboardingPrimary,
+                          fontSize: 14.0))
                 ])),
         const SizedBox(
           height: 18.0,
         ),
         FutureBuilder<String>(
-            future: BiometryHelper(context).getTitleAvailableBiometryType(),
+            future:
+                BiometryHelperUtility(context).getTitleAvailableBiometryType(),
             builder: (context, snapshot) {
               return snapshot.hasData
                   ? Row(
@@ -112,7 +115,7 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
                         Switch.adaptive(
                             value: isActiveBiometry,
                             splashRadius: 0.0,
-                            activeColor: AppColors.onboardingPrimary,
+                            activeColor: AppColorsUtility.onboardingPrimary,
                             onChanged: (value) {
                               setState(() {
                                 isActiveBiometry = value;
@@ -145,18 +148,20 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
             fixedSize: Size(sizeOfScreen().width, 48.0),
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(12.0))),
-            backgroundColor:
-                flag ? AppColors.onboardingPrimary : AppColors.otline),
+            backgroundColor: flag
+                ? AppColorsUtility.onboardingPrimary
+                : AppColorsUtility.otline),
         child: Text(
           'Sign in',
           style: TextStyle(
-              color: flag ? AppColors.surface : AppColors.secondary,
+              color:
+                  flag ? AppColorsUtility.surface : AppColorsUtility.secondary,
               fontSize: 16.0),
         ));
   }
 
   void validationCheck() {
-    if (RegexPattern.emailValidator(_controllerEmail.text) &&
+    if (RegexPatternUtility.emailValidator(_controllerEmail.text) &&
         _controllerPassword.text.isNotEmpty) {
       setState(() {
         isActiveButton = true;
@@ -177,15 +182,15 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
     return Container(
       height: 48.0,
       decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: AppColorsUtility.surface,
           border: Border.all(
               color: isActiveButton
-                  ? AppColors.onboardingPrimary
-                  : AppColors.internalShadow),
+                  ? AppColorsUtility.onboardingPrimary
+                  : AppColorsUtility.internalShadow),
           boxShadow: [
             BoxShadow(
                 blurStyle: BlurStyle.inner,
-                color: AppColors.internalShadow.withOpacity(0.2),
+                color: AppColorsUtility.internalShadow.withOpacity(0.2),
                 offset: const Offset(0.0, -1.0))
           ],
           borderRadius: const BorderRadius.all(Radius.circular(8.0))),
@@ -197,7 +202,7 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
         obscuringCharacter: '*',
         maxLength: isEmailStyle ? null : 8,
         controller: controller,
-        style: TextStyle(color: AppColors.text),
+        style: TextStyle(color: AppColorsUtility.text),
         decoration: InputDecoration(
             counterText: '',
             prefixIcon: isEmailStyle
@@ -210,7 +215,8 @@ class _LoginState extends BaseScreenState<Login> with BaseScreenMixin {
             isDense: false,
             border: InputBorder.none,
             hintText: isEmailStyle ? "Email address" : 'Password',
-            hintStyle: TextStyle(fontSize: 16.0, color: AppColors.otline),
+            hintStyle:
+                TextStyle(fontSize: 16.0, color: AppColorsUtility.otline),
             suffixIcon: isEmailStyle
                 ? null
                 : IconButton(

@@ -14,14 +14,14 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
   @override
   AppBar emptyAppBar(
       {Color? backgroundColor, Widget? title, Color? backButtonColor}) {
-    return super.emptyAppBar(backButtonColor: AppColors.secondary);
+    return super.emptyAppBar(backButtonColor: AppColorsUtility.secondary);
   }
 
   @override
   Widget body(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: AppColors.lightBackground,
+        color: AppColorsUtility.lightBackground,
         child: Column(
           children: [
             Padding(
@@ -30,7 +30,7 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
               child: Text(
                 'Get started in 3 easy steps',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 32.0, color: AppColors.text),
+                style: TextStyle(fontSize: 32.0, color: AppColorsUtility.text),
               ),
             ),
             Image.asset('lib/images/login/signup/illustration.png',
@@ -49,7 +49,7 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
                       child: Container(
                         height: 120,
                         width: 2.0,
-                        color: AppColors.onboardingPrimary,
+                        color: AppColorsUtility.onboardingPrimary,
                       ),
                     ),
                   ),
@@ -78,12 +78,12 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
                           borderRadius:
                               BorderRadius.all(Radius.circular(16.0))),
                       fixedSize: Size(sizeOfScreen.width - 32.0, 48.0),
-                      backgroundColor: AppColors.onboardingPrimary,
+                      backgroundColor: AppColorsUtility.onboardingPrimary,
                       foregroundColor: Colors.grey.shade200,
                       splashFactory: NoSplash.splashFactory),
                   child: Text(
                     'Continue',
-                    style: TextStyle(color: AppColors.surface, fontSize: 16.0),
+                    style: TextStyle(color: AppColorsUtility.surface, fontSize: 16.0),
                   )),
             )
           ],
@@ -100,12 +100,12 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
           width: 22.0,
           height: 22.0,
           decoration: BoxDecoration(
-              color: AppColors.onboardingPrimary, shape: BoxShape.circle),
+              color: AppColorsUtility.onboardingPrimary, shape: BoxShape.circle),
           child: Text(
             number,
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(color: AppColors.surface, fontSize: 16.0),
+            style: TextStyle(color: AppColorsUtility.surface, fontSize: 16.0),
           ),
         ),
         const SizedBox(width: 14.0),
@@ -114,7 +114,7 @@ class SignUpAccountCreationVerification extends BaseScreenStateless {
           child: Text(
             title,
             textAlign: TextAlign.left,
-            style: TextStyle(color: AppColors.text, fontSize: 16.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 16.0),
           ),
         )
       ],

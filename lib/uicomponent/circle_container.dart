@@ -10,23 +10,23 @@ class CircleContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color? backgroundColor, textColor;
-    Color borderColor = AppColors.otline;
+    Color borderColor = AppColorsUtility.otline;
 
     switch (item) {
       case typeOfCircle.empty:
-        backgroundColor = AppColors.surface;
-        textColor = AppColors.otline;
-        borderColor = AppColors.otline;
+        backgroundColor = AppColorsUtility.surface;
+        textColor = AppColorsUtility.otline;
+        borderColor = AppColorsUtility.otline;
         break;
       case typeOfCircle.middle:
-        backgroundColor = AppColors.surface;
-        textColor = AppColors.text;
-        borderColor = AppColors.onboardingPrimary;
+        backgroundColor = AppColorsUtility.surface;
+        textColor = AppColorsUtility.text;
+        borderColor = AppColorsUtility.onboardingPrimary;
         break;
       case typeOfCircle.full:
-        backgroundColor = AppColors.onboardingPrimary;
-        textColor = AppColors.surface;
-        borderColor = AppColors.onboardingPrimary;
+        backgroundColor = AppColorsUtility.onboardingPrimary;
+        textColor = AppColorsUtility.surface;
+        borderColor = AppColorsUtility.onboardingPrimary;
         break;
       default:
     }

@@ -25,7 +25,7 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.78,
         0.8,
@@ -42,7 +42,7 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
         Text(
           'Selfie verification',
           softWrap: true,
-          style: TextStyle(color: AppColors.text, fontSize: 32.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
         ),
         const SizedBox(
           height: 8.0,
@@ -51,7 +51,7 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
           'We will complete the photo in your document with your selfie to confirm your identity',
           softWrap: true,
           textAlign: TextAlign.center,
-          style: TextStyle(color: AppColors.text, fontSize: 14.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
         ),
         const SizedBox(
           height: 40.0,
@@ -77,7 +77,7 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
         Container(
           width: sizeOfScreen().width,
           decoration: BoxDecoration(
-              color: AppColors.otline,
+              color: AppColorsUtility.otline,
               borderRadius: const BorderRadius.all(Radius.circular(14.0))),
           child: Row(
             children: [
@@ -102,7 +102,7 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
                   child: Text(
                     'The data you share will be encrypted, stored securely, and only used to verify your identity',
                     style:
-                        TextStyle(color: AppColors.secondary, fontSize: 14.0),
+                        TextStyle(color: AppColorsUtility.secondary, fontSize: 14.0),
                     softWrap: true,
                     textAlign: TextAlign.left,
                   ),
@@ -123,12 +123,12 @@ class _SelfieVerificationState extends BaseScreenState<SelfieVerification>
                     extra: false);
               },
               style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.onboardingPrimary,
+                  backgroundColor: AppColorsUtility.onboardingPrimary,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12.0)))),
               child: Text(
                 'Open camera',
-                style: TextStyle(color: AppColors.surface, fontSize: 16.0),
+                style: TextStyle(color: AppColorsUtility.surface, fontSize: 16.0),
               )),
         ),
         const SizedBox(height: 98.0)

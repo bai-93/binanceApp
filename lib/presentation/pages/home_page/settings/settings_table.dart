@@ -58,7 +58,7 @@ class _SettingsTableState extends State<SettingsTable> {
         child: Text(
           text,
           textAlign: TextAlign.right,
-          style: TextStyle(color: AppColors.secondary, fontSize: 14.0),
+          style: TextStyle(color: AppColorsUtility.secondary, fontSize: 14.0),
         ),
       ),
     );
@@ -154,12 +154,12 @@ class _SettingsTableState extends State<SettingsTable> {
                 const EdgeInsets.only(top: 20.0, bottom: 20.0, right: 12.0),
             child: Text(
               'Dark mode',
-              style: TextStyle(color: AppColors.secondary, fontSize: 14.0),
+              style: TextStyle(color: AppColorsUtility.secondary, fontSize: 14.0),
             ),
           ),
           Switch.adaptive(
               value: isActiveDark,
-              activeColor: AppColors.onboardingPrimary,
+              activeColor: AppColorsUtility.onboardingPrimary,
               onChanged: (value) {
                 setState(() {
                   isActiveDark = value;
@@ -215,13 +215,13 @@ class _SettingsTableState extends State<SettingsTable> {
                 children: [
                   Container(
                     height: 1,
-                    color: AppColors.surface,
+                    color: AppColorsUtility.surface,
                     width: 43.0,
                   ),
                   Container(
                     height: 1.0,
                     width: MediaQuery.of(context).size.width - 43.0 - 31.0,
-                    color: AppColors.otline,
+                    color: AppColorsUtility.otline,
                   ),
                 ],
               );

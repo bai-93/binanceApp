@@ -9,7 +9,7 @@ class LineAnimation extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = AppColors.onboardingPrimary
+      ..color = AppColorsUtility.onboardingPrimary
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..style = PaintingStyle.stroke

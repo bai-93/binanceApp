@@ -23,7 +23,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
 
   AppBar _onboardingAppbar() {
     return AppBar(
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       surfaceTintColor: Colors.transparent,
       title: Image.asset('lib/images/login/signup/coinmoney_appbar.png'),
     );
@@ -63,7 +63,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
             splashFactory: NoSplash.splashFactory,
             overlayColor: MaterialStatePropertyAll(Colors.transparent)),
       ),
-      backgroundColor: backgroundColor ?? AppColors.lightBackground,
+      backgroundColor: backgroundColor ?? AppColorsUtility.lightBackground,
     );
   }
 

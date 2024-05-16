@@ -211,9 +211,9 @@ class GraphCustomPaint extends CustomPainter {
     Offset maxOffset = coordinates[indexMaxValue];
 
     TextPainter minPainter =
-        textPainter(MoneyFormatter.dollarFormat(minValue.toString()));
+        textPainter(MoneyFormatterUtility.dollarFormat(minValue.toString()));
     TextPainter maxPainter =
-        textPainter(MoneyFormatter.dollarFormat(maxValue.toString()));
+        textPainter(MoneyFormatterUtility.dollarFormat(maxValue.toString()));
 
     minPainter.paint(canvas, Offset(minOffset.dx * 0.8, minOffset.dy + 5.0));
     maxPainter.paint(canvas, Offset(maxOffset.dx * 0.8, maxOffset.dy + 5.0));

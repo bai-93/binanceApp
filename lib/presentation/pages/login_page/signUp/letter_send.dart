@@ -26,7 +26,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.0,
         0.15,
@@ -37,7 +37,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
   @override
   Widget body() {
     return Container(
-      color: AppColors.lightBackground,
+      color: AppColorsUtility.lightBackground,
       child: Column(
         children: [
           const SizedBox(height: 56.0),
@@ -51,7 +51,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
             padding: const EdgeInsets.only(left: 13.0, right: 19.0),
             child: Text('Confirm your email',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 32.0, color: AppColors.text)),
+                style: TextStyle(fontSize: 32.0, color: AppColorsUtility.text)),
           ),
           const SizedBox(
             height: 6.0,
@@ -62,7 +62,7 @@ class _LetterSendState extends BaseScreenState<LetterSend>
               'We just sent you an email to ${widget.emailData}',
               textAlign: TextAlign.center,
               softWrap: true,
-              style: TextStyle(color: AppColors.text, fontSize: 14.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
             ),
           ),
           const SizedBox(height: 56.0),
@@ -73,20 +73,20 @@ class _LetterSendState extends BaseScreenState<LetterSend>
             style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                backgroundColor: AppColors.onboardingPrimary,
+                backgroundColor: AppColorsUtility.onboardingPrimary,
                 fixedSize: Size(sizeOfScreen().width - 32.0, 48.0)),
             child: Center(
                 child: Text(
               'Confirm',
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColors.surface, fontSize: 16.0),
+              style: TextStyle(color: AppColorsUtility.surface, fontSize: 16.0),
             )),
           ),
           const SizedBox(height: 24.0),
           RichText(
               text: TextSpan(
                   text: 'I ',
-                  style: TextStyle(color: AppColors.text, fontSize: 14.0),
+                  style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
                   children: [
                 TextSpan(
                     text: 'didn’t receive',
@@ -95,10 +95,10 @@ class _LetterSendState extends BaseScreenState<LetterSend>
                         debugPrint("didn't receive");
                       },
                     style: TextStyle(
-                        color: AppColors.onboardingPrimary, fontSize: 14.0)),
+                        color: AppColorsUtility.onboardingPrimary, fontSize: 14.0)),
                 TextSpan(
                     text: ' my email',
-                    style: TextStyle(color: AppColors.text, fontSize: 14.0))
+                    style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0))
               ])),
           const SizedBox(height: 58.0)
         ],

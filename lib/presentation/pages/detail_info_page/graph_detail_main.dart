@@ -50,7 +50,7 @@ class _GraphDetailPageState extends State<GraphDetailPage> {
                 color: Colors.yellowAccent.shade700,
               ))
         ],
-      ), 
+      ),
       body: Container(
           color: Colors.white,
           width: MediaQuery.of(context).size.width,
@@ -69,7 +69,7 @@ class _GraphDetailPageState extends State<GraphDetailPage> {
             ],
             child: BlocBuilder<DetailInfoGraphBloc, DetailInfoGraphState>(
               builder: (context, state) {
-                if (state is DetailDataIsLoading) {
+                if (state is GraphDataIsLoadingState) {
                   return const CryptoGraphShimmer();
                 }
                 if (state is SuccessLoadedDataDetailInfoCrypto) {

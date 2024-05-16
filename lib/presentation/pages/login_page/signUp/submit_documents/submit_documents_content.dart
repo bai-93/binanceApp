@@ -20,10 +20,10 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
         children: [
           Container(
             decoration: BoxDecoration(
-                color: AppColors.surface,
+                color: AppColorsUtility.surface,
                 boxShadow: [
                   BoxShadow(
-                      color: AppColors.internalShadow,
+                      color: AppColorsUtility.internalShadow,
                       blurRadius: 4.0,
                       offset: const Offset(0.0, 3.0))
                 ],
@@ -48,14 +48,14 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                   Container(
                     width: 1.0,
                     height: 30.0,
-                    color: AppColors.otline,
+                    color: AppColorsUtility.otline,
                   ),
                   const SizedBox(
                     width: 8.0,
                   ),
                   Text(
                     'Ukraine',
-                    style: TextStyle(color: AppColors.text, fontSize: 16.0),
+                    style: TextStyle(color: AppColorsUtility.text, fontSize: 16.0),
                   ),
                 ],
               ),
@@ -66,30 +66,30 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                 Container(
                   height: 50.0,
                   width: 100.0,
-                  color: AppColors.onboardingPrimary,
+                  color: AppColorsUtility.onboardingPrimary,
                   child: Text(
                     'country',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.surface),
+                    style: TextStyle(color: AppColorsUtility.surface),
                   ),
                 ),
                 Container(
                     height: 50.0,
                     width: 100.0,
-                    color: AppColors.secondary,
+                    color: AppColorsUtility.secondary,
                     child: Text(
                       'country',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: AppColors.surface),
+                      style: TextStyle(color: AppColorsUtility.surface),
                     )),
                 Container(
                     height: 50.0,
                     width: 100.0,
-                    color: AppColors.text,
+                    color: AppColorsUtility.text,
                     child: Text(
                       'country',
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: AppColors.surface),
+                      style: TextStyle(color: AppColorsUtility.surface),
                     ))
               ],
             ),
@@ -135,15 +135,15 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                     : null,
                 style: ElevatedButton.styleFrom(
                     backgroundColor: idCardFlag || passportFlag || licenseFlag
-                        ? AppColors.onboardingPrimary
-                        : AppColors.otline,
+                        ? AppColorsUtility.onboardingPrimary
+                        : AppColorsUtility.otline,
                     shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)))),
                 child: Text('Continue',
                     style: TextStyle(
                         color: idCardFlag || passportFlag || licenseFlag
-                            ? AppColors.surface
-                            : AppColors.secondary))),
+                            ? AppColorsUtility.surface
+                            : AppColorsUtility.secondary))),
           ),
           const SizedBox(height: 98)
         ],
@@ -159,10 +159,10 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
         width: MediaQuery.of(context).size.width - 32.0,
         height: 68.0,
         decoration: BoxDecoration(
-            color: AppColors.surface,
+            color: AppColorsUtility.surface,
             boxShadow: [
               BoxShadow(
-                  color: AppColors.internalShadow,
+                  color: AppColorsUtility.internalShadow,
                   blurRadius: 4.0,
                   offset: const Offset(0.0, 3.0))
             ],
@@ -178,12 +178,12 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                 width: 27.0,
                 child: Image.asset(
                   'lib/images/login/signup/$nameOfImage',
-                  color: flag ? AppColors.onboardingPrimary : null,
+                  color: flag ? AppColorsUtility.onboardingPrimary : null,
                 ),
               ),
               const SizedBox(width: 8.0),
               Container(
-                color: AppColors.otline,
+                color: AppColorsUtility.otline,
                 width: 1.0,
                 height: 30.0,
               ),
@@ -194,7 +194,7 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                 title,
                 textAlign: TextAlign.center,
                 softWrap: true,
-                style: TextStyle(color: AppColors.text, fontSize: 16.0),
+                style: TextStyle(color: AppColorsUtility.text, fontSize: 16.0),
               ),
               const Spacer(),
               Stack(
@@ -203,11 +203,11 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                     width: 18.0,
                     height: 18.0,
                     decoration: BoxDecoration(
-                        color: AppColors.surface,
+                        color: AppColorsUtility.surface,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(9.0)),
                         border: Border.all(
-                            color: AppColors.onboardingPrimary, width: 2.0)),
+                            color: AppColorsUtility.onboardingPrimary, width: 2.0)),
                   ),
                   Positioned(
                     left: 3.0,
@@ -218,8 +218,8 @@ class _SubmitDocumentsContentState extends State<SubmitDocumentsContent> {
                       height: 12.0,
                       decoration: BoxDecoration(
                           color: flag
-                              ? AppColors.onboardingPrimary
-                              : AppColors.surface,
+                              ? AppColorsUtility.onboardingPrimary
+                              : AppColorsUtility.surface,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(6.0))),
                     ),

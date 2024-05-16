@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_detail_model.dart';
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
 import 'package:sheker/domain/usecases/history_page_usecase/get_crypto_detail_usecase.dart';
@@ -15,21 +16,20 @@ class DetailInfoGraphBloc
   GetCryptoHistoryUsecase getCryptoHistoryUsecase =
       getIt<GetCryptoHistoryUsecase>();
 
-  DetailInfoGraphBloc() : super(DetailDataIsLoading()) {
+  DetailInfoGraphBloc() : super(GraphDataIsLoadingState()) {
     on<GetDetailInfoCryptoEvent>((event, emit) async {
-      emit(DetailDataIsLoading());
+      emit(GraphDataIsLoadingState());
       final result = await detailUsecase.call(event.cryptoId);
       emit(SuccessLoadedDataDetailInfoCrypto(result));
     });
     on<GetIntervalInfoCryptoEvent>((event, emit) async {
-      emit(GraphDataIsLoading());
+      emit(GraphDataIsLoadingState());
       try {
         final result = await getCryptoHistoryUsecase.call(event.cryptoId,
             second: event.interval);
-        emit(SuccessGraphDataLoaded(result));
+        emit(SuccessGraphDataLoadedState(result));
       } catch (error) {
-        print("eroorororrororroroorororoo");
-        print(error.toString());
+        debugPrint(error.toString());
       }
     });
   }

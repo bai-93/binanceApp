@@ -47,9 +47,9 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
   AppBar customAppbar() {
     return AppBar(
         leading: BackButton(
-          color: AppColors.secondary,
+          color: AppColorsUtility.secondary,
         ),
-        backgroundColor: AppColors.lightBackground,
+        backgroundColor: AppColorsUtility.lightBackground,
         title: VerificationStep(0.0, 0.001));
   }
 
@@ -63,7 +63,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
         ),
         Text(
           'Password reset',
-          style: TextStyle(color: AppColors.text, fontSize: 32.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
         ),
         const SizedBox(
           height: 8.0,
@@ -72,7 +72,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
           'Please enter your registered email address to reset your password',
           textAlign: TextAlign.center,
           softWrap: true,
-          style: TextStyle(color: AppColors.text, fontSize: 14.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
         ),
         const SizedBox(
           height: 24.0,
@@ -82,16 +82,16 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
           width: sizeOfScreen().width,
           child: Container(
             decoration: BoxDecoration(
-                color: AppColors.lightBackground,
+                color: AppColorsUtility.lightBackground,
                 border: Border.all(
                     color: isActiveButton
-                        ? AppColors.onboardingPrimary
-                        : AppColors.otline),
+                        ? AppColorsUtility.onboardingPrimary
+                        : AppColorsUtility.otline),
                 boxShadow: [
                   BoxShadow(
                       blurStyle: BlurStyle.inner,
                       blurRadius: 1.0,
-                      color: AppColors.internalShadow,
+                      color: AppColorsUtility.internalShadow,
                       offset: const Offset(0.0, -1.0))
                 ],
                 borderRadius: const BorderRadius.all(Radius.circular(8.0))),
@@ -99,7 +99,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
               controller: _controller,
               decoration: InputDecoration(
                   hintText: 'Email address',
-                  hintStyle: TextStyle(color: AppColors.otline, fontSize: 16.0),
+                  hintStyle: TextStyle(color: AppColorsUtility.otline, fontSize: 16.0),
                   isDense: true,
                   counterText: '',
                   border: InputBorder.none,
@@ -125,16 +125,16 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
                 fixedSize: Size(sizeOfScreen().width, 48.0),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                surfaceTintColor: AppColors.lightBackground,
-                foregroundColor: AppColors.lightBackground,
+                surfaceTintColor: AppColorsUtility.lightBackground,
+                foregroundColor: AppColorsUtility.lightBackground,
                 backgroundColor: isActiveButton
-                    ? AppColors.onboardingPrimary
-                    : AppColors.otline),
+                    ? AppColorsUtility.onboardingPrimary
+                    : AppColorsUtility.otline),
             child: Text(
               'Continue',
               style: TextStyle(
                   color:
-                      isActiveButton ? AppColors.surface : AppColors.secondary,
+                      isActiveButton ? AppColorsUtility.surface : AppColorsUtility.secondary,
                   fontSize: 16.0),
             )),
         const SizedBox(
@@ -144,7 +144,7 @@ class _PasswordResetState extends BaseScreenState<PasswordReset>
           'By registering you accept our Terms & Conditions and Privacy Policy. Your data will be security encrypted with TLS',
           softWrap: true,
           textAlign: TextAlign.center,
-          style: TextStyle(color: AppColors.text, fontSize: 12.0),
+          style: TextStyle(color: AppColorsUtility.text, fontSize: 12.0),
         ),
         const SizedBox(
           height: 70.0,

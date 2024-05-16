@@ -25,8 +25,8 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
     controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
     colorBackgroundTween = ColorTween(
-            begin: AppColors.onboardingPrimary,
-            end: AppColors.lightBackground)
+            begin: AppColorsUtility.onboardingPrimary,
+            end: AppColorsUtility.lightBackground)
         .animate(controller)
       ..addListener(() {
         setState(() {});
@@ -98,7 +98,7 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
                               fixedSize: Size(
                                   MediaQuery.of(context).size.width - 32.0,
                                   48.0),
-                              backgroundColor: AppColors.onboardingPrimary,
+                              backgroundColor: AppColorsUtility.onboardingPrimary,
                               splashFactory: NoSplash.splashFactory)),
                     ),
                   ),

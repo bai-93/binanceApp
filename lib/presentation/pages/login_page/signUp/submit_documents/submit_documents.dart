@@ -24,7 +24,7 @@ class _SubmitDocumentsState extends BaseScreenState<SubmitDocuments>
     return AppBar(
       clipBehavior: Clip.hardEdge,
       surfaceTintColor: Colors.transparent,
-      backgroundColor: AppColors.lightBackground,
+      backgroundColor: AppColorsUtility.lightBackground,
       title: VerificationStep(
         0.0,
         0.24,
@@ -41,7 +41,7 @@ class _SubmitDocumentsState extends BaseScreenState<SubmitDocuments>
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
           child: Text(
             'Submit documents',
-            style: TextStyle(color: AppColors.text, fontSize: 32.0),
+            style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
           ),
         ),
         const SizedBox(
@@ -53,7 +53,7 @@ class _SubmitDocumentsState extends BaseScreenState<SubmitDocuments>
             'We are required by law to verify your identity by collecting your ID and selfie',
             softWrap: true,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14.0, color: AppColors.text),
+            style: TextStyle(fontSize: 14.0, color: AppColorsUtility.text),
           ),
         ),
         const SizedBox(
@@ -66,7 +66,7 @@ class _SubmitDocumentsState extends BaseScreenState<SubmitDocuments>
             child: Text(
               'Enter your location',
               textAlign: TextAlign.start,
-              style: TextStyle(color: AppColors.text, fontSize: 14.0),
+              style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
             ),
           ),
         ),

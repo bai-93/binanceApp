@@ -14,7 +14,7 @@ class _BalanceGraphState extends State<BalanceGraph> {
     return Column(
       children: [
         Container(
-          color: AppColors.lightBackground,
+          color: AppColorsUtility.lightBackground,
           child: Column(
             children: [
               const SizedBox(
@@ -44,7 +44,7 @@ class _BalanceGraphState extends State<BalanceGraph> {
   Widget makeText(String text, {double? fontSize = 14.0}) {
     return Text(
       text,
-      style: TextStyle(fontSize: fontSize, color: AppColors.text),
+      style: TextStyle(fontSize: fontSize, color: AppColorsUtility.text),
     );
   }
 }

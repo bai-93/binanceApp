@@ -58,7 +58,7 @@ class _MarketMoversState extends State<MarketMovers> {
                   Text(
                     'More',
                     style: TextStyle(
-                        color: AppColors.onboardingPrimary,
+                        color: AppColorsUtility.onboardingPrimary,
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500),
                   )
@@ -70,11 +70,15 @@ class _MarketMoversState extends State<MarketMovers> {
           SizedBox(
             height: 180.0,
             child: ListView.separated(
+              cacheExtent: 5000,
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               itemCount: 5,
               itemBuilder: (context, item) {
-                return MarketMoversContent(data[item]);
+                return MarketMoversContent(
+                  data[item],
+                  key: ValueKey(item),
+                );
               },
               separatorBuilder: (BuildContext context, int index) {
                 return const SizedBox(width: 8.0);

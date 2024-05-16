@@ -4,11 +4,11 @@ import 'package:local_auth/local_auth.dart';
 
 typedef callback = void Function();
 
-class BiometryHelper {
+class BiometryHelperUtility {
   BuildContext _context;
   final LocalAuthentication localAuth = LocalAuthentication();
 
-  BiometryHelper(this._context);
+  BiometryHelperUtility(this._context);
 
   Future<String> getTitleAvailableBiometryType() async {
     if (_context.mounted) {

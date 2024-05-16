@@ -13,7 +13,7 @@ class DioClient {
     );
     final Dio dio = Dio(options);
     dio.interceptors.add(DioClientInterceptor(dio));
-    dio.interceptors.add(LogInterceptor());
+    // dio.interceptors.add(LogInterceptor());
     return dio;
   }
 

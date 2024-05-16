@@ -6,11 +6,11 @@ MaterialStateColor convertColor(Color color) {
 }
 
 final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
-    primaryColor: AppColors.lightBackground,
-    hintColor: AppColors.darkBackground.withAlpha(80),
-    scaffoldBackgroundColor: AppColors.lightBackground,
-    appBarTheme: AppBarTheme(backgroundColor: AppColors.lightBackground),
-    colorScheme: ColorScheme.light(background: AppColors.surface), // container
+    primaryColor: AppColorsUtility.lightBackground,
+    hintColor: AppColorsUtility.darkBackground.withAlpha(80),
+    scaffoldBackgroundColor: AppColorsUtility.lightBackground,
+    appBarTheme: AppBarTheme(backgroundColor: AppColorsUtility.lightBackground),
+    colorScheme: ColorScheme.light(background: AppColorsUtility.surface), // container
     tabBarTheme: TabBarTheme(
         splashFactory: NoSplash.splashFactory,
         overlayColor: convertColor(Colors.transparent)),
@@ -19,66 +19,66 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             shape: RoundedRectangleBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(12.0)),
                 side:
-                    BorderSide(color: AppColors.onboardingPrimary, width: 2.0)),
+                    BorderSide(color: AppColorsUtility.onboardingPrimary, width: 2.0)),
             splashFactory: NoSplash.splashFactory,
             foregroundColor: Colors.grey.shade500,
-            surfaceTintColor: AppColors.lightBackground)),
+            surfaceTintColor: AppColorsUtility.lightBackground)),
     textTheme: TextTheme(
         titleSmall: TextStyle(
-            color: AppColors.secondary,
+            color: AppColorsUtility.secondary,
             fontSize: 12.0,
             fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
-            color: AppColors.text, fontSize: 16.0, fontWeight: FontWeight.w400),
+            color: AppColorsUtility.text, fontSize: 16.0, fontWeight: FontWeight.w400),
         bodySmall: TextStyle(
-            color: AppColors.text, fontSize: 14.0, fontWeight: FontWeight.w400),
+            color: AppColorsUtility.text, fontSize: 14.0, fontWeight: FontWeight.w400),
         bodyMedium: TextStyle(
-            color: AppColors.onboardingPrimary,
+            color: AppColorsUtility.onboardingPrimary,
             fontSize: 16.0,
             fontWeight: FontWeight.w500),
         bodyLarge: TextStyle(
-            color: AppColors.text,
+            color: AppColorsUtility.text,
             fontSize: 18.0,
             fontWeight: FontWeight.w500)));
 
 final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
-    primaryColor: AppColors.darkBackground, // background
+    primaryColor: AppColorsUtility.darkBackground, // background
     hintColor: Color.fromARGB(255, 126, 144, 147),
-    scaffoldBackgroundColor: AppColors.darkBackground,
-    appBarTheme: AppBarTheme(backgroundColor: AppColors.darkBackground),
+    scaffoldBackgroundColor: AppColorsUtility.darkBackground,
+    appBarTheme: AppBarTheme(backgroundColor: AppColorsUtility.darkBackground),
     tabBarTheme: TabBarTheme(
         splashFactory: NoSplash.splashFactory,
         overlayColor: convertColor(Colors.transparent)),
     colorScheme:
-        ColorScheme.dark(background: AppColors.darkSurface), // containers
+        ColorScheme.dark(background: AppColorsUtility.darkSurface), // containers
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-          side: BorderSide(color: AppColors.onboardingPrimary, width: 2.0)),
+          side: BorderSide(color: AppColorsUtility.onboardingPrimary, width: 2.0)),
       splashFactory: NoSplash.splashFactory,
-      backgroundColor: AppColors.darkSurface,
-      foregroundColor: AppColors.text,
+      backgroundColor: AppColorsUtility.darkSurface,
+      foregroundColor: AppColorsUtility.text,
     )),
     textTheme: TextTheme(
         titleSmall: TextStyle(
-            color: AppColors.secondary,
+            color: AppColorsUtility.secondary,
             fontSize: 12.0,
             fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
             // label is color of text inside
-            color: AppColors.surface,
+            color: AppColorsUtility.surface,
             fontSize: 16.0,
             fontWeight: FontWeight.w400),
         bodySmall: TextStyle(
-            color: AppColors.surface,
+            color: AppColorsUtility.surface,
             fontSize: 14.0,
             fontWeight: FontWeight.w400),
         bodyMedium: TextStyle(
-            color: AppColors.surface,
+            color: AppColorsUtility.surface,
             fontSize: 16.0,
             fontWeight: FontWeight.w500),
         bodyLarge: TextStyle(
-            color: AppColors.surface,
+            color: AppColorsUtility.surface,
             fontSize: 18.0,
             fontWeight: FontWeight.w500)));
