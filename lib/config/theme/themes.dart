@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
-MaterialStateColor convertColor(Color color) {
-  return MaterialStateColor.resolveWith((states) => color);
+WidgetStateColor convertColor(Color color) {
+  return WidgetStateColor.resolveWith((states) => color);
 }
 
 final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
@@ -10,7 +10,8 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
     hintColor: AppColorsUtility.darkBackground.withAlpha(80),
     scaffoldBackgroundColor: AppColorsUtility.lightBackground,
     appBarTheme: AppBarTheme(backgroundColor: AppColorsUtility.lightBackground),
-    colorScheme: ColorScheme.light(background: AppColorsUtility.surface), // container
+    colorScheme:
+        ColorScheme.light(surface: AppColorsUtility.surface), // container
     tabBarTheme: TabBarTheme(
         splashFactory: NoSplash.splashFactory,
         overlayColor: convertColor(Colors.transparent)),
@@ -18,8 +19,8 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
                 borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                side:
-                    BorderSide(color: AppColorsUtility.onboardingPrimary, width: 2.0)),
+                side: BorderSide(
+                    color: AppColorsUtility.onboardingPrimary, width: 2.0)),
             splashFactory: NoSplash.splashFactory,
             foregroundColor: Colors.grey.shade500,
             surfaceTintColor: AppColorsUtility.lightBackground)),
@@ -28,10 +29,18 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             color: AppColorsUtility.secondary,
             fontSize: 12.0,
             fontWeight: FontWeight.w400),
+        // labelSmall: TextStyle(
+        //     color: AppColorsUtility.text,
+        //     fontSize: 14.0,
+        //     fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
-            color: AppColorsUtility.text, fontSize: 16.0, fontWeight: FontWeight.w400),
+            color: AppColorsUtility.text,
+            fontSize: 16.0,
+            fontWeight: FontWeight.w400),
         bodySmall: TextStyle(
-            color: AppColorsUtility.text, fontSize: 14.0, fontWeight: FontWeight.w400),
+            color: AppColorsUtility.text,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400),
         bodyMedium: TextStyle(
             color: AppColorsUtility.onboardingPrimary,
             fontSize: 16.0,
@@ -50,12 +59,13 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
         splashFactory: NoSplash.splashFactory,
         overlayColor: convertColor(Colors.transparent)),
     colorScheme:
-        ColorScheme.dark(background: AppColorsUtility.darkSurface), // containers
+        ColorScheme.dark(surface: AppColorsUtility.darkSurface), // containers
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-          side: BorderSide(color: AppColorsUtility.onboardingPrimary, width: 2.0)),
+          side: BorderSide(
+              color: AppColorsUtility.onboardingPrimary, width: 2.0)),
       splashFactory: NoSplash.splashFactory,
       backgroundColor: AppColorsUtility.darkSurface,
       foregroundColor: AppColorsUtility.text,
@@ -65,6 +75,10 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
             color: AppColorsUtility.secondary,
             fontSize: 12.0,
             fontWeight: FontWeight.w400),
+        // labelSmall: TextStyle(
+        //     color: AppColorsUtility.surface,
+        //     fontSize: 14.0,
+        //     fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
             // label is color of text inside
             color: AppColorsUtility.surface,

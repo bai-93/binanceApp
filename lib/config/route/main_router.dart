@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sheker/config/route/router_manager/router_manager.dart';
 import 'package:sheker/config/route/signup_router.dart';
 import 'package:sheker/config/route/tabbar_routes/home/home_route.dart';
+import 'package:sheker/config/route/tabbar_routes/trade/trade_router.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
@@ -25,7 +26,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: RouterPathManager.getRouterPath(),
+      initialLocation: "/trade",//RouterPathManager.getRouterPath(),
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -58,42 +59,30 @@ class AppRouter {
             navigatorKey: _cryptoHomeNavigatorKey,
             routes: [HomeRoute.getRouter(key: _rootNavigatorKey)],
           ),
-          StatefulShellBranch(navigatorKey: _feedNavigatorKey, routes: [
-            GoRoute(
-                path: '/feed',
-                builder: (context, state) {
-                  return Container(
-                    color: Colors.blue,
-                    child: const Center(
-                      child: Text(
-                        'Feed',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  );
-                })
-          ]),
+          StatefulShellBranch(
+              navigatorKey: _feedNavigatorKey,
+              routes: [TradeRouter.getRouter(key: _rootNavigatorKey)]),
           StatefulShellBranch(navigatorKey: _tradeNavigatorKey, routes: [
             GoRoute(
-                path: '/trade',
+                path: '/market',
                 builder: (context, state) {
                   return Container(
                     color: Colors.yellow,
                     child: const Center(
-                      child: Text('Trade'),
+                      child: Text('Market'),
                     ),
                   );
                 })
           ]),
           StatefulShellBranch(navigatorKey: _serviceNavigatorKey, routes: [
             GoRoute(
-                path: '/service',
+                path: '/favorites',
                 builder: (context, state) {
                   return Container(
                     color: Colors.deepPurpleAccent,
                     child: const Center(
                         child: Text(
-                      'Services',
+                      'Favorites',
                       style: TextStyle(color: Colors.white),
                     )),
                   );

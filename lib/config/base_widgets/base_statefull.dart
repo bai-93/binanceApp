@@ -35,7 +35,9 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
     return null;
   }
 
-  Widget? title() {}
+  Widget? title() {
+    return null;
+  }
 
   AppBar? _signUpAppbar() {
     return AppBar(
@@ -69,7 +71,7 @@ mixin BaseScreenMixin<T extends BaseScreen> on BaseScreenState<T> {
         color: backButtonColor,
         style: const ButtonStyle(
             splashFactory: NoSplash.splashFactory,
-            overlayColor: MaterialStatePropertyAll(Colors.transparent)),
+            overlayColor: WidgetStatePropertyAll(Colors.transparent)),
       ),
       backgroundColor: backgroundColor ?? AppColorsUtility.lightBackground,
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sheker/utilities/app_colors.dart';
 import 'package:sheker/utilities/money_formatter.dart';
-import 'package:sheker/utilities/regex_pattern.dart';
 import '../../../../domain/models/responses/crypto_models/list_crypto_currencies_model.dart';
 
 class PortfolioCellContent extends StatelessWidget {
@@ -11,7 +9,7 @@ class PortfolioCellContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PhysicalModel(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       borderRadius: const BorderRadius.all(Radius.circular(12.0)),
       elevation: 3.0,
       shadowColor: Colors.blue,

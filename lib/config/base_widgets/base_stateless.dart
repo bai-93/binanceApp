@@ -61,7 +61,7 @@ abstract class BaseScreenStateless extends StatelessWidget {
         color: backButtonColor,
         style: const ButtonStyle(
             splashFactory: NoSplash.splashFactory,
-            overlayColor: MaterialStatePropertyAll(Colors.transparent)),
+            overlayColor: WidgetStatePropertyAll(Colors.transparent)),
       ),
       backgroundColor: backgroundColor ?? AppColorsUtility.lightBackground,
     );
