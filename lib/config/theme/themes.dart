@@ -6,6 +6,7 @@ WidgetStateColor convertColor(Color color) {
 }
 
 final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
+    splashColor: Colors.transparent,
     primaryColor: AppColorsUtility.lightBackground,
     hintColor: AppColorsUtility.darkBackground.withAlpha(80),
     scaffoldBackgroundColor: AppColorsUtility.lightBackground,
@@ -24,6 +25,7 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             splashFactory: NoSplash.splashFactory,
             foregroundColor: Colors.grey.shade500,
             surfaceTintColor: AppColorsUtility.lightBackground)),
+    //TEXT
     textTheme: TextTheme(
         titleSmall: TextStyle(
             color: AppColorsUtility.secondary,
@@ -51,6 +53,7 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             fontWeight: FontWeight.w500)));
 
 final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
+    splashColor: Colors.transparent,
     primaryColor: AppColorsUtility.darkBackground, // background
     hintColor: Color.fromARGB(255, 126, 144, 147),
     scaffoldBackgroundColor: AppColorsUtility.darkBackground,
@@ -70,6 +73,8 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
       backgroundColor: AppColorsUtility.darkSurface,
       foregroundColor: AppColorsUtility.text,
     )),
+
+    // TEXT
     textTheme: TextTheme(
         titleSmall: TextStyle(
             color: AppColorsUtility.secondary,

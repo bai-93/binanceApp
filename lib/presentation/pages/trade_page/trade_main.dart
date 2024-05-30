@@ -1,8 +1,8 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:flutter/widgets.dart";
 import "package:sheker/config/base_widgets/base_statefull.dart";
 import "package:sheker/config/base_widgets/base_stateless.dart";
+import "package:sheker/presentation/pages/trade_page/trading_pair/trading_pair.dart";
 import "package:sheker/utilities/app_colors.dart";
 
 class TradeMain extends BaseScreen {
@@ -79,7 +79,8 @@ class _TradeMainState extends BaseScreenState<TradeMain> with BaseScreenMixin {
                     slidingIndex = item ?? 0;
                   });
                 }),
-          )
+          ),
+          TradingPair()
         ],
       ),
     );

@@ -10,7 +10,7 @@ CryptoHistoryPriceModel _$CryptoHistoryPriceModelFromJson(
         Map<String, dynamic> json) =>
     CryptoHistoryPriceModel(
       json['priceUsd'] as String,
-      json['time'] as int,
+      (json['time'] as num).toInt(),
       json['date'] as String,
     );
 
