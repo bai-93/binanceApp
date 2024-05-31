@@ -4,8 +4,8 @@ import 'package:sheker/presentation/pages/trade_page/trading_pair/trade_pair_mod
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'trade_pair_models/subscribe_model.dart';
 
-typedef _successCallbackWebSocket = Function(CoinTickerBatchModel? item);
-typedef _failureCallbackWebSocket = Function();
+typedef _successCallbackWebSocket = Function(CoinTickerBatchModel? item)?;
+typedef _failureCallbackWebSocket = Function()?;
 
 class TradingWebSocketModel {
   late WebSocketChannel _socketChannel;
@@ -44,7 +44,7 @@ class TradingWebSocketModel {
 
   void _unSubscribe() {
     _socketChannel.sink
-        .add(SubscribeData('unsubscribe', coinCurrency).toJson());
+        .add(jsonEncode(SubscribeData('unsubscribe', coinCurrency)));
   }
 
   void getSocketStream(_successCallbackWebSocket successCallback,
@@ -56,9 +56,9 @@ class TradingWebSocketModel {
       Map<String, dynamic> toMap = jsonDecode(data);
       if (toMap['type'] == 'ticker') {
         dataObject = CoinTickerBatchModel.fromJson(toMap);
-        successCallback(dataObject);
+        successCallback?.call(dataObject);
       } else {
-        failCallback();
+        failCallback?.call();
       }
     }, onDone: () {
       debugPrint("on done");
