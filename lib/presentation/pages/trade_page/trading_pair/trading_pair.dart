@@ -108,7 +108,7 @@ class _TradingPairState extends State<TradingPair> {
             height: 35.0,
             width: 100,
             child: Container(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.surface,
               child: Text(
                 value,
                 textAlign: TextAlign.center,
@@ -131,26 +131,39 @@ class _TradingPairState extends State<TradingPair> {
       },
       alignmentOffset: const Offset(-9.0, 0.0),
       style: MenuStyle(
-          backgroundColor: WidgetStatePropertyAll(
-              Theme.of(context).scaffoldBackgroundColor)),
+        backgroundColor:
+            WidgetStatePropertyAll(Theme.of(context).colorScheme.surface),
+      ),
       child: GestureDetector(
         onTap: () {
           if (controller.isOpen) {
             controller.close();
           } else {
-            controller.open();
+            controller.open(position: const Offset(0.0, 40.0));
           }
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SizedBox(
-                width: 93.0,
-                height: 18.0,
-                child: Text(
-                  coinToUsd,
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.labelMedium,
+            Container(
+                width: 100.0,
+                height: 28.0,
+                decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.surface,
+                    boxShadow: [
+                      BoxShadow(
+                          color: AppColorsUtility.internalShadow,
+                          offset: const Offset(0.0, 4.0),
+                          blurRadius: 4.0,
+                          spreadRadius: 0.0)
+                    ],
+                    borderRadius: const BorderRadius.all(Radius.circular(7.0))),
+                child: Center(
+                  child: Text(
+                    coinToUsd,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
                 )),
             arrowIcon
           ],
