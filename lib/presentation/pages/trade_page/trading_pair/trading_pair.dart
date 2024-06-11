@@ -5,7 +5,8 @@ import 'package:sheker/utilities/app_colors.dart';
 import 'package:sheker/utilities/money_formatter.dart';
 
 class TradingPair extends StatefulWidget {
-  const TradingPair({super.key});
+  void Function(String formatedValue, String rawValue) getPriceValue;
+  TradingPair(this.getPriceValue, {super.key});
 
   @override
   State<TradingPair> createState() => _TradingPairState();
@@ -30,12 +31,13 @@ class _TradingPairState extends State<TradingPair> {
             (data) {
               String formatedValue =
                   MoneyFormatterUtility.dollarFormat(data?.price);
+              widget.getPriceValue(formatedValue, data?.price ?? "0.0");
               setState(() {
                 coinUsd = formatedValue;
               });
             },
             () {
-              debugPrint("failure ");
+              widget.getPriceValue('', '');
             },
           );
         } else {

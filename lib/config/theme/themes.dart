@@ -31,10 +31,10 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             color: AppColorsUtility.secondary,
             fontSize: 12.0,
             fontWeight: FontWeight.w400),
-        // labelSmall: TextStyle(
-        //     color: AppColorsUtility.text,
-        //     fontSize: 14.0,
-        //     fontWeight: FontWeight.w400),
+        labelSmall: TextStyle(
+            color: AppColorsUtility.text,
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
             color: AppColorsUtility.text,
             fontSize: 16.0,
@@ -80,10 +80,10 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
             color: AppColorsUtility.secondary,
             fontSize: 12.0,
             fontWeight: FontWeight.w400),
-        // labelSmall: TextStyle(
-        //     color: AppColorsUtility.surface,
-        //     fontSize: 14.0,
-        //     fontWeight: FontWeight.w400),
+        labelSmall: TextStyle(
+            color: AppColorsUtility.surface,
+            fontSize: 12.0,
+            fontWeight: FontWeight.w400),
         labelMedium: TextStyle(
             // label is color of text inside
             color: AppColorsUtility.surface,

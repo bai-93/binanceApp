@@ -22,4 +22,8 @@ class MoneyFormatterUtility {
   static String moneyFormatShort(double input) {
     return input.toStringAsFixed(2);
   }
+
+  static String moneyFormatCount(double input, {int count = 5}) {
+    return input.toStringAsFixed(count);
+  }
 }

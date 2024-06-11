@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/utilities/app_colors.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TradingLimitPriceAmount extends StatefulWidget {
   const TradingLimitPriceAmount({super.key});
@@ -13,8 +13,13 @@ class TradingLimitPriceAmount extends StatefulWidget {
 class _TradingLimitPriceAmountState extends State<TradingLimitPriceAmount> {
   MenuController orderController = MenuController();
   bool orderFlag = false;
+  String orderTitle = "10";
+  List<String> orderData = ["10", "8", "6", "4", "2"];
   MenuController unitController = MenuController();
   bool unitFlag = false;
+  String unitTitle = "0.00001";
+  List<String> unitData = ["0.00001", "0.0001", "0.001", "0.01", "0.1"];
+  int slidingIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,6 +27,8 @@ class _TradingLimitPriceAmountState extends State<TradingLimitPriceAmount> {
       child: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,14 +37,49 @@ class _TradingLimitPriceAmountState extends State<TradingLimitPriceAmount> {
                   const SizedBox(
                     height: 4.0,
                   ),
-                  makeDropdown(orderController, orderFlag)
+                  makeDropdown(orderController, orderFlag, (flag) {
+                    setState(() {
+                      orderFlag = flag;
+                    });
+                  }, (title) {
+                    setState(() {
+                      orderTitle = title;
+                    });
+                  }, orderTitle, orderData)
                 ],
               ),
               Column(
                 children: [
                   makeText('Unit'),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
+                  makeDropdown(unitController, unitFlag, (flag) {
+                    setState(() {
+                      unitFlag = flag;
+                    });
+                  }, (value) {
+                    unitTitle = value;
+                  }, unitTitle, unitData, width: 80.0)
                 ],
-              )
+              ),
+              const SizedBox(
+                width: 11.0,
+              ),
+              SizedBox(
+                height: 32.0,
+                width: 164.0,
+                child: CupertinoSlidingSegmentedControl(
+                    groupValue: slidingIndex,
+                    thumbColor: AppColorsUtility.onboardingPrimary,
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                    children: makeSlidingItems(),
+                    onValueChanged: (index) {
+                      setState(() {
+                        slidingIndex = index ?? 0;
+                      });
+                    }),
+              ),
             ],
           ),
         ],
@@ -52,31 +94,81 @@ class _TradingLimitPriceAmountState extends State<TradingLimitPriceAmount> {
     );
   }
 
-  Widget makeDropdown(MenuController controller, bool flagIcon,
-      {bool flag = false}) {
+  Map<int, Widget> makeSlidingItems() {
+    Map<int, Widget> item = {};
+    List<String> dataName = ["Buy", "Sell"];
+    TextStyle? white = const TextStyle(
+        color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.w400);
+    TextStyle? grey = TextStyle(
+        color: AppColorsUtility.secondary,
+        fontSize: 14.0,
+        fontWeight: FontWeight.w400);
+    TextStyle? textStyle;
+    for (int i = 0; i < 2; i++) {
+      if (slidingIndex == i) {
+        textStyle = white;
+      } else {
+        textStyle = grey;
+      }
+      item[i] = Text(dataName[i], style: textStyle);
+    }
+    return item;
+  }
+
+  Widget makeDropdown(
+      MenuController controller,
+      bool flagIcon,
+      void Function(bool flag) closeOpen,
+      void Function(String title) titleUpdate,
+      String title,
+      List<String> data,
+      {bool flag = false,
+      double height = 28.0,
+      double width = 55.0}) {
     return Row(children: [
       MenuAnchor(
-        menuChildren: const [
-          SizedBox(
-            height: 28.0,
-            width: 55.0,
-          )
-        ],
+        menuChildren: data.map<Widget>((String value) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                titleUpdate(data[data.indexOf(value)]);
+                closeOpen(false);
+              });
+              controller.close();
+            },
+            child: Container(
+              height: height,
+              width: width,
+              color: Theme.of(context).colorScheme.surface,
+              child: Center(
+                  child: Text(
+                value,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall,
+              )),
+            ),
+          );
+        }).toList(),
         style: MenuStyle(
             backgroundColor:
                 WidgetStatePropertyAll(Theme.of(context).colorScheme.surface)),
         controller: controller,
+        onClose: () {
+          closeOpen(false);
+        },
         child: GestureDetector(
           onTap: () {
             if (controller.isOpen) {
               controller.close();
+              closeOpen(false);
             } else {
               controller.open(position: const Offset(0.0, 40.0));
+              closeOpen(true);
             }
           },
           child: Container(
+            padding: const EdgeInsets.only(left: 8.0, right: 2.0),
             height: 28.0,
-            width: 55.0,
             decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.surface,
                 boxShadow: [
@@ -88,8 +180,12 @@ class _TradingLimitPriceAmountState extends State<TradingLimitPriceAmount> {
                 ],
                 borderRadius: const BorderRadius.all(Radius.circular(7.0))),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(width: 5.0),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
                 Icon(flagIcon
                     ? Icons.arrow_drop_up_rounded
                     : Icons.arrow_drop_down_rounded),
