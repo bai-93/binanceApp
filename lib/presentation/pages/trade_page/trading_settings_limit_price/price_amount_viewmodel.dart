@@ -23,59 +23,30 @@ class PriceAmountViewModel {
   void addData(String item) {
     if (item.isNotEmpty) {
       double price = double.parse(item);
-      _redPriceGenerate(price);
-      _redAmountGenerate();
-      _greenPriceGenerate(price);
-      _greenAmountGenerate();
+      _dataGenerate(price, redPrice);
+      _dataGenerate(0, redAmount, flag: true);
+      _dataGenerate(price, greenPrice, flag: false);
+      _dataGenerate(0, greenAmount, flag: true);
       readyCallback?.call();
     } else {
       debugPrint("empty");
     }
   }
 
-  void _redPriceGenerate(double price) {
-    redPrice.clear();
+  void _dataGenerate(double price, List<String> dataCollection,
+      {bool flag = false}) {
+    dataCollection.clear();
     for (int i = 0; i < 10; i++) {
-      double generatedValue = _generateNumber(price);
+      double generatedValue = _generateNumber(price, isAmount: flag);
       String formatedValue =
           MoneyFormatterUtility.moneyFormatShort(generatedValue);
-      redPrice.add(formatedValue);
-    }
-  }
-
-  void _redAmountGenerate() {
-    redAmount.clear();
-    for (int i = 0; i < 10; i++) {
-      double generatedValue = _generateNumber(0, isAmount: true);
-      String formatedValue =
-          MoneyFormatterUtility.moneyFormatCount(generatedValue);
-      redAmount.add(formatedValue);
-    }
-  }
-
-  void _greenPriceGenerate(double price) {
-    greenPrice.clear();
-    for (int i = 0; i < 10; i++) {
-      double generatedValue = _generateNumber(price);
-      String formatedValue =
-          MoneyFormatterUtility.moneyFormatShort(generatedValue);
-      greenPrice.add(formatedValue);
-    }
-  }
-
-  void _greenAmountGenerate() {
-    greenAmount.clear();
-    for (int i = 0; i < 10; i++) {
-      double generatedValue = _generateNumber(0, isAmount: true);
-      String formatedValue =
-          MoneyFormatterUtility.moneyFormatCount(generatedValue);
-      greenAmount.add(formatedValue);
+      dataCollection.add(formatedValue);
     }
   }
 
   double _generateNumber(double price, {bool isAmount = false}) {
     if (isAmount) {
-      return _random.nextDouble() * 1 * 12.345;
+      return _random.nextDouble() * 1 * 12.34582;
     } else {
       return _random.nextDouble() + 1 * price;
     }
