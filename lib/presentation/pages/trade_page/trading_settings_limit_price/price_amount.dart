@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_settings_limit_price/price_amount_viewmodel.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
+import 'buy_btc.dart';
+
 class PriceAmountList extends StatefulWidget {
   StreamController<String> priceController =
       StreamController<String>.broadcast();
@@ -40,25 +42,31 @@ class _PriceAmountListState extends State<PriceAmountList> {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 12.0,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 12.0,
+                    ),
+                    makeText('Price'),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    makeListView(model.redPrice, isRedPrice: true),
+                    makeListView(model.greenPrice, isGreenPrice: true)
+                  ],
                 ),
-                makeText('Price'),
-                const SizedBox(
-                  height: 5.0,
-                ),
-                makeListView(model.redPrice, isRedPrice: true)
               ],
             ),
             const SizedBox(
               width: 10.0,
             ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 const SizedBox(
                   height: 12.0,
@@ -67,19 +75,18 @@ class _PriceAmountListState extends State<PriceAmountList> {
                 const SizedBox(
                   height: 5.0,
                 ),
-                makeListView(model.redAmount, isLeft: false, isRedAmount: true)
+                makeListView(model.redAmount, isLeft: false, isRedAmount: true),
+                makeListView(model.greenAmount, isGreenAmount: true)
               ],
             ),
-          ],
-        ),
-        Row(
-          children: [
-            makeListView(model.greenPrice, isGreenPrice: true),
             const SizedBox(
               width: 10.0,
             ),
-            makeListView(model.greenAmount, isGreenAmount: true)
+            const BuyBtcPriceLimit(),
           ],
+        ),
+        const SizedBox(
+          height: 30.0,
         )
       ],
     );
@@ -96,7 +103,7 @@ class _PriceAmountListState extends State<PriceAmountList> {
       bool isGreenPrice = false,
       bool isGreenAmount = false}) {
     return SizedBox(
-      height: 180.0,
+      height: 180,
       width: isRedAmount || isGreenAmount ? 70.0 : 80.0,
       child: ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
