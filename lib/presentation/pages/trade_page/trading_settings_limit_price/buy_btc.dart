@@ -79,7 +79,9 @@ class _BuyBtcPriceLimitState extends State<BuyBtcPriceLimit> {
         const SizedBox(
           height: 16.0,
         ),
-        makeButton(() {}),
+        makeButton(() {
+          debugPrint('BUY button');
+        }),
       ],
     );
   }

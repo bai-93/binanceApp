@@ -86,7 +86,7 @@ class _PriceAmountListState extends State<PriceAmountList> {
           ],
         ),
         const SizedBox(
-          height: 30.0,
+          height: 10.0,
         )
       ],
     );

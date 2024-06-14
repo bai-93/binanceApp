@@ -87,7 +87,7 @@ class _TradeMainState extends BaseScreenState<TradeMain> with BaseScreenMixin {
             _priceAmountList.priceController.add(rawValue);
           }),
           TradingLimitPriceAmount(),
-          _priceAmountList
+          _priceAmountList,
         ],
       ),
     );
