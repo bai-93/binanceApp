@@ -2,6 +2,7 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:sheker/config/base_widgets/base_statefull.dart";
 import "package:sheker/config/base_widgets/base_stateless.dart";
+import "package:sheker/presentation/pages/trade_page/orders/orders_main.dart";
 import "package:sheker/presentation/pages/trade_page/trading_pair/trading_pair.dart";
 import "package:sheker/presentation/pages/trade_page/trading_settings_limit_price/price_amount.dart";
 import "package:sheker/presentation/pages/trade_page/trading_settings_limit_price/trading_limit_price.dart";
@@ -86,8 +87,9 @@ class _TradeMainState extends BaseScreenState<TradeMain> with BaseScreenMixin {
           TradingPair((formatedValue, rawValue) {
             _priceAmountList.priceController.add(rawValue);
           }),
-          TradingLimitPriceAmount(),
+          const TradingLimitPriceAmount(),
           _priceAmountList,
+          const OrdersMain()
         ],
       ),
     );
