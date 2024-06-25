@@ -17,4 +17,5 @@ class AppColorsUtility {
   static Color green = '#098C26'.toColor();
   static Color orange = '#F7931A'.toColor();
   static Color red = '#CD0000'.toColor();
+  static Color darkPrimary = '#436FE2'.toColor();
 }

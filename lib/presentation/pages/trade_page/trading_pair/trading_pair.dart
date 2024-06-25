@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/coins_model.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/trading_websocket_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
@@ -76,7 +77,8 @@ class _TradingPairState extends State<TradingPair> {
           const Spacer(),
           GestureDetector(
             onTap: () {
-              debugPrint("graph button was tapped");
+              context.go('/trade/graph', extra: _coinModel.getCurrentIndex());
+              debugPrint('current index == ${_coinModel.getCurrentIndex()}');
             },
             child: Image.asset(
               'lib/images/trade/graph.png',

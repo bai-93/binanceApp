@@ -12,4 +12,10 @@ class DateFormatUtility {
       return output;
     }
   }
+
+  static String getCurrentTime() {
+    DateTime dateTime = DateTime.now();
+    String output = '${dateTime.hour}:${dateTime.minute}:${dateTime.second}';
+    return output;
+  }
 }

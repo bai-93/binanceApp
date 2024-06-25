@@ -43,7 +43,7 @@ class _TradeMainState extends BaseScreenState<TradeMain> with BaseScreenMixin {
   }
 
   Map<int, Widget> makeSlidingItems(int index) {
-    List<String> textsData = ['Small', 'Margin', 'Grid', 'Fiat'];
+    List<String> textsData = ['Spot', 'Margin', 'Grid', 'Fiat'];
     TextStyle? textStyle;
     Map<int, Widget> dataWidgets = {};
     for (int i = 0; i < 4; i++) {
