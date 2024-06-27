@@ -58,6 +58,7 @@ dependencies:
   stream_channel: ^2.1.0
   web: ^0.5.0
   web_socket: ^0.1.3
+  flutter_slidable: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -89,6 +90,7 @@ flutter:
     - lib/images/home/settings/
     - lib/images/coin/
     - lib/images/trade/
+    - lib/images/market/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
