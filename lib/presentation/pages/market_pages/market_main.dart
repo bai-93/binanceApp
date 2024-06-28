@@ -88,7 +88,6 @@ class _MarketMainState extends BaseScreenState<MarketMain>
                 height: state.data.data.length * 84.0,
                 child: ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
-                  // cacheExtent: 10,
                   itemCount: state.data.data.length,
                   separatorBuilder: (context, index) {
                     return const SizedBox(
