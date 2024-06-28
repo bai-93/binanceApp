@@ -160,8 +160,10 @@ class _MarketCoinContentState extends State<MarketCoinContent>
         return SizedBox(
             height: 50.0,
             width: 93.0,
-            child: CustomPaint(
-              painter: SmallGraphicComponent(state.model, changePercent24Hr),
+            child: RepaintBoundary(
+              child: CustomPaint(
+                painter: SmallGraphicComponent(state.model, changePercent24Hr),
+              ),
             ));
       }
       return makeShimmerUtility(

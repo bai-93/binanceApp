@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/config/route/router_manager/router_manager.dart';
 import 'package:sheker/config/route/signup_router.dart';
+import 'package:sheker/config/route/tabbar_routes/favorite/favorites_router.dart';
 import 'package:sheker/config/route/tabbar_routes/home/home_route.dart';
 import 'package:sheker/config/route/tabbar_routes/market/market_router.dart';
 import 'package:sheker/config/route/tabbar_routes/trade/trade_router.dart';
@@ -27,7 +28,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/market', //RouterPathManager.getRouterPath(),
+      initialLocation: '/home', //RouterPathManager.getRouterPath(),
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -66,20 +67,9 @@ class AppRouter {
           StatefulShellBranch(
               navigatorKey: _tradeNavigatorKey,
               routes: [MarketRouter.getRouter()]),
-          StatefulShellBranch(navigatorKey: _serviceNavigatorKey, routes: [
-            GoRoute(
-                path: '/favorites',
-                builder: (context, state) {
-                  return Container(
-                    color: Colors.deepPurpleAccent,
-                    child: const Center(
-                        child: Text(
-                      'Favorites',
-                      style: TextStyle(color: Colors.white),
-                    )),
-                  );
-                })
-          ]),
+          StatefulShellBranch(
+              navigatorKey: _serviceNavigatorKey,
+              routes: [FavoritesRouter.getRouter()]),
           StatefulShellBranch(navigatorKey: _walletNavigatorKey, routes: [
             GoRoute(
                 path: '/wallet',
