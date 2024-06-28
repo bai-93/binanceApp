@@ -27,6 +27,10 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             surfaceTintColor: AppColorsUtility.lightBackground)),
     //TEXT
     textTheme: TextTheme(
+        displaySmall: TextStyle(
+            color: AppColorsUtility.text,
+            fontSize: 10.0,
+            fontWeight: FontWeight.w400),
         titleSmall: TextStyle(
             color: AppColorsUtility.secondary,
             fontSize: 12.0,
@@ -76,6 +80,10 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
 
     // TEXT
     textTheme: TextTheme(
+        displaySmall: TextStyle(
+            color: AppColorsUtility.surface,
+            fontSize: 10.0,
+            fontWeight: FontWeight.w400),
         titleSmall: TextStyle(
             color: AppColorsUtility.secondary,
             fontSize: 12.0,

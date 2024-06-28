@@ -35,8 +35,9 @@ class SmallGraphicComponent extends CustomPainter {
     paint.strokeCap = StrokeCap.round;
     paint.strokeJoin = StrokeJoin.round;
     paint.strokeWidth = 1.0;
-    paint.color =
-        isAscentOrDescent ? AppColorsUtility.green : AppColorsUtility.orange;
+    paint.color = isAscentOrDescent
+        ? AppColorsUtility.onboardingPrimary
+        : AppColorsUtility.orange;
     return paint;
   }
 

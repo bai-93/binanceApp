@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/bloc/market/bloc/market_bloc.dart';
+import 'package:sheker/presentation/bloc/market/market_graph_bloc/bloc/market_graph_bloc.dart';
 import 'package:sheker/presentation/pages/market_pages/market_coin_content/market_coin_content.dart';
 import 'package:sheker/presentation/pages/market_pages/market_search_content/market_search_content.dart';
 import 'package:sheker/presentation/pages/market_pages/market_search_content/market_search_history_content.dart';
@@ -83,15 +84,26 @@ class _MarketMainState extends BaseScreenState<MarketMain>
             }
             if (state is MarketDataWasLoaded) {
               return SizedBox(
-                height: 76.0 * 3.0,
-                child: ListView(
-                  children: const [
-                    MarketCoinContent(),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    MarketCoinContent()
-                  ],
+                width: sizeOfScreen().width,
+                height: state.data.data.length * 84.0,
+                child: ListView.separated(
+                  physics: const NeverScrollableScrollPhysics(),
+                  // cacheExtent: 10,
+                  itemCount: state.data.data.length,
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 8.0,
+                    );
+                  },
+                  itemBuilder: (context, index) {
+                    return BlocProvider(
+                      create: (context) => MarketGraphBloc(),
+                      child: MarketCoinContent(() {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('added')));
+                      }, state.data.data[index]),
+                    );
+                  },
                 ),
               );
             }
