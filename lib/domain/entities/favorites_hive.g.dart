@@ -24,13 +24,14 @@ class FavoritesHiveAdapter extends TypeAdapter<FavoritesHive> {
       lastPrice: fields[4] as double?,
       percent24h: fields[5] as double?,
       symbol: fields[6] as String?,
+      id: fields[7] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoritesHive obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class FavoritesHiveAdapter extends TypeAdapter<FavoritesHive> {
       ..writeByte(5)
       ..write(obj.percent24h)
       ..writeByte(6)
-      ..write(obj.symbol);
+      ..write(obj.symbol)
+      ..writeByte(7)
+      ..write(obj.id);
   }
 
   @override

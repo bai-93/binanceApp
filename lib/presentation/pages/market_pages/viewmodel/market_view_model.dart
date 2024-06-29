@@ -35,7 +35,8 @@ class MarketViewModel {
         name: inputModel.name,
         percent24h: changePercent24Hr,
         topPrice: priceUsd,
-        volume24h: volume24h);
+        volume24h: volume24h,
+        id: inputModel.id);
     if (_hasTheSameData(object)) {
     } else {
       FavoritesServiceHive.addData(object);

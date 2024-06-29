@@ -18,6 +18,8 @@ class FavoritesHive extends HiveObject {
   late double? percent24h;
   @HiveField(6)
   late String? symbol;
+  @HiveField(7)
+  late String? id;
 
   FavoritesHive(
       {this.name = '',
@@ -26,5 +28,6 @@ class FavoritesHive extends HiveObject {
       this.lowPrice = 0.0,
       this.lastPrice = 0.0,
       this.percent24h = 0.0,
-      this.symbol = ''});
+      this.symbol = '',
+      this.id = ''});
 }

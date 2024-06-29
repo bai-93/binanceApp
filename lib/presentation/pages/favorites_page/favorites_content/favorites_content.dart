@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sheker/domain/entities/favorites_hive.dart';
+import 'package:sheker/presentation/bloc/market/market_graph_bloc/bloc/market_graph_bloc.dart';
+import 'package:sheker/uicomponent/small_graphic.dart';
 import 'package:sheker/utilities/app_colors.dart';
-import 'package:sheker/utilities/money_formatter.dart';
+import 'package:sheker/utilities/shimmer_utility.dart';
 
 class FavoritesContent extends StatefulWidget {
-  void Function() removeCallback;
-  FavoritesHive input;
-  FavoritesContent(this.input, this.removeCallback, {super.key});
+  final void Function() removeCallback;
+  final FavoritesHive input;
+  const FavoritesContent(this.input, this.removeCallback, {super.key});
 
   @override
   State<FavoritesContent> createState() => _FavoritesContentState();
@@ -20,6 +23,9 @@ class _FavoritesContentState extends State<FavoritesContent>
   @override
   void initState() {
     _controller = SlidableController(this);
+    context
+        .read<MarketGraphBloc>()
+        .add(MarketGraphCoinIntervalEvent(widget.input.id ?? ''));
     super.initState();
   }
 
@@ -119,7 +125,8 @@ class _FavoritesContentState extends State<FavoritesContent>
                 children: [
                   const SizedBox(height: 8.0),
                   makeText10('Price ${input.topPrice.toString()}\$'),
-                  const SizedBox(height: 2.0)
+                  const SizedBox(height: 2.0),
+                  makeGraph()
                 ],
               ),
               const Spacer(),
@@ -130,6 +137,38 @@ class _FavoritesContentState extends State<FavoritesContent>
         ),
       ),
     );
+  }
+
+  Widget makeGraph() {
+    return BlocBuilder<MarketGraphBloc, MarketGraphState>(
+      builder: (context, state) {
+        if (state is MarketGraphSuccessLoadedState) {
+          return SizedBox(
+            height: 50.0,
+            width: 85.0,
+            child: RepaintBoundary(
+              child: CustomPaint(
+                painter: SmallGraphicComponent(
+                    state.model, widget.input.percent24h ?? 0),
+              ),
+            ),
+          );
+        }
+        return shimmerGraph();
+      },
+    );
+  }
+
+  Widget shimmerGraph() {
+    return makeShimmerUtility(
+        Container(
+          height: 36.0,
+          width: 85.0,
+          decoration: BoxDecoration(
+              color: AppColorsUtility.surface,
+              borderRadius: const BorderRadius.all(Radius.circular(12.0))),
+        ),
+        context);
   }
 
   Widget makeText16(String input) {

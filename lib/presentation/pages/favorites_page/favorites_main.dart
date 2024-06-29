@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/domain/entities/hive_services/favorites_service_hive.dart';
+import 'package:sheker/presentation/bloc/market/market_graph_bloc/bloc/market_graph_bloc.dart';
 import 'package:sheker/presentation/pages/favorites_page/favorites_content/favorites_content.dart';
 import 'package:sheker/presentation/pages/favorites_page/viewmodel/favorites_view_model.dart';
 
@@ -57,11 +59,14 @@ class _FavoritesMainState extends BaseScreenState<FavoritesMain>
                       const SizedBox(
                         height: 7.0,
                       ),
-                      FavoritesContent(
-                        model.getItems()[index],
-                        () {
-                          model.removeDataOnIndex(index);
-                        },
+                      BlocProvider(
+                        create: (context) => MarketGraphBloc(),
+                        child: FavoritesContent(
+                          model.getItems()[index],
+                          () {
+                            model.removeDataOnIndex(index);
+                          },
+                        ),
                       ),
                       const SizedBox(
                         height: 7.0,
