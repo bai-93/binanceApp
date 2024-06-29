@@ -27,6 +27,10 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
             surfaceTintColor: AppColorsUtility.lightBackground)),
     //TEXT
     textTheme: TextTheme(
+        headlineSmall: TextStyle(
+            color: AppColorsUtility.surface,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400),
         displaySmall: TextStyle(
             color: AppColorsUtility.text,
             fontSize: 10.0,
@@ -59,7 +63,7 @@ final lightTheme = ThemeData.light(useMaterial3: true).copyWith(
 final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
     splashColor: Colors.transparent,
     primaryColor: AppColorsUtility.darkBackground, // background
-    hintColor: Color.fromARGB(255, 126, 144, 147),
+    hintColor: const Color.fromARGB(255, 126, 144, 147),
     scaffoldBackgroundColor: AppColorsUtility.darkBackground,
     appBarTheme: AppBarTheme(backgroundColor: AppColorsUtility.darkBackground),
     tabBarTheme: TabBarTheme(
@@ -80,6 +84,10 @@ final darkTheme = ThemeData.dark(useMaterial3: true).copyWith(
 
     // TEXT
     textTheme: TextTheme(
+        headlineSmall: TextStyle(
+            color: AppColorsUtility.text,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400),
         displaySmall: TextStyle(
             color: AppColorsUtility.surface,
             fontSize: 10.0,

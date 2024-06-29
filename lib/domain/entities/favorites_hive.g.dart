@@ -17,19 +17,20 @@ class FavoritesHiveAdapter extends TypeAdapter<FavoritesHive> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FavoritesHive(
-      name: fields[0] as String,
-      volume24h: fields[1] as double,
-      topPrice: fields[2] as double,
-      lowPrice: fields[3] as double,
-      lastPrice: fields[4] as double,
-      percent24h: fields[5] as double,
+      name: fields[0] as String?,
+      volume24h: fields[1] as double?,
+      topPrice: fields[2] as double?,
+      lowPrice: fields[3] as double?,
+      lastPrice: fields[4] as double?,
+      percent24h: fields[5] as double?,
+      symbol: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, FavoritesHive obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class FavoritesHiveAdapter extends TypeAdapter<FavoritesHive> {
       ..writeByte(4)
       ..write(obj.lastPrice)
       ..writeByte(5)
-      ..write(obj.percent24h);
+      ..write(obj.percent24h)
+      ..writeByte(6)
+      ..write(obj.symbol);
   }
 
   @override

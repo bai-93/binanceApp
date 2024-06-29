@@ -10,10 +10,14 @@ class FavoritesServiceHive {
   }
 
   static Future<void> addData(FavoritesHive data) async {
-    await favoritesDataBase?.put(data.name, data);
+    await favoritesDataBase?.add(data);
   }
 
-  static Future<void> removeData(FavoritesHive data) async {
-    await favoritesDataBase?.delete(data.name);
+  static Future<void> removeData(int index) async {
+    await favoritesDataBase?.deleteAt(index);
+  }
+
+  static FavoritesHive? getDataByIndex(int index) {
+    return favoritesDataBase?.getAt(index);
   }
 }

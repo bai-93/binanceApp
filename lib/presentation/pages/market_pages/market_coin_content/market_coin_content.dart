@@ -175,7 +175,6 @@ class _MarketCoinContentState extends State<MarketCoinContent>
                 borderRadius: const BorderRadius.all(Radius.circular(12.0))),
           ),
           context);
-      ;
     });
   }
 

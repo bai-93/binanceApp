@@ -100,11 +100,7 @@ class _MarketMainState extends BaseScreenState<MarketMain>
                     return BlocProvider(
                       create: (context) => MarketGraphBloc(),
                       child: MarketCoinContent(() {
-                        // ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(content: Text('added')));
-
-                        FavoritesServiceHive.addData(FavoritesHive(
-                            name: state.data.data[index].name ?? 'st'));
+                        model.addToDataBase(state.data.data[index]);
                       }, state.data.data[index]),
                     );
                   },

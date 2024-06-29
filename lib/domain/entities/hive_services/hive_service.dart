@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sheker/domain/entities/favorites_hive.dart';
-import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
 import 'package:sheker/domain/entities/portfolio_hive.dart';
 import 'package:sheker/domain/entities/user_hive.dart';
 
