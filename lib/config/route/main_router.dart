@@ -6,6 +6,7 @@ import 'package:sheker/config/route/tabbar_routes/favorite/favorites_router.dart
 import 'package:sheker/config/route/tabbar_routes/home/home_route.dart';
 import 'package:sheker/config/route/tabbar_routes/market/market_router.dart';
 import 'package:sheker/config/route/tabbar_routes/trade/trade_router.dart';
+import 'package:sheker/config/route/tabbar_routes/wallet/wallet_router.dart';
 import 'package:sheker/presentation/pages/login_page/secondVersionloginScreen.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding.dart';
 import 'package:sheker/presentation/pages/tab_bar/main_part/main_menu_tabBar.dart';
@@ -28,7 +29,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation: '/home', //RouterPathManager.getRouterPath(),
+      initialLocation: '/wallet', //RouterPathManager.getRouterPath(),
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(
@@ -70,13 +71,9 @@ class AppRouter {
           StatefulShellBranch(
               navigatorKey: _serviceNavigatorKey,
               routes: [FavoritesRouter.getRouter()]),
-          StatefulShellBranch(navigatorKey: _walletNavigatorKey, routes: [
-            GoRoute(
-                path: '/wallet',
-                builder: (context, state) {
-                  return const WalletShimmerPage();
-                })
-          ])
+          StatefulShellBranch(
+              navigatorKey: _walletNavigatorKey,
+              routes: [WalletRouter.getRouter()])
         ]);
   }
 }
