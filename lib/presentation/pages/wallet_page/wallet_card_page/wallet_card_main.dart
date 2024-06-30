@@ -236,6 +236,7 @@ class _WalletCardsMainPageState extends State<WalletCardsMainPage> {
 
   @override
   void dispose() {
+    controller.dispose();
     super.dispose();
   }
 }

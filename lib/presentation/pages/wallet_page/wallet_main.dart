@@ -62,8 +62,45 @@ class _WalletMainState extends BaseScreenState<WalletMain>
             ? WalletCardsMainPage(model.getCardIndex(), (index) {
                 model.setCardIndex(index);
               })
-            : const Center()
+            : const Center(),
+        const SizedBox(height: 16.0),
+        makeFinanceOperationButtons()
       ],
+    );
+  }
+
+  Widget makeFinanceOperationButtons() {
+    List<void Function()> actions = [
+      model.depositTapped,
+      model.sendTapped,
+      model.receiveTapped,
+      model.withdrawTapped
+    ];
+
+    List<Widget> dataWidget = [];
+
+    for (int i = 0; i < actions.length; i++) {
+      dataWidget.add(GestureDetector(
+        onTap: () {
+          actions[i]();
+        },
+        child: Column(
+          children: [
+            Image.asset(model.getImagePath()[i], width: 44.0, height: 44.0),
+            Text(
+              model.getFinanceButtonTitles()[i],
+              style: Theme.of(context).textTheme.bodySmall,
+            )
+          ],
+        ),
+      ));
+    }
+    return Padding(
+      padding: const EdgeInsets.only(left: 23.0, right: 15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: dataWidget,
+      ),
     );
   }
 }

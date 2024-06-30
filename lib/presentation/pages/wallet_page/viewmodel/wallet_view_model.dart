@@ -21,6 +21,36 @@ class WalletViewModel {
     return _cardIndex;
   }
 
+  List<String> getFinanceButtonTitles() {
+    return ['Deposit', 'Send', 'Receive', 'Withdraw'];
+  }
+
+  List<String> getImagePath() {
+    String imagePath = 'lib/images/wallet/';
+    return [
+      '${imagePath}deposit.png',
+      '${imagePath}send.png',
+      '${imagePath}receive.png',
+      '${imagePath}withdraw.png'
+    ];
+  }
+
+  void depositTapped() {
+    debugPrint('deposit');
+  }
+
+  void sendTapped() {
+    debugPrint('send');
+  }
+
+  void receiveTapped() {
+    debugPrint('receive');
+  }
+
+  void withdrawTapped() {
+    debugPrint('withdraw');
+  }
+
   Map<int, Widget> makeSlidingItems(BuildContext context) {
     List<String> slidingData = ['Cards', 'Portfolio'];
     TextStyle? textStyle;
