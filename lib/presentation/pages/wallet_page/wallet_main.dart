@@ -64,7 +64,8 @@ class _WalletMainState extends BaseScreenState<WalletMain>
               })
             : const Center(),
         const SizedBox(height: 16.0),
-        makeFinanceOperationButtons()
+        makeFinanceOperationButtons(),
+        const SizedBox(height: 16.0)
       ],
     );
   }

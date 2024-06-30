@@ -138,12 +138,12 @@ class _WalletCardsMainPageState extends State<WalletCardsMainPage> {
               ),
               const SizedBox(width: 5.0),
               Container(
-                  color: AppColorsUtility.otline, width: 1.0, height: 25.0),
+                  color: AppColorsUtility.secondary, width: 1.0, height: 25.0),
               const SizedBox(width: 5.0),
               Text(
                 itemModel.minorTitleLefttTop,
                 style: TextStyle(
-                    color: AppColorsUtility.surface,
+                    color: AppColorsUtility.secondary,
                     fontSize: 11.0,
                     fontWeight: FontWeight.w600),
               )
