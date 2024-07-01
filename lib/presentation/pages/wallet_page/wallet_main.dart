@@ -4,7 +4,7 @@ import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/pages/wallet_page/viewmodel/wallet_view_model.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_card_page/wallet_card_main.dart';
-import 'package:sheker/utilities/app_colors.dart';
+import 'package:sheker/presentation/pages/wallet_page/wallet_draggable_page/wallet_draggable_main.dart';
 
 class WalletMain extends BaseScreen {
   const WalletMain({super.key});
@@ -39,35 +39,45 @@ class _WalletMainState extends BaseScreenState<WalletMain>
   }
 
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(appBar: customAppbar(), body: body());
+  }
+
+  @override
   Widget body() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
-          child: SizedBox(
-            width: sizeOfScreen().width,
-            height: 32.0,
-            child: CupertinoSlidingSegmentedControl(
-                children: model.makeSlidingItems(context),
-                groupValue: model.getSlideIndex(),
-                onValueChanged: (index) {
-                  setState(() {
-                    model.setSlideIndex(index ?? 0);
-                  });
-                }),
+    return Stack(children: [
+      Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+            child: SizedBox(
+              width: sizeOfScreen().width,
+              height: 32.0,
+              child: CupertinoSlidingSegmentedControl(
+                  children: model.makeSlidingItems(context),
+                  groupValue: model.getSlideIndex(),
+                  onValueChanged: (index) {
+                    setState(() {
+                      model.setSlideIndex(index ?? 0);
+                    });
+                  }),
+            ),
           ),
-        ),
-        const SizedBox(height: 16.0),
-        model.getSlideIndex() == 0
-            ? WalletCardsMainPage(model.getCardIndex(), (index) {
-                model.setCardIndex(index);
-              })
-            : const Center(),
-        const SizedBox(height: 16.0),
-        makeFinanceOperationButtons(),
-        const SizedBox(height: 16.0)
-      ],
-    );
+          const SizedBox(height: 16.0),
+          model.getSlideIndex() == 0
+              ? WalletCardsMainPage(model.getCardIndex(), (index) {
+                  model.setCardIndex(index);
+                })
+              : const Center(),
+          const SizedBox(height: 16.0),
+          makeFinanceOperationButtons(),
+          const SizedBox(height: 16.0),
+        ],
+      ),
+      Align(
+          alignment: Alignment.bottomCenter,
+          child: WalletDraggableMainPage(model.getSlideIndex()))
+    ]);
   }
 
   Widget makeFinanceOperationButtons() {

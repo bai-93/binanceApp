@@ -89,6 +89,7 @@ flutter:
     - lib/images/home/
     - lib/images/home/settings/
     - lib/images/coin/
+    - lib/images/brand/
     - lib/images/trade/
     - lib/images/market/
     - lib/images/favorites/
