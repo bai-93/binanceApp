@@ -5,6 +5,7 @@ import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/presentation/pages/wallet_page/viewmodel/wallet_view_model.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_card_page/wallet_card_main.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_draggable_page/wallet_draggable_main.dart';
+import 'package:sheker/presentation/pages/wallet_page/wallet_portfolio_page/wallet_portfolio_main.dart';
 
 class WalletMain extends BaseScreen {
   const WalletMain({super.key});
@@ -68,7 +69,7 @@ class _WalletMainState extends BaseScreenState<WalletMain>
               ? WalletCardsMainPage(model.getCardIndex(), (index) {
                   model.setCardIndex(index);
                 })
-              : const Center(),
+              : const WalletPortfolioMain(),
           const SizedBox(height: 16.0),
           makeFinanceOperationButtons(),
           const SizedBox(height: 16.0),

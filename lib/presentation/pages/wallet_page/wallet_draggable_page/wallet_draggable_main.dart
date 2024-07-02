@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_draggable_page/view_model/wallet_draggable_view_model.dart';
