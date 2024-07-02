@@ -14,9 +14,7 @@ class Providers {
               return ThemeBloc();
             },
           ),
-          BlocProvider<CryptoListBloc>(
-              create: (context) =>
-                  CryptoListBloc()..add(CryptoListLoadEvent())),
+          BlocProvider<CryptoListBloc>(create: (context) => CryptoListBloc()),
           BlocProvider<IntervalPriceDragGestureBloc>(create: (context) {
             return IntervalPriceDragGestureBloc();
           }),

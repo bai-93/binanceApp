@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_draggable_page/view_model/wallet_draggable_view_model.dart';
+import 'package:sheker/presentation/pages/wallet_page/wallet_draggable_page/wallet_draggable_content/wallet_assets_content.dart';
 import 'package:sheker/presentation/pages/wallet_page/wallet_draggable_page/wallet_draggable_content/wallet_transaction_content.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -89,7 +91,7 @@ class _WalletDraggableMainPageState extends State<WalletDraggableMainPage> {
                                 model.firstPartTransaction,
                                 model.secondPartTransaction
                               ])
-                            : const Center()
+                            : WalletAssetsContent()
                       ],
                     ),
                   ),
@@ -104,11 +106,17 @@ class _WalletDraggableMainPageState extends State<WalletDraggableMainPage> {
 
   Widget makeButton(bool isSearch) {
     String image = isSearch ? 'search.png' : 'filter.png';
+    bool isDark = UserServiceHive.getIsDarkTheme();
     return GestureDetector(
       onTap: () {
         debugPrint(isSearch ? 'search' : 'filter');
       },
-      child: Image.asset('lib/images/wallet/$image', width: 24.0, height: 24.0),
+      child: Image.asset(
+        'lib/images/wallet/$image',
+        width: 24.0,
+        height: 24.0,
+        color: isDark ? Colors.white : null,
+      ),
     );
   }
 }
