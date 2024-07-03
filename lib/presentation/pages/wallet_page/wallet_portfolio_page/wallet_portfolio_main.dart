@@ -29,7 +29,7 @@ class _WalletPortfolioMainState extends State<WalletPortfolioMain> {
           ],
         ),
         const SizedBox(height: 20.0),
-        WalletPortfolioContentGraph(),
+        WalletPortfolioContentGraph(model.getPercents(), model.getColors()),
       ],
     );
   }
