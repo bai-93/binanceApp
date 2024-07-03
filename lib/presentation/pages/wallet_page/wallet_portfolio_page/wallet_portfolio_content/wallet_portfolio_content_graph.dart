@@ -19,8 +19,8 @@ class _WalletPortfolioContentGraphState
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 900));
     progressValue = Tween<double>(begin: 0.0, end: 1.0).animate(_controller)
       ..addListener(
         () {
@@ -39,13 +39,30 @@ class _WalletPortfolioContentGraphState
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 220.0,
-      height: 206.0,
-      child: CustomPaint(
-        painter: WalletPortfolioCircularGraph(
-            widget.percents, widget.colors, progressValue.value),
+    return Stack(alignment: Alignment.center, children: [
+      SizedBox(
+        width: 185.0,
+        height: 180.0,
+        child: CustomPaint(
+          painter: WalletPortfolioCircularGraph(
+              widget.percents, widget.colors, progressValue.value),
+        ),
       ),
-    );
+      Column(
+        children: [
+          Text(
+            'My balance',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          const SizedBox(
+            height: 8.0,
+          ),
+          Text(
+            '\$2,760.23',
+            style: Theme.of(context).textTheme.bodyLarge,
+          )
+        ],
+      )
+    ]);
   }
 }
