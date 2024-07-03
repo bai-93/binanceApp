@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/utilities/app_colors.dart';
-import 'package:sheker/utilities/shimmer_utility.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MarketDataShimmer extends StatelessWidget {

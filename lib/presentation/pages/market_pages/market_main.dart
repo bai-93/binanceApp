@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
-import 'package:sheker/domain/entities/favorites_hive.dart';
-import 'package:sheker/domain/entities/hive_services/favorites_service_hive.dart';
 import 'package:sheker/presentation/bloc/market/bloc/market_bloc.dart';
 import 'package:sheker/presentation/bloc/market/market_graph_bloc/bloc/market_graph_bloc.dart';
 import 'package:sheker/presentation/pages/market_pages/market_coin_content/market_coin_content.dart';
