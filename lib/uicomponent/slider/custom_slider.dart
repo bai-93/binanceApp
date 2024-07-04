@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/uicomponent/slider/slider_overlay_shape.dart';
 import 'package:sheker/uicomponent/slider/slider_track_shape.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -15,11 +16,15 @@ class _CustomSliderState extends State<CustomSlider> {
   Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderThemeData(
-        activeTrackColor: AppColorsUtility.onboardingPrimary,
+        trackHeight: 12.0,
+        activeTickMarkColor: AppColorsUtility.surface,
+        inactiveTickMarkColor: AppColorsUtility.onboardingPrimary,
         inactiveTrackColor: AppColorsUtility.otline,
-        // trackShape: SliderTrackCustomShape(widget.value)
+        activeTrackColor: AppColorsUtility.darkPrimary,
+        trackShape: SliderTrackCustomShape(widget.value),
       ),
       child: Slider(
+          // divisions: 4,
           label: widget.value.toString(),
           value: widget.value,
           onChanged: widget.onChanged,

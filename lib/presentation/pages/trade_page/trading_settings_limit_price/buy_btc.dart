@@ -64,13 +64,21 @@ class _BuyBtcPriceLimitState extends State<BuyBtcPriceLimit> {
         SizedBox(
           height: 11.0,
           width: 170.0,
-          child: Slider(
-              value: model.getPercentOfSlider(),
-              onChanged: (value) {
-                setState(() {
-                  model.changePercentOfSlider(value);
-                });
-              }),
+          child: CustomSlider(
+            model.getPercentOfSlider(),
+            (value) {
+              setState(() {
+                model.changePercentOfSlider(value);
+              });
+            },
+          ),
+          // child: Slider(
+          //     value: model.getPercentOfSlider(),
+          //     onChanged: (value) {
+          //       setState(() {
+          //         model.changePercentOfSlider(value);
+          //       });
+          //     }),
         ),
         const SizedBox(
           height: 8.0,

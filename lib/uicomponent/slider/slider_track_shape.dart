@@ -1,78 +1,94 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 
-class SliderTrackCustomShape extends SliderTrackShape {
+class SliderTrackCustomShape extends RoundedRectSliderTrackShape {
   double value;
-
   SliderTrackCustomShape(this.value);
-  @override
-  Rect getPreferredRect(
-      {required RenderBox parentBox,
-      Offset offset = Offset.zero,
-      required SliderThemeData sliderTheme,
-      bool isEnabled = false,
-      bool isDiscrete = false}) {
-    final double thumbWidth =
-        sliderTheme.thumbShape!.getPreferredSize(false, false).width;
-    final double trackHeight = sliderTheme.trackHeight ?? 0.0;
-
-    final double trackWidth = parentBox.size.width - thumbWidth;
-    final double trackLeft = (offset.dx - thumbWidth / 1).abs();
-    final double trackTop =
-        offset.dy + (parentBox.size.height - trackHeight) / 2;
-    return Rect.fromLTWH(trackLeft, trackTop, trackWidth, trackHeight);
-  }
 
   @override
   void paint(PaintingContext context, Offset offset,
       {required RenderBox parentBox,
       required SliderThemeData sliderTheme,
       required Animation<double> enableAnimation,
+      required TextDirection textDirection,
       required Offset thumbCenter,
       Offset? secondaryOffset,
-      bool isEnabled = false,
-      bool isDiscrete = false,
-      required TextDirection textDirection}) {
-    //
-    double percentSlider = value / 100;
-    //
+      bool isDiscrete = true,
+      bool isEnabled = true,
+      double additionalActiveTrackHeight = 0}) {
     final Rect trackRect = getPreferredRect(
-        parentBox: parentBox, sliderTheme: sliderTheme, offset: offset);
-    //
-    final inActivePaint =
-        inActiveTrackLayer(sliderTheme.inactiveTrackColor ?? Colors.grey);
+      parentBox: parentBox,
+      offset: offset,
+      sliderTheme: sliderTheme,
+      isEnabled: isEnabled,
+      isDiscrete: isDiscrete,
+    );
 
-    final secondLayerPaint = Paint()
-      ..color = sliderTheme.inactiveTrackColor!
-      ..style = PaintingStyle.fill;
-    //
-    final Path inActiveTrackPath = makeTrackPath();
-    // inActiveTrackPath.moveTo(20.0, 15.0);
-    // inActiveTrackPath.addRect(Rect.fromLTWH(
-    //     20.0, 5.0, trackRect.width * percentSlider, trackRect.height));
-    // inActiveTrackPath.addArc(
-    //     Rect.fromLTWH(18.0, 5.0, 5.0, trackRect.height), pi / 2, pi);
+    final ColorTween activeTrackColorTween = ColorTween(
+        begin: sliderTheme.disabledActiveTrackColor,
+        end: sliderTheme.activeTrackColor);
+    final ColorTween inactiveTrackColorTween = ColorTween(
+        begin: sliderTheme.disabledInactiveTrackColor,
+        end: sliderTheme.inactiveTrackColor);
+    final Paint activePaint = Paint()
+      ..color = activeTrackColorTween.evaluate(enableAnimation)!;
+    final Paint inactivePaint = Paint()
+      ..color = inactiveTrackColorTween.evaluate(enableAnimation)!;
 
-    // context.canvas.drawPath(secondLayerPath, secondLayerPaint);
-    context.canvas.drawPath(inActiveTrackPath, inActivePaint);
+    final radius = trackRect.height * 0.5; //todo: use your trackHeightRatio
+    final thumbWidth =
+        sliderTheme.thumbShape!.getPreferredSize(isEnabled, isDiscrete).width;
+
+    final Path path = Path();
+    path.moveTo(trackRect.left - 1.0, trackRect.top + trackRect.height * 0.22);
+    path.lineTo(trackRect.width + thumbWidth + 5.0, trackRect.top);
+    path.arcToPoint(
+      Offset(trackRect.width + thumbWidth + 5.0, trackRect.bottom),
+      radius: Radius.circular(radius),
+    );
+    path.lineTo(trackRect.left - 1.0, trackRect.height * 0.6);
+    path.arcToPoint(Offset(trackRect.left - 3.5, trackRect.height * 0.3),
+        radius: Radius.circular(radius));
+    path.close();
+
+    final Path inactivePath = makeInactivePath(trackRect, thumbWidth, radius);
+    final Path activePath =
+        makeActivePath(trackRect, thumbWidth, radius, value / 100.0);
+
+    // final Paint trackPaint = Paint();
+    context.canvas.drawPath(inactivePath, inactivePaint);
+    context.canvas.drawPath(activePath, activePaint);
   }
 
-  Paint inActiveTrackLayer(Color inActiveColor) {
-    Paint paint = Paint();
-    paint.color = inActiveColor;
-    paint.style = PaintingStyle.fill;
-    paint.strokeCap = StrokeCap.round;
-    paint.strokeJoin = StrokeJoin.round;
-    return paint;
+  Path makeInactivePath(Rect trackRect, double thumbWidth, double radius) {
+    final Path path = Path();
+    path.moveTo(trackRect.left - 1.0, trackRect.top + trackRect.height * 0.22);
+    path.lineTo(trackRect.width + thumbWidth + 5.0, trackRect.top);
+    path.arcToPoint(
+      Offset(trackRect.width + thumbWidth + 5.0, trackRect.bottom),
+      radius: Radius.circular(radius),
+    );
+    path.lineTo(trackRect.left - 1.0, trackRect.height * 0.6);
+    path.arcToPoint(Offset(trackRect.left - 3.5, trackRect.height * 0.3),
+        radius: Radius.circular(radius));
+    path.close();
+    return path;
   }
 
-  Path makeTrackPath() {
-    Path path = Path();
-    path.moveTo(15.0, 15.0);
-    path.quadraticBezierTo(10.0, 3, 15.0, 2.0);
+  Path makeActivePath(
+      Rect trackRect, double thumbWidth, double radius, double percentOfWAy) {
+    final Path path = Path();
+    path.moveTo(trackRect.left - 1.0, trackRect.top + trackRect.height * 0.22);
+    path.lineTo(
+        (trackRect.width * percentOfWAy) + thumbWidth + 5.0, trackRect.top);
+    path.arcToPoint(
+      Offset((trackRect.width * percentOfWAy) + thumbWidth + 5.0,
+          trackRect.bottom),
+      radius: Radius.circular(radius),
+    );
+    path.lineTo(trackRect.left - 1.0, trackRect.height * 0.6);
+    path.arcToPoint(Offset(trackRect.left - 3.5, trackRect.height * 0.3),
+        radius: Radius.circular(radius));
+    path.close();
     return path;
   }
 }
-
-// final Size thumbSize =
-    //     sliderTheme.thumbShape!.getPreferredSize(isEnabled, isDiscrete);

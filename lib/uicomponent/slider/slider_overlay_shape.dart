@@ -29,7 +29,6 @@ class SliderOverlayCustomShape extends SliderComponentShape {
       ..lineTo(size.width, 0.0)
       ..lineTo(size.width, size.height);
     pathSegment.close;
-    print(value);
 
     context.canvas.drawPath(pathSegment, activePaint);
   }
