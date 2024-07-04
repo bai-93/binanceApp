@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
 import 'package:sheker/uicomponent/slider/slider_overlay_shape.dart';
 import 'package:sheker/uicomponent/slider/slider_track_shape.dart';
 import 'package:sheker/utilities/app_colors.dart';
@@ -16,6 +17,10 @@ class _CustomSliderState extends State<CustomSlider> {
   Widget build(BuildContext context) {
     return SliderTheme(
       data: SliderThemeData(
+        thumbColor: AppColorsUtility.darkPrimary,
+        overlayColor: UserServiceHive.getIsDarkTheme()
+            ? AppColorsUtility.otline.withOpacity(0.5)
+            : AppColorsUtility.surface.withOpacity(0.5),
         trackHeight: 12.0,
         activeTickMarkColor: AppColorsUtility.surface,
         inactiveTickMarkColor: AppColorsUtility.onboardingPrimary,
