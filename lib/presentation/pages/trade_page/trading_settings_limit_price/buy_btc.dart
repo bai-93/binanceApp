@@ -72,13 +72,6 @@ class _BuyBtcPriceLimitState extends State<BuyBtcPriceLimit> {
               });
             },
           ),
-          // child: Slider(
-          //     value: model.getPercentOfSlider(),
-          //     onChanged: (value) {
-          //       setState(() {
-          //         model.changePercentOfSlider(value);
-          //       });
-          //     }),
         ),
         const SizedBox(
           height: 8.0,

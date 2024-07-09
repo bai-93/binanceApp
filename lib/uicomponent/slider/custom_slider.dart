@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
-import 'package:sheker/uicomponent/slider/slider_overlay_shape.dart';
 import 'package:sheker/uicomponent/slider/slider_track_shape.dart';
 import 'package:sheker/utilities/app_colors.dart';
 

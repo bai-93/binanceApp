@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
+import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/graph_content/graph_content.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/view_model/graph_coin_view_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
-class GraphOfCoin extends BaseScreen {
+class GraphOfCoinMain extends BaseScreen {
   final int index;
-  const GraphOfCoin(this.index, {super.key});
+  const GraphOfCoinMain(this.index, {super.key});
   @override
-  State<GraphOfCoin> createState() => _GraphOfCoinState();
+  State<GraphOfCoinMain> createState() => _GraphOfCoinMainState();
 }
 
-class _GraphOfCoinState extends BaseScreenState<GraphOfCoin>
+class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
     with BaseScreenMixin {
   Map<int, Widget> slidingItems = {};
   late GraphCoinViewModel model;
@@ -115,19 +116,7 @@ class _GraphOfCoinState extends BaseScreenState<GraphOfCoin>
           const SizedBox(
             height: 16.0,
           ),
-          Container(
-            width: sizeOfScreen().width,
-            height: 301.0,
-            decoration: BoxDecoration(
-                color: Colors.blueGrey[300],
-                borderRadius: const BorderRadius.all(Radius.circular(12.0)),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColorsUtility.internalShadow,
-                      offset: const Offset(0.0, 3.0),
-                      blurRadius: 3.0)
-                ]),
-          ), //graph container
+          const GraphContentMain(1),
           const SizedBox(height: 16.0),
           Text(
             'Popular Pairs',
