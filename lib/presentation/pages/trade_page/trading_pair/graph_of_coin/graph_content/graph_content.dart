@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sheker/presentation/bloc/detail_info_graph_bloc/bloc/detail_info_graph_bloc.dart';
+import 'package:sheker/presentation/bloc/trade_graph/bloc/trade_graph_bloc.dart';
+import 'package:sheker/presentation/pages/detail_info_page/crypto_graph/graph_custom_paint.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/graph_content/graph_view_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class GraphContentMain extends StatefulWidget {
+  final void Function() getNewCoinInfoCallback;
   final int index;
-  const GraphContentMain(this.index, {super.key});
+  const GraphContentMain(this.index, this.getNewCoinInfoCallback, {super.key});
 
   @override
   State<GraphContentMain> createState() => _GraphContentMainState();
@@ -15,12 +20,16 @@ class _GraphContentMainState extends State<GraphContentMain> {
 
   @override
   void initState() {
+    context
+        .read<TradeGraphBloc>()
+        .add(GetDetailInfoCoinTradeGraphEvent(model.getCoinWithLowerCase()));
     model.setIndex(widget.index);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    model.setIndex(widget.index);
     return Container(
       height: 301.0,
       width: MediaQuery.of(context).size.width,
@@ -40,7 +49,7 @@ class _GraphContentMainState extends State<GraphContentMain> {
             width: MediaQuery.of(context).size.width,
             child: makeIconMoneyPercentTop(),
           ),
-          SizedBox(height: 201.0, width: MediaQuery.of(context).size.width),
+          makeGraph(),
           SizedBox(
             height: 38.0,
             width: MediaQuery.of(context).size.width,
@@ -92,6 +101,49 @@ class _GraphContentMainState extends State<GraphContentMain> {
           ),
         )
       ],
+    );
+  }
+
+  Widget makeGraph() {
+    return BlocListener<TradeGraphBloc, TradeGraphState>(
+      listener: (context, state) {
+        if (state is SuccessLoadedDetailInfoCoinGraphTradeState) {
+          debugPrint('here listener success detail info graph trade state');
+          print(state.model);
+          // context
+          //     .read<TradeGraphBloc>()
+          //     .add(const GetIntervalInfoCoinTradeGraphEvent('h1', 'bitcoin'));
+        }
+      },
+      child: BlocBuilder<TradeGraphBloc, TradeGraphState>(
+        builder: (context, state) {
+          if (state is GraphDataLoadingGraphTradeState ||
+              state is SuccessLoadedDetailInfoCoinGraphTradeState) {
+            return SizedBox(
+                height: 201.0, width: MediaQuery.of(context).size.width);
+          }
+          if (state is SuccessLoadedIntervalHistoryGraphTradeState) {
+            return GestureDetector(
+              onHorizontalDragUpdate: (details) {
+                setState(() {
+                  model.setPoints(details.globalPosition);
+                });
+              },
+              child: SizedBox(
+                  height: 201.0,
+                  width: MediaQuery.of(context).size.width,
+                  child: RepaintBoundary(
+                    child: CustomPaint(
+                        painter: GraphCustomPaint(
+                      state.model,
+                      (priceCoin, date) {},
+                    )),
+                  )),
+            );
+          }
+          return Container(color: Colors.red, width: 100.0, height: 100.0);
+        },
+      ),
     );
   }
 

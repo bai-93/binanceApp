@@ -84,6 +84,10 @@ class GraphCoinViewModel {
       return [firstPart, secondPart];
     }
   }
+
+  String getCoinLowerCase() {
+    return _coinQueriesSymbolData[_coinTitleOfButtonIndex];
+  }
 }
 
 class _PriceAmountTime {

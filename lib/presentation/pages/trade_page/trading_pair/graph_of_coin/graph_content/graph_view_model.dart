@@ -3,6 +3,7 @@ import 'package:sheker/utilities/money_formatter.dart';
 import 'package:flutter/material.dart';
 
 class GraphViewModel {
+  Offset globalPoints = Offset.zero;
   double _currentPrice = 0.0;
   int _currentIndex = 0;
   double _currentPercent = 0.0;
@@ -69,5 +70,13 @@ class GraphViewModel {
 
   List<String> getGraphSettingsNames() {
     return ['target', 'line', 'brush', 'candlestick', 'full_alt'];
+  }
+
+  void setPoints(Offset input) {
+    globalPoints = input;
+  }
+
+  String getCoinWithLowerCase() {
+    return _coinNames[_currentIndex].toLowerCase();
   }
 }

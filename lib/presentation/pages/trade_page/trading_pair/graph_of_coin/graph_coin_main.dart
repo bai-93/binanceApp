@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
 import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
-import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/graph_content/graph_content.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/view_model/graph_coin_view_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -116,7 +115,10 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
           const SizedBox(
             height: 16.0,
           ),
-          const GraphContentMain(1),
+          // GraphContentMain(model.getCoinTitleOfButtonIndex(), () {
+          //   context.read<TradeGraphBloc>().add(
+          //       GetDetailInfoCoinTradeGraphEvent(model.getCoinLowerCase()));
+          // }),
           const SizedBox(height: 16.0),
           Text(
             'Popular Pairs',

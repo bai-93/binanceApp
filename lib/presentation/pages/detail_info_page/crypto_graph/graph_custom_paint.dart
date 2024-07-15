@@ -45,22 +45,12 @@ class GraphCustomPaint extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     var paint = paintConfigure(true);
     var path = drawFunction(canvas, size, true);
-
+    Color first = const Color(0xFF2F66F6).withAlpha(200);
+    Color second = const Color(0xFF2F66F6).withAlpha(0);
     paint.shader = LinearGradient(
-        begin: Alignment.topRight,
-        end: Alignment.bottomRight,
-        stops: const [
-          0.2,
-          0.3,
-          0.8,
-          1.0
-        ],
-        colors: [
-          Colors.yellowAccent.withAlpha(100),
-          Colors.purple.withAlpha(100),
-          Colors.blue.withAlpha(127),
-          Colors.red.withAlpha(200),
-        ]).createShader(path.getBounds());
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [first,second]).createShader(path.getBounds());
     canvas.drawPath(path, paint);
     canvas.drawPath(drawFunction(canvas, size, false), paintConfigure(false));
     minMaxCircleDraw(canvas, size);
