@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/presentation/bloc/detail_info_graph_bloc/bloc/detail_info_graph_bloc.dart';
@@ -7,9 +8,8 @@ import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/
 import 'package:sheker/utilities/app_colors.dart';
 
 class GraphContentMain extends StatefulWidget {
-  final void Function() getNewCoinInfoCallback;
   final int index;
-  const GraphContentMain(this.index, this.getNewCoinInfoCallback, {super.key});
+  const GraphContentMain(this.index, {super.key});
 
   @override
   State<GraphContentMain> createState() => _GraphContentMainState();
@@ -17,51 +17,150 @@ class GraphContentMain extends StatefulWidget {
 
 class _GraphContentMainState extends State<GraphContentMain> {
   GraphViewModel model = GraphViewModel();
+  Map<int, Widget> slidingItems = {};
 
   @override
   void initState() {
-    context
-        .read<TradeGraphBloc>()
-        .add(GetDetailInfoCoinTradeGraphEvent(model.getCoinWithLowerCase()));
+    // context
+    //     .read<TradeGraphBloc>()
+    //     .add(GetDetailInfoCoinTradeGraphEvent(model.getCoinWithLowerCase()));
     model.setIndex(widget.index);
+    slidingItems = makeSlidingItems(model.getCurrentIndex());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    model.setIndex(widget.index);
-    return Container(
-      height: 301.0,
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          boxShadow: [
-            BoxShadow(
-                color: AppColorsUtility.internalShadow,
-                blurRadius: 3.0,
-                offset: const Offset(0.0, 3.0)),
-          ],
-          borderRadius: const BorderRadius.all(Radius.circular(10.0))),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 54.0,
-            width: MediaQuery.of(context).size.width,
-            child: makeIconMoneyPercentTop(),
+    return Column(
+      children: [
+        SizedBox(
+          height: 32.0,
+          width: MediaQuery.of(context).size.width - 32.0,
+          child: CupertinoSlidingSegmentedControl(
+              thumbColor: Theme.of(context).colorScheme.surface,
+              children: makeSlidingItems(model.getCurrentIndex()),
+              groupValue: model.getCurrentIndex(),
+              onValueChanged: (index) {
+                model.setIndex(index as int);
+              }),
+        ),
+        SizedBox(
+          height: 54.0,
+          width: MediaQuery.of(context).size.width,
+          child: makeIconMoneyPercentTop(),
+        ),
+        SizedBox(
+          height: 38.0,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: generateGraphSettingsButtons(),
           ),
-          makeGraph(),
-          SizedBox(
-            height: 38.0,
-            width: MediaQuery.of(context).size.width,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: generateGraphSettingsButtons(),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
+
+  Map<int, Widget> makeSlidingItems(int index) {
+    TextStyle? textStyle;
+    Map<int, Widget> dataWidgets = {};
+    for (int i = 0; i < model.getTitlesOfDates().length; i++) {
+      if (i == index) {
+        textStyle = Theme.of(context).textTheme.bodySmall;
+        dataWidgets[i] = Text(
+          model.getTitlesOfDates()[i],
+          style: textStyle,
+        );
+      } else {
+        textStyle = TextStyle(
+            color: AppColorsUtility.secondary,
+            fontSize: 14.0,
+            fontWeight: FontWeight.w400);
+        dataWidgets[i] = Text(model.getTitlesOfDates()[i], style: textStyle);
+      }
+    }
+    return dataWidgets;
+  }
+
+  // Widget makeCoinButtons() {
+  //   List<Widget> buttons = [];
+
+  //   for (int i = 0; i <= model.getTitles().length; i++) {
+  //     Widget title = Text(model.getCoinTitles()[i],
+  //         style: TextStyle(
+  //             color: i == model.getCoinTitleOfButtonIndex()
+  //                 ? AppColorsUtility.surface
+  //                 : AppColorsUtility.secondary,
+  //             fontSize: 14.0,
+  //             fontWeight: FontWeight.w400));
+  //     if (i == model.getCoinTitleOfButtonIndex()) {
+  //       Color background = UserServiceHive.getIsDarkTheme()
+  //           ? AppColorsUtility.darkPrimary
+  //           : AppColorsUtility.onboardingPrimary;
+  //       buttons.add(GestureDetector(
+  //         onTap: () {
+  //           setState(() {
+  //             model.setIndexOfButtonIndexCoin(i);
+  //           });
+  //         },
+  //         child: Container(
+  //           width: 80.0,
+  //           height: 28.0,
+  //           decoration: BoxDecoration(
+  //               color: background,
+  //               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+  //               boxShadow: [
+  //                 BoxShadow(
+  //                     color: AppColorsUtility.internalShadow,
+  //                     offset: const Offset(0.0, 3.0),
+  //                     blurRadius: 3.0)
+  //               ]),
+  //           child: Center(child: title),
+  //         ),
+  //       ));
+  //     } else {
+  //       buttons.add(GestureDetector(
+  //         onTap: () {
+  //           setState(() {
+  //             model.setIndexOfButtonIndexCoin(i);
+  //           });
+  //         },
+  //         child: Container(
+  //           width: 80.0,
+  //           height: 28.0,
+  //           decoration: BoxDecoration(
+  //               color: Theme.of(context).colorScheme.surface,
+  //               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+  //               boxShadow: [
+  //                 BoxShadow(
+  //                     color: AppColorsUtility.internalShadow,
+  //                     offset: const Offset(0.0, 2.0),
+  //                     blurRadius: 3.0)
+  //               ]),
+  //           child: Center(child: title),
+  //         ),
+  //       ));
+  //     }
+  //   }
+  //   return SizedBox(
+  //     height: 32.0,
+  //     width: sizeOfScreen().width,
+  //     child: ListView.separated(
+  //       padding: const EdgeInsets.only(bottom: 5.0),
+  //       scrollDirection: Axis.horizontal,
+  //       itemCount: buttons.length,
+  //       itemBuilder: (context, index) {
+  //         return buttons[index];
+  //       },
+  //       separatorBuilder: (context, index) {
+  //         return const SizedBox(
+  //           width: 8.0,
+  //           height: 1,
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   Widget makeIconMoneyPercentTop() {
     return Row(

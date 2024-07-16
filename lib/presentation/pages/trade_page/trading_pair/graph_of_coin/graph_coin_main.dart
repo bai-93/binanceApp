@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sheker/config/base_widgets/base_statefull.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
-import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
+import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/graph_content/graph_content.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/view_model/graph_coin_view_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
@@ -15,12 +14,11 @@ class GraphOfCoinMain extends BaseScreen {
 
 class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
     with BaseScreenMixin {
-  Map<int, Widget> slidingItems = {};
   late GraphCoinViewModel model;
 
   @override
   void initState() {
-    model = GraphCoinViewModel(widget.index);
+    model = GraphCoinViewModel();
     super.initState();
   }
 
@@ -62,6 +60,7 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
                       top: BorderSide(color: AppColorsUtility.internalShadow))),
               child: Row(
                 children: [
+                  // GraphContentMain(widget.index),
                   const SizedBox(
                     width: 16.0,
                   ),
@@ -89,36 +88,11 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
 
   @override
   Widget body() {
-    slidingItems = makeSlidingItems(model.getCurrentIndex());
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 16.0,
-          ),
-          SizedBox(
-            height: 32.0,
-            width: sizeOfScreen().width,
-            child: CupertinoSlidingSegmentedControl(
-              thumbColor: Theme.of(context).colorScheme.surface,
-              groupValue: model.getCurrentIndex(),
-              onValueChanged: (value) {
-                setState(() {
-                  model.setIndex(value ?? 0);
-                });
-              },
-              children: slidingItems,
-            ),
-          ),
-          const SizedBox(
-            height: 16.0,
-          ),
-          // GraphContentMain(model.getCoinTitleOfButtonIndex(), () {
-          //   context.read<TradeGraphBloc>().add(
-          //       GetDetailInfoCoinTradeGraphEvent(model.getCoinLowerCase()));
-          // }),
           const SizedBox(height: 16.0),
           Text(
             'Popular Pairs',
@@ -126,10 +100,6 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
           ),
           const SizedBox(
             height: 8.0,
-          ),
-          makeCoinButtons(),
-          const SizedBox(
-            height: 16.0,
           ),
           Text(
             'Trading History',
@@ -143,107 +113,6 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
             height: 100.0,
           )
         ],
-      ),
-    );
-  }
-
-  Map<int, Widget> makeSlidingItems(int index) {
-    TextStyle? textStyle;
-    Map<int, Widget> dataWidgets = {};
-    for (int i = 0; i < model.getTitles().length; i++) {
-      if (i == index) {
-        textStyle = Theme.of(context).textTheme.bodySmall;
-        dataWidgets[i] = Text(
-          model.getTitles()[i],
-          style: textStyle,
-        );
-      } else {
-        textStyle = TextStyle(
-            color: AppColorsUtility.secondary,
-            fontSize: 14.0,
-            fontWeight: FontWeight.w400);
-        dataWidgets[i] = Text(model.getTitles()[i], style: textStyle);
-      }
-    }
-    return dataWidgets;
-  }
-
-  Widget makeCoinButtons() {
-    List<Widget> buttons = [];
-
-    for (int i = 0; i <= model.getTitles().length; i++) {
-      Widget title = Text(model.getCoinTitles()[i],
-          style: TextStyle(
-              color: i == model.getCoinTitleOfButtonIndex()
-                  ? AppColorsUtility.surface
-                  : AppColorsUtility.secondary,
-              fontSize: 14.0,
-              fontWeight: FontWeight.w400));
-      if (i == model.getCoinTitleOfButtonIndex()) {
-        Color background = UserServiceHive.getIsDarkTheme()
-            ? AppColorsUtility.darkPrimary
-            : AppColorsUtility.onboardingPrimary;
-        buttons.add(GestureDetector(
-          onTap: () {
-            setState(() {
-              model.setIndexOfButtonIndexCoin(i);
-            });
-          },
-          child: Container(
-            width: 80.0,
-            height: 28.0,
-            decoration: BoxDecoration(
-                color: background,
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColorsUtility.internalShadow,
-                      offset: const Offset(0.0, 3.0),
-                      blurRadius: 3.0)
-                ]),
-            child: Center(child: title),
-          ),
-        ));
-      } else {
-        buttons.add(GestureDetector(
-          onTap: () {
-            setState(() {
-              model.setIndexOfButtonIndexCoin(i);
-            });
-          },
-          child: Container(
-            width: 80.0,
-            height: 28.0,
-            decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColorsUtility.internalShadow,
-                      offset: const Offset(0.0, 2.0),
-                      blurRadius: 3.0)
-                ]),
-            child: Center(child: title),
-          ),
-        ));
-      }
-    }
-    return SizedBox(
-      height: 32.0,
-      width: sizeOfScreen().width,
-      child: ListView.separated(
-        padding: const EdgeInsets.only(bottom: 5.0),
-        scrollDirection: Axis.horizontal,
-        itemCount: buttons.length,
-        itemBuilder: (context, index) {
-          return buttons[index];
-        },
-        separatorBuilder: (context, index) {
-          return const SizedBox(
-            width: 8.0,
-            height: 1,
-          );
-        },
       ),
     );
   }
