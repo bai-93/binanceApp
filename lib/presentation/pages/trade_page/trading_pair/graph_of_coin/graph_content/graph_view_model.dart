@@ -31,7 +31,7 @@ class GraphViewModel {
     _coinButtonIndex = index;
   }
 
-  void setTitlesIndex(int index) {
+  void setDaysIndex(int index) {
     _titlesDaysIndex = index;
   }
 
@@ -39,8 +39,16 @@ class GraphViewModel {
     return _coinButtonIndex;
   }
 
+  int getCurrentDateIndex() {
+    return _titlesDaysIndex;
+  }
+
   List<String> getTitlesOfDates() {
     return _titlesOfDates;
+  }
+
+  List<String> getCoinLabels() {
+    return _coinLabelTitles;
   }
 
   String getImage() {
@@ -93,9 +101,5 @@ class GraphViewModel {
 
   void setPoints(Offset input) {
     globalPoints = input;
-  }
-
-  String getCoinWithLowerCase() {
-    return _coinNames[_coinButtonIndex].toLowerCase();
   }
 }

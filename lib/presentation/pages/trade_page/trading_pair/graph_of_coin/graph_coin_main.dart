@@ -60,7 +60,6 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
                       top: BorderSide(color: AppColorsUtility.internalShadow))),
               child: Row(
                 children: [
-                  // GraphContentMain(widget.index),
                   const SizedBox(
                     width: 16.0,
                   ),
@@ -93,11 +92,7 @@ class _GraphOfCoinMainState extends BaseScreenState<GraphOfCoinMain>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 16.0),
-          Text(
-            'Popular Pairs',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
+          GraphContentMain(widget.index),
           const SizedBox(
             height: 8.0,
           ),
