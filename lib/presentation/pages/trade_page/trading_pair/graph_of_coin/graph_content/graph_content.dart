@@ -83,7 +83,7 @@ class _GraphContentMainState extends State<GraphContentMain> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: generateGraphSettingsButtons(),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -267,7 +267,7 @@ class _GraphContentMainState extends State<GraphContentMain> {
                 });
               },
               child: SizedBox(
-                  height: 201.0,
+                  height: 210.0,
                   width: MediaQuery.of(context).size.width - 32.0,
                   child: RepaintBoundary(
                     child: CustomPaint(
