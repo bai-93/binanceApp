@@ -18,7 +18,7 @@ class GraphViewModel {
     'ADA/USD'
   ];
   final List<String> _titlesOfDates = ['1Hour', '1Day', '1Month', '1Year'];
-  final List<String> _datesOfQuery = ['h1', 'd1', 'm1', '1y'];
+  final List<String> _datesOfQuery = ['h1', 'd1', 'm1', 'm15'];
   final List<String> _coinNames = [
     'Ethereum',
     'Bitcoin',
@@ -60,6 +60,10 @@ class GraphViewModel {
     return _coinNames[_coinButtonIndex];
   }
 
+  String getCoinQuery() {
+    return _coinNames[_coinButtonIndex].toLowerCase();
+  }
+
   String getCoinSymbolName() {
     return _imagesCoin[_coinButtonIndex];
   }
@@ -82,6 +86,10 @@ class GraphViewModel {
 
   String getCurrentPercent() {
     return '${MoneyFormatterUtility.moneyFormatCount(_currentPercent, count: 2)}%';
+  }
+
+  String getDayQuery() {
+    return _datesOfQuery[_titlesDaysIndex];
   }
 
   List<String> getGraphSettingsImages() {
