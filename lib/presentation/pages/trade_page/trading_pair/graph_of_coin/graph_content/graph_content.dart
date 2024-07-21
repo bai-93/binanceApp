@@ -25,6 +25,10 @@ class _GraphContentMainState extends State<GraphContentMain> {
   void initState() {
     model.setIndex(widget.index);
 
+    context
+        .read<TradeGraphBloc>()
+        .add(GetDetailInfoCoinTradeGraphEvent(model.getCoinQuery()));
+
     WidgetsBinding.instance.addPostFrameCallback((duration) {
       setState(() {
         slidingItems = makeSlidingItems(model.getCurrentDateIndex());
@@ -164,6 +168,9 @@ class _GraphContentMainState extends State<GraphContentMain> {
             setState(() {
               model.setIndex(i);
             });
+            context.read<TradeGraphBloc>().add(
+                GetIntervalInfoCoinTradeGraphEvent(
+                    model.getDayQuery(), model.getCoinQuery()));
           },
           child: Container(
             width: 80.0,
@@ -247,10 +254,8 @@ class _GraphContentMainState extends State<GraphContentMain> {
     return BlocListener<TradeGraphBloc, TradeGraphState>(
       listener: (context, state) {
         if (state is SuccessLoadedDetailInfoCoinGraphTradeState) {
-          print(state.model);
-          // context
-          //     .read<TradeGraphBloc>()
-          //     .add(const GetIntervalInfoCoinTradeGraphEvent('h1', 'bitcoin'));
+          context.read<TradeGraphBloc>().add(GetIntervalInfoCoinTradeGraphEvent(
+              model.getDayQuery(), model.getCoinQuery()));
         }
       },
       child: BlocBuilder<TradeGraphBloc, TradeGraphState>(
@@ -272,9 +277,8 @@ class _GraphContentMainState extends State<GraphContentMain> {
                   child: RepaintBoundary(
                     child: CustomPaint(
                         painter: GraphCustomPaint(
-                      state.model,
-                      (priceCoin, date) {},
-                    )),
+                            state.model, (priceCoin, date) {},
+                            positionOfTouch: model.getGlobalPoints())),
                   )),
             );
           }
