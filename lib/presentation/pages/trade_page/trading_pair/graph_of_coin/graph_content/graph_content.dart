@@ -76,7 +76,15 @@ class _GraphContentMainState extends State<GraphContentMain> {
                 child: makeIconMoneyPercentTop(),
               ),
               const SizedBox(height: 4.0),
-              makeGraph(),
+              // makeGraph(),
+              SizedBox(
+                  height: 210.0,
+                  width: MediaQuery.of(context).size.width - 32.0,
+                  child: RepaintBoundary(
+                    child: CustomPaint(
+                        painter: GraphCustomPaint(null, (priceCoin, date) {},
+                            positionOfTouch: model.getGlobalPoints())),
+                  )),
               const SizedBox(
                 height: 4.0,
               ),
@@ -315,3 +323,40 @@ class _GraphContentMainState extends State<GraphContentMain> {
     return items;
   }
 }
+
+// Path drawFunction(Canvas canvas, Size size) {
+//     var path = Path();
+//     final double stepWidth = size.width / cryptoMoneyData.length;
+//     double halfStep = stepWidth / 2;
+//     double nextStepX = stepWidth;
+//     final height = size.height;
+//     bool isFirst = true;
+//     coordinates.clear();
+//     for (int i = 0; i < percentCoefficientData.length; i++) {
+//       if (isFirst) {
+//         isFirst = false;
+//         path.moveTo(0.0, percentCoefficientData[i] * height);
+//         //add coordinate only "i"
+//         path.cubicTo(
+//             halfStep,
+//             percentCoefficientData[i] * height,
+//             halfStep,
+//             percentCoefficientData[i + 1] * height,
+//             nextStepX,
+//             percentCoefficientData[i + 1] * height);
+//         //add coordinate "i + 1"
+//       } else {
+//         if (i + 1 < percentCoefficientData.length) {
+//           path.cubicTo(
+//               nextStepX + halfStep,
+//               percentCoefficientData[i] * height,
+//               nextStepX + halfStep,
+//               percentCoefficientData[i + 1] * height,
+//               nextStepX + stepWidth,
+//               percentCoefficientData[i + 1] * height);
+//         } else {}
+//         nextStepX += stepWidth;
+//       }
+//     }
+//     return path;
+//   }

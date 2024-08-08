@@ -18,4 +18,11 @@ class AppColorsUtility {
   static Color orange = '#F7931A'.toColor();
   static Color red = '#CD0000'.toColor();
   static Color darkPrimary = '#436FE2'.toColor();
+
+  static List<Color> graphGradientColor(bool isDark) {
+    '#2F66F600'.toColor().withAlpha(100);
+    return isDark
+        ? [Color(0xFF2F66F6), Color(0xFF2F66F6).withOpacity(0.25)]
+        : [Color(0xFF2F66F6), Color(0xFFD9D9D9)];
+  }
 }

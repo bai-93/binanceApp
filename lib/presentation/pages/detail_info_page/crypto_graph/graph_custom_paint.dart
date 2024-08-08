@@ -1,165 +1,54 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sheker/config/theme/theme_manager.dart';
 import 'dart:ui' as UI;
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
+import 'package:sheker/injection/injection_configure.dart';
+import 'package:sheker/utilities/app_colors.dart';
+import 'package:sheker/utilities/biometryhelper.dart';
+import 'package:sheker/utilities/graph_data_normalize.dart';
 import 'package:sheker/utilities/money_formatter.dart';
 
 class GraphCustomPaint extends CustomPainter {
-  CryptoHistoryPriceListModel model;
-  double progressValue;
-  bool onStartFlag = false, onUpdateFlag = false, onEndFlag = false;
+  CryptoHistoryPriceListModel? model;
   Offset positionOfTouch = Offset.zero;
+  Path graphPath = Path();
+  Path gradientPath = Path();
   void Function(double value, String date) callBack;
 
-  List<double> percentageData = [];
-  List<Offset> coordinates = [];
-  List<String> dates = [];
-  List<double> percentCoefficient = [
-    63006.5,
-    63094.97,
-    62740.13,
-    62734.97,
-    63460.04,
-    62773.37,
-    63195.48,
-    62653.63,
-    62384.96,
-    62743.44,
-    63014.9,
-    63188.83,
-    62979.91,
-    62806.18,
-    63806.18,
+  List<double> cryptoMoneyData = [
+    65000.0,
+    65300.0,
+    65350.0,
+    65200.0,
+    65250.0,
+    65310.0,
+    65290.0,
+    65280.0,
+    65290.0
   ];
+  List<double> percentCoefficientData = [];
+  int indexMin = 0, indexMax = 0;
+  List<Offset> coordinates = [];
+
   GraphCustomPaint(this.model, this.callBack,
-      {this.onStartFlag = false,
-      this.onUpdateFlag = false,
-      this.onEndFlag = false,
-      this.positionOfTouch = Offset.zero,
-      this.progressValue = 1.0}) {
+      {this.positionOfTouch = Offset.zero}) {
     settingsModel();
   }
 
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = paintConfigure(true);
-    var path = drawFunction(canvas, size, true);
-    Color first = const Color(0xFF2F66F6).withAlpha(200);
-    Color second = const Color(0xFF2F66F6).withAlpha(0);
-    paint.shader = LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [first,second]).createShader(path.getBounds());
-    canvas.drawPath(path, paint);
-    canvas.drawPath(drawFunction(canvas, size, false), paintConfigure(false));
+    graphPath = drawFunction(canvas, size);
+    gradientPath = drawFunction(canvas, size);
+
+    Paint paint = graphPaintArea(graphPath.getBounds(), isStroke: true);
+    Paint gradientPaint = graphPaintArea(gradientPath.getBounds());
+    canvas.drawPath(graphPath, paint);
+    gradientPath.lineTo(size.width, size.height);
+    gradientPath.close();
+    canvas.drawPath(gradientPath, gradientPaint);
     minMaxCircleDraw(canvas, size);
-    drawRulerScaleOfIndicator(canvas, size);
-  }
-
-  Path drawFunction(Canvas canvas, Size size, bool isFull) {
-    var path = Path();
-    final limitSize = Size(size.width, size.height);
-    final stepWidth = limitSize.width / percentageData.length;
-    double nextStepX = stepWidth / 2;
-    bool isFirst = true;
-    int nextIndex = 0;
-    coordinates.clear();
-    for (var i = 0; i < percentageData.length; i++) {
-      if (isFirst) {
-        isFirst = false;
-        path.moveTo(
-            0.0, (percentageData[i]) * (limitSize.height * progressValue));
-        coordinates.add(Offset(2.0, percentageData[i] * limitSize.height));
-
-        path.cubicTo(
-            nextStepX + stepWidth / 2,
-            (((percentageData[i]) * limitSize.height * progressValue)),
-            nextStepX + stepWidth / 2,
-            ((percentageData[i + 1]) * limitSize.height * progressValue),
-            nextStepX + stepWidth,
-            ((percentageData[i + 1]) * limitSize.height * progressValue));
-        coordinates.add(Offset(nextStepX + stepWidth,
-            percentageData[i + 1] * limitSize.height * progressValue));
-      } else {
-        if (nextIndex + 1 < percentageData.length) {
-          path.cubicTo(
-              nextStepX + stepWidth / 2,
-              (((percentageData[i]) * limitSize.height * progressValue)),
-              nextStepX + stepWidth / 2,
-              (percentageData[i + 1]) * limitSize.height * progressValue,
-              nextStepX + stepWidth,
-              ((percentageData[i + 1]) * limitSize.height * progressValue));
-          coordinates.add(Offset(nextStepX + stepWidth,
-              percentageData[i + 1] * limitSize.height * progressValue));
-        } else {
-          path.cubicTo(
-              nextStepX + stepWidth,
-              (((percentageData[i]) * limitSize.height * progressValue)),
-              nextStepX + stepWidth,
-              (percentageData[i]) * limitSize.height * progressValue,
-              nextStepX + stepWidth,
-              ((percentageData[i]) * limitSize.height * progressValue));
-        }
-      }
-      nextStepX += stepWidth;
-      nextIndex++;
-    }
-    if (isFull) {
-      path.lineTo(limitSize.width, limitSize.height);
-      path.lineTo(0.0, limitSize.height);
-      path.close();
-    }
-    return path;
-  }
-
-// it will work but we have to consider more cases for example if value is zero then we get NAN
-  double getCoefficient(int index, double limitHeight) {
-    double coeff = (log(percentageData[index]).abs()) * 10 > 1.0
-        ? ((log(percentageData[index]).abs()) / 20)
-        : ((log(percentageData[index]).abs()) * 10);
-    return (limitHeight - (coeff * limitHeight * 1.7)).abs();
-  }
-
-  Paint paintConfigure(bool isFill, {Color color = Colors.transparent}) {
-    var paint = Paint();
-    paint.color = isFill ? Colors.black : Colors.green;
-    paint.strokeCap = StrokeCap.round;
-    paint.strokeJoin = StrokeJoin.round;
-    paint.strokeMiterLimit = 100.0;
-    paint.strokeWidth = isFill ? 0.0 : 2.0;
-    paint.style = isFill ? PaintingStyle.fill : PaintingStyle.stroke;
-    // paint.maskFilter = const MaskFilter.blur(BlurStyle.inner, 1.0);
-    return paint;
-  }
-
-  void settingsModel() {
-    int startIndex = model.data.length - 15;
-    int endIndex = model.data.length;
-    // here I had to be shortened here, because we got a huge size of data
-    List<CryptoHistoryPriceModel> cryptoHistoryModel =
-        model.data.getRange(startIndex, endIndex).toList();
-    percentCoefficient =
-        cryptoHistoryModel.map((e) => double.parse(e.priceUsd)).toList();
-    double majorMaxPrice = percentCoefficient
-        .reduce((value, element) => value > element ? value : element);
-    List<double> subtractedData =
-        percentCoefficient.map((e) => (majorMaxPrice - e).abs()).toList();
-    double maxValueFromSubtracted = subtractedData
-        .reduce((value, element) => value > element ? value : element);
-    percentageData = subtractedData.map((e) {
-      if (e == 0.0) {
-        return 0.0;
-      } else if (e == maxValueFromSubtracted) {
-        return 0.8;
-      } else {
-        return (e / maxValueFromSubtracted - 0.2).abs();
-      }
-    }).toList();
-    dates = cryptoHistoryModel
-        .map((e) => DateFormat('dd.mm.yyyy \nHH:mm:ss')
-            .format(DateTime.fromMillisecondsSinceEpoch(e.time)))
-        .toList();
   }
 
   @override
@@ -167,18 +56,167 @@ class GraphCustomPaint extends CustomPainter {
     return true;
   }
 
+  void settingsModel() {
+    double maxValue = cryptoMoneyData.reduce(
+      (value, element) {
+        return value > element ? value : element;
+      },
+    );
+    List<double> subtractedData = cryptoMoneyData.map(
+      (e) {
+        return maxValue - e;
+      },
+    ).toList();
+    double subtractedMax = subtractedData.reduce(
+      (value, element) {
+        return value > element ? value : element;
+      },
+    );
+    subtractedData = subtractedData.map(
+      (e) {
+        if (e == 0.0) {
+          return subtractedMax * 1 / 9;
+        } else {
+          return subtractedMax * 1 / 9 + e;
+        }
+      },
+    ).toList();
+    double max = subtractedData.reduce(
+      (value, element) {
+        return value > element ? value : element;
+      },
+    );
+    double min = subtractedData.reduce(
+      (value, element) {
+        return value > element ? element : value;
+      },
+    );
+    indexMin = subtractedData.indexOf(min);
+    indexMax = subtractedData.indexOf(max);
+
+    percentCoefficientData = subtractedData.map(
+      (e) {
+        return e / max;
+      },
+    ).toList();
+  }
+
+  Path drawFunction(Canvas canvas, Size size) {
+    var path = Path();
+    final double stepWidth = size.width / cryptoMoneyData.length;
+    double halfStep = stepWidth / 2;
+    double nextStepX = stepWidth;
+    final height = size.height;
+    bool isFirst = true;
+    coordinates.clear();
+    for (int i = 0; i < percentCoefficientData.length; i++) {
+      if (isFirst) {
+        isFirst = false;
+        path.moveTo(0.0, percentCoefficientData[i] * height);
+        coordinates.add(Offset(0.0, percentCoefficientData[i] * height));
+        path.cubicTo(
+            halfStep * 2.0,
+            percentCoefficientData[i] * height,
+            halfStep * 2.0,
+            percentCoefficientData[i + 1] * height,
+            nextStepX + halfStep,
+            percentCoefficientData[i + 1] * height);
+        coordinates.add(Offset(
+            nextStepX + halfStep, percentCoefficientData[i + 1] * height));
+      } else {
+        if (i + 1 < percentCoefficientData.length) {
+          path.cubicTo(
+              nextStepX + stepWidth,
+              percentCoefficientData[i] * height,
+              nextStepX + stepWidth,
+              percentCoefficientData[i + 1] * height,
+              nextStepX + stepWidth + halfStep,
+              percentCoefficientData[i + 1] * height);
+          coordinates.add(Offset(nextStepX + stepWidth + halfStep,
+              percentCoefficientData[i + 1] * height));
+        } else {
+          if (percentCoefficientData[i] > percentCoefficientData[i - 1]) {
+            path.cubicTo(
+                size.width * 0.99,
+                percentCoefficientData[i] * height,
+                size.width * 0.99,
+                percentCoefficientData[i] * height,
+                size.width,
+                percentCoefficientData[i] * height);
+          } else {
+            path.cubicTo(
+                size.width * 0.99,
+                percentCoefficientData[i - 1] * height,
+                size.width * 0.99,
+                percentCoefficientData[i - 1] * height,
+                size.width,
+                percentCoefficientData[i - 1] * height);
+          }
+        }
+        nextStepX += stepWidth;
+      }
+    }
+    // path.lineTo(size.width, size.height);
+    // path.close();
+    return path;
+  }
+
+  //graph's Paint
+  Paint graphPaintArea(Rect boundsPath, {bool isStroke = false}) {
+    bool flag = getIt<ThemeManager>().getIsDark() ?? false;
+    Paint paint = Paint();
+    paint.color = flag
+        ? AppColorsUtility.onboardingPrimary
+        : AppColorsUtility.darkPrimary;
+    paint.strokeWidth = isStroke ? 3.0 : 0.0;
+    paint.style = isStroke ? PaintingStyle.stroke : PaintingStyle.fill;
+    paint.strokeCap = StrokeCap.round;
+    paint.strokeJoin = StrokeJoin.round;
+    paint.shader = isStroke ? null : graphGradient(boundsPath, flag);
+    return paint;
+  }
+
+  Shader graphGradient(Rect rectBounds, bool isDarkTheme) {
+    LinearGradient linearGradient = LinearGradient(
+        colors: AppColorsUtility.graphGradientColor(isDarkTheme),
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter);
+    return linearGradient.createShader(rectBounds);
+  }
+
 // here we'll add circle shape for minimal and maximum values
   void minMaxCircleDraw(Canvas canvas, Size size) {
-    double maxValues = percentCoefficient
+    bool isDarkTheme = getIt<ThemeManager>().getIsDark() ?? false;
+    double maxValues = percentCoefficientData
         .reduce((value, element) => value > element ? value : element);
-    double minValues = percentCoefficient
+    double minValues = percentCoefficientData
         .reduce((value, element) => value > element ? element : value);
-    int indexMaxValues = percentCoefficient.indexOf(maxValues);
-    int indexMinValues = percentCoefficient.indexOf(minValues);
-    canvas.drawCircle(coordinates[indexMaxValues], 5.0,
-        cirlclePaint(color: Colors.redAccent.shade400));
+    int indexMaxValues = percentCoefficientData.indexOf(maxValues);
+    int indexMinValues = percentCoefficientData.indexOf(minValues);
+
+    // min value
     canvas.drawCircle(
-        coordinates[indexMinValues], 5.0, cirlclePaint(color: Colors.black));
+        coordinates[indexMaxValues],
+        9.0,
+        cirlclePaint(
+            color: isDarkTheme
+                ? AppColorsUtility.onboardingPrimary
+                : AppColorsUtility.darkPrimary));
+    canvas.drawCircle(
+        Offset(coordinates[indexMaxValues].dx, coordinates[indexMaxValues].dy),
+        4.0,
+        cirlclePaint(color: isDarkTheme ? Colors.black : Colors.white));
+
+    // max values
+    canvas.drawCircle(
+        coordinates[indexMinValues],
+        9.0,
+        cirlclePaint(
+            color: isDarkTheme
+                ? AppColorsUtility.onboardingPrimary
+                : AppColorsUtility.darkPrimary));
+    canvas.drawCircle(coordinates[indexMinValues], 4.0,
+        cirlclePaint(color: isDarkTheme ? Colors.black : Colors.white));
     titleOfExtremumPoints(canvas, indexMaxValues, indexMinValues);
   }
 
@@ -195,8 +233,8 @@ class GraphCustomPaint extends CustomPainter {
   //here we added text painter for minimum and maximum values
   void titleOfExtremumPoints(
       Canvas canvas, int indexMaxValue, int indexMinValue) {
-    double minValue = percentCoefficient[indexMinValue];
-    double maxValue = percentCoefficient[indexMaxValue];
+    double minValue = percentCoefficientData[indexMinValue];
+    double maxValue = percentCoefficientData[indexMaxValue];
     Offset minOffset = coordinates[indexMinValue];
     Offset maxOffset = coordinates[indexMaxValue];
 
@@ -205,8 +243,8 @@ class GraphCustomPaint extends CustomPainter {
     TextPainter maxPainter =
         textPainter(MoneyFormatterUtility.dollarFormat(maxValue.toString()));
 
-    minPainter.paint(canvas, Offset(minOffset.dx * 0.8, minOffset.dy + 5.0));
-    maxPainter.paint(canvas, Offset(maxOffset.dx * 0.8, maxOffset.dy + 5.0));
+    minPainter.paint(canvas, Offset(minOffset.dx, minOffset.dy));
+    maxPainter.paint(canvas, Offset(maxOffset.dx, maxOffset.dy));
   }
 
   TextPainter textPainter(String title) {
@@ -223,46 +261,54 @@ class GraphCustomPaint extends CustomPainter {
     return painter;
   }
 
+  // it will work but we have to consider more cases for example if value is zero then we get NAN
+  // double getCoefficient(int index, double limitHeight) {
+  //   double coeff = (log(percentageData[index]).abs()) * 10 > 1.0
+  //       ? ((log(percentageData[index]).abs()) / 20)
+  //       : ((log(percentageData[index]).abs()) * 10);
+  //   return (limitHeight - (coeff * limitHeight * 1.7)).abs();
+  // }
+
   //Here we added scale indicator
-  void drawRulerScaleOfIndicator(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = Colors.black
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 1.5
-      ..style = PaintingStyle.stroke;
-    double lineStep = size.height / 10.0;
-    double stepSumm = 0.0;
-    bool isFirst = true;
+  // void drawRulerScaleOfIndicator(Canvas canvas, Size size) {
+  //   Paint paint = Paint()
+  //     ..color = Colors.black
+  //     ..strokeCap = StrokeCap.round
+  //     ..strokeJoin = StrokeJoin.round
+  //     ..strokeWidth = 1.5
+  //     ..style = PaintingStyle.stroke;
+  //   double lineStep = size.height / 10.0;
+  //   double stepSumm = 0.0;
+  //   bool isFirst = true;
 
-    Path bezierPath = Path();
-    double percentOfWidth = positionOfTouch.dx / size.width;
-    int index = (percentOfWidth * (coordinates.length - 1)).toInt();
-    bezierPath.moveTo(coordinates[index].dx, 0.0);
-    for (var i = 0; i < 10; i++) {
-      bezierPath.lineTo(coordinates[index].dx, isFirst ? 10.0 : stepSumm);
-      stepSumm += lineStep;
-      bezierPath.moveTo(coordinates[index].dx, stepSumm + 10);
-      isFirst = false;
-    }
-    canvas.drawPath(bezierPath, paint);
-    drawCircleRulerIndicator(canvas, size);
-    callBack(percentCoefficient[index], dates[index]);
-  }
+  //   Path bezierPath = Path();
+  //   double percentOfWidth = positionOfTouch.dx / size.width;
+  //   int index = (percentOfWidth * (coordinates.length - 1)).toInt();
+  //   bezierPath.moveTo(coordinates[index].dx, 0.0);
+  //   for (var i = 0; i < 10; i++) {
+  //     bezierPath.lineTo(coordinates[index].dx, isFirst ? 10.0 : stepSumm);
+  //     stepSumm += lineStep;
+  //     bezierPath.moveTo(coordinates[index].dx, stepSumm + 10);
+  //     isFirst = false;
+  //   }
+  //   canvas.drawPath(bezierPath, paint);
+  //   drawCircleRulerIndicator(canvas, size);
+  //   callBack(percentCoefficient[index], dates[index]);
+  // }
 
-  void drawCircleRulerIndicator(Canvas canvas, Size size) {
-    double percentOfWidth = positionOfTouch.dx / size.width;
-    int index = (percentOfWidth * (coordinates.length - 1)).toInt();
-    Paint paint = Paint()
-      ..color = Colors.cyan.shade500
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3.0;
-    Path bezierPath = Path();
-    bezierPath.addArc(
-        Offset(coordinates[index].dx - 5.0, coordinates[index].dy - 5) &
-            const Size(10.0, 10.0),
-        0.0,
-        pi * 2);
-    canvas.drawPath(bezierPath, paint);
-  }
+  // void drawCircleRulerIndicator(Canvas canvas, Size size) {
+  //   double percentOfWidth = positionOfTouch.dx / size.width;
+  //   int index = (percentOfWidth * (coordinates.length - 1)).toInt();
+  //   Paint paint = Paint()
+  //     ..color = Colors.cyan.shade500
+  //     ..style = PaintingStyle.stroke
+  //     ..strokeWidth = 3.0;
+  //   Path bezierPath = Path();
+  //   bezierPath.addArc(
+  //       Offset(coordinates[index].dx - 5.0, coordinates[index].dy - 5) &
+  //           const Size(10.0, 10.0),
+  //       0.0,
+  //       pi * 2);
+  //   canvas.drawPath(bezierPath, paint);
+  // }
 }
