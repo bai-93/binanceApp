@@ -77,14 +77,6 @@ class _GraphContentMainState extends State<GraphContentMain> {
               ),
               const SizedBox(height: 4.0),
               makeGraph(),
-              // SizedBox(
-              //     height: 210.0,
-              //     width: MediaQuery.of(context).size.width - 32.0,
-              //     child: RepaintBoundary(
-              //       child: CustomPaint(
-              //           painter: GraphCustomPaint(null, (priceCoin, date) {},
-              //               positionOfTouch: model.getGlobalPoints())),
-              //     )),
               const SizedBox(
                 height: 4.0,
               ),
