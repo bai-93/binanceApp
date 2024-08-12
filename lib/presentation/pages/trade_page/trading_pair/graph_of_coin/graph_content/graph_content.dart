@@ -51,6 +51,9 @@ class _GraphContentMainState extends State<GraphContentMain> {
               onValueChanged: (index) {
                 setState(() {
                   model.setDaysIndex(index as int);
+                  context.read<TradeGraphBloc>().add(
+                      GetIntervalInfoCoinTradeGraphEvent(
+                          model.getDayQuery(), model.getCoinQuery()));
                 });
               }),
         ),
