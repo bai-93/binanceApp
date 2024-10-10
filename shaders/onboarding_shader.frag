@@ -15,10 +15,13 @@ void main(){
     vec2 uv=(gl_FragCoord.xy/u_resolution-.5)*4.;
     uv.x*=u_resolution.x/u_resolution.y;
     vec3 color=vec3(0.);
-    float frequency=1.9;
+    vec3 lineColor=vec3(.1843137254901961,.4,.9647058823529412);
+    float frequency=(.9);
     
-    float sinf=sin((dot(sin(uv.x*2.34+u_time),sin(uv.x+u_time)))*atan(uv.x)*sin(uv.x*2.));
-    float fx=.003/abs(sinf+uv.y);
-    color+=fx;
+    for(float i=3.;i<20.;i++){
+        float sinf=(sin((dot(sin(uv.x*1.24+u_time),atan(uv.y+u_time)))*atan(uv.x+i*.1)+(uv.x*(i/20.)))*.4)+sin(i/600./(i*frequency));
+        float fx=.0023/abs(sinf+(uv.y+i*.03));
+        color+=fx*lineColor;
+    }
     gl_FragColor=vec4(color,1.);
 }
