@@ -1,27 +1,21 @@
-/* Main function, uniforms & utils */
-#ifdef GL_ES
-precision mediump float;
-#endif
+#include<flutter/runtime_effect.glsl>
 
-uniform vec2 u_resolution;
-uniform vec2 u_mouse;
+uniform vec2 uSize;
 uniform float u_time;
-
-#define PI_TWO 1.570796326794897
-#define PI 3.141592653589793
-#define TWO_PI 6.283185307179586
+out vec4 fragColor;
 
 void main(){
-    vec2 uv=(gl_FragCoord.xy/u_resolution-.5)*9.;
-    uv.x*=u_resolution.x/u_resolution.y;
-    vec3 color=vec3(0.);
-    vec3 lineColor=vec3(.1843137254901961,.4,.9647058823529412);
-    float frequency=(.9);
-    
+    vec2 uv=(FlutterFragCoord().xy/uSize.xy-.5)*6.5;
+    uv.x*=uSize.x/uSize.y;
+    vec3 lineColor=vec3(.0235,.2667,.3882);
+    vec3 backgroundColor=vec3(.0353,.0392,.0392);
+    // fragColor=vec4(vec3(0.),1.);
+    float frequency=.9;
+    uv.y-=1.5;
     for(float i=1.;i<20.;i++){
-        float sinf=(sin((dot(sin(uv.x*1.85+(u_time-floor(i/20.))),atan(uv.y+u_time)))*atan(uv.x+i*.1)+(uv.x*(i/20.7)))*.4)+asin(i*.12/(i*frequency))*frequency/i;
-        float fx=.0083/abs(sinf+(uv.y+i*.09));
-        color+=fx*lineColor;
+        float sinf=(sin((dot(sin(uv.x*2.85+(u_time-floor(i/20.))),atan(uv.y+u_time)))*atan(uv.x+i*.1)+(uv.x*(i/20.7)))*.4)+asin(i*.12/(i*frequency))*frequency/i-.9;
+        float fx=.004/abs((sinf+(uv.y+i*.04)));
+        backgroundColor+=(fx*lineColor);
     }
-    gl_FragColor=vec4(color,1.);
+    fragColor=vec4(backgroundColor,1.);
 }

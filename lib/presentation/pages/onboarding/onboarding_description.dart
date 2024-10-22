@@ -1,6 +1,9 @@
+import 'dart:async';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sheker/presentation/pages/onboarding/onboarding_center_info.dart';
+import 'package:sheker/presentation/pages/onboarding/onboarding_painter.dart';
 import 'package:sheker/utilities/app_colors.dart';
 
 class OnboardingDescription extends StatefulWidget {
@@ -16,8 +19,11 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
   late AnimationController opacityContorller;
   late Animation<Color?> colorBackgroundTween;
   late Animation<Color?> colorButtonTween;
-
+  var updateTime = 0.0;
+  double delta = 0;
+  late FragmentShader shader;
   int count = 0;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +41,11 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
         vsync: this, duration: const Duration(milliseconds: 10))
       ..addListener(() {
         setState(() {});
+      })
+      ..addStatusListener((status) {
+        if (status.isCompleted) {
+          startUpdateTime();
+        }
       });
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -51,11 +62,23 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
     });
   }
 
+  void startUpdateTime() {
+    Timer.periodic(const Duration(milliseconds: 10), (time) {
+      setState(() {
+        updateTime += (1 / 60).toDouble();
+      });
+    });
+  }
+
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
     opacityContorller.dispose();
+    super.dispose();
+  }
+
+  Future<FragmentProgram> _initShader() {
+    return FragmentProgram.fromAsset('shaders/onboarding_shader.frag');
   }
 
   @override
@@ -67,6 +90,29 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
         color: colorBackgroundTween.value,
         child: Stack(
           children: [
+            Positioned(
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: FutureBuilder(
+                    future: _initShader(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return RepaintBoundary(
+                          child: CustomPaint(
+                            painter: OnboardingPainter(
+                                snapshot.data!.fragmentShader(), updateTime),
+                          ),
+                        );
+                      } else {
+                        return const Center();
+                      }
+                    },
+                  ),
+                )),
             Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -98,7 +144,8 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
                               fixedSize: Size(
                                   MediaQuery.of(context).size.width - 32.0,
                                   48.0),
-                              backgroundColor: AppColorsUtility.onboardingPrimary,
+                              backgroundColor:
+                                  AppColorsUtility.onboardingPrimary,
                               splashFactory: NoSplash.splashFactory)),
                     ),
                   ),

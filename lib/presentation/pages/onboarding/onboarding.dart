@@ -62,7 +62,7 @@ class _OnboardingState extends State<Onboarding>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: [
-        Column(
+        const Column(
           children: [OnboardingDescription()],
         ),
         AnimatedAlign(

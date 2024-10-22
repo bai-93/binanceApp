@@ -57,7 +57,7 @@ class OnboardingImageTitle extends StatelessWidget {
             child: Text(
               titleContent[indexItem],
               textAlign: TextAlign.center,
-              style: TextStyle(color: AppColorsUtility.text, fontSize: 32.0),
+              style: const TextStyle(color: Colors.white, fontSize: 32.0),
             ),
           ),
           Padding(
@@ -69,7 +69,7 @@ class OnboardingImageTitle extends StatelessWidget {
                   subtitle,
                   softWrap: true,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColorsUtility.text, fontSize: 14.0),
+                  style: const TextStyle(color: Colors.white, fontSize: 14.0),
                 ),
               ),
             ]),
