@@ -1,13 +1,14 @@
+import 'dart:async';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sheker/domain/entities/hive_services/user_service_hive.dart';
-import 'package:sheker/presentation/bloc/detail_info_graph_bloc/bloc/detail_info_graph_bloc.dart';
 import 'package:sheker/presentation/bloc/trade_graph/bloc/trade_graph_bloc.dart';
 import 'package:sheker/presentation/pages/detail_info_page/crypto_graph/graph_custom_paint.dart';
+import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/graph_content/graph_shader.dart';
 import 'package:sheker/presentation/pages/trade_page/trading_pair/graph_of_coin/graph_content/graph_view_model.dart';
 import 'package:sheker/utilities/app_colors.dart';
-import 'package:sheker/utilities/shimmer_utility.dart';
 
 class GraphContentMain extends StatefulWidget {
   final int index;
@@ -20,6 +21,7 @@ class GraphContentMain extends StatefulWidget {
 class _GraphContentMainState extends State<GraphContentMain> {
   GraphViewModel model = GraphViewModel();
   Map<int, Widget> slidingItems = {};
+  var updateTime = 0.0;
 
   @override
   void initState() {
@@ -30,6 +32,7 @@ class _GraphContentMainState extends State<GraphContentMain> {
         .add(GetDetailInfoCoinTradeGraphEvent(model.getCoinQuery()));
 
     WidgetsBinding.instance.addPostFrameCallback((duration) {
+      startUpdateTime();
       setState(() {
         slidingItems = makeSlidingItems(model.getCurrentDateIndex());
       });
@@ -265,7 +268,7 @@ class _GraphContentMainState extends State<GraphContentMain> {
         builder: (context, state) {
           if (state is GraphDataLoadingGraphTradeState ||
               state is SuccessLoadedDetailInfoCoinGraphTradeState) {
-            return makeGraphShimmer();
+            return shaderGraphShimmer();
           }
           if (state is SuccessLoadedIntervalHistoryGraphTradeState) {
             return GestureDetector(
@@ -295,14 +298,39 @@ class _GraphContentMainState extends State<GraphContentMain> {
     );
   }
 
-  Widget makeGraphShimmer() {
-    return makeShimmerUtility(
-        Container(
-          height: 201.0,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: AppColorsUtility.surface),
-        ),
-        context);
+  Future<FragmentProgram> _initShader() {
+    return FragmentProgram.fromAsset('shaders/graph_shader.frag');
+  }
+
+  FutureBuilder shaderGraphShimmer() {
+    return FutureBuilder(
+      future: _initShader(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return SizedBox(
+            height: 201.0,
+            width: MediaQuery.of(context).size.width,
+            child: RepaintBoundary(
+              child: CustomPaint(
+                painter:
+                    GraphShader(snapshot.data!.fragmentShader(), updateTime),
+              ),
+            ),
+          );
+        } else {
+          return SizedBox(
+              height: 201.0, width: MediaQuery.of(context).size.width);
+        }
+      },
+    );
+  }
+
+  void startUpdateTime() {
+    Timer.periodic(const Duration(milliseconds: 10), (time) {
+      setState(() {
+        updateTime += (1 / 60).toDouble();
+      });
+    });
   }
 
   List<Widget> generateGraphSettingsButtons() {

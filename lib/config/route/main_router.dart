@@ -29,8 +29,7 @@ class AppRouter {
 
   GoRouter configRouter() {
     GoRouter goRouter = GoRouter(
-      initialLocation:
-          '/onboarding', //'/trade', //RouterPathManager.getRouterPath(),
+      initialLocation: RouterPathManager.getRouterPath(),
       navigatorKey: _rootNavigatorKey,
       routes: [
         GoRoute(

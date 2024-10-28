@@ -1,13 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sheker/config/theme/theme_manager.dart';
 import 'dart:ui' as UI;
 import 'package:sheker/domain/models/responses/crypto_models/crypto_history_price_model.dart';
 import 'package:sheker/injection/injection_configure.dart';
 import 'package:sheker/utilities/app_colors.dart';
-import 'package:sheker/utilities/biometryhelper.dart';
-import 'package:sheker/utilities/graph_data_normalize.dart';
 import 'package:sheker/utilities/money_formatter.dart';
 
 class GraphCustomPaint extends CustomPainter {
@@ -217,93 +213,4 @@ class GraphCustomPaint extends CustomPainter {
     painter.layout();
     return painter;
   }
-
-  // it will work but we have to consider more cases for example if value is zero then we get NAN
-  // double getCoefficient(int index, double limitHeight) {
-  //   double coeff = (log(percentageData[index]).abs()) * 10 > 1.0
-  //       ? ((log(percentageData[index]).abs()) / 20)
-  //       : ((log(percentageData[index]).abs()) * 10);
-  //   return (limitHeight - (coeff * limitHeight * 1.7)).abs();
-  // }
-
-  //Here we added scale indicator
-  // void drawRulerScaleOfIndicator(Canvas canvas, Size size) {
-  //   Paint paint = Paint()
-  //     ..color = Colors.black
-  //     ..strokeCap = StrokeCap.round
-  //     ..strokeJoin = StrokeJoin.round
-  //     ..strokeWidth = 1.5
-  //     ..style = PaintingStyle.stroke;
-  //   double lineStep = size.height / 10.0;
-  //   double stepSumm = 0.0;
-  //   bool isFirst = true;
-
-  //   Path bezierPath = Path();
-  //   double percentOfWidth = positionOfTouch.dx / size.width;
-  //   int index = (percentOfWidth * (coordinates.length - 1)).toInt();
-  //   bezierPath.moveTo(coordinates[index].dx, 0.0);
-  //   for (var i = 0; i < 10; i++) {
-  //     bezierPath.lineTo(coordinates[index].dx, isFirst ? 10.0 : stepSumm);
-  //     stepSumm += lineStep;
-  //     bezierPath.moveTo(coordinates[index].dx, stepSumm + 10);
-  //     isFirst = false;
-  //   }
-  //   canvas.drawPath(bezierPath, paint);
-  //   drawCircleRulerIndicator(canvas, size);
-  //   callBack(percentCoefficient[index], dates[index]);
-  // }
-
-  // void drawCircleRulerIndicator(Canvas canvas, Size size) {
-  //   double percentOfWidth = positionOfTouch.dx / size.width;
-  //   int index = (percentOfWidth * (coordinates.length - 1)).toInt();
-  //   Paint paint = Paint()
-  //     ..color = Colors.cyan.shade500
-  //     ..style = PaintingStyle.stroke
-  //     ..strokeWidth = 3.0;
-  //   Path bezierPath = Path();
-  //   bezierPath.addArc(
-  //       Offset(coordinates[index].dx - 5.0, coordinates[index].dy - 5) &
-  //           const Size(10.0, 10.0),
-  //       0.0,
-  //       pi * 2);
-  //   canvas.drawPath(bezierPath, paint);
-  // }
-  //// here old version of graph but it's work
-  // for (int i = 0; i < percentCoefficientData.length; i++) {
-  //   if (isFirst) {
-  //     isFirst = false;
-  //     path.moveTo(0.0, percentCoefficientData[i] * height);
-  //     coordinates.add(Offset(0.0, percentCoefficientData[i] * height));
-  //     path.cubicTo(
-  //         halfStep * 2.0,
-  //         percentCoefficientData[i] * height,
-  //         halfStep * 2.0,
-  //         percentCoefficientData[i + 1] * height,
-  //         nextStepX + halfStep,
-  //         percentCoefficientData[i + 1] * height);
-  //     coordinates.add(Offset(
-  //         nextStepX + halfStep, percentCoefficientData[i + 1] * height));
-  //   } else {
-  //     if (i + 1 < percentCoefficientData.length) {
-  //       path.cubicTo(
-  //           nextStepX + stepWidth,
-  //           percentCoefficientData[i] * height,
-  //           nextStepX + stepWidth,
-  //           percentCoefficientData[i + 1] * height,
-  //           nextStepX + stepWidth + halfStep,
-  //           percentCoefficientData[i + 1] * height);
-  //       coordinates.add(Offset(nextStepX + stepWidth + halfStep,
-  //           percentCoefficientData[i + 1] * height));
-  //     } else {
-  //       path.cubicTo(
-  //           size.width,
-  //           percentCoefficientData[i] * height,
-  //           size.width,
-  //           percentCoefficientData[i] * height,
-  //           size.width,
-  //           percentCoefficientData[i] * height);
-  //     }
-  //     nextStepX += stepWidth;
-  //   }
-  // }
 }
