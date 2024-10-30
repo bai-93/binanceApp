@@ -1,4 +1,3 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sheker/config/base_widgets/base_stateless.dart';
@@ -124,17 +123,21 @@ class SignUpWelcomeScreen extends BaseScreenStateless {
         style: ElevatedButton.styleFrom(
             splashFactory: NoSplash.splashFactory,
             fixedSize: Size(sizeOfScreen.width - 32, 48.0),
-            backgroundColor:
-                flag ? AppColorsUtility.onboardingPrimary : AppColorsUtility.surface,
+            backgroundColor: flag
+                ? AppColorsUtility.onboardingPrimary
+                : AppColorsUtility.surface,
             shape: RoundedRectangleBorder(
-              side: BorderSide(color: AppColorsUtility.onboardingPrimary, width: 2.0),
+              side: BorderSide(
+                  color: AppColorsUtility.onboardingPrimary, width: 2.0),
               borderRadius: const BorderRadius.all(Radius.circular(12.0)),
             )),
         child: Center(
           child: Text(
             title,
             style: TextStyle(
-                color: flag ? AppColorsUtility.surface : AppColorsUtility.onboardingPrimary,
+                color: flag
+                    ? AppColorsUtility.surface
+                    : AppColorsUtility.onboardingPrimary,
                 fontSize: 16.0),
           ),
         ));

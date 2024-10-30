@@ -19,8 +19,9 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
   late AnimationController opacityContorller;
   late Animation<Color?> colorBackgroundTween;
   late Animation<Color?> colorButtonTween;
+  Timer? _timer;
   var updateTime = 0.0;
-  double delta = 0;
+  bool _isRunning = false;
   late FragmentShader shader;
   int count = 0;
 
@@ -63,15 +64,19 @@ class _OnboardingDescriptionState extends State<OnboardingDescription>
   }
 
   void startUpdateTime() {
-    Timer.periodic(const Duration(milliseconds: 10), (time) {
-      setState(() {
-        updateTime += (1 / 60).toDouble();
+    if (!_isRunning) {
+      _isRunning = true;
+      _timer = Timer.periodic(const Duration(milliseconds: 10), (time) {
+        setState(() {
+          updateTime += (1 / 60).toDouble();
+        });
       });
-    });
+    }
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     controller.dispose();
     opacityContorller.dispose();
     super.dispose();

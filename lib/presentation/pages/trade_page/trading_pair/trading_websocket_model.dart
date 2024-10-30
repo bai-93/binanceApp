@@ -16,7 +16,7 @@ class TradingWebSocketModel {
   Future<bool> _connection() async {
     try {
       _socketChannel =
-          WebSocketChannel.connect(Uri.parse('wss://ws-feed.pro.coinbase.com'));
+          WebSocketChannel.connect(Uri.parse('wss://ws-feed.exchange.coinbase.com'));
       await _socketChannel.ready;
     } catch (e) {
       return false;
@@ -34,6 +34,7 @@ class TradingWebSocketModel {
   }
 
   void subscribeToCoin(List<String> productIds) {
+    print("subscribe to coin == ${productIds}");
     if (coinCurrency.isNotEmpty) {
       _unSubscribe();
     }
